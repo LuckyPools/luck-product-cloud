@@ -84,7 +84,7 @@ public abstract class BaseController<T extends BaseEntity,V extends BaseVO>{
     @PutMapping
     public ResultVO update(@Validated @RequestBody V vo) {
         T entity = (T) ConvertUtils.convert(vo,getEntity().getClass());
-        getService().update(entity);
+        getService().updateById(entity);
         return ResultVO.success(entity.getId());
     }
 

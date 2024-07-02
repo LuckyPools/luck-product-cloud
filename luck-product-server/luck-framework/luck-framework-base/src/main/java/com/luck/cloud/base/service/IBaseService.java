@@ -14,25 +14,7 @@ import java.util.List;
  * @author luck
  * @date 2023-10-26
  */
-public interface IBaseService<T> extends IService<T> {
-    /**
-     * 查询列表数据
-     * 默认进行数据范围控制
-     *
-     * @param tableVO 列表数据传输对象 {@link PageVO}
-     * @return
-     */
-    PageVO<T> queryList(PageVO<T> tableVO);
-
-    /**
-     * 查询所有列表数据
-     * 默认进行数据范围控制
-     *
-     * @return
-     */
-    default PageVO<T> queryList() {
-        return queryList(PageVO.emptyPageVO());
-    }
+public interface IBaseService<T> extends IService<T>{
 
     /**
      * 按条件查询列表数据
@@ -42,20 +24,16 @@ public interface IBaseService<T> extends IService<T> {
      */
     List<T> queryList(SearchParam searchParam);
 
-
-
     /**
      * 分页查询列表数据
-     * 默认进行数据范围控制
      *
-     * @param tableVO 列表数据传输对象 {@link PageVO}
+     * @param pageVO 列表数据传输对象 {@link PageVO}
      * @return
      */
-    PageVO<T> queryPage(PageVO<T> tableVO);
-
+    PageVO<T> queryPage(PageVO<T> pageVO);
 
     /**
-     * 查询唯一记录
+     * 查询唯一数据
      *
      * @param searchParam 查询条件{@link SearchParam}
      * @return
@@ -63,29 +41,12 @@ public interface IBaseService<T> extends IService<T> {
     T queryOne(SearchParam searchParam);
 
     /**
-     * 查询唯一记录
+     * 查询唯一数据
      *
      * @param id         id值
-     * @param primaryKey 指定键名
      * @return
      */
-    T queryOneById(String id, String... primaryKey);
-
-    /**
-     * 保存更新
-     *
-     * @param entity 实体
-     * @return
-     */
-    boolean saveOrUpdate(T entity);
-
-    /**
-     * 批量保存更新
-     *
-     * @param entityList 实体列表
-     * @return
-     */
-    boolean saveOrUpdateBatch(Collection<T> entityList);
+    T queryOneById(Serializable id);
 
     /**
      * 插入
@@ -109,7 +70,7 @@ public interface IBaseService<T> extends IService<T> {
      * @param entity 实体
      * @return
      */
-    boolean update(T entity);
+    boolean updateById(T entity);
 
     /**
      * 批量更新
@@ -117,10 +78,18 @@ public interface IBaseService<T> extends IService<T> {
      * @param entityList 实体列表
      * @return
      */
-    boolean updateBatch(Collection<T> entityList);
+    boolean updateBatchById(Collection<T> entityList);
 
     /**
-     * 根据id删除记录
+     * 批量保存更新
+     *
+     * @param entityList 实体列表
+     * @return
+     */
+    boolean saveOrUpdateBatch(Collection<T> entityList,int batchSize);
+
+    /**
+     * 根据id删除数据
      *
      * @param id 主键
      * @return
@@ -128,10 +97,11 @@ public interface IBaseService<T> extends IService<T> {
     boolean deleteById(Serializable id);
 
     /**
-     * 根据id列表批量删除记录
+     * 根据id列表批量删除数据
      *
      * @param idList 主键列表
      * @return
      */
     boolean deleteByIds(Collection<? extends Serializable> idList);
+
 }

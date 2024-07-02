@@ -89,6 +89,7 @@ public class PageVO<T> extends ResultVO implements IPage<T>, Serializable {
         return Global.YES.equals(page);
     }
 
+
     /**
      * 设置是否分页
      *

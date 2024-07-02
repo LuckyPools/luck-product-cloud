@@ -12,8 +12,6 @@ import java.util.List;
 
 /**
  * 对象转换工具
- * 1.基于{@see <a href="https://mapstruct.plus">mapstruct.plus</a>}
- * 2.源或目标对象的类需要使用{@link io.github.linpeilie.annotations.AutoMapper}注解进行标注后才能使用本
  * @author luck
  * @date 2023-10-26
  */
