@@ -5,14 +5,18 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.luck.cloud</groupId>
-        <artifactId>luck-product-server</artifactId>
-        <version>${revision}</version>
+        <artifactId>luck-system</artifactId>
+        <version>1.0.0</version>
     </parent>
 
-    <packaging>pom</packaging>
-    <modules>
-        <module>luck-user</module>
-    </modules>
-    <artifactId>luck-system</artifactId>
+    <artifactId>luck-user</artifactId>
 
+
+    <dependencies>
+        <dependency>
+            <groupId>com.luck.cloud</groupId>
+            <artifactId>luck-framework-base</artifactId>
+            <version>${revision}</version>
+        </dependency>
+    </dependencies>
 </project>

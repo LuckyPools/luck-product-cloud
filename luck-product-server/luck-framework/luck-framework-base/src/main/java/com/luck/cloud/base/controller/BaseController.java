@@ -3,16 +3,18 @@ package com.luck.cloud.base.controller;
 import com.luck.cloud.base.entity.BaseEntity;
 import com.luck.cloud.base.service.IBaseService;
 import com.luck.cloud.base.utils.ConvertUtils;
-import com.luck.cloud.base.vo.BaseVO;
 import com.luck.cloud.base.vo.PageVO;
 import com.luck.cloud.base.vo.ResultVO;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.io.Serializable;
 import java.util.List;
 
-public abstract class BaseController<T extends BaseEntity,V extends BaseVO>{
+public abstract class BaseController<T extends BaseEntity,V>{
 
     /**
      * 获取实际服务类
@@ -26,26 +28,14 @@ public abstract class BaseController<T extends BaseEntity,V extends BaseVO>{
      *
      * @return
      */
-    public abstract T getEntity();
-
+    public abstract Class<T> getEntityClass();
     /**
      * 获取当前Controller数据库实体Entity
      *
      * @return
      */
-    public abstract V getVO();
+    public abstract Class<V> getVOClass();
 
-
-    /**
-     * 分页模板
-     *
-     * @return
-     */
-    @GetMapping("/list")
-    public ResultVO<List<V>> list(PageVO<T> pageVO) {
-        getService().queryPage(pageVO);
-        return (PageVO<V>) ConvertUtils.convertPage(pageVO, getVO().getClass());
-    }
 
     /**
      * 分页模板
@@ -55,7 +45,7 @@ public abstract class BaseController<T extends BaseEntity,V extends BaseVO>{
     @GetMapping("/page")
     public PageVO<V> page(PageVO<T> pageVO) {
         getService().queryPage(pageVO);
-        return (PageVO<V>) ConvertUtils.convertPage(pageVO, getVO().getClass());
+        return ConvertUtils.convertPage(pageVO,getVOClass());
     }
 
 
@@ -67,8 +57,9 @@ public abstract class BaseController<T extends BaseEntity,V extends BaseVO>{
      */
     @GetMapping("/get/{id}")
     public ResultVO<V> get(@PathVariable("id") String id) {
-        T result = getService().queryOneById(id);
-        return (ResultVO<V>) ResultVO.success(ConvertUtils.convert(result,getVO().getClass()));
+        T entity = getService().queryOneById(id);
+        V result = ConvertUtils.convert(entity,getVOClass());
+        return ResultVO.success(result);
     }
 
     /**
@@ -80,7 +71,7 @@ public abstract class BaseController<T extends BaseEntity,V extends BaseVO>{
      */
     @PostMapping("/save")
     public ResultVO save(@RequestBody V vo) {
-        T entity = (T) ConvertUtils.convert(vo,getEntity().getClass());
+        T entity = ConvertUtils.convert(vo,getEntityClass());
         getService().insert(entity);
         return ResultVO.success(entity.getId());
     }
@@ -94,7 +85,7 @@ public abstract class BaseController<T extends BaseEntity,V extends BaseVO>{
      */
     @PostMapping("/update")
     public ResultVO update(@Validated @RequestBody V vo) {
-        T entity = (T) ConvertUtils.convert(vo,getEntity().getClass());
+        T entity = ConvertUtils.convert(vo,getEntityClass());
         getService().updateById(entity);
         return ResultVO.success(entity.getId());
     }

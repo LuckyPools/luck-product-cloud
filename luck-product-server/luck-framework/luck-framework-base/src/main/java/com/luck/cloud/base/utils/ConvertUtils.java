@@ -31,11 +31,10 @@ public class ConvertUtils {
      *
      * @param source       源对象
      * @param targetType   目标对象类型
-     * @param doEhrConvert 是否执行自定义转换，自定义转换包括字典值、日期格式、数字格式等
      * @param <S>          源对象类型
      * @param <T>          目标对象类型
      */
-    public static <S, T> T convert(S source, Class<T> targetType, boolean... doEhrConvert) {
+    public static <S, T> T convert(S source, Class<T> targetType) {
         T target = ConvertUtils.getConverter().convert(source, targetType);
         // 根据@AutoMappingIgnore过滤掉忽略转换的字段
         Arrays.stream(targetType.getDeclaredFields()).forEach(field -> {
@@ -49,15 +48,14 @@ public class ConvertUtils {
      *
      * @param source       源对象
      * @param targetType   目标对象类型
-     * @param doEhrConvert 是否执行自定义转换，自定义转换包括字典值、日期格式、数字格式等
      * @param <S>          源对象类型
      * @param <T>          目标对象类型
      */
-    public static <S, T> List<T> convertList(List<S> source, Class<T> targetType, boolean... doEhrConvert) {
+    public static <S, T> List<T> convertList(List<S> source, Class<T> targetType) {
         List<T> resultList = new ArrayList<>();
         if (!CollectionUtils.isEmpty(source)) {
             source.forEach(record -> {
-                T target = ConvertUtils.convert(record, targetType, doEhrConvert);
+                T target = ConvertUtils.convert(record, targetType);
                 resultList.add(target);
             });
         }

@@ -136,6 +136,26 @@ public class BaseServiceImpl<M extends BaseDao<T>, T> extends ServiceImpl<M, T> 
     }
 
     /**
+     * 保存或更新
+     * @param entity
+     * @return
+     */
+    @Override
+    public boolean saveOrUpdate(T entity) {
+        return super.saveOrUpdate(entity);
+    }
+
+    /**
+     * 批量保存或更新
+     * @param entityList
+     * @return
+     */
+    @Override
+    public boolean saveOrUpdateBatch(Collection<T> entityList) {
+        return super.saveOrUpdateBatch(entityList);
+    }
+
+    /**
      * 根据id删除数据
      *
      * @param id 主键

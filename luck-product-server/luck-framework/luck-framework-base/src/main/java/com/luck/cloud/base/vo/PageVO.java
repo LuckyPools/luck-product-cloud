@@ -74,10 +74,10 @@ public class PageVO<T> extends ResultVO implements IPage<T>, Serializable {
      * @return
      */
     public static <T> PageVO<T> emptyPageVO() {
-        PageVO<T> tableVO = new PageVO<>();
-        tableVO.setPage(Global.YES);
-        tableVO.setPageNo(1);
-        return tableVO;
+        PageVO<T> pageVO = new PageVO<>();
+        pageVO.setPage(Global.YES);
+        pageVO.setPageNo(1);
+        return pageVO;
     }
 
     /**
