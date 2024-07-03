@@ -14,24 +14,31 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResultVO {
+public class ResultVO<T> {
 
     private String code;
 
     private String message;
 
-    private Object data;
+    private T data;
 
     public ResultVO(String code, String message) {
         this.code = code;
         this.message = message;
     }
 
-    public static ResultVO success(Object data) {
+    public ResultVO(String code, String message,T data) {
+        this.code = code;
+        this.message = message;
+        this.data = data;
+    }
+
+    public static <T> ResultVO<T> success(T data){
         return new ResultVO(HttpCodeEnum.OK.getCode(), HttpCodeEnum.OK.getMessage(), data);
     }
 
-    public static ResultVO error() {
-        return new ResultVO(HttpCodeEnum.UN_KNOW_ERROR.getCode(), HttpCodeEnum.UN_KNOW_ERROR.getMessage());
+    public static <T> ResultVO<T> error(T data){
+        return new ResultVO(HttpCodeEnum.UN_KNOW_ERROR.getCode(), HttpCodeEnum.UN_KNOW_ERROR.getMessage(), data);
     }
+
 }

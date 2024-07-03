@@ -1,18 +1,19 @@
 package com.luck.cloud.base.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.luck.cloud.base.dao.BaseDao;
 import com.luck.cloud.base.param.SearchParam;
 import com.luck.cloud.base.service.IBaseService;
 import com.luck.cloud.base.vo.PageVO;
+import com.luck.cloud.common.constant.Global;
+import com.luck.cloud.common.exception.NotUniqueDataException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
+import java.util.Optional;
 
 /**
  * 基础service实现类
@@ -20,26 +21,16 @@ import java.util.function.Function;
  * @author luck
  * @date 2023-10-26
  */
-public class BaseServiceImpl<M extends BaseDao<T>, T> implements IBaseService<T> {
+public class BaseServiceImpl<M extends BaseDao<T>, T> extends ServiceImpl<M, T> implements IBaseService<T> {
 
     @Autowired
     protected M baseDao;
 
+    /**
+     * 获取数据操作对象
+     */
     public M getDao() {
         return baseDao;
-    }
-
-
-    /**
-     * 查询列表数据
-     * 默认进行数据范围控制
-     *
-     * @param tableVO 列表数据传输对象 {@link PageVO}
-     * @return
-     */
-    @Override
-    public PageVO<T> queryList(PageVO<T> tableVO) {
-        return null;
     }
 
     /**
@@ -50,104 +41,54 @@ public class BaseServiceImpl<M extends BaseDao<T>, T> implements IBaseService<T>
      */
     @Override
     public List<T> queryList(SearchParam searchParam) {
-        return null;
+        return this.getDao().queryList(searchParam);
     }
 
     /**
      * 分页查询列表数据
-     * 默认进行数据范围控制
      *
-     * @param tableVO 列表数据传输对象 {@link PageVO}
+     * @param pageVO 列表数据传输对象 {@link PageVO}
      * @return
      */
     @Override
-    public PageVO<T> queryPage(PageVO<T> tableVO) {
-        return null;
+    public PageVO<T> queryPage(PageVO<T> pageVO) {
+        pageVO = Optional.ofNullable(pageVO).orElse(PageVO.emptyPageVO());
+        pageVO.setIsPage(Global.YES);
+        SearchParam searchParam = SearchParam.getSearchParam();
+        searchParam.putAll(pageVO.getSearchParam());
+        searchParam.setPage(pageVO);
+        pageVO.setRecords(this.queryList(searchParam));
+        return pageVO;
     }
 
     /**
-     * 查询唯一记录
+     * 查询唯一数据
      *
      * @param searchParam 查询条件{@link SearchParam}
      * @return
      */
     @Override
     public T queryOne(SearchParam searchParam) {
-        return null;
+        List<T> list = this.queryList(searchParam);
+        if (list.size() > 1) {
+            throw new NotUniqueDataException("数据不唯一");
+        } else {
+            return list.stream().findFirst().orElse(null);
+        }
     }
 
     /**
-     * 查询唯一记录
+     * 查询唯一数据
      *
      * @param id         id值
-     * @param primaryKey 指定键名
      * @return
      */
     @Override
-    public T queryOneById(String id, String... primaryKey) {
-        return null;
-    }
-
-    /**
-     * 保存更新
-     *
-     * @param entity 实体
-     * @return
-     */
-    @Override
-    public boolean saveOrUpdate(T entity) {
-        return false;
-    }
-
-    @Override
-    public T getOne(Wrapper<T> queryWrapper, boolean throwEx) {
-        return null;
-    }
-
-    @Override
-    public Map<String, Object> getMap(Wrapper<T> queryWrapper) {
-        return null;
-    }
-
-    @Override
-    public <V> V getObj(Wrapper<T> queryWrapper, Function<? super Object, V> mapper) {
-        return null;
-    }
-
-    @Override
-    public BaseMapper<T> getBaseMapper() {
-        return null;
-    }
-
-    @Override
-    public Class<T> getEntityClass() {
-        return null;
-    }
-
-    @Override
-    public boolean saveBatch(Collection<T> entityList, int batchSize) {
-        return false;
-    }
-
-    /**
-     * 批量保存更新
-     *
-     * @param entityList 实体列表
-     * @return
-     */
-    @Override
-    public boolean saveOrUpdateBatch(Collection<T> entityList) {
-        return false;
-    }
-
-    @Override
-    public boolean saveOrUpdateBatch(Collection<T> entityList, int batchSize) {
-        return false;
-    }
-
-    @Override
-    public boolean updateBatchById(Collection<T> entityList, int batchSize) {
-        return false;
+    public T queryOneById(Serializable id) {
+        Assert.isNull(id,"id不能为空");
+        SearchParam searchParam = SearchParam.getSearchParam();
+        searchParam.put("id",id);
+        return this.queryOne(searchParam);
     }
 
     /**
@@ -158,7 +99,7 @@ public class BaseServiceImpl<M extends BaseDao<T>, T> implements IBaseService<T>
      */
     @Override
     public boolean insert(T entity) {
-        return false;
+        return super.save(entity);
     }
 
     /**
@@ -169,7 +110,7 @@ public class BaseServiceImpl<M extends BaseDao<T>, T> implements IBaseService<T>
      */
     @Override
     public boolean insertBatch(Collection<T> entityList) {
-        return false;
+        return super.saveBatch(entityList);
     }
 
     /**
@@ -179,8 +120,8 @@ public class BaseServiceImpl<M extends BaseDao<T>, T> implements IBaseService<T>
      * @return
      */
     @Override
-    public boolean update(T entity) {
-        return false;
+    public boolean updateById(T entity) {
+        return this.updateById(entity);
     }
 
     /**
@@ -190,29 +131,30 @@ public class BaseServiceImpl<M extends BaseDao<T>, T> implements IBaseService<T>
      * @return
      */
     @Override
-    public boolean updateBatch(Collection<T> entityList) {
-        return false;
+    public boolean updateBatchById(Collection<T> entityList) {
+        return super.updateBatchById(entityList);
     }
 
     /**
-     * 根据id删除记录
+     * 根据id删除数据
      *
      * @param id 主键
      * @return
      */
     @Override
     public boolean deleteById(Serializable id) {
-        return false;
+        return super.removeById(id);
     }
 
     /**
-     * 根据id列表批量删除记录
+     * 根据id列表批量删除数据
      *
      * @param idList 主键列表
      * @return
      */
     @Override
     public boolean deleteByIds(Collection<? extends Serializable> idList) {
-        return false;
+        return super.removeBatchByIds(idList);
     }
+
 }

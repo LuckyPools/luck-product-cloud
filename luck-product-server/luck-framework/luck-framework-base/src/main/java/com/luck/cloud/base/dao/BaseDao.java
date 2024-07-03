@@ -20,4 +20,5 @@ public interface BaseDao<T> extends BaseMapper<T> {
      * @return
      */
     List<T> queryList(SearchParam searchParam);
+
 }

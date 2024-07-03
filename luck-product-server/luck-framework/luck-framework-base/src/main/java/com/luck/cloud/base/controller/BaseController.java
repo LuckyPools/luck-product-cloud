@@ -35,13 +35,25 @@ public abstract class BaseController<T extends BaseEntity,V extends BaseVO>{
      */
     public abstract V getVO();
 
+
     /**
      * 分页模板
      *
      * @return
      */
-    @GetMapping("/pageList")
-    public PageVO<V> pageList(PageVO<T> pageVO) {
+    @GetMapping("/list")
+    public ResultVO<List<V>> list(PageVO<T> pageVO) {
+        getService().queryPage(pageVO);
+        return (PageVO<V>) ConvertUtils.convertPage(pageVO, getVO().getClass());
+    }
+
+    /**
+     * 分页模板
+     *
+     * @return
+     */
+    @GetMapping("/page")
+    public PageVO<V> page(PageVO<T> pageVO) {
         getService().queryPage(pageVO);
         return (PageVO<V>) ConvertUtils.convertPage(pageVO, getVO().getClass());
     }
@@ -53,10 +65,10 @@ public abstract class BaseController<T extends BaseEntity,V extends BaseVO>{
      * @param id
      * @return
      */
-    @GetMapping("/{id}")
-    public ResultVO detail(@PathVariable("id") String id) {
+    @GetMapping("/get/{id}")
+    public ResultVO<V> get(@PathVariable("id") String id) {
         T result = getService().queryOneById(id);
-        return ResultVO.success(ConvertUtils.convert(result,getVO().getClass()));
+        return (ResultVO<V>) ResultVO.success(ConvertUtils.convert(result,getVO().getClass()));
     }
 
     /**
@@ -66,10 +78,9 @@ public abstract class BaseController<T extends BaseEntity,V extends BaseVO>{
      * @return
      * @throws Exception
      */
-    @PostMapping
-    public ResultVO insert(@RequestBody V vo) {
+    @PostMapping("/save")
+    public ResultVO save(@RequestBody V vo) {
         T entity = (T) ConvertUtils.convert(vo,getEntity().getClass());
-        //插入
         getService().insert(entity);
         return ResultVO.success(entity.getId());
     }
@@ -81,10 +92,10 @@ public abstract class BaseController<T extends BaseEntity,V extends BaseVO>{
      * @return
      * @throws Exception
      */
-    @PutMapping
+    @PostMapping("/update")
     public ResultVO update(@Validated @RequestBody V vo) {
         T entity = (T) ConvertUtils.convert(vo,getEntity().getClass());
-        getService().update(entity);
+        getService().updateById(entity);
         return ResultVO.success(entity.getId());
     }
 
@@ -95,8 +106,8 @@ public abstract class BaseController<T extends BaseEntity,V extends BaseVO>{
      * @param id
      * @return
      */
-    @DeleteMapping("/{id}")
-    public ResultVO deleteById(@PathVariable("id") Long id) {
+    @PostMapping("/delete")
+    public ResultVO delete(@PathVariable("id") Long id) {
         getService().deleteById(id);
         return ResultVO.success(id);
     }
@@ -108,7 +119,7 @@ public abstract class BaseController<T extends BaseEntity,V extends BaseVO>{
      * @return
      */
     @PostMapping("/delete/batch")
-    public ResultVO deleteBatchIds(@RequestBody List<Serializable> ids) {
+    public ResultVO deleteBatch(@RequestBody List<Serializable> ids) {
         boolean deleteCount = getService().deleteByIds(ids);
         return ResultVO.success(deleteCount);
     }
