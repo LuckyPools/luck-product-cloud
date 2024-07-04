@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: luck-system
+
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/luck_product?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    driver-class-name: com.mysql.jdbc.Driver
+
+jdbc:
+  type: mysql
+
+mybatis-plus:
+  typeAliasesPackage: com.luck.cloud.**.entity,com.luck.cloud.**.vo
+  typeAliasesSuperType: com.luck.cloud.base.entity.BaseEntity
+  mapper-locations: classpath*:mapper/${jdbc.type}/**/*.xml
+  config-location: classpath:mybatis-config.xml
+  global-config:
+    db-config:
+      idType: ASSIGN_ID

@@ -15,6 +15,7 @@
     <modules>
         <module>luck-framework-common</module>
         <module>luck-framework-base</module>
+        <module>luck-framework-mybaits</module>
     </modules>
 
 </project>

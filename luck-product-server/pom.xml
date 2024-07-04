@@ -171,7 +171,6 @@
         <module>luck-framework</module>
         <module>luck-server</module>
         <module>luck-gateway</module>
-        <module>luck-system</module>
-        <module>luck-biz</module>
+        <module>luck-modules</module>
     </modules>
 </project>
