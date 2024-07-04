@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/luck-product-server/luck-biz/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/luck-product-server/luck-biz/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/luck-product-server/luck-framework/luck-framework-base/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/luck-product-server/luck-framework/luck-framework-base/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/luck-product-server/luck-framework/luck-framework-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/luck-product-server/luck-framework/luck-framework-common/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/luck-product-server/luck-framework/luck-framework-mybaits/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/luck-product-server/luck-framework/luck-framework-mybaits/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/luck-product-server/luck-framework/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/luck-product-server/luck-framework/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/luck-product-server/luck-gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/luck-product-server/luck-gateway/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/luck-product-server/luck-modules/luck-system/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/luck-product-server/luck-modules/luck-system/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/luck-product-server/luck-modules/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/luck-product-server/luck-modules/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/luck-product-server/luck-server/luck-eureka/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/luck-product-server/luck-server/luck-eureka/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/luck-product-server/luck-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/luck-product-server/luck-server/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/luck-product-server/luck-system/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/luck-product-server/luck-system/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/luck-product-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/luck-product-server/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+  </component>
+</project>
