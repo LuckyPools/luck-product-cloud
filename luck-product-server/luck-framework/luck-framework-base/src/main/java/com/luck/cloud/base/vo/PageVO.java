@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.luck.cloud.base.param.SearchParam;
 import com.luck.cloud.common.constant.Global;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 import java.util.List;
@@ -17,7 +18,8 @@ import java.util.Map;
  * @date 2023-10-26
  */
 @Data
-public class PageVO<T> extends ResultVO implements IPage<T>, Serializable {
+@EqualsAndHashCode(callSuper = true)
+public class PageVO<T> extends ResultVO<T> implements IPage<T>, Serializable {
     private static final long serialVersionUID = 1L;
 
     /**

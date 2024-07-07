@@ -4,6 +4,7 @@ import com.luck.cloud.base.entity.BaseEntity;
 import com.luck.cloud.base.service.IBaseService;
 import com.luck.cloud.base.utils.ConvertUtils;
 import com.luck.cloud.base.vo.PageVO;
+import com.luck.cloud.base.vo.Result2VO;
 import com.luck.cloud.base.vo.ResultVO;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,9 +44,10 @@ public abstract class BaseController<T extends BaseEntity,V>{
      * @return
      */
     @GetMapping("/page")
-    public PageVO<V> page(PageVO<T> pageVO) {
+    public Result2VO<T> page(PageVO<T> pageVO) {
         getService().queryPage(pageVO);
-        return ConvertUtils.convertPage(pageVO,getVOClass());
+        return new Result2VO<>();
+        //return ConvertUtils.convertPage(pageVO,getVOClass());
     }
 
 

@@ -35,12 +35,7 @@ public class ConvertUtils {
      * @param <T>          目标对象类型
      */
     public static <S, T> T convert(S source, Class<T> targetType) {
-        T target = ConvertUtils.getConverter().convert(source, targetType);
-        // 根据@AutoMappingIgnore过滤掉忽略转换的字段
-        Arrays.stream(targetType.getDeclaredFields()).forEach(field -> {
-            ReflectUtils.setFieldValue(target, field.getName(), null);
-        });
-        return target;
+        return ConvertUtils.getConverter().convert(source, targetType);
     }
 
     /**

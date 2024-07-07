@@ -13,6 +13,8 @@ import lombok.Data;
 @Data
 public abstract class BaseEntity<T extends BaseEntity<T>> extends Model<T> {
 
+    private static final long serialVersionUID = 1L;
+
     @TableId
     protected String id;
 }

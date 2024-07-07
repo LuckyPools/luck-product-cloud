@@ -4,6 +4,8 @@ import com.luck.cloud.system.entity.User;
 import io.github.linpeilie.annotations.AutoMapper;
 import lombok.Data;
 
+import java.io.Serializable;
+
 
 /**
  * 系统管理 - 用户信息VO
@@ -13,7 +15,7 @@ import lombok.Data;
  **/
 @Data
 @AutoMapper(target = User.class)
-public class UserVO {
+public class UserVO implements Serializable {
 
     private String name;
 

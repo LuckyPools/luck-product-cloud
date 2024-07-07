@@ -4,6 +4,8 @@ import com.luck.cloud.common.enums.HttpCodeEnum;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 /**
  * 返回结果VO对象
  *
@@ -12,20 +14,22 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-public class ResultVO<T> {
+public class ResultVO<T> implements Serializable {
 
-    private String code;
+    private static final long serialVersionUID = 1L;
+
+    private int code = HttpCodeEnum.OK.getCode();
 
     private String message;
 
     private T data;
 
-    public ResultVO(String code, String message) {
+    public ResultVO(int code, String message) {
         this.code = code;
         this.message = message;
     }
 
-    public ResultVO(String code, String message,T data) {
+    public ResultVO(int code, String message,T data) {
         this.code = code;
         this.message = message;
         this.data = data;
@@ -39,7 +43,7 @@ public class ResultVO<T> {
         return new ResultVO<T>(HttpCodeEnum.UN_KNOW_ERROR.getCode(), HttpCodeEnum.UN_KNOW_ERROR.getMessage(), data);
     }
 
-    public ResultVO<T> setCode(String code){
+    public ResultVO<T> setCode(int code){
         this.code = code;
         return this;
     }
@@ -60,7 +64,7 @@ public class ResultVO<T> {
     }
 
     public ResultVO<T> setErrorMessage(String message){
-        this.code = HttpCodeEnum.UN_KNOW_ERROR.getMessage();
+        this.message = HttpCodeEnum.UN_KNOW_ERROR.getMessage();
         return this;
     }
 
@@ -70,11 +74,11 @@ public class ResultVO<T> {
     }
 
     public ResultVO<T> setSuccessMessage(String message){
-        this.code = HttpCodeEnum.OK.getMessage();
+        this.message = HttpCodeEnum.OK.getMessage();
         return this;
     }
 
     public boolean isOk(){
-        return this.code.equals(HttpCodeEnum.OK.getCode());
+        return this.code == HttpCodeEnum.OK.getCode();
     }
 }

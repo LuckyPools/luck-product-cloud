@@ -9,7 +9,7 @@
     </parent>
 
     <packaging>pom</packaging>
-    <artifactId>luck-modules</artifactId>
+    <artifactId>luck-service</artifactId>
 
     <modules>
         <module>luck-system</module>
