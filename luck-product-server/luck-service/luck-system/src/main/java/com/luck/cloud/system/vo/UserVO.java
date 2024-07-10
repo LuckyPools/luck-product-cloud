@@ -17,6 +17,10 @@ import java.io.Serializable;
 @AutoMapper(target = User.class)
 public class UserVO implements Serializable {
 
+    private String id;
+
+    private String isDelete;
+
     private String name;
 
     private String loginName;

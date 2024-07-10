@@ -3,6 +3,7 @@ package com.luck.cloud.system.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.luck.cloud.base.entity.BaseEntity;
+import com.luck.cloud.base.entity.DataEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -15,8 +16,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @TableName("sys_user")
-public class User extends BaseEntity<User> {
-    private static final long serialVersionUID = 1L;
+public class User extends DataEntity<User> {
 
     /**
      * 用户名
