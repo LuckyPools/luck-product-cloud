@@ -2,7 +2,6 @@ package com.luck.cloud.system.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.luck.cloud.base.entity.BaseEntity;
 import com.luck.cloud.base.entity.DataEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

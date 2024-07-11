@@ -1,5 +1,5 @@
 server:
-  port: 9080
+  port: 9090
   servlet:
     context-path: /
 spring:
@@ -9,9 +9,21 @@ spring:
     gateway:
       discovery:
         locator:
-          #Eureka Server地址
           enabled: true
           lower-case-service-id: true
+      routes:
+          # 路由ID
+        - id: luck-system
+          # 转发地址
+          uri: http://localhost:9080
+          # 匹配路径
+          predicates:
+            - Path=/sys/**
+          # 去掉前缀
+          filters:
+            - StripPrefix=1
+
+
 eureka:
   client:
     service-url:

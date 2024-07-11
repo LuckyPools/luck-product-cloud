@@ -85,7 +85,7 @@ public class BaseServiceImpl<M extends BaseDao<T>, T> extends ServiceImpl<M, T> 
      */
     @Override
     public T queryOneById(Serializable id) {
-        Assert.isNull(id,"id不能为空");
+        Assert.notNull(id,"id不能为空");
         SearchParam searchParam = SearchParam.getSearchParam();
         searchParam.put("id",id);
         return this.queryOne(searchParam);

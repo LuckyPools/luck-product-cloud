@@ -14,5 +14,6 @@
 
     <modules>
         <module>luck-eureka</module>
+        <module>luck-config</module>
     </modules>
 </project>

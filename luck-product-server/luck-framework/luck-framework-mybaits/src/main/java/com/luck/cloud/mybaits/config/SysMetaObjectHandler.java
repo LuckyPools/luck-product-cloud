@@ -2,7 +2,6 @@ package com.luck.cloud.mybaits.config;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.luck.cloud.common.constant.Global;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
 

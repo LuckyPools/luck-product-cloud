@@ -1,7 +1,6 @@
 package com.luck.cloud.system.controller;
 
 import com.luck.cloud.base.controller.BaseController;
-import com.luck.cloud.base.service.IBaseService;
 import com.luck.cloud.base.utils.ConvertUtils;
 import com.luck.cloud.base.vo.PageVO;
 import com.luck.cloud.base.vo.ResultVO;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,7 +21,7 @@ import java.util.List;
  * @create 2024-4-10
  **/
 @RestController("sysUserController")
-@RequestMapping("/sys/user")
+@RequestMapping("/user")
 public class UserController extends BaseController {
 
     @Autowired

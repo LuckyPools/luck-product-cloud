@@ -1,0 +1,18 @@
+server:
+  port: 9070
+spring:
+  cloud:
+    config:
+      server:
+        native:
+          # 本地文件：resource目录
+          search-locations: classpath:/config/
+  application:
+    name: luck-config
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:eureka@localhost:9010/eureka/
+  instance:
+    prefer-ip-address: true

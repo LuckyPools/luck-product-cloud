@@ -8,8 +8,14 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-@SpringBootApplication
+/**
+ * 注册中心
+ *
+ * @author luck
+ * @date 2024-07-11
+ */
 @EnableEurekaServer
+@SpringBootApplication
 public class LuckEurekaApplication {
 
     public static void main(String[] args){

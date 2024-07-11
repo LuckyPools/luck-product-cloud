@@ -9,6 +9,11 @@
         select
             t.*
         from sys_user t
+        <where>
+            <if test="id != null and id != ''">
+                and t.id = #{id}
+            </if>
+        </where>
     </select>
 
 </mapper>

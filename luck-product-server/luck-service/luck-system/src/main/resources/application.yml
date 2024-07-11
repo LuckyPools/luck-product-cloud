@@ -1,5 +1,5 @@
 server:
-  port: 9090
+  port: 9080
 
 spring:
   application:
@@ -22,3 +22,11 @@ mybatis-plus:
   global-config:
     db-config:
       idType: ASSIGN_ID
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:eureka@localhost:9010/eureka/
+  instance:
+    prefer-ip-address: true
