@@ -1,0 +1,23 @@
+server:
+  port: 9080
+  servlet:
+    context-path: /
+spring:
+  application:
+    name: luck-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          #Eureka Server地址
+          enabled: true
+          lower-case-service-id: true
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:eureka@localhost:9010/eureka/
+  instance:
+    prefer-ip-address: true
+
+
+

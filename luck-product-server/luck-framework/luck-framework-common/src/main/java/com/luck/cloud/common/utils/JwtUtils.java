@@ -22,7 +22,7 @@ public class JwtUtils {
     /**
      * 加密私钥，用于加密信息
      */
-    private static final String secret = "quzhe-product";
+    private static final String secret = "luck-product";
 
     /**
      * @param username 用户名

@@ -1,6 +1,5 @@
-
 server:
-  port: 7571
+  port: 9010
 
 spring:
   profiles:
