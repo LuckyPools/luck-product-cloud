@@ -35,8 +35,16 @@ public class ResultVO<T> implements Serializable {
         this.data = data;
     }
 
+    public static <T> ResultVO<T> success(){
+        return new ResultVO<T>(HttpCodeEnum.OK.getCode(), HttpCodeEnum.OK.getMessage());
+    }
+
     public static <T> ResultVO<T> success(T data){
         return new ResultVO<T>(HttpCodeEnum.OK.getCode(), HttpCodeEnum.OK.getMessage(), data);
+    }
+
+    public static <T> ResultVO<T> error(){
+        return new ResultVO<T>(HttpCodeEnum.UN_KNOW_ERROR.getCode(), HttpCodeEnum.UN_KNOW_ERROR.getMessage());
     }
 
     public static <T> ResultVO<T> error(T data){

@@ -9,17 +9,17 @@
         <version>${revision}</version>
     </parent>
 
-    <artifactId>luck-system</artifactId>
+    <artifactId>luck-auth</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>com.luck.cloud</groupId>
-            <artifactId>luck-framework-base</artifactId>
-            <version>${revision}</version>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
         </dependency>
         <dependency>
             <groupId>com.luck.cloud</groupId>
-            <artifactId>luck-framework-mybaits</artifactId>
+            <artifactId>luck-framework-base</artifactId>
             <version>${revision}</version>
         </dependency>
         <dependency>
@@ -30,6 +30,9 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-config-client</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-security</artifactId>
+        </dependency>
     </dependencies>
-
 </project>

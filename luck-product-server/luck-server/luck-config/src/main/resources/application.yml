@@ -1,14 +1,17 @@
 server:
   port: 9070
 spring:
+  application:
+    name: luck-config
+  profiles:
+    # 使用本地配置
+    active: native
   cloud:
     config:
       server:
         native:
-          # 本地文件：resource目录
+          # 配置信息查询路径
           search-locations: classpath:/config/
-  application:
-    name: luck-config
 
 eureka:
   client:

@@ -13,6 +13,7 @@
 
     <modules>
         <module>luck-system</module>
+        <module>luck-auth</module>
     </modules>
 
 </project>

@@ -4,11 +4,10 @@ server:
 spring:
   application:
     name: luck-system
-
   datasource:
-    username: root
-    password: root
-    url: jdbc:mysql://localhost:3306/luck_product?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    username: ${datasource.username}
+    password: ${datasource.password}
+    url: ${datasource.url}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 jdbc:
@@ -23,10 +22,3 @@ mybatis-plus:
     db-config:
       idType: ASSIGN_ID
 
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://root:eureka@localhost:9010/eureka/
-  instance:
-    prefer-ip-address: true
