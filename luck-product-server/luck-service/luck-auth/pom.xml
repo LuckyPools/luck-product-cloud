@@ -13,13 +13,23 @@
 
     <dependencies>
         <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt</artifactId>
-            <version>0.9.1</version>
+            <groupId>com.luck.cloud</groupId>
+            <artifactId>luck-framework-base</artifactId>
+            <version>${revision}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-web</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
         <dependency>
             <groupId>com.luck.cloud</groupId>
-            <artifactId>luck-framework-base</artifactId>
+            <artifactId>luck-framework-mybaits</artifactId>
             <version>${revision}</version>
         </dependency>
         <dependency>

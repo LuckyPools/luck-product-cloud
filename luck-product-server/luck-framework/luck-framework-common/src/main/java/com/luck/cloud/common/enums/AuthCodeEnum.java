@@ -1,6 +1,6 @@
-package com.luck.cloud.auth.enums;
+package com.luck.cloud.common.enums;
 
-public enum UserStatusCodeEnum {
+public enum AuthCodeEnum {
 
     ACCOUNT_NOT_EXIST(0,"用户不存在"),
     LOGIN_PASSWORD_ERROR(1,"密码错误"),
@@ -14,7 +14,7 @@ public enum UserStatusCodeEnum {
     private Integer code;
     private String message;
 
-    UserStatusCodeEnum(Integer code, String message) {
+    AuthCodeEnum(Integer code, String message) {
         this.code = code;
         this.message = message;
     }

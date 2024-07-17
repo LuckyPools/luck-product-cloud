@@ -1,6 +1,6 @@
 package com.luck.cloud.auth.dao;
 
-import com.luck.cloud.auth.entity.User;
+import com.luck.cloud.auth.entity.LoginUser;
 import com.luck.cloud.base.dao.BaseDao;
 import org.springframework.stereotype.Component;
 
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * @author luck
  * @create 2024-4-10
  */
-@Component("sysUserDao")
-public interface UserDao extends BaseDao<User> {
+@Component
+public interface UserDao extends BaseDao<LoginUser> {
 
 }

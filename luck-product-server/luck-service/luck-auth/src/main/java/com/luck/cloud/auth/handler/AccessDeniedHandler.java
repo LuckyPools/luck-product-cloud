@@ -12,16 +12,17 @@ import org.springframework.security.web.server.authorization.ServerAccessDeniedH
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
+
 import java.nio.charset.Charset;
 
 /**
- * @author ShiLei
+ * @author luck
  * @version 1.0.0
  * @date 2021/3/11 11:12
- * @description 鉴权管理
+ * @description 权限不够时处理
  */
 @Component
-public class DefaultAccessDeniedHandler implements ServerAccessDeniedHandler {
+public class AccessDeniedHandler implements ServerAccessDeniedHandler {
 
     @Override
     public Mono<Void> handle(ServerWebExchange exchange, AccessDeniedException denied) {

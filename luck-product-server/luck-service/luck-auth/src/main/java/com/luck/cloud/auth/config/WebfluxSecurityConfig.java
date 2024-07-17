@@ -1,12 +1,12 @@
 package com.luck.cloud.auth.config;
 
-import com.luck.cloud.auth.handler.DefaultAccessDeniedHandler;
-import com.luck.cloud.auth.handler.DefaultAuthenticationEntryPoint;
-import com.luck.cloud.auth.handler.DefaultAuthenticationFailureHandler;
-import com.luck.cloud.auth.handler.DefaultAuthenticationSuccessHandler;
-import com.luck.cloud.auth.service.IUserService;
+import com.luck.cloud.auth.handler.*;
+import com.luck.cloud.auth.service.ILoginUserService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.DelegatingReactiveAuthenticationManager;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
@@ -17,40 +17,43 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 import reactor.core.publisher.Mono;
-import javax.annotation.Resource;
 import java.util.LinkedList;
 
 /**
- * @author ShiLei
+ * @author luck
  * @version 1.0.0
  * @date 2021/3/11 10:56
  * @description webflux security核心配置类
  */
 @EnableWebFluxSecurity
+@Configuration
+@Slf4j
 public class WebfluxSecurityConfig {
-    @Resource
-    private DefaultAuthorizationManager defaultAuthorizationManager;
 
-    @Resource
-    private IUserService userService;
+    @Autowired
+    private AuthorizationManager authorizationManager;
 
-    @Resource
-    private DefaultAuthenticationSuccessHandler defaultAuthenticationSuccessHandler;
+    @Autowired
+    private AuthenticationSuccessHandler authenticationSuccessHandler;
 
-    @Resource
-    private DefaultAuthenticationFailureHandler defaultAuthenticationFailureHandler;
+    @Autowired
+    private AuthenticationFailureHandler authenticationFailureHandler;
 
-    @Resource
+    @Autowired
     private TokenAuthenticationManager tokenAuthenticationManager;
 
-    @Resource
-    private DefaultSecurityContextRepository defaultSecurityContextRepository;
+    @Autowired
+    private SecurityContextRepository securityContextRepository;
 
-    @Resource
-    private DefaultAuthenticationEntryPoint defaultAuthenticationEntryPoint;
+    @Autowired
+    private AuthenticationEntryPoint authenticationEntryPoint;
 
-    @Resource
-    private DefaultAccessDeniedHandler defaultAccessDeniedHandler;
+    @Autowired
+    private AccessDeniedHandler accessDeniedHandler;
+
+    @Autowired
+    private ILoginUserService userService;
+
 
     /**
      * 自定义过滤权限
@@ -63,23 +66,23 @@ public class WebfluxSecurityConfig {
         httpSecurity
                 // 登录认证处理
                 .authenticationManager(reactiveAuthenticationManager())
-                .securityContextRepository(defaultSecurityContextRepository)
+                .securityContextRepository(securityContextRepository)
                 // 请求拦截处理
                 .authorizeExchange(exchange -> exchange
                         .pathMatchers(noFilter).permitAll()
                         .pathMatchers(HttpMethod.OPTIONS).permitAll()
-                        .anyExchange().access(defaultAuthorizationManager)
+                        .anyExchange().access(authorizationManager)
                 )
-                .formLogin()
+                .formLogin().loginPage("/login")
                 // 自定义处理
-                .authenticationSuccessHandler(defaultAuthenticationSuccessHandler)
-                .authenticationFailureHandler(defaultAuthenticationFailureHandler)
+                .authenticationSuccessHandler(authenticationSuccessHandler)
+                .authenticationFailureHandler(authenticationFailureHandler)
                 .and()
                 .exceptionHandling()
-                .authenticationEntryPoint(defaultAuthenticationEntryPoint)
+                .authenticationEntryPoint(authenticationEntryPoint)
                 .and()
                 .exceptionHandling()
-                .accessDeniedHandler(defaultAccessDeniedHandler)
+                .accessDeniedHandler(accessDeniedHandler)
                 .and()
                 .csrf().disable()
         ;

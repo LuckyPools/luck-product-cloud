@@ -1,6 +1,6 @@
 package com.luck.cloud.auth.config;
 
-import com.luck.cloud.auth.utils.JwtTokenUtil;
+import com.luck.cloud.common.utils.JwtTokenUtils;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -11,7 +11,7 @@ import reactor.core.publisher.Mono;
 import java.util.Collection;
 
 /**
- * @author ShiLei
+ * @author luck
  * @version 1.0.0
  * @date 2021/3/11 13:23
  * @description token 认证处理
@@ -24,9 +24,9 @@ public class TokenAuthenticationManager implements ReactiveAuthenticationManager
     @SuppressWarnings("unchecked")
     public Mono<Authentication> authenticate(Authentication authentication) {
         return Mono.just(authentication)
-                .map(auth -> JwtTokenUtil.parseJwtRsa256(auth.getPrincipal().toString()))
+                .map(auth -> JwtTokenUtils.parseJwtRsa256(auth.getPrincipal().toString()))
                 .map(claims -> {
-                    Collection<? extends GrantedAuthority> roles = (Collection<? extends GrantedAuthority>)                     claims.get("roles");
+                    Collection<? extends GrantedAuthority> roles = (Collection<? extends GrantedAuthority>) claims.get("roles");
                     return new UsernamePasswordAuthenticationToken(
                             claims.getSubject(),
                             null,

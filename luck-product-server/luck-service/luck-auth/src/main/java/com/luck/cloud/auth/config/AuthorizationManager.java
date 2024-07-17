@@ -18,14 +18,14 @@ import reactor.core.publisher.Mono;
 import java.util.Collection;
 
 /**
- * @author ShiLei
+ * @author luck
  * @version 1.0.0
  * @date 2021/3/11 13:10
  * @description 用户权限鉴权处理
  */
 @Component
 @Slf4j
-public class DefaultAuthorizationManager implements ReactiveAuthorizationManager<AuthorizationContext> {
+public class AuthorizationManager implements ReactiveAuthorizationManager<AuthorizationContext> {
 
     private final AntPathMatcher antPathMatcher = new AntPathMatcher();
 
@@ -38,7 +38,6 @@ public class DefaultAuthorizationManager implements ReactiveAuthorizationManager
             for (GrantedAuthority authority : authorities) {
                 String authorityAuthority = authority.getAuthority();
                 String path = request.getURI().getPath();
-                // TODO
                 // 查询用户访问所需角色进行对比
                 if (antPathMatcher.match(authorityAuthority, path)) {
                     log.info(String.format("用户请求API校验通过，GrantedAuthority:{%s}  Path:{%s} ", authorityAuthority, path));

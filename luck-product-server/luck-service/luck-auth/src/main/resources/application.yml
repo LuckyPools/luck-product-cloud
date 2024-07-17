@@ -1,0 +1,43 @@
+server:
+  port: 9060
+
+spring:
+  application:
+    name: luck-auth
+  datasource:
+    username: ${datasource.username}
+    password: ${datasource.password}
+    url: ${datasource.url}
+    driver-class-name: ${datasource.driver-class-name}
+
+  redis:
+    database: ${redis.database}
+    host: ${redis.host}
+    port: ${redis.port}
+    password: ${redis.password}
+    timeout: ${redis.timeout}
+    jedis:
+      pool:
+        max-idle: ${redis.jedis.pool.max-idle}
+        min-idle: ${redis.jedis.pool.min-idle}
+        max-active: ${redis.jedis.pool.max-active}
+        max-wait: ${redis.jedis.pool.max-wait}
+    expire: ${redis.expire}
+
+mybatis-plus:
+  typeAliasesPackage: com.luck.cloud.**.entity,com.luck.cloud.**.vo
+  typeAliasesSuperType: com.luck.cloud.base.entity.BaseEntity
+  mapper-locations: classpath*:mapper/${jdbc.type}/**/*.xml
+  config-location: classpath:mybatis-config.xml
+  global-config:
+    db-config:
+      idType: ASSIGN_ID
+
+jwt:
+  token:
+    expired: 3600
+    refresh:
+      expired: 3600
+
+security:
+  noFilter: /login

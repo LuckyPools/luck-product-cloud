@@ -14,13 +14,13 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * @author ShiLei
+ * @author luck
  * @version 1.0.0
  * @date 2021/3/11 16:27
- * @description 存储认证授权的相关信息
+ * @description 用户信息上下文存储类
  */
 @Component
-public class DefaultSecurityContextRepository implements ServerSecurityContextRepository {
+public class SecurityContextRepository implements ServerSecurityContextRepository {
 
     public final static String TOKEN_HEADER = "Authorization";
 
@@ -34,6 +34,12 @@ public class DefaultSecurityContextRepository implements ServerSecurityContextRe
         return Mono.empty();
     }
 
+
+    /**
+     * todo 具体功能
+     * @param exchange
+     * @return
+     */
     @Override
     public Mono<SecurityContext> load(ServerWebExchange exchange) {
         ServerHttpRequest request = exchange.getRequest();

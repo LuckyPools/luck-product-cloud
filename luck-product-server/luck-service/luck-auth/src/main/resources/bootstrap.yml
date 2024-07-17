@@ -1,0 +1,17 @@
+spring:
+  cloud:
+    config:
+      # 获取配置文件的名称
+      name: application
+      # 获取配置文件的策略
+      profile: dev
+      discovery:
+        # 开启配置服务发现，表示从eureka注册中心发现服务 (service-id)
+        enabled: true
+        # 指定配置中心的service-id
+        service-id: luck-config
+
+eureka:
+  client:
+    service-url: # 注册在eureka注册中心
+      defaultZone: http://root:eureka@localhost:9010/eureka/

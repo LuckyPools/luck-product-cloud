@@ -1,4 +1,4 @@
-package com.luck.cloud.auth.utils;
+package com.luck.cloud.common.utils;
 
 
 import io.jsonwebtoken.Claims;
@@ -16,13 +16,13 @@ import java.util.Date;
 import java.util.Map;
 
 /**
- * @author ShiLei
+ * @author luck
  * @version 1.0.0
  * @date 2021/3/9 16:17
  * @description jwt token 生成工具类
  */
 @Slf4j
-public class JwtTokenUtil {
+public class JwtTokenUtils {
 
     private final static Clock CLOCK = DefaultClock.INSTANCE;
 

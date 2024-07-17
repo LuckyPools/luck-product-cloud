@@ -23,6 +23,19 @@ spring:
           filters:
             - StripPrefix=1
 
+  redis:
+    database: ${redis.database}
+    host: ${redis.host}
+    port: ${redis.port}
+    password: ${redis.password}
+    timeout: ${redis.timeout}
+    jedis:
+      pool:
+        max-idle: ${redis.jedis.pool.max-idle}
+        min-idle: ${redis.jedis.pool.min-idle}
+        max-active: ${redis.jedis.pool.max-active}
+        max-wait: ${redis.jedis.pool.max-wait}
+    expire: ${redis.expire}
 
 eureka:
   client:
