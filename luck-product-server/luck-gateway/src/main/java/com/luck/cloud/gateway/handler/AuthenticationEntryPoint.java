@@ -16,10 +16,9 @@ import reactor.core.publisher.Mono;
 import java.nio.charset.Charset;
 
 /**
+ * 未认证处理
  * @author luck
- * @version 1.0.0
  * @date 2021/3/11 15:17
- * @description 未认证处理
  */
 @Component
 public class AuthenticationEntryPoint implements ServerAuthenticationEntryPoint {

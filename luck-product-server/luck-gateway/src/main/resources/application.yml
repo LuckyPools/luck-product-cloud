@@ -44,5 +44,13 @@ eureka:
   instance:
     prefer-ip-address: true
 
+jwt:
+  token:
+    expired: 3600
+    refresh:
+      expired: 3600
 
+security:
+  white-urls:
+        - "/login"
 

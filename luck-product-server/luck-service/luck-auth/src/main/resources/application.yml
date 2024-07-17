@@ -33,11 +33,3 @@ mybatis-plus:
     db-config:
       idType: ASSIGN_ID
 
-jwt:
-  token:
-    expired: 3600
-    refresh:
-      expired: 3600
-
-security:
-  noFilter: /login

@@ -1,9 +1,10 @@
-package com.luck.cloud.auth.config;
+package com.luck.cloud.gateway.config;
 
 import com.alibaba.fastjson.JSONObject;
-import com.luck.cloud.auth.enums.UserStatusCodeEnum;
 import com.luck.cloud.base.vo.ResultVO;
+import com.luck.cloud.common.enums.AuthCodeEnum;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authorization.AuthorizationDecision;
@@ -15,19 +16,25 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
+
 import java.util.Collection;
 
 /**
+ * 鉴权
  * @author luck
- * @version 1.0.0
  * @date 2021/3/11 13:10
- * @description 用户权限鉴权处理
  */
 @Component
 @Slf4j
 public class AuthorizationManager implements ReactiveAuthorizationManager<AuthorizationContext> {
 
+    private final RedisTemplate<String, Object> redisTemplate;
+
     private final AntPathMatcher antPathMatcher = new AntPathMatcher();
+
+    public AuthorizationManager(RedisTemplate<String, Object> redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
 
     @Override
     public Mono<AuthorizationDecision> check(Mono<Authentication> authentication, AuthorizationContext authorizationContext) {
@@ -53,7 +60,7 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
         return check(authentication, object)
                 .filter(AuthorizationDecision::isGranted)
                 .switchIfEmpty(Mono.defer(() -> {
-                    String body = JSONObject.toJSONString(ResultVO.error(UserStatusCodeEnum.PERMISSION_DENIED.getCode()));
+                    String body = JSONObject.toJSONString(ResultVO.error(AuthCodeEnum.PERMISSION_DENIED.getCode()));
                     return Mono.error(new AccessDeniedException(body));
                 })).flatMap(d -> Mono.empty());
     }

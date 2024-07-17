@@ -2,6 +2,7 @@ package com.luck.cloud.gateway.handler;
 
 import com.alibaba.fastjson.JSONObject;
 import com.luck.cloud.base.vo.ResultVO;
+import com.luck.cloud.common.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferFactory;
@@ -16,10 +17,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 认证成功处理
  * @author luck
- * @version 1.0.0
  * @date 2021/3/11 15:00
- * @description 认证成功处理
  */
 @Component
 public class AuthenticationSuccessHandler implements ServerAuthenticationSuccessHandler {
@@ -45,8 +45,8 @@ public class AuthenticationSuccessHandler implements ServerAuthenticationSuccess
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             map.put("username", userDetails.getUsername());
             map.put("roles", userDetails.getAuthorities());
-            String token = JwtTokenUtil.generateToken(map, userDetails.getUsername(), jwtTokenExpired);
-            String refreshToken = JwtTokenUtil.generateToken(map, userDetails.getUsername(), jwtTokenRefreshExpired);
+            String token = JwtUtils.generateToken(map, userDetails.getUsername(), jwtTokenExpired);
+            String refreshToken = JwtUtils.generateToken(map, userDetails.getUsername(), jwtTokenRefreshExpired);
             Map<String, Object> tokenMap = new HashMap<>(2);
             tokenMap.put("token", token);
             tokenMap.put("refreshToken", refreshToken);

@@ -1,4 +1,5 @@
-package com.luck.cloud.auth.config;
+package com.luck.cloud.gateway.config;
+
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.server.reactive.ServerHttpRequest;

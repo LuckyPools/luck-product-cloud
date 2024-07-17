@@ -16,10 +16,9 @@ import reactor.core.publisher.Mono;
 import java.nio.charset.Charset;
 
 /**
+ * 权限不够时处理
  * @author luck
- * @version 1.0.0
  * @date 2021/3/11 11:12
- * @description 权限不够时处理
  */
 @Component
 public class AccessDeniedHandler implements ServerAccessDeniedHandler {

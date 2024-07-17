@@ -14,10 +14,9 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 /**
+ * 认证失败处理
  * @author luck
- * @version 1.0.0
  * @date 2021/3/11 15:14
- * @description 认证失败处理
  */
 @Component
 public class AuthenticationFailureHandler implements ServerAuthenticationFailureHandler {

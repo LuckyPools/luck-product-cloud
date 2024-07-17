@@ -1,6 +1,6 @@
 package com.luck.cloud.auth.service.impl;
 
-import com.luck.cloud.auth.dao.UserDao;
+import com.luck.cloud.auth.dao.LoginUserDao;
 import com.luck.cloud.auth.entity.LoginUser;
 import com.luck.cloud.auth.service.ILoginUserService;
 import com.luck.cloud.base.param.SearchParam;
@@ -18,7 +18,7 @@ import reactor.core.publisher.Mono;
  **/
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class LoginUserServiceImpl extends BaseServiceImpl<UserDao, LoginUser> implements ILoginUserService {
+public class LoginUserServiceImpl extends BaseServiceImpl<LoginUserDao, LoginUser> implements ILoginUserService {
 
     @Override
     public Mono<UserDetails> findByUsername(String s) {

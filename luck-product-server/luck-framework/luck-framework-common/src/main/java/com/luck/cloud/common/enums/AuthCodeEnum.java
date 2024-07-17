@@ -1,5 +1,10 @@
 package com.luck.cloud.common.enums;
 
+/**
+ * 登录状态返回码
+ * @author luck
+ * @date 2024-07-17
+ */
 public enum AuthCodeEnum {
 
     ACCOUNT_NOT_EXIST(0,"用户不存在"),

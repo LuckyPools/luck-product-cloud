@@ -11,6 +11,6 @@ import org.springframework.stereotype.Component;
  * @create 2024-4-10
  */
 @Component
-public interface UserDao extends BaseDao<LoginUser> {
+public interface LoginUserDao extends BaseDao<LoginUser> {
 
 }

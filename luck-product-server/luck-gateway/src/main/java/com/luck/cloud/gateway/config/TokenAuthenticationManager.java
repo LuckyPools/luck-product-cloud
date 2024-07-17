@@ -1,6 +1,6 @@
-package com.luck.cloud.auth.config;
+package com.luck.cloud.gateway.config;
 
-import com.luck.cloud.common.utils.JwtTokenUtils;
+import com.luck.cloud.common.utils.JwtUtils;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -11,20 +11,20 @@ import reactor.core.publisher.Mono;
 import java.util.Collection;
 
 /**
+ * 校验令牌是否有效
  * @author luck
- * @version 1.0.0
  * @date 2021/3/11 13:23
- * @description token 认证处理
  */
 @Component
 @Primary
 public class TokenAuthenticationManager implements ReactiveAuthenticationManager {
 
+    // todo 这里将token转化为Authentication
     @Override
     @SuppressWarnings("unchecked")
     public Mono<Authentication> authenticate(Authentication authentication) {
         return Mono.just(authentication)
-                .map(auth -> JwtTokenUtils.parseJwtRsa256(auth.getPrincipal().toString()))
+                .map(auth -> JwtUtils.parseJwtRsa256(auth.getPrincipal().toString()))
                 .map(claims -> {
                     Collection<? extends GrantedAuthority> roles = (Collection<? extends GrantedAuthority>) claims.get("roles");
                     return new UsernamePasswordAuthenticationToken(
@@ -35,3 +35,4 @@ public class TokenAuthenticationManager implements ReactiveAuthenticationManager
                 });
     }
 }
+

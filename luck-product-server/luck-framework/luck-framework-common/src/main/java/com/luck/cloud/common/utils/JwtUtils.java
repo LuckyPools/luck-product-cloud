@@ -22,7 +22,7 @@ import java.util.Map;
  * @description jwt token 生成工具类
  */
 @Slf4j
-public class JwtTokenUtils {
+public class JwtUtils {
 
     private final static Clock CLOCK = DefaultClock.INSTANCE;
 
