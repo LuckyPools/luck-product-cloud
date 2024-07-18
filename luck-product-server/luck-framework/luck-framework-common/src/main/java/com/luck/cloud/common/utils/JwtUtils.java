@@ -1,18 +1,16 @@
 package com.luck.cloud.common.utils;
 
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Clock;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.impl.DefaultClock;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTCreator;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.Claim;
+import com.auth0.jwt.interfaces.DecodedJWT;
+import com.auth0.jwt.interfaces.JWTVerifier;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.CollectionUtils;
 
-import java.io.InputStream;
-import java.security.KeyStore;
-import java.security.PrivateKey;
-import java.security.PublicKey;
-import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,62 +22,124 @@ import java.util.Map;
 @Slf4j
 public class JwtUtils {
 
-    private final static Clock CLOCK = DefaultClock.INSTANCE;
-
+    /**
+     * 加密私钥，用于加密信息
+     */
+    private static final String secret = "luck-product";
 
     /**
-     * 寻找证书文件
+     * @param username 用户名
+     * @param uuid
+     * @return
      */
-    private static final InputStream INPUT_STREAM = Thread.currentThread().getContextClassLoader().getResourceAsStream("mirror-privateKey.jks");
-    private static PrivateKey privateKey = null;
-    private static PublicKey publicKey = null;
+    public String createToken(String username, String uuid) {
+        return JWT.create()
+                .withClaim("username", username)
+                .withClaim("uuid", uuid)
+                .sign(Algorithm.HMAC256(secret));
+    }
 
-    static { // 将证书文件里边的私钥公钥拿出来
-        try {
-            // java key store 固定常量
-            KeyStore keyStore = KeyStore.getInstance("JKS");
-            keyStore.load(INPUT_STREAM, "3d-mirror".toCharArray());
-            // jwt 为 命令生成整数文件时的别名
-            privateKey = (PrivateKey) keyStore.getKey("mirror-privateKey", "3d-mirror".toCharArray());
-            publicKey = keyStore.getCertificate("mirror-privateKey").getPublicKey();
-        } catch (Exception e) {
-            e.printStackTrace();
+    /**
+     * 秘钥8
+     * @param username 用户名
+     * @return
+     */
+    public String createToken(String username, String uuid,Integer type,String tenantCode) {
+        return JWT.create()
+                .withClaim("username", username)
+                .withClaim("uuid", uuid)
+                .withClaim("type", type)
+                .withClaim("tenant", tenantCode)
+                .sign(Algorithm.HMAC256(secret));
+    }
+
+    /**
+     * 根据用户名、角色、权限、菜单等信息生成token
+     * @param username 用户名
+     * @param roles 角色
+     * @param authorities 权限
+     * @param menus 菜单
+     * @return
+     */
+    public String createToken(String username, List<String> roles, List<String> authorities, List<String> menus) {
+        JWTCreator.Builder builder = JWT.create();
+        //角色
+        if (!CollectionUtils.isEmpty(roles)) {
+            builder.withClaim("role", roles);
         }
+        //权限
+        if (!CollectionUtils.isEmpty(authorities)) {
+            builder.withClaim("authorities", authorities);
+        }
+        //菜单
+        if (!CollectionUtils.isEmpty(authorities)) {
+            builder.withClaim("menus", menus);
+        }
+        return builder.withClaim("username", username)
+                .sign(Algorithm.HMAC256(secret));
+    }
+
+    /**
+     * 获取jwt的负载
+     * @param token
+     * @return
+     */
+    public Map<String, Claim> getClaim(String token) {
+        JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(secret)).build();
+        DecodedJWT decodedJWT = jwtVerifier.verify(token);
+        return decodedJWT.getClaims();
+    }
+
+    /**
+     * 获取用户名
+     * @param token
+     * @return
+     */
+    public String getUsername(String token) {
+        Claim claim = getClaim(token).get("username");
+        if(claim == null) {
+            return null;
+        }
+        return claim.asString();
     }
 
 
     /**
-     * @author Administrator
-     * @date 2021/3/9 17:36
-     * @description 生成jwt token
+     * 获取租户
+     * @param token
+     * @return
      */
-    public static String generateToken(Map<String, Object> claims, String subject, int expiration) {
-        SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.RS256;
-        // 生成签名密钥
-        final Date createdDate = CLOCK.now();
-        final Date expirationDate = calculateExpirationDate(createdDate, expiration);
-        return Jwts.builder()
-                .setClaims(claims)
-                .setSubject(subject)
-                .setIssuedAt(createdDate)
-                .setExpiration(expirationDate)
-                .signWith(signatureAlgorithm, privateKey)
-                .compact();
-    }
-
-    private static Date calculateExpirationDate(Date createdDate, int expiration) {
-        return new Date(createdDate.getTime() + expiration);
+    public String getTenant(String token) {
+        Claim claim = getClaim(token).get("tenant");
+        if(claim == null) {
+            return null;
+        }
+        return claim.asString();
     }
 
     /**
-     * 解密Jwt内容
-     *
-     * @param jwt jwt
-     * @return Claims
+     * 获取用户类型
+     * @param token
+     * @return
      */
-    public static Claims parseJwtRsa256(String jwt) {
-        return Jwts.parser()
-                .setSigningKey(publicKey)
-                .parseClaimsJws(jwt).getBody();
+    public Integer getUserType(String token) {
+        Claim claim = getClaim(token).get("type");
+        if(claim == null) {
+            return null;
+        }
+        return claim.asInt();
+    }
+
+    /**
+     * 获取客户端唯一标识
+     * @param token
+     * @return
+     */
+    public String getUUID(String token) {
+        Claim claim = getClaim(token).get("uuid");
+        if(claim == null) {
+            return null;
+        }
+        return claim.asString();
     }
 }
