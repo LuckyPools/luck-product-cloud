@@ -15,7 +15,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Component
-@ConfigurationProperties(prefix = "security.white-urls")
+@ConfigurationProperties(prefix = "security.ignore")
 public class WhiteUrlsConfig {
   private List<String> urls;
 }

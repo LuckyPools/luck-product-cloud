@@ -33,9 +33,13 @@ mybatis-plus:
     db-config:
       idType: ASSIGN_ID
 
-security:
-  white-urls: ${white-urls}
 
 jwt:
   token:
     expired: ${token.expired}
+
+security:
+  ignore:
+    urls:
+      - "/login"
+      - "/logout"

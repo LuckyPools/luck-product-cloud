@@ -33,7 +33,7 @@ public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticatio
      * token 过期时间
      */
     @Value("${jwt.token.expired}")
-    private int jwtTokenExpired;
+    private long jwtTokenExpired;
 
     private  static ObjectMapper objectMapper = new ObjectMapper();
 

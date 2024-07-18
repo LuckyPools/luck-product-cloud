@@ -29,12 +29,13 @@ public class TokenAuthenticationManager implements ReactiveAuthenticationManager
     @SuppressWarnings("unchecked")
     public Mono<Authentication> authenticate(Authentication authentication) {
         return Mono.just(authentication)
-                .map(auth -> JwtUtils.parseJwtRsa256(auth.getPrincipal().toString()))
+                .map(auth -> JwtUtils.getClaims(auth.getPrincipal().toString()))
                 .map(claims -> {
                     String userId = MapUtil.getStr(claims, "userId");
                     UserDetails userDetails = RedisCacheUtils.get("user:" + userId);
                     Collection<? extends GrantedAuthority> roles = userDetails.getAuthorities();
                     return new UsernamePasswordAuthenticationToken(
+                            // 用户名
                             claims.getSubject(),
                             null,
                             roles
