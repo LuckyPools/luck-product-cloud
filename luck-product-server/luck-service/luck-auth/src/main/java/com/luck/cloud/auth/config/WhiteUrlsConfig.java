@@ -1,4 +1,4 @@
-package com.luck.cloud.gateway.config;
+package com.luck.cloud.auth.config;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -15,7 +15,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Component
-@ConfigurationProperties(prefix = "security.ignore")
+@ConfigurationProperties(prefix = "security.white-urls")
 public class WhiteUrlsConfig {
   private List<String> urls;
 }

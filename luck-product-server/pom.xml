@@ -36,6 +36,7 @@
         <ibeetl.btjson.version>0.94</ibeetl.btjson.version>
         <alibaba.fastjson.version>1.2.5</alibaba.fastjson.version>
         <jjwt.version>0.9.1</jjwt.version>
+        <hutool.core.version>5.8.15</hutool.core.version>
         <maven-compiler-plugin.verison>3.8.0</maven-compiler-plugin.verison>
         <mapstruct-plus.lombok.version>0.2.0</mapstruct-plus.lombok.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -132,6 +133,11 @@
                 <groupId>io.jsonwebtoken</groupId>
                 <artifactId>jjwt</artifactId>
                 <version>${jjwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-core</artifactId>
+                <version>${hutool.core.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

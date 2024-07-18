@@ -23,6 +23,12 @@ spring:
           filters:
             - StripPrefix=1
 
+  datasource:
+    username: ${datasource.username}
+    password: ${datasource.password}
+    url: ${datasource.url}
+    driver-class-name: ${datasource.driver-class-name}
+
   redis:
     database: ${redis.database}
     host: ${redis.host}
@@ -37,6 +43,16 @@ spring:
         max-wait: ${redis.jedis.pool.max-wait}
     expire: ${redis.expire}
 
+mybatis-plus:
+  typeAliasesPackage: com.luck.cloud.**.entity,com.luck.cloud.**.vo
+  typeAliasesSuperType: com.luck.cloud.base.entity.BaseEntity
+  mapper-locations: classpath*:mapper/${jdbc.type}/**/*.xml
+  config-location: classpath:mybatis-config.xml
+  global-config:
+    db-config:
+      idType: ASSIGN_ID
+
+
 eureka:
   client:
     service-url:
@@ -46,11 +62,11 @@ eureka:
 
 jwt:
   token:
-    expired: 3600
-    refresh:
-      expired: 3600
+    expired: ${token.expired}
 
 security:
-  white-urls:
-        - "/login"
+  ignore:
+    urls:
+      - "/login"
+      - "/logout"
 

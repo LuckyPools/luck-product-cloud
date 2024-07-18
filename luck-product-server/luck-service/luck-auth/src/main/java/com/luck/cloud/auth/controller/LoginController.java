@@ -1,8 +1,6 @@
 package com.luck.cloud.auth.controller;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -17,7 +15,6 @@ public class LoginController {
 
     @PostMapping
     public String login() {
-        // todo 将信息存储进
         return "success";
     }
 }

@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.luck.cloud.base.vo.ResultVO;
 import com.luck.cloud.common.enums.AuthCodeEnum;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authorization.AuthorizationDecision;
@@ -28,13 +27,7 @@ import java.util.Collection;
 @Slf4j
 public class AuthorizationManager implements ReactiveAuthorizationManager<AuthorizationContext> {
 
-    private final RedisTemplate<String, Object> redisTemplate;
-
     private final AntPathMatcher antPathMatcher = new AntPathMatcher();
-
-    public AuthorizationManager(RedisTemplate<String, Object> redisTemplate) {
-        this.redisTemplate = redisTemplate;
-    }
 
     @Override
     public Mono<AuthorizationDecision> check(Mono<Authentication> authentication, AuthorizationContext authorizationContext) {

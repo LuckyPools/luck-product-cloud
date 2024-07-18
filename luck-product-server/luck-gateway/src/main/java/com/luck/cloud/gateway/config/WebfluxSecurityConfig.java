@@ -3,8 +3,6 @@ package com.luck.cloud.gateway.config;
 import cn.hutool.core.util.ArrayUtil;
 import com.luck.cloud.gateway.handler.AccessDeniedHandler;
 import com.luck.cloud.gateway.handler.AuthenticationEntryPoint;
-import com.luck.cloud.gateway.handler.AuthenticationFailureHandler;
-import com.luck.cloud.gateway.handler.AuthenticationSuccessHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -27,6 +25,7 @@ import java.util.LinkedList;
  * webflux security核心配置类
  * @author luck
  * @date 2021/3/11 10:56
+ * WebfluxSecurityConfig
  */
 @EnableWebFluxSecurity
 @Configuration
@@ -43,12 +42,6 @@ public class WebfluxSecurityConfig {
     private SecurityContextRepository securityContextRepository;
 
     @Autowired
-    private AuthenticationSuccessHandler authenticationSuccessHandler;
-
-    @Autowired
-    private AuthenticationFailureHandler authenticationFailureHandler;
-
-    @Autowired
     private AuthenticationEntryPoint authenticationEntryPoint;
 
     @Autowired
@@ -61,7 +54,7 @@ public class WebfluxSecurityConfig {
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity httpSecurity) {
         httpSecurity
-            // 登录认证处理
+            // 认证处理
             .authenticationManager(reactiveAuthenticationManager())
             .securityContextRepository(securityContextRepository)
             // 请求拦截处理
@@ -71,9 +64,6 @@ public class WebfluxSecurityConfig {
                     .anyExchange().access(authorizationManager)
             )
             .formLogin()
-            // 自定义处理
-            .authenticationSuccessHandler(authenticationSuccessHandler)
-            .authenticationFailureHandler(authenticationFailureHandler)
             .and()
             .exceptionHandling()
             .authenticationEntryPoint(authenticationEntryPoint)

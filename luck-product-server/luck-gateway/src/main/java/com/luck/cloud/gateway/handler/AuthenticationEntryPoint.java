@@ -16,7 +16,7 @@ import reactor.core.publisher.Mono;
 import java.nio.charset.Charset;
 
 /**
- * 未认证处理
+ * 没有登录或token过期时处理
  * @author luck
  * @date 2021/3/11 15:17
  */

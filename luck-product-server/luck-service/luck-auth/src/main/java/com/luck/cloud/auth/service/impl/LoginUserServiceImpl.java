@@ -21,13 +21,10 @@ import reactor.core.publisher.Mono;
 public class LoginUserServiceImpl extends BaseServiceImpl<LoginUserDao, LoginUser> implements ILoginUserService {
 
     @Override
-    public Mono<UserDetails> findByUsername(String s) {
+    public UserDetails loadUserByUsername(String s) {
         SearchParam searchParam = SearchParam.getSearchParam();
         searchParam.put("loginName",s);
-        LoginUser user = this.queryOne(searchParam);
-        if(user != null){
-
-        }
-        return null;
+        LoginUser loginUser = this.queryOne(searchParam);
+        return loginUser;
     }
 }

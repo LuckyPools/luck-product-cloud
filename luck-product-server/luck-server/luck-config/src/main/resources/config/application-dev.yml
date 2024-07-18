@@ -27,3 +27,12 @@ redis:
 jdbc:
   type: mysql
 
+ignore-urls:
+  - "/login"
+  - "/logout"
+
+token:
+  expired: 3600
+  refresh:
+    expired: 3600
+
