@@ -1,16 +1,13 @@
 package com.luck.cloud.common.utils;
 
-import java.io.Serializable;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+
+import javax.servlet.http.HttpServletRequest;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.Map;
 
 /**
  * JWT工具类
@@ -170,6 +167,11 @@ public class JwtUtils implements Serializable {
             token = null;
         }
         return token;
+    }
+
+    public static void main(String[] args) {
+        Map<String, Object> claims = JwtUtils.getClaims("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ6aGFuZ3NhbiIsImV4cCI6MTcyMTY1NDEyMSwidXNlcklkIjoiMSIsInVzZXJuYW1lIjoiemhhbmdzYW4ifQ.2mJ2SZp9NGOiMawQBltHH2ndwsGHy4TMR3mCAfVbSEeQQlBzsvcMN1_PiUWkDI4R9BfAqK8evTgXizwaDaxo9Q");
+        System.out.println(claims.get("userId"));
     }
 
 }

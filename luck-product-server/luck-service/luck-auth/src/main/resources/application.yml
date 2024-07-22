@@ -38,8 +38,3 @@ jwt:
   token:
     expired: ${token.expired}
 
-security:
-  ignore:
-    urls:
-      - "/login"
-      - "/logout"

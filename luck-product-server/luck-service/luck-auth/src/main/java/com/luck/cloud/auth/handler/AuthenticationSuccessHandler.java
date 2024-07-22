@@ -1,19 +1,14 @@
 package com.luck.cloud.auth.handler;
 
-import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.luck.cloud.auth.entity.LoginUser;
-import com.luck.cloud.base.vo.ResultVO;
 import com.luck.cloud.common.utils.JwtUtils;
 import com.luck.cloud.redis.utils.RedisCacheUtils;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.buffer.DataBuffer;
-import org.springframework.core.io.buffer.DataBufferFactory;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
-import reactor.core.publisher.Mono;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -49,6 +44,9 @@ public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticatio
             RedisCacheUtils.put("user:" + loginUser.getId(), loginUser, jwtTokenExpired);
             response.setContentType("application/json;charset=UTF-8");
             response.getWriter().write(objectMapper.writeValueAsString(token));
+        }else{
+            response.setContentType("application/json;charset=UTF-8");
+            response.getWriter().write("用户已登录");
         }
     }
 

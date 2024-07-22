@@ -15,11 +15,18 @@ spring:
           # 路由ID
         - id: luck-system
           # 转发地址
-          uri: http://localhost:9080
+          uri: lb://luck-system
           # 匹配路径
           predicates:
             - Path=/sys/**
           # 去掉前缀
+          filters:
+            - StripPrefix=1
+
+        - id: luck-auth
+          uri: lb://luck-auth
+          predicates:
+            - Path=/auth/**
           filters:
             - StripPrefix=1
 
@@ -67,6 +74,6 @@ jwt:
 security:
   ignore:
     urls:
-      - "/login"
+      - "/auth/login"
       - "/logout"
-
+      - "/admin/instance"

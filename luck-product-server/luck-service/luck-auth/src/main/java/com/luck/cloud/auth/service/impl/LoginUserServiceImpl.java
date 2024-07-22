@@ -6,9 +6,9 @@ import com.luck.cloud.auth.service.ILoginUserService;
 import com.luck.cloud.base.param.SearchParam;
 import com.luck.cloud.base.service.impl.BaseServiceImpl;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import reactor.core.publisher.Mono;
 
 /**
  * 用户信息service实现类
@@ -25,6 +25,9 @@ public class LoginUserServiceImpl extends BaseServiceImpl<LoginUserDao, LoginUse
         SearchParam searchParam = SearchParam.getSearchParam();
         searchParam.put("loginName",s);
         LoginUser loginUser = this.queryOne(searchParam);
+        if(loginUser == null){
+            throw new UsernameNotFoundException("用户不存在");
+        }
         return loginUser;
     }
 }

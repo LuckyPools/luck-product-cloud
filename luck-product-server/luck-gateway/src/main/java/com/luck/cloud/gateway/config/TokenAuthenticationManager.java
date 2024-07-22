@@ -2,11 +2,8 @@ package com.luck.cloud.gateway.config;
 
 import cn.hutool.core.map.MapUtil;
 import com.luck.cloud.common.utils.JwtUtils;
-import com.luck.cloud.common.utils.MapUtils;
 import com.luck.cloud.redis.utils.RedisCacheUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -14,6 +11,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
+
 import java.util.Collection;
 
 /**

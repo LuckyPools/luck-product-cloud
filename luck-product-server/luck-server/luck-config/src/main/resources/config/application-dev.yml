@@ -32,7 +32,5 @@ ignore-urls:
   - "/logout"
 
 token:
-  expired: 3600
-  refresh:
-    expired: 3600
+  expired: 36000
 
