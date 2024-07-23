@@ -10,8 +10,8 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * @author luck
  * @date 2024-07-11
  */
-@SpringBootApplication
 @EnableDiscoveryClient
+@SpringBootApplication(scanBasePackages = "com.luck.cloud")
 public class LuckGatewayApplication {
     public static void main(String[] args) {
         SpringApplication.run(LuckGatewayApplication.class,args);

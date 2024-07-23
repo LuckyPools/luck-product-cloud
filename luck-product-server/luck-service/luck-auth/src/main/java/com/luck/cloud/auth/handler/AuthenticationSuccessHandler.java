@@ -1,10 +1,11 @@
 package com.luck.cloud.auth.handler;
 
+import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.luck.cloud.auth.entity.LoginUser;
 import com.luck.cloud.common.utils.JwtUtils;
 import com.luck.cloud.redis.utils.RedisCacheUtils;
-import org.springframework.beans.factory.annotation.Value;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -21,14 +22,9 @@ import java.util.Map;
  * @author luck
  * @date 2021/3/11 15:00
  */
+@Slf4j
 @Component
 public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
-
-    /**
-     * token 过期时间
-     */
-    @Value("${jwt.token.expired}")
-    private long jwtTokenExpired;
 
     private  static ObjectMapper objectMapper = new ObjectMapper();
 
@@ -40,8 +36,11 @@ public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticatio
         if(!RedisCacheUtils.exists("user:" + loginUser.getId())){
             map.put("userId", loginUser.getId());
             map.put("username", loginUser.getUsername());
+            // 有效时长12小时
+            long jwtTokenExpired = 12 * 60 * 60 * 1000;
             String token = JwtUtils.generateToken(map, loginUser.getUsername(), jwtTokenExpired);
-            RedisCacheUtils.put("user:" + loginUser.getId(), loginUser, jwtTokenExpired);
+            log.info("用户" + loginUser.getUsername() + "登录成功");
+            RedisCacheUtils.put("user:" + loginUser.getId(), JSON.toJSONString(loginUser), jwtTokenExpired);
             response.setContentType("application/json;charset=UTF-8");
             response.getWriter().write(objectMapper.writeValueAsString(token));
         }else{

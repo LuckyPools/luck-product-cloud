@@ -16,10 +16,9 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
+ * 用户信息上下文存储类
  * @author luck
- * @version 1.0.0
  * @date 2021/3/11 16:27
- * @description 用户信息上下文存储类
  */
 @Component
 public class SecurityContextRepository implements ServerSecurityContextRepository {

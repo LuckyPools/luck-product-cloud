@@ -1,7 +1,13 @@
 package com.luck.cloud.redis.utils;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.luck.cloud.common.utils.SpringBeanUtils;
+import com.luck.cloud.common.utils.StringUtils;
 import com.luck.cloud.redis.service.RedisService;
+
+import java.util.List;
 
 /**
  * redis缓存操作工具类
@@ -29,12 +35,33 @@ public class RedisCacheUtils {
         return Static.getRedisService().get(Static.getCachePrefix() + key);
     }
 
+    public static <T> T get(String key, Class<T> clazz) {
+        String str = get(key);
+        if(StringUtils.isNotEmpty(str)){
+            String objStr = (String) JSON.parse(str);
+            return JSONObject.parseObject(objStr, clazz);
+        }
+        return null;
+    }
+
     public static <T> void put(String key, T value) {
-        Static.getRedisService().set(Static.getCachePrefix() + key, value);
+        String str;
+        if( value instanceof List){
+            str = JSONArray.toJSONString(value);
+        } else {
+            str = JSONObject.toJSONString(value);
+        }
+        Static.getRedisService().set(Static.getCachePrefix() + key, str);
     }
 
     public static <T> void put(String key, T value, long time) {
-        Static.getRedisService().set(Static.getCachePrefix() + key, value, time);
+        String str;
+        if( value instanceof List){
+            str = JSONArray.toJSONString(value);
+        } else {
+            str = JSONObject.toJSONString(value);
+        }
+        Static.getRedisService().set(Static.getCachePrefix() + key, str, time);
     }
 
     /**

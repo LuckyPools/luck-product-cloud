@@ -170,7 +170,7 @@ public class JwtUtils implements Serializable {
     }
 
     public static void main(String[] args) {
-        Map<String, Object> claims = JwtUtils.getClaims("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ6aGFuZ3NhbiIsImV4cCI6MTcyMTY1NDEyMSwidXNlcklkIjoiMSIsInVzZXJuYW1lIjoiemhhbmdzYW4ifQ.2mJ2SZp9NGOiMawQBltHH2ndwsGHy4TMR3mCAfVbSEeQQlBzsvcMN1_PiUWkDI4R9BfAqK8evTgXizwaDaxo9Q");
+        Map<String, Object> claims = JwtUtils.getClaims("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ6aGFuZ3NhbiIsImV4cCI6MTcyMTczNjM1NiwidXNlcklkIjoiMSIsInVzZXJuYW1lIjoiemhhbmdzYW4ifQ.HQsTLa4FqnkGxChp7USw7I-fIf927cHLvihDSLiWV3V2x_PQ2-0EesDB0rJEMIpTabu_f-1tAnUYSGB0ULPxbg");
         System.out.println(claims.get("userId"));
     }
 

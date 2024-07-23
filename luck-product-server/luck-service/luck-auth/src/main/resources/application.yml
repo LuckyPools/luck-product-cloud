@@ -33,8 +33,3 @@ mybatis-plus:
     db-config:
       idType: ASSIGN_ID
 
-
-jwt:
-  token:
-    expired: ${token.expired}
-

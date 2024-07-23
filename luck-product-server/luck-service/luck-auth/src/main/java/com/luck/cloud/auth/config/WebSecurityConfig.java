@@ -1,6 +1,5 @@
 package com.luck.cloud.auth.config;
 
-import cn.hutool.core.util.ArrayUtil;
 import com.luck.cloud.auth.handler.AuthenticationFailureHandler;
 import com.luck.cloud.auth.handler.AuthenticationSuccessHandler;
 import com.luck.cloud.auth.service.ILoginUserService;
