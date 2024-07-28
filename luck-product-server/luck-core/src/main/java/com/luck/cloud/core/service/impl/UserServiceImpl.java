@@ -1,9 +1,9 @@
-package com.luck.cloud.system.service.impl;
+package com.luck.cloud.core.service.impl;
 
 import com.luck.cloud.base.service.impl.BaseServiceImpl;
-import com.luck.cloud.system.dao.UserDao;
-import com.luck.cloud.system.entity.User;
-import com.luck.cloud.system.service.IUserService;
+import com.luck.cloud.core.dao.UserDao;
+import com.luck.cloud.core.entity.User;
+import com.luck.cloud.core.service.IUserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

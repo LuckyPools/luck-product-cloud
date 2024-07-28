@@ -5,31 +5,26 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.luck.cloud</groupId>
-        <artifactId>luck-service</artifactId>
+        <artifactId>luck-product-server</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>luck-system</artifactId>
+    <artifactId>luck-core</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>com.luck.cloud</groupId>
-            <artifactId>luck-core</artifactId>
+            <artifactId>luck-framework-base</artifactId>
             <version>${revision}</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.luck.cloud</groupId>-->
-<!--            <artifactId>luck-framework-base</artifactId>-->
-<!--            <version>${revision}</version>-->
-<!--        </dependency>-->
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-config-client</artifactId>
+            <groupId>com.luck.cloud</groupId>
+            <artifactId>luck-framework-mybaits</artifactId>
+            <version>${revision}</version>
         </dependency>
     </dependencies>
-
 </project>

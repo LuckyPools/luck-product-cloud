@@ -1,4 +1,4 @@
-package com.luck.cloud.auth.service;
+package com.luck.cloud.core.service;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 

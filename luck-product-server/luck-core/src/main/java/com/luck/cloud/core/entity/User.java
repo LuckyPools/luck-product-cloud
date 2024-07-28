@@ -1,4 +1,4 @@
-package com.luck.cloud.system.entity;
+package com.luck.cloud.core.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;

@@ -217,5 +217,6 @@
         <module>luck-server</module>
         <module>luck-gateway</module>
         <module>luck-service</module>
+        <module>luck-core</module>
     </modules>
 </project>

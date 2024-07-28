@@ -2,7 +2,7 @@ package com.luck.cloud.auth.config;
 
 import com.luck.cloud.auth.handler.AuthenticationFailureHandler;
 import com.luck.cloud.auth.handler.AuthenticationSuccessHandler;
-import com.luck.cloud.auth.service.ILoginUserService;
+import com.luck.cloud.core.service.ILoginUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

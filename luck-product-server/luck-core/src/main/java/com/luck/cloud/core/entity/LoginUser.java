@@ -1,10 +1,5 @@
-package com.luck.cloud.gateway.entity;
+package com.luck.cloud.core.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.luck.cloud.base.entity.DataEntity;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -16,29 +11,7 @@ import java.util.Collection;
  * @author luck
  * @create 2024-4-10
  **/
-@Data
-@EqualsAndHashCode(callSuper = false)
-@TableName("sys_user")
-public class LoginUser extends DataEntity<LoginUser> implements UserDetails {
-
-    /**
-     * 用户名
-     */
-    @TableField
-    private String name;
-
-    /**
-     * 登录账号
-     */
-    @TableField
-    private String loginName;
-
-    /**
-     * 密码
-     * 加密后存储
-     */
-    @TableField
-    private String password;
+public class LoginUser extends User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -47,7 +20,7 @@ public class LoginUser extends DataEntity<LoginUser> implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.loginName;
+        return this.getLoginName();
     }
 
     @Override

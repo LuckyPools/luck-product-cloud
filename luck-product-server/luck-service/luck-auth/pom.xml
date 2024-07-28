@@ -50,7 +50,7 @@
         </dependency>
         <dependency>
             <groupId>com.luck.cloud</groupId>
-            <artifactId>luck-framework-base</artifactId>
+            <artifactId>luck-core</artifactId>
             <version>${revision}</version>
             <exclusions>
                 <exclusion>

@@ -1,6 +1,6 @@
-package com.luck.cloud.system.vo;
+package com.luck.cloud.core.vo;
 
-import com.luck.cloud.system.entity.User;
+import com.luck.cloud.core.entity.User;
 import io.github.linpeilie.annotations.AutoMapper;
 import lombok.Data;
 

@@ -1,8 +1,8 @@
-package com.luck.cloud.system.service;
+package com.luck.cloud.core.service;
 
 
 import com.luck.cloud.base.service.IBaseService;
-import com.luck.cloud.system.entity.User;
+import com.luck.cloud.core.entity.User;
 
 /**
  * 用户信息服务接口

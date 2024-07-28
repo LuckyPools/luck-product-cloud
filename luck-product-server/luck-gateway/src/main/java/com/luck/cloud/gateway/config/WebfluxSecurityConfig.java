@@ -65,6 +65,7 @@ public class WebfluxSecurityConfig {
             .authenticationEntryPoint(authenticationEntryPoint)
             .and()
             .exceptionHandling()
+            // 权限不足处理
             .accessDeniedHandler(accessDeniedHandler)
             .and()
             .csrf().disable()
