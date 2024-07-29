@@ -18,16 +18,16 @@ import lombok.EqualsAndHashCode;
 public class User extends DataEntity<User> {
 
     /**
-     * 用户名
+     * 姓名
      */
     @TableField
     private String name;
 
     /**
-     * 登录账号
+     * 用户名
      */
     @TableField
-    private String loginName;
+    private String username;
 
     /**
      * 密码

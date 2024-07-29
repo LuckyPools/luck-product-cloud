@@ -1,0 +1,127 @@
+package ${package.Entity};
+
+import com.baomidou.mybatisplus.annotation.TableName;
+import java.sql.Timestamp;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.luck.cloud.base.entity.DataEntity;
+<% if(swagger){ %>
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+<% } %>
+<% if(entityLombokModel){ %>
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+<% } %>
+/**
+ * ${table.comment!}
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+<% if(entityLombokModel){ %>
+@Data
+<% if(isNotEmpty(superEntityClass)){ %>
+@EqualsAndHashCode(callSuper = true)
+<% }else{ %>
+@EqualsAndHashCode(callSuper = false)
+<% } %>
+<% } %>
+<% if(table.convert){ %>
+@TableName("${strutil.toLowerCase(table.name)}")
+<% } %>
+<% if(swagger){ %>
+<% } %>
+<% if(isNotEmpty(superEntityClass)){ %>
+public class ${entity} extends ${superEntityClass}<${entity}>{
+<% }else if(activeRecord){ %>
+public class ${entity} extends Model<${entity}> {
+<% }else{ %>
+public class ${entity} implements Serializable {
+<% } %>
+
+<% /** -----------BEGIN 字段循环遍历----------- **/ %>
+<% for(field in table.fields){ %>
+    <% if(field.propertyName != "createBy" && field.propertyName != "createDate" && field.propertyName != "updateBy" && field.propertyName != "updateDate" && field.propertyName != "remarks" && field.propertyName != "delFlag" && field.propertyName != "id"){ %>
+        <% if(isNotEmpty(field.comment)){ %>
+    /**
+     * ${field.comment}
+     */
+        <% } %>
+    <%
+    /*乐观锁注解*/
+    %>
+    <% if(versionFieldName!'' == field.name){ %>
+@Version
+    <% } %>
+    <%
+    /*逻辑删除注解*/
+    %>
+    <% if(logicDeleteFieldName!'' == field.name){ %>
+@Version
+    <% } %>
+    @TableField
+    private ${field.propertyType} ${field.propertyName};
+
+    <% } %>
+<% } %>
+<% /** -----------END 字段循环遍历----------- **/ %>
+
+<% if(!entityLombokModel){ %>
+    <% for(field in table.fields){ %>
+        <%
+        var getprefix ='';
+        if(field.propertyType=='boolean'){
+            getprefix='is';
+        }else{
+            getprefix='get';
+        }
+        %>
+    public ${field.propertyType} ${getprefix}${field.capitalName}() {
+        return ${field.propertyName};
+    }
+
+        <% if(entityBuilderModel){ %>
+    public ${entity} set${field.capitalName}(${field.propertyType} ${field.propertyName}) {
+        <% }else{ %>
+    public void set${field.capitalName}(${field.propertyType} ${field.propertyName}) {
+        <% } %>
+        this.${field.propertyName} = ${field.propertyName};
+        <% if(entityBuilderModel){ %>
+        return this;
+        <% } %>
+    }
+
+    <% } %>
+<% } %>
+<% if(entityColumnConstant){ %>
+   <% for(field in table.fields){ %>
+    public static final String ${strutil.toUpperCase(field.name)} = "${field.name}";
+
+   <% } %>
+<% } %>
+<% if(activeRecord){ %>
+    @Override
+    protected Serializable pkVal() {
+    <% if(isNotEmpty(keyPropertyName)){ %>
+        return this.${keyPropertyName};
+    <% }else{ %>
+        return null;
+    <% } %>
+    }
+
+<% } %>
+<% if(!entityLombokModel){ %>
+    @Override
+    public String toString() {
+        return "${entity}{" +
+    <% for(field in table.fields){ %>
+       <% if(fieldLP.index==0){ %>
+        "${field.propertyName}=" + ${field.propertyName} +
+       <% }else{ %>
+        ", ${field.propertyName}=" + ${field.propertyName} +
+       <% } %>
+    <% } %>
+        "}";
+    }
+<% } %>
+}

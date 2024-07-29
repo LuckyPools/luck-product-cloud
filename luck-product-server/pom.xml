@@ -37,6 +37,7 @@
         <alibaba.fastjson.version>1.2.5</alibaba.fastjson.version>
         <jwt.version>0.9.1</jwt.version>
         <hutool.core.version>5.8.15</hutool.core.version>
+        <ibeetl.version>2.9.3</ibeetl.version>
         <maven-compiler-plugin.verison>3.8.0</maven-compiler-plugin.verison>
         <mapstruct-plus.lombok.version>0.2.0</mapstruct-plus.lombok.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -139,6 +140,11 @@
                 <artifactId>hutool-core</artifactId>
                 <version>${hutool.core.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.ibeetl</groupId>
+                <artifactId>beetl</artifactId>
+                <version>${ibeetl.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -218,5 +224,6 @@
         <module>luck-gateway</module>
         <module>luck-service</module>
         <module>luck-core</module>
+        <module>luck-generate</module>
     </modules>
 </project>

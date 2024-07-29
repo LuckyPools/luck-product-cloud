@@ -1,0 +1,20 @@
+package ${package.Mapper};
+
+import ${package.Entity}.${entity};
+import ${superMapperClassPackage};
+import org.springframework.stereotype.Component;
+
+/**
+ * ${table.comment!}
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+@Component(value = "${table.entityPath}Dao")
+<% if(kotlin){ %>
+interface ${table.mapperName} : ${superMapperClass}<${entity}>
+<% }else{ %>
+public interface ${table.mapperName} extends ${superMapperClass}<${entity}> {
+
+}
+<% } %>

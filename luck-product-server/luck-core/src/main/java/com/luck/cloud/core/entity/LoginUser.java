@@ -19,11 +19,6 @@ public class LoginUser extends User implements UserDetails {
     }
 
     @Override
-    public String getUsername() {
-        return this.getLoginName();
-    }
-
-    @Override
     public boolean isAccountNonExpired() {
         return true;
     }

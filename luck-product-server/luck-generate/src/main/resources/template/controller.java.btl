@@ -1,0 +1,106 @@
+package ${package.Controller};
+
+import com.luck.cloud.base.vo.ResultVO;
+import com.luck.cloud.base.vo.PageVO;
+import ${package.Entity}.${entity};
+import ${strutil.replace(package.Entity,'entity','vo')}.${entity}VO;
+import com.luck.cloud.base.utils.ConvertUtils;
+<% if(swagger){ %>
+import com.github.xiaoymin.knife4j.annotations.ApiSupport;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.*;
+<% if(isNotEmpty(superControllerClassPackage)){ %>
+import ${superControllerClassPackage};
+<% } %>
+import ${package.Service}.${table.serviceName};
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Arrays;
+import java.util.List;
+
+
+
+/**
+ * ${table.comment!}
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+<% if(restControllerStyle){ %>
+@RestController("${package.ModuleName}${entity}Controller")
+<% }else{ %>
+@Controller("${package.ModuleName}${entity}")
+<% } %>
+@RequestMapping("<% if(isNotEmpty(package.ModuleName)){ %>/${strutil.replace(package.ModuleName,'.','/')}/<% } %><% if(controllerMappingHyphenStyle){ %>${controllerMappingHyphen}<% }else{ %>${table.entityPath}<% } %>")
+<% if(kotlin){ %>
+class ${table.controllerName}<% if(isNotEmpty(superControllerClass)){ %> : ${superControllerClass}()<% } %>
+<% }else{ %>
+    <% if(isNotEmpty(superControllerClass)){ %>
+public class ${table.controllerName} extends ${superControllerClass} {
+    <% }else{ %>
+public class ${table.controllerName} {
+    <% } %>
+
+    <% var serviceAlias = strutil.toLowerCase(strutil.subStringTo(table.serviceName,1,2)) + strutil.subString(table.serviceName,2); %>
+    @Autowired
+    private ${table.serviceName} ${serviceAlias};
+
+    <% if(swagger){ %>
+    @ApiOperation("分页获取数据")
+    <% } %>
+    @PostMapping("page")
+    public PageVO<${entity}VO> page${entity}(@RequestBody PageVO<${entity}> PageVO) {
+        return ConvertUtils.convertTable(${serviceAlias}.queryPage(PageVO), ${entity}VO.class, true);
+    }
+
+    <% if(swagger){ %>
+    @ApiOperation("根据id获取唯一数据")
+    <% } %>
+    @GetMapping("/get/{id}")
+    public ResultVO<${entity}VO> get(@PathVariable("id") String id) {
+        ${entity}VO ${table.entityPath}VO = ConvertUtils.convert(${serviceAlias}.queryOneById(id), ${entity}VO.class, true);
+        return ResultVO.success(${table.entityPath}VO);
+    }
+
+    <% if(swagger){ %>
+    @ApiOperation("添加数据")
+    <% } %>
+    @PostMapping("save")
+    public ResultVO save(@RequestBody ${entity}VO ${table.entityPath}VO) {
+        ${entity} ${table.entityPath} = ConvertUtils.convert(${table.entityPath}VO, ${entity}.class);
+        ${serviceAlias}.saveOrUpdate(${table.entityPath});
+        return ResultVO.success(${table.entityPath}.getId());
+    }
+
+    <% if(swagger){ %>
+    @ApiOperation("更改数据")
+    <% } %>
+    @PostMapping("update")
+    public ResultVO update(@RequestBody ${entity}VO ${table.entityPath}VO) {
+        ${entity} ${table.entityPath} = ConvertUtils.convert(${table.entityPath}VO, ${entity}.class);
+        ${serviceAlias}.saveOrUpdate(${table.entityPath});
+        return ResultVO.success();
+    }
+
+    <% if(swagger){ %>
+    @ApiOperation("删除数据")
+    <% } %>
+    @PostMapping("/delete/{id}")
+    public ResultVO delete(@PathVariable("id") String id) {
+        ${serviceAlias}.deleteById(id);
+        return ResultVO.success(id);
+    }
+
+    <% if(swagger){ %>
+    @ApiOperation("批量删除数据")
+    <% } %>
+    @PostMapping("/delete/batch")
+    public ResultVO deleteBatch(@RequestBody String ids) {
+        List<String> idList = Arrays.asList(ids.split(","));
+        boolean deleteCount = ${serviceAlias}.deleteByIds(idList);
+        return ResultVO.success(deleteCount);
+    }
+
+}
+<% } %>
