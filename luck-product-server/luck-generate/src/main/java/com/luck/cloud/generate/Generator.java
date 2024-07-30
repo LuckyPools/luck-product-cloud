@@ -9,10 +9,12 @@ import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.BeetlTemplateEngine;
+import com.luck.cloud.generate.utils.CustomMap;
 
 import javax.validation.constraints.NotNull;
 import java.io.File;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -48,7 +50,7 @@ public class Generator {
     /**
      * 需要生成的表(注意数据库类型是否区分大小写)
      */
-    private static String[] include = {"sys_menu"};
+    private static String[] include = {"sys_menu","sys_role","sys_role_menu"};
 
     /**
      * 需要去除的表名字前缀
@@ -75,7 +77,8 @@ public class Generator {
                             .disableOpenDir()
                             .author(author)
                             .dateType(DateType.SQL_PACK)
-                            .commentDate("yyyy-MM-dd");
+                            .commentDate("yyyy-MM-dd")
+                            .enableSwagger();
                 })
                 .packageConfig(builder -> {
                     builder.parent(parentPackage)
@@ -116,26 +119,35 @@ public class Generator {
 
                             .controllerBuilder()
                             .superClass(com.luck.cloud.base.controller.BaseController.class)
-                            .formatFileName("%sController");
+                            .formatFileName("%sController")
+                            .enableRestStyle();
                 })
                 .injectionConfig(builder -> {
                     //自定义xml模板
-                    builder.customFile(Collections.singletonMap("Dao.xml", "template/mapper.xml.btl"))
-                            .customFile(Collections.singletonMap("VO.java", "template/vo.java.btl"))
+                    builder.customFile(CustomMap.create().build("Dao.xml", "template/mapper.xml.btl").build("VO.java", "template/vo.java.btl"))
                             .build();
                 })
                 .templateEngine(new BeetlTemplateEngine() {
                     @Override
                     protected void outputCustomFile(@NotNull Map<String, String> customFile, TableInfo tableInfo, Map<String, Object> objectMap) {
                         String entityName = tableInfo.getEntityName();
-                        String parentPath = this.getPathInfo(OutputFile.xml);
                         //自定义xml文件输出
                         customFile.forEach((key, value) -> {
+                            String parentPath;
+                            if(key.startsWith("Dao")){
+                                //自定义xml文件输出
+                                parentPath = this.getPathInfo(OutputFile.xml);
+                            }else{
+                                //自定义vo文件输出
+                                parentPath = projectPath + path + File.separator + (parentPackage + File.separator + modulesName + File.separator + "vo").replaceAll("\\.", "/");
+                            }
                             String fileName = String.format(parentPath + File.separator + entityName + "%s", key);
                             this.outputFile(new File(fileName), objectMap, value, this.getConfigBuilder().getInjectionConfig().isFileOverride());
                         });
                     }
                 }).execute();
+
+
     }
 
 }
