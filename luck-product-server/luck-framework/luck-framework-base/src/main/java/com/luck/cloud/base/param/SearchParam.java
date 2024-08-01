@@ -33,4 +33,16 @@ public class SearchParam extends HashMap<String, Object> {
     public void setPage(IPage page) {
         put("searchPage", page);
     }
+
+
+    /**
+     * 设置值
+     * @param key
+     * @param value
+     */
+    @Override
+    public SearchParam put(String key, Object value) {
+        super.put(key, value);
+        return this;
+    }
 }

@@ -1,14 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.luck.cloud.core.dao.MenuDao">
-    <select id="queryList" resultType="com.luck.cloud.core.entity.Menu">
+
+    <resultMap id="menuMap" type="com.luck.cloud.core.entity.Menu" autoMapping="true">
+    </resultMap>
+
+    <select id="queryList" resultMap="menuMap">
         select t.* from sys_menu t
         <where>
-            t.del_flag = '0'
+            t.is_delete = 0
             <if test="id != null and id != ''">
               and t.id = #{id}
             </if>
         </where>
         order by t.create_date desc
+    </select>
+
+    <select id="queryMenusByRoleIds" resultMap="menuMap">
+        select
+            m.*
+        from sys_menu m
+        inner join sys_role_menu rm
+            on m.id = rm.menu_id
+            and rm.is_delete = 0
+        inner join sys_role r
+            on rm.role_id = r.id
+            and r.is_delete = 0
+        where r.id in
+        <foreach collection="roleIds" item="roleId" open="(" separator="," close=")">
+            #{roleId}
+        </foreach>
+            and m.is_delete = 0
+        order by m.sort desc
     </select>
 </mapper>

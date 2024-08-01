@@ -7,6 +7,8 @@ import com.luck.cloud.base.service.impl.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * 系统角色
  *
@@ -16,4 +18,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("coreRoleService")
 @Transactional(rollbackFor = Exception.class)
 public class RoleServiceImpl extends BaseServiceImpl<RoleDao, Role> implements IRoleService {
+
+    /**
+     * 根据用户id获取角色
+     *
+     * @param userId
+     * @return
+     */
+    public List<Role> queryRolesByUserId(String userId){
+        return getDao().queryRolesByUserId(userId);
+    }
 }

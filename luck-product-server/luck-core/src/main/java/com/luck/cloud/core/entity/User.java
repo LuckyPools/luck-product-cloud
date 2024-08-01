@@ -6,6 +6,9 @@ import com.luck.cloud.base.entity.DataEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.List;
+import java.util.Set;
+
 /**
  * 用户实体类
  *
@@ -31,10 +34,21 @@ public class User extends DataEntity<User> {
 
     /**
      * 密码
-     * <p>加密后存储</p>
      *
      */
     @TableField
     private String password;
 
+    /**
+     * 角色
+     */
+    @TableField(exist = false)
+    private List<Role> roles;
+
+
+    /**
+     * 权限
+     */
+    @TableField(exist = false)
+    private List<String> permissions;
 }

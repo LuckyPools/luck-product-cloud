@@ -38,3 +38,55 @@ CREATE TABLE `sys_log_request` (
    `agent` varchar(2000) DEFAULT NULL COMMENT '代理信息',
    PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='系统请求日志';
+
+
+CREATE TABLE `sys_role` (
+    `id` varchar(64) NOT NULL COMMENT 'ID',
+    `create_by` varchar(255) DEFAULT NULL COMMENT '创建人',
+    `create_date` datetime DEFAULT NULL COMMENT '创建时间',
+    `update_by` varchar(255) DEFAULT NULL COMMENT '更新人',
+    `update_date` datetime DEFAULT NULL COMMENT '更新时间',
+    `remarks` varchar(2000) DEFAULT NULL COMMENT '备注',
+    `is_delete` tinyint(1) NOT NULL COMMENT '是否删除',
+    `name` varchar(64)  DEFAULT NULL COMMENT '角色名称',
+    `code` varchar(255) DEFAULT NULL COMMENT '角色编码',
+    `type` varchar(255) DEFAULT NULL COMMENT '角色类型',
+    `sort` int DEFAULT NULL COMMENT '排序',
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='系统角色';
+
+
+CREATE TABLE `sys_role_menu` (
+    `id` varchar(64) NOT NULL COMMENT 'ID',
+    `create_by` varchar(255) DEFAULT NULL COMMENT '创建人',
+    `create_date` datetime DEFAULT NULL COMMENT '创建时间',
+    `update_by` varchar(255) DEFAULT NULL COMMENT '更新人',
+    `update_date` datetime DEFAULT NULL COMMENT '更新时间',
+    `remarks` varchar(2000) DEFAULT NULL COMMENT '备注',
+    `is_delete` tinyint(1) NOT NULL COMMENT '是否删除',
+    `role_id` varchar(64) DEFAULT NULL COMMENT '角色ID',
+    `menu_id` varchar(255) DEFAULT NULL COMMENT '菜单ID',
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='系统角色权限';
+
+
+CREATE TABLE `sys_menu` (
+    `id` varchar(64) NOT NULL COMMENT 'ID',
+    `create_by` varchar(255) DEFAULT NULL COMMENT '创建人',
+    `create_date` datetime DEFAULT NULL COMMENT '创建时间',
+    `update_by` varchar(255) DEFAULT NULL COMMENT '更新人',
+    `update_date` datetime DEFAULT NULL COMMENT '更新时间',
+    `remarks` varchar(2000) DEFAULT NULL COMMENT '备注',
+    `is_delete` tinyint(1) NOT NULL COMMENT '是否删除',
+    `name` varchar(255)  DEFAULT NULL COMMENT '菜单名称',
+    `permission` varchar(255)  DEFAULT NULL COMMENT '权限',
+    `parent_id` varchar(64)  DEFAULT NULL COMMENT '父菜单ID',
+    `sort` int DEFAULT NULL COMMENT '排序',
+    `type` varchar(255) DEFAULT NULL COMMENT '菜单类型',
+    `is_show` tinyint(1) DEFAULT NULL COMMENT '是否显示：D_SYS_YES_NO',
+    `path` varchar(255) DEFAULT NULL COMMENT '路由地址',
+    `icon` varchar(255) DEFAULT NULL COMMENT '菜单图标',
+    `component` varchar(255) DEFAULT NULL COMMENT '组件名称',
+    `component_path` varchar(255) DEFAULT NULL COMMENT '组件地址',
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='系统菜单';

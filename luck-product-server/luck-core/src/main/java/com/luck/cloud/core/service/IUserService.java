@@ -12,4 +12,10 @@ import com.luck.cloud.core.entity.User;
  */
 public interface IUserService extends IBaseService<User> {
 
+    /**
+     * 设置用户权限
+     * @param user
+     * @return
+     */
+    void setUserPermission(User user);
 }

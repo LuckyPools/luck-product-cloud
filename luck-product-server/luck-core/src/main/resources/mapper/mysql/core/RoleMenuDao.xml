@@ -4,7 +4,7 @@
     <select id="queryList" resultType="com.luck.cloud.core.entity.RoleMenu">
         select t.* from sys_role_menu t
         <where>
-            t.del_flag = '0'
+            t.is_delete = 0
             <if test="id != null and id != ''">
               and t.id = #{id}
             </if>

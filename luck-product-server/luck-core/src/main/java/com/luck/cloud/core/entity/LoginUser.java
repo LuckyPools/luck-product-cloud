@@ -1,21 +1,28 @@
 package com.luck.cloud.core.entity;
 
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 /**
- * 用户实体类
+ * 登录用户信息
  *
  * @author luck
  * @create 2024-4-10
  **/
+@Data
 public class LoginUser extends User implements UserDetails {
+
+    private List<SimpleGrantedAuthority> authorities;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return this.authorities;
     }
 
     @Override

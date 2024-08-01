@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.luck.cloud.core.dao.LogRequestDao">
-    <select id="queryList" resultType="com.luck.cloud.core.entity.LogRequest">
-        select t.* from sys_log_request t
+<mapper namespace="com.luck.cloud.core.dao.UserRoleDao">
+
+    <resultMap id="userRoleMap" type="com.luck.cloud.core.entity.UserRole" autoMapping="true">
+    </resultMap>
+
+    <select id="queryList" resultMap="userRoleMap">
+        select t.* from sys_user_role t
         <where>
             t.is_delete = 0
             <if test="id != null and id != ''">

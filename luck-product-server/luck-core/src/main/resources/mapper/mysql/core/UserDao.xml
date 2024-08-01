@@ -10,6 +10,7 @@
             t.*
         from sys_user t
         <where>
+            t.is_delete = 0
             <if test="id != null and id != ''">
                 and t.id = #{id}
             </if>
