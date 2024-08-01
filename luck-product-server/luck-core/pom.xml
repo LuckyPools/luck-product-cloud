@@ -26,5 +26,10 @@
             <artifactId>luck-framework-mybaits</artifactId>
             <version>${revision}</version>
         </dependency>
+        <dependency>
+            <groupId>com.luck.cloud</groupId>
+            <artifactId>luck-framework-redis</artifactId>
+            <version>${revision}</version>
+        </dependency>
     </dependencies>
 </project>

@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.Data;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -39,7 +38,7 @@ public abstract class DataEntity<T extends DataEntity<T>> extends BaseEntity<T> 
      * 更新时间
      */
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    Timestamp updateDate;
+    Date updateDate;
 
     /**
      * 备注

@@ -6,7 +6,7 @@ import java.util.HashMap;
 /**
  * 自定义map
  *
- * @author liul
+ * @author luck
  * @date 2024-07-30
  */
 public class CustomMap<K,V> extends HashMap<K, V> {

@@ -50,7 +50,7 @@ public class Generator {
     /**
      * 需要生成的表(注意数据库类型是否区分大小写)
      */
-    private static String[] include = {"sys_menu","sys_role","sys_role_menu"};
+    private static String[] include = {"sys_log_request"};
 
     /**
      * 需要去除的表名字前缀
