@@ -1,17 +1,14 @@
-const { defineConfig } = require('@vue/cli-service')
-module.exports = defineConfig({
-  transpileDependencies: true,
+const proxy = require('http-proxy-middleware');
 
-  devServer: {
-    proxy: {
-      [process.env.VUE_APP_BASE_API]: {
-        target: `http://localhost:8080`,
-        changeOrigin: true,
-        pathRewrite: {
-          ['^' + process.env.VUE_APP_BASE_API]: ''
+module.exports = {
+    devServer: {
+        proxy: {
+            '/api': {
+                target: 'http://localhost:9090',
+                pathRewrite: { '^/api': '' },
+                ws: true,
+                changeOrigin: true
+            }
         }
-      }
-    },
-    disableHostCheck: true
-  },
-})
+    }
+}
