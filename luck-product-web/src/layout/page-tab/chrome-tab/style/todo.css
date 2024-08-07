@@ -1,0 +1,12 @@
+/**
+ * 切换颜色
+ */
+
+:root{
+    --soy-primary-color: #646cff;
+    --soy-primary-color1: #f0f0ff;
+    --soy-primary-color2: #1e204d;
+    --soy-primary-color-opacity1: #646cff1a;
+    --soy-primary-color-opacity2: #646cff26;
+    --soy-primary-color-opacity3: #646cff4d;
+}
