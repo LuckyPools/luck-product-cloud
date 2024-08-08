@@ -10,6 +10,9 @@
       <a-form-item>
         <a-button v-on:click="login">登录</a-button>
       </a-form-item>
+      <div class="a">
+          <div class="b">111</div>
+      </div>
     </a-form>
   </div>
 </template>
@@ -41,3 +44,10 @@
     }
   }
 </script>
+<style lang="scss">
+  .a{
+    .b{
+      color: red;
+    }
+  }
+</style>
