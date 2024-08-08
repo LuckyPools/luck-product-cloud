@@ -1,0 +1,15 @@
+/**
+ * todo切换颜色
+ */
+:root{
+    --soy-header-height: 56px;
+    --soy-header-z-index: 97;
+    --soy-tab-height: 44px;
+    --soy-tab-z-index: 95;
+    --soy-sider-width: 220px;
+    --soy-sider-collapsed-width: 64px;
+    --soy-sider-z-index: 99;
+    --soy-mobile-sider-z-index: 0;
+    --soy-footer-height: 48px;
+    --soy-footer-z-index: 95;
+}

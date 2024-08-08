@@ -8,7 +8,7 @@
         <a-input v-model="form.password" placeholder="请输入客户名称"/>
       </a-form-item>
       <a-form-item>
-        <a-button>登录</a-button>
+        <a-button v-on:click="login">登录</a-button>
       </a-form-item>
     </a-form>
   </div>
@@ -31,6 +31,9 @@
     },
     methods:{
       login(){
+        this.$store.dispatch(
+            'user/setInfo',{name: '张三'});
+        console.log(this.$store.state.user.info);
         login(this.form).then(res=>{
           console.log(res);
         })

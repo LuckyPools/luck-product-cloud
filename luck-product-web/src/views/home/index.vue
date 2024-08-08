@@ -1,13 +1,10 @@
 <template>
   <div class="app-container">
-    <baseLayout></baseLayout>
   </div>
 </template>
 <script>
-import BaseLayout from "@/layout/base-layout/index.vue";
 export default {
   name: 'homePage',
-  components: {BaseLayout},
   data() {
     return {
       tableData: [

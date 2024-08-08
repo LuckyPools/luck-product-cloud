@@ -19,7 +19,7 @@
 </template>
 <script>
 import ChromeTabBg from "@/layout/page-tab/chrome-tab-bg/index.vue";
-import {PageTabProps} from './prop'
+import {PageTabProps} from '../props.js'
 export default {
   name: 'ChromeTab',
   components: {ChromeTabBg},
@@ -33,5 +33,5 @@ export default {
 }
 </script>
 <style scoped>
-@import './style/index.css';
+@import '../module.css';
 </style>

@@ -12,22 +12,18 @@
     <slot></slot>
     <template #suffix>
       <slot name="suffix">
-        <SvgClose v-if="closable" :class="[style['svg-close']]" @click="handleClose" />
+        <SvgClose v-if="closable" :class="'svg-close'" @click="handleClose" />
       </slot>
     </template>
   </component>
 </template>
 <script>
-import { computed } from 'vue';
-import type { Component } from 'vue';
-import type { PageTabMode, PageTabProps } from '../../types';
-import { ACTIVE_COLOR, createTabCssVars } from './shared';
-import style from './index.module.css';
-
 import ChromeTab from '@/layout/page-tab/chrome-tab/index.vue';
 import ButtonTab from '@/layout/page-tab/button-tab/index.vue';
-import { PageTabProps } from './chrome-tab/prop'
 import SvgClose from "@/layout/page-tab/svg-close/index.vue";
+import { ACTIVE_COLOR, createTabCssVars } from './shared';
+import { PageTabProps } from './props';
+
 
 const props = {
   ...PageTabProps,
@@ -41,7 +37,7 @@ const props = {
   },
   activeColor: {
     type: String,
-    default: '#1890ff'
+    default: ACTIVE_COLOR
   },
   closable: {
     type: Boolean,
@@ -49,10 +45,9 @@ const props = {
   }
 }
 
-
 export default {
   name: 'PageTab',
-  components: {SvgClose},
+  components: {SvgClose,ChromeTab,ButtonTab},
   props: props,
   data() {
     return {
@@ -60,14 +55,14 @@ export default {
   },
   computed: {
     activeTabComponent() {
-      const { mode, chromeClass, buttonClass } = props;
+      const { mode, chromeClass, buttonClass } = this;
       const tabComponentMap = {
         chrome: {
-          component: ChromeTab,
+          component: 'ChromeTab',
           class: chromeClass
         },
         button: {
-          component: ButtonTab,
+          component: 'ButtonTab',
           class: buttonClass
         }
       };
@@ -75,7 +70,14 @@ export default {
     },
 
     cssVars(){
-      return createTabCssVars(props.activeColor);
+      return createTabCssVars(this.activeColor);
+    },
+
+    bindProps(){
+        const res = Object.entries(this.$props).filter(
+            ([key]) => !['chromeClass', 'buttonClass'].includes(key)
+        );
+        return Object.fromEntries(res);
     }
   },
   methods: {
@@ -84,7 +86,6 @@ export default {
     },
 
     handleMouseup(e) {
-      // close tab by mouse wheel button click
       if (e.button === 1) {
         this.handleClose();
       }
@@ -92,16 +93,8 @@ export default {
   }
 }
 
-
-
-const cssVars = computed(() => createTabCssVars(props.activeColor));
-
-const bindProps = computed(() => {
-  const { chromeClass: _chromeCls, buttonClass: _btnCls, ...rest } = props;
-
-  return rest;
-});
-
 </script>
 
-<style scoped></style>
+<style scoped>
+@import 'module.css';
+</style>
