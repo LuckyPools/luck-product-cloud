@@ -11,7 +11,7 @@
         <a-button v-on:click="login">登录</a-button>
       </a-form-item>
       <div class="a">
-          <div class="b">111</div>
+        <div class="b">{{$t('system.title')}}</div>
       </div>
     </a-form>
   </div>
