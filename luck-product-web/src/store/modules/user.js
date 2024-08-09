@@ -4,10 +4,14 @@
 export default {
   namespaced: true,
   state: {
+    // 是否登录
+    isLogin: true,
     // 当前登录用户信息
-    info: null,
+    info: {
+      name: ''
+    },
     // 当前登录用户的菜单
-    menus: null,
+    menus: [],
     // 当前登录用户的权限
     permissions: [],
     // 当前登录用户的角色

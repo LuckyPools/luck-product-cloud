@@ -13,14 +13,27 @@
       <div class="a">
         <div class="b">{{$t('system.title')}}</div>
       </div>
+        <global-logo></global-logo>
+        <global-breadcrumb></global-breadcrumb>
+        <global-content></global-content>
+        <global-footer></global-footer>
+        <theme-button></theme-button>
+        <user-avatar></user-avatar>
     </a-form>
   </div>
 </template>
 
 <script>
   import { login } from "@/api/auth";
+  import GlobalLogo from "@/layout/base-layout/global-logo/index.vue";
+  import GlobalBreadcrumb from "@/layout/base-layout/global-breadcrumb/index.vue";
+  import GlobalContent from "@/layout/base-layout/global-content/index.vue";
+  import GlobalFooter from "@/layout/base-layout/global-footer/index.vue";
+  import ThemeButton from "@/layout/base-layout/global-header/components/theme-button.vue";
+  import UserAvatar from "@/layout/base-layout/global-header/components/user-avatar.vue";
   export default {
     name: 'Login',
+      components: {UserAvatar, ThemeButton, GlobalFooter, GlobalContent, GlobalBreadcrumb, GlobalLogo},
     data() {
       return {
         // 加载状态
