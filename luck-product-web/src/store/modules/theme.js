@@ -8,6 +8,7 @@ const DEFAULT_STATE = Object.freeze({
 export default {
     namespaced: true,
     state: {
+        darkMode: false,
         /** 'light' | 'dark' | 'auto' */
         themeScheme: 'light',
         /** Whether to recommend color */
@@ -95,13 +96,17 @@ export default {
             right: true
         },
     },
-    getters: {
-
-    },
     mutations: {
-
+        TOGGLE_THEME_SCHEME(state) {
+            const themeSchemes = ['light', 'dark', 'auto'];
+            const index = themeSchemes.findIndex(item => item === state.themeScheme);
+            const nextIndex = index === themeSchemes.length - 1 ? 0 : index + 1;
+            state.themeScheme = themeSchemes[nextIndex];
+        }
     },
     actions: {
-
+        toggleThemeScheme({ commit }){
+            commit('TOGGLE_THEME_SCHEME');
+        }
     }
 };

@@ -14,10 +14,12 @@
 <script>
 export default {
   name: 'SvgClose',
+  props: {},
   data() {
     return {
     }
   },
+  computed: {},
   methods: {
     handleClick() {
       this.$emit('click');

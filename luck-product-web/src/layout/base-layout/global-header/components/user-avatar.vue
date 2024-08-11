@@ -44,10 +44,10 @@ export default {
         loginOrRegister() {},
         logout() {
             Modal.confirm({
-                title: $t('common.tip'),
-                content: $t('common.logoutConfirm'),
-                okText: $t('common.confirm'),
-                cancelText: $t('common.cancel'),
+                title: this.$t('common.tip'),
+                content: this.$t('common.logoutConfirm'),
+                okText: this.$t('common.confirm'),
+                cancelText: this.$t('common.cancel'),
                 onOk: () => {}
             });
         },

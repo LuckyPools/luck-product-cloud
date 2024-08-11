@@ -19,6 +19,11 @@
         <global-footer></global-footer>
         <theme-button></theme-button>
         <user-avatar></user-avatar>
+        <global-header></global-header>
+        <first-level-menu></first-level-menu>
+        <vertical-mix-menu></vertical-mix-menu>
+        <horizontal-mix-menu></horizontal-mix-menu>
+        <global-sider></global-sider>
     </a-form>
   </div>
 </template>
@@ -31,9 +36,19 @@
   import GlobalFooter from "@/layout/base-layout/global-footer/index.vue";
   import ThemeButton from "@/layout/base-layout/global-header/components/theme-button.vue";
   import UserAvatar from "@/layout/base-layout/global-header/components/user-avatar.vue";
+  import GlobalHeader from "@/layout/base-layout/global-header/index.vue";
+  import FirstLevelMenu from "@/layout/base-layout/global-menu/first-level-menu.vue";
+  import VerticalMixMenu from "@/layout/base-layout/global-menu/vertical-mix-menu.vue";
+  import HorizontalMixMenu from "@/layout/base-layout/global-menu/horizontal-mix-menu.vue";
+  import GlobalSider from "@/layout/base-layout/global-sider/index.vue";
   export default {
     name: 'Login',
-      components: {UserAvatar, ThemeButton, GlobalFooter, GlobalContent, GlobalBreadcrumb, GlobalLogo},
+      components: {
+        GlobalSider,
+        HorizontalMixMenu,
+        VerticalMixMenu,
+        FirstLevelMenu,
+        GlobalHeader, UserAvatar, ThemeButton, GlobalFooter, GlobalContent, GlobalBreadcrumb, GlobalLogo},
     data() {
       return {
         // 加载状态

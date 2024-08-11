@@ -20,9 +20,6 @@ export default {
 
         ]
     },
-    getters: {
-
-    },
     mutations: {
 
     },

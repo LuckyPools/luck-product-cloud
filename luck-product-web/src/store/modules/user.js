@@ -11,7 +11,14 @@ export default {
       name: ''
     },
     // 当前登录用户的菜单
-    menus: [],
+    menus: [
+      {icon: '',label: '测试',key: 'test',routeKey: 'to_test',
+        children : [
+          {icon: '',label: '子项1',key: 'item1',routeKey: 'to_item1'},
+          {icon: '',label: '子项2',key: 'item2',routeKey: 'to_item2'}]
+      },
+      {icon: '',label: '测试1',key: 'test1',routeKey: 'to_test1'}
+    ],
     // 当前登录用户的权限
     permissions: [],
     // 当前登录用户的角色
@@ -19,19 +26,19 @@ export default {
   },
   mutations: {
     // 设置登录用户的信息
-    setUserInfo(state, info) {
+    SET_USER_INFO(state, info) {
       state.info = info;
     },
     // 设置登录用户的菜单
-    setMenus(state, menus) {
+    SET_MENUS(state, menus) {
       state.menus = menus;
     },
     // 设置登录用户的权限
-    setPermissions(state, permissions) {
+    SET_PERMISSIONS(state, permissions) {
       state.permissions = permissions;
     },
     // 设置登录用户的角色
-    setRoles(state, roles) {
+    SET_ROLES(state, roles) {
       state.roles = roles;
     }
   },
@@ -45,13 +52,13 @@ export default {
      * 更新用户信息
      */
     setInfo({ commit }, value) {
-      commit('setUserInfo', value);
+      commit('SET_USER_INFO', value);
     },
     /**
      * 更新菜单数据
      */
     setMenus({ commit }, value) {
-      commit('setMenus', value);
+      commit('SET_MENUS', value);
     }
   }
 };
