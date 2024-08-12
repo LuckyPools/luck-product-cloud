@@ -1,25 +1,25 @@
 <template>
-  <ButtonIcon :key="String(full)" :tooltip-content="full ? $t('icon.fullscreenExit') : $t('icon.fullscreen')">
+  <ButtonIcon :tooltip-content="$t('icon.reload')">
     <!-- todo 图标 -->
-    <a-icon type="step-backward" />
-    <div v-if="full">fullscreen-exit</div>
-    <div v-else>fullscreen</div>
+    <a-icon type="step-backward" :class="{ 'animate-spin animate-duration-750': loading }"  />
   </ButtonIcon>
 </template>
+
 <script>
 import ButtonIcon from "@/component/custom/button-icon.vue";
 
 export default {
-  name: 'FullScreen',
+  name: 'ReloadButton',
   components: {ButtonIcon},
   props: {
-    full: {
+    loading: {
       type: Boolean
     }
   },
   data() {
     return {}
   },
+  computed: {},
   methods: {}
 }
 </script>

@@ -61,9 +61,11 @@ export default {
     }
   },
   methods: {
+
     handleClickMixMenu(menu) {
       this.$emit('select', menu);
     },
+
     handleToggle(){
       this.$store.dispatch('app/toggleSiderCollapse');
     },

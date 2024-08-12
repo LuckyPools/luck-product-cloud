@@ -32,17 +32,23 @@ export default {
     trigger: {
       /** 'click' | 'hover' | 'contextmenu' **/
       type: Array,
-      default: ['contextmenu']
+      default: () => {
+        return ['contextmenu']
+      }
     },
     excludeKeys: {
       /** 'closeCurrent' | 'closeOther' | 'closeLeft' | 'closeRight' | 'closeAll' **/
       type: Array,
-      default: []
+      default: () => {
+        return []
+      }
     },
     disabledKeys: {
       /** 'closeCurrent' | 'closeOther' | 'closeLeft' | 'closeRight' | 'closeAll' **/
       type: Array,
-      default: []
+      default: () => {
+        return []
+      }
     },
   },
   data() {

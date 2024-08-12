@@ -24,6 +24,7 @@
         <vertical-mix-menu></vertical-mix-menu>
         <horizontal-mix-menu></horizontal-mix-menu>
         <global-sider></global-sider>
+        <global-tab></global-tab>
     </a-form>
   </div>
 </template>
@@ -41,9 +42,11 @@
   import VerticalMixMenu from "@/layout/base-layout/global-menu/vertical-mix-menu.vue";
   import HorizontalMixMenu from "@/layout/base-layout/global-menu/horizontal-mix-menu.vue";
   import GlobalSider from "@/layout/base-layout/global-sider/index.vue";
+  import GlobalTab from "@/layout/base-layout/global-tab/index.vue";
   export default {
     name: 'Login',
       components: {
+        GlobalTab,
         GlobalSider,
         HorizontalMixMenu,
         VerticalMixMenu,

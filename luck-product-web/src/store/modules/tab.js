@@ -1,4 +1,4 @@
-import router from '@router';
+import router from '@/router';
 import { $t } from '@/i18n';
 
 /**
@@ -63,7 +63,8 @@ export function getTabByRoute(route) {
 
 export function getRouteIcons(route) {
     // Set default value for icon at the beginning
-    let icon = route?.meta?.icon || import.meta.env.VITE_MENU_ICON;
+    // todo VITE_MENU_ICON默认图标
+    let icon = route?.meta?.icon || '';
     let localIcon = route?.meta?.localIcon;
     // Route.matched only appears when there are multiple matches,so check if route.matched exists
     if (route.matched) {
@@ -114,7 +115,7 @@ export default {
         }
     },
     actions: {
-        addTab({ state,commit },route, active) {
+        addTab({ state, commit },route, active) {
             const tab = getTabByRoute(route);
             const isHomeTab = tab.id === state.homeTab?.id;
             if (!isHomeTab && !isTabInTabs(tab.id, state.tabs)) {
@@ -125,7 +126,7 @@ export default {
             }
         },
 
-        removeTab({ state,commit },tabId){
+        removeTab({ state, commit, dispatch },tabId){
             const isRemoveActiveTab = state.activeTabId === tabId;
             const updatedTabs = filterTabsById(tabId, state.tabs);
             function update() {
@@ -144,9 +145,9 @@ export default {
             commit('REMOVE_TAB',tabId);
         },
 
-        clearTabs({ state,commit },excludes) {
+        clearTabs({ state, commit, dispatch },excludes) {
             const remainTabIds = [...getFixedTabIds(state.tabs), ...excludes];
-            const removedTabsIds = state.tabs.value.map(tab => tab.id).filter(id => !remainTabIds.includes(id));
+            const removedTabsIds = state.tabs.map(tab => tab.id).filter(id => !remainTabIds.includes(id));
             const isRemoveActiveTab = removedTabsIds.includes(state.activeTabId);
             const updatedTabs = filterTabsByIds(removedTabsIds, state.tabs);
             function update() {
@@ -162,7 +163,7 @@ export default {
             })
         },
 
-        clearLeftTabs({ state,commit },tabId) {
+        clearLeftTabs({ state, commit, dispatch },tabId) {
             const tabIds = state.tabs.map(tab => tab.id);
             const index = tabIds.indexOf(tabId);
             if (index === -1) return;
@@ -170,7 +171,7 @@ export default {
             dispatch('clearTabs',excludes);
         },
 
-        clearRightTabs({ state,commit },tabId) {
+        clearRightTabs({ state, commit, dispatch },tabId) {
             const isHomeTab = tabId === state.homeTab?.id;
             if (isHomeTab) {
                 dispatch('clearTabs',[]);
@@ -184,20 +185,26 @@ export default {
             dispatch('clearTabs',excludes);
         },
 
-        switchRouteByTab({ state,commit },tab) {
+        switchRouteByTab({ state, commit },tab) {
             const fail = router.push({path: tab.fullPath})
             if (!fail) {
                 commit('SET_ACTIVE_TAB_ID',tab.id);
             }
         },
 
-        initTabStore({ state,commit,rootState },currentRoute) {
+        initTabStore({ state, commit, rootState, dispatch },currentRoute) {
             const storageTabs = localStorage.getItem('globalTabs');
             if (rootState.theme.tab.cache && storageTabs) {
                 const extractedTabs = extractTabsByAllRoutes(router, storageTabs);
                 commit('SET_TABS',updateTabsByI18nKey(extractedTabs));
             }
             dispatch('addTab',currentRoute);
+        },
+
+        isTabRetain({ state, commit }, tabId) {
+            if (tabId === state.homeTab?.id) return true;
+            const fixedTabIds = getFixedTabIds(state.tabs);
+            return fixedTabIds.includes(tabId);
         }
     }
 };

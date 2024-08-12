@@ -37,7 +37,9 @@ export default {
         },
 
         symbolId() {
-            const {VITE_ICON_LOCAL_PREFIX: prefix} = import.meta.env;
+            // todo 图标前缀
+            // const {VITE_ICON_LOCAL_PREFIX: prefix} = import.meta.env;
+            const prefix = '';
             const defaultLocalIcon = 'no-icon';
             const icon = this.localIcon || defaultLocalIcon;
             return `#${prefix}-${icon}`;

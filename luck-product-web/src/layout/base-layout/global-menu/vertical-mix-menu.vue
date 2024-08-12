@@ -62,6 +62,7 @@ export default {
     }
   },
   methods: {
+
     setDrawerVisible(value) {
       this.drawerVisible = value;
     },

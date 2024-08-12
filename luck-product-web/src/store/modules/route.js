@@ -1,25 +1,45 @@
+import {getFixedTabIds} from "@/store/modules/tab";
+
 /**
  * 路由状态管理
  */
 export default {
     namespaced: true,
     state: {
-        breadcrumbs: [
-            {icon: '',label: '测试',key: 'test',routeKey: 'to_test',
-                children : [
-                {icon: '',label: '子项1',key: 'item1',routeKey: 'to_item1'},
-                {icon: '',label: '子项2',key: 'item2',routeKey: 'to_item2'}]
-            },
-            {icon: '',label: '测试1',key: 'test1',routeKey: 'to_test1'}
-        ],
-        cacheRoutes: [
-
-        ]
+        breadcrumbs: [],
+        cacheRoutes: [],
+        allCacheRoutes: []
     },
     mutations: {
-
+        ADD_CACHE_ROUTES(state, routeKey) {
+            state.cacheRoutes.push(routeKey);
+        }
     },
     actions: {
+        reCacheRoutesByKey({ state, commit, dispatch }, routeKey) {
+            if(!state.allCacheRoutes.includes(routeKey)){
+                return;
+            }
+            dispatch('removeCacheRoutes', routeKey).then(() => {
+                dispatch('app/reloadPage').then(() => {
+                    dispatch('addCacheRoutes',routeKey);
+                })
+            })
+        },
 
+        addCacheRoutes({ state, commit },routeKey) {
+            if (state.cacheRoutes.includes(routeKey)) return;
+            commit('ADD_CACHE_ROUTES',routeKey)
+        },
+
+        removeCacheRoutes({ state, commit },routeKey) {
+            const index = state.cacheRoutes.findIndex(item => item === routeKey);
+            if (index === -1) return;
+            state.cacheRoutes.splice(index, 1);
+        },
+
+        isCachedRoute({ state, commit },routeKey) {
+            return state.allCacheRoutes.includes(routeKey);
+        }
     }
 };

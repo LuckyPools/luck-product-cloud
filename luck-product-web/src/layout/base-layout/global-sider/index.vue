@@ -33,12 +33,15 @@ export default {
     isVerticalMix(){
       return this.theme.layout.mode === 'vertical-mix';
     },
+
     isHorizontalMix(){
       return this.theme.layout.mode === 'horizontal-mix';
     },
+
     darkMenu(){
       return !this.theme.darkMode && !this.isHorizontalMix && this.theme.sider.inverted
     },
+
     showLogo(){
       return !this.isVerticalMix && ! this.isHorizontalMix
     },
