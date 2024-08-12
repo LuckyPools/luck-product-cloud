@@ -18,3 +18,5 @@ export const i18n = new VueI18n({
 });
 
 export default i18n;
+
+export const $t = i18n.t;

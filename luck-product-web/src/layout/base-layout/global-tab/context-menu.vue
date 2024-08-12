@@ -53,27 +53,27 @@ export default {
       const opts = [
         {
           key: 'closeCurrent',
-          label: $t('dropdown.closeCurrent'),
+          label: this.$t('dropdown.closeCurrent'),
           icon: 'ant-design:close-outlined'
         },
         {
           key: 'closeOther',
-          label: $t('dropdown.closeOther'),
+          label: this.$t('dropdown.closeOther'),
           icon: 'ant-design:column-width-outlined'
         },
         {
           key: 'closeLeft',
-          label: $t('dropdown.closeLeft'),
+          label: this.$t('dropdown.closeLeft'),
           icon: 'mdi:format-horizontal-align-left'
         },
         {
           key: 'closeRight',
-          label: $t('dropdown.closeRight'),
+          label: this.$t('dropdown.closeRight'),
           icon: 'mdi:format-horizontal-align-right'
         },
         {
           key: 'closeAll',
-          label: $t('dropdown.closeAll'),
+          label: this.$t('dropdown.closeAll'),
           icon: 'ant-design:line-outlined'
         }
       ];
@@ -92,22 +92,15 @@ export default {
   methods: {
     dropdownAction(key){
       if(key === 'closeCurrent'){
-
-      }
-      closeCurrent() {
-        removeTab(props.tabId);
-      },
-      closeOther() {
-        clearTabs([props.tabId]);
-      },
-      closeLeft() {
-        clearLeftTabs(props.tabId);
-      },
-      closeRight() {
-        clearRightTabs(props.tabId);
-      },
-      closeAll() {
-        clearTabs();
+          this.$store.dispatch('tab/removeTab', this.tabId);
+      } else if(key === 'closeOther'){
+          this.$store.dispatch('tab/clearTabs', [this.tabId]);
+      } else if(key === 'closeLeft'){
+          this.$store.dispatch('tab/clearLeftTabs', this.tabId);
+      } else if(key === 'clearRightTabs'){
+          this.$store.dispatch('tab/clearRightTabs', this.tabId);
+      } else if(key === 'closeAll'){
+          this.$store.dispatch('tab/clearTabs');
       }
     }
   }

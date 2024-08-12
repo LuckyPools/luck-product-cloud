@@ -1,120 +1,3 @@
-<script setup lang="ts">
-import { nextTick, ref, watch } from 'vue';
-import { useRoute } from 'vue-router';
-import { useElementBounding } from '@vueuse/core';
-import { PageTab } from '@sa/materials';
-import BetterScroll from '@/components/custom/better-scroll.vue';
-import { useAppStore } from '@/store/modules/app';
-import { useThemeStore } from '@/store/modules/theme';
-import { useRouteStore } from '@/store/modules/route';
-import { useTabStore } from '@/store/modules/tab';
-import ContextMenu from './context-menu.vue';
-
-defineOptions({
-  name: 'GlobalTab'
-});
-
-const route = useRoute();
-const appStore = useAppStore();
-const themeStore = useThemeStore();
-const routeStore = useRouteStore();
-const tabStore = useTabStore();
-
-const bsWrapper = ref<HTMLElement>();
-const { width: bsWrapperWidth, left: bsWrapperLeft } = useElementBounding(bsWrapper);
-const bsScroll = ref<InstanceType<typeof BetterScroll>>();
-const tabRef = ref<HTMLElement>();
-
-const TAB_DATA_ID = 'data-tab-id';
-
-type TabNamedNodeMap = NamedNodeMap & {
-  [TAB_DATA_ID]: Attr;
-};
-
-async function scrollToActiveTab() {
-  await nextTick();
-  if (!tabRef.value) return;
-
-  const { children } = tabRef.value;
-
-  for (let i = 0; i < children.length; i += 1) {
-    const child = children[i];
-
-    const { value: tabId } = (child.attributes as TabNamedNodeMap)[TAB_DATA_ID];
-
-    if (tabId === tabStore.activeTabId) {
-      const { left, width } = child.getBoundingClientRect();
-      const clientX = left + width / 2;
-
-      setTimeout(() => {
-        scrollByClientX(clientX);
-      }, 50);
-
-      break;
-    }
-  }
-}
-
-function scrollByClientX(clientX: number) {
-  const currentX = clientX - bsWrapperLeft.value;
-  const deltaX = currentX - bsWrapperWidth.value / 2;
-
-  if (bsScroll.value?.instance) {
-    const { maxScrollX, x: leftX, scrollBy } = bsScroll.value.instance;
-
-    const rightX = maxScrollX - leftX;
-    const update = deltaX > 0 ? Math.max(-deltaX, rightX) : Math.min(-deltaX, -leftX);
-
-    scrollBy(update, 0, 300);
-  }
-}
-
-function getContextMenuDisabledKeys(tabId: string) {
-  const disabledKeys: App.Global.DropdownKey[] = [];
-
-  if (tabStore.isTabRetain(tabId)) {
-    const homeDisable: App.Global.DropdownKey[] = ['closeCurrent', 'closeLeft'];
-    disabledKeys.push(...homeDisable);
-  }
-
-  return disabledKeys;
-}
-
-async function handleCloseTab(tab: App.Global.Tab) {
-  await tabStore.removeTab(tab.id);
-  await routeStore.reCacheRoutesByKey(tab.routeKey);
-}
-
-async function refresh() {
-  appStore.reloadPage(500);
-}
-
-function removeFocus() {
-  (document.activeElement as HTMLElement)?.blur();
-}
-
-function init() {
-  tabStore.initTabStore(route);
-}
-
-// watch
-watch(
-  () => route.fullPath,
-  () => {
-    tabStore.addTab(route);
-  }
-);
-watch(
-  () => tabStore.activeTabId,
-  () => {
-    scrollToActiveTab();
-  }
-);
-
-// init
-init();
-</script>
-
 <template>
   <DarkModeContainer class="size-full flex-y-center px-16px shadow-tab">
     <div ref="bsWrapper" class="h-full flex-1-hidden">
@@ -161,5 +44,116 @@ init();
     <FullScreen :full="appStore.fullContent" @click="appStore.toggleFullContent" />
   </DarkModeContainer>
 </template>
+
+<script>
+import { useElementBounding } from '@vueuse/core';
+import {mapGetters} from "vuex";
+import DarkModeContainer from "@/component/common/dark-mode-container.vue";
+import BetterScroll from "@/component/custom/better-scroll.vue";
+import PageTab from "@/layout/page-tab/index.vue";
+import FullScreen from "@/component/common/full-screen.vue";
+const TAB_DATA_ID = 'data-tab-id';
+export default {
+    name: 'GlobalTab',
+    components: {FullScreen, PageTab, BetterScroll, DarkModeContainer},
+    props: {
+        showTitle: {
+            type: Boolean
+        }
+    },
+    data() {
+        return {
+            bsWrapperWidth: null,
+            bsWrapperLeft: null
+        }
+    },
+    watch:{
+        $route(route){
+            this.$store.dispatch(
+                'tab/addTab',route);
+        },
+        'tab.activeTabId':{
+            handler() {
+                this.scrollToActiveTab();
+            }
+        }
+    },
+    computed: {
+        ...mapGetters(['app','theme','user','route']),
+    },
+    mounted() {
+        this.init();
+        const { width: bsWrapperWidth, left: bsWrapperLeft } = useElementBounding(this.$refs.bsWrapper);
+        this.bsWrapperWidth = bsWrapperWidth;
+        this.bsWrapperLeft = bsWrapperLeft;
+    },
+    methods: {
+        async scrollToActiveTab() {
+            await this.$nextTick();
+            if (!this.$refs.tabRef) return;
+
+            const {children} = this.$refs.tabRef;
+
+            for (let i = 0; i < children.length; i += 1) {
+                const child = children[i];
+
+                const {value: tabId} = (child.attributes)[TAB_DATA_ID];
+
+                if (tabId === this.tab.activeTabId) {
+                    const {left, width} = child.getBoundingClientRect();
+                    const clientX = left + width / 2;
+
+                    setTimeout(() => {
+                        this.scrollByClientX(clientX);
+                    }, 50);
+
+                    break;
+                }
+            }
+        },
+        scrollByClientX(clientX) {
+            const currentX = clientX - this.bsWrapperLeft;
+            const deltaX = currentX - this.bsWrapperWidth / 2;
+
+            if (bsScroll.value?.instance) {
+                const { maxScrollX, x: leftX, scrollBy } = bsScroll.value.instance;
+
+                const rightX = maxScrollX - leftX;
+                const update = deltaX > 0 ? Math.max(-deltaX, rightX) : Math.min(-deltaX, -leftX);
+
+                scrollBy(update, 0, 300);
+            }
+        },
+        getContextMenuDisabledKeys(tabId: string) {
+            const disabledKeys: App.Global.DropdownKey[] = [];
+
+            if (tabStore.isTabRetain(tabId)) {
+                const homeDisable: App.Global.DropdownKey[] = ['closeCurrent', 'closeLeft'];
+                disabledKeys.push(...homeDisable);
+            }
+
+            return disabledKeys;
+        },
+
+        handleCloseTab(tab: App.Global.Tab) {
+            await tabStore.removeTab(tab.id);
+            await routeStore.reCacheRoutesByKey(tab.routeKey);
+        },
+
+        refresh() {
+            appStore.reloadPage(500);
+        },
+
+        removeFocus() {
+            (document.activeElement as HTMLElement)?.blur();
+        },
+
+        init() {
+            this.$store.dispatch(
+                'tab/initTabStore',this.$route);
+        }
+    }
+}
+</script>
 
 <style scoped></style>
