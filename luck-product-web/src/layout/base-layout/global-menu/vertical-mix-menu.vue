@@ -35,11 +35,6 @@ import BaseMenu from "@/layout/base-layout/global-menu/base-menu.vue";
 export default {
   name: 'VerticalMixMenu',
   components: {BaseMenu, PinToggler, DarkModeContainer, FirstLevelMenu},
-  props: {
-    showTitle: {
-      type: Boolean
-    }
-  },
   data() {
     return {
       drawerVisible: false,

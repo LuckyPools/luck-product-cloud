@@ -37,14 +37,11 @@
 </template>
 <script>
 import {mapGetters} from "vuex";
-
+import SettingItem from "@/layout/base-layout/theme-drawer/components/setting-item.vue";
+import ColorPicker from "@/layout/color-picker/index.vue";
 export default {
     name: 'ThemeColor',
-    props: {
-        showTitle: {
-            type: Boolean
-        }
-    },
+    components: {ColorPicker, SettingItem},
     data() {
         return {}
     },
@@ -57,10 +54,4 @@ export default {
         }
     }
 }
-
-
-
-
-function
 </script>
-<style scoped></style>

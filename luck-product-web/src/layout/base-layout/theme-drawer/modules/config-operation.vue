@@ -12,11 +12,6 @@ import {mapGetters} from "vuex";
 
 export default {
     name: 'ConfigOperation',
-    props: {
-        showTitle: {
-            type: Boolean
-        }
-    },
     data() {
         return {
             domRef: null

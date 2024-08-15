@@ -30,11 +30,6 @@ import SvgIcon from "@/component/custom/svg-icon.vue";
 export default {
     name: 'DarkMode',
     components: {SvgIcon, SettingItem},
-    props: {
-        showTitle: {
-            type: Boolean
-        }
-    },
     data() {
         return {
             icons: {

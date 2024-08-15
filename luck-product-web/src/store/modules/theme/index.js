@@ -1,4 +1,5 @@
 import {initThemeSettings} from "@/store/modules/theme/share";
+import {getPaletteColorByNumber} from "@/store/modules/theme/palette";
 
 /**
  * 主题状态管理
@@ -26,6 +27,13 @@ export default {
         },
         SET_GRAYSCALE(state,value) {
             state.grayscale = value;
+        },
+        UPDATE_THEME_COLORS(state,key,colorValue){
+            if (key === 'primary') {
+                state.themeColor = colorValue;
+            } else {
+                state.otherColor[key] = colorValue;
+            }
         }
     },
     actions: {
@@ -43,18 +51,32 @@ export default {
         },
         updateThemeColors({ commit, state },key, color) {
             let colorValue = color;
-
-            if (settings.value.recommendColor) {
+            if (state.recommendColor) {
                 // get a color palette by provided color and color name, and use the suitable color
-
                 colorValue = getPaletteColorByNumber(color, 500, true);
             }
-
-            if (key === 'primary') {
-                settings.value.themeColor = colorValue;
-            } else {
-                settings.value.otherColor[key] = colorValue;
+            commit('UPDATE_THEME_COLORS',key, colorValue);
+        }
+    },
+    getters: {
+        themeColors: state => {
+            const {themeColor, otherColor, isInfoFollowPrimary} = state;
+            const colors = {
+                primary: themeColor,
+                ...otherColor,
+                info: isInfoFollowPrimary ? themeColor : otherColor.info
+            };
+            return colors;
+        },
+        darkMode: state => {
+            if (state.themeScheme === 'auto') {
+                // todo 研究逻辑
+                // return state.osTheme === 'dark';
             }
+            return state.themeScheme === 'dark';
+        },
+        grayscaleMode: state => {
+            return state.grayscale
         }
     }
 };

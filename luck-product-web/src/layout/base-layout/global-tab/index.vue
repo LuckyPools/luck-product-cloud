@@ -61,11 +61,6 @@ const TAB_DATA_ID = 'data-tab-id';
 export default {
   name: 'GlobalTab',
   components: {ReloadButton, SvgIcon, ContextMenu, FullScreen, PageTab, BetterScroll, DarkModeContainer},
-  props: {
-    showTitle: {
-      type: Boolean
-    }
-  },
   data() {
     return {
       bsWrapperWidth: null,
