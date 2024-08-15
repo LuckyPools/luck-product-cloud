@@ -2,7 +2,7 @@
   <ADivider>{{ $t('theme.themeSchema.title') }}</ADivider>
   <div class="flex-col-stretch gap-16px">
     <div class="i-flex-center">
-      <ASegmented :value="themeStore.themeScheme" :options="options" class="bg-layout" @change="handleSegmentChange">
+      <ASegmented :value="theme.themeScheme" :options="options" class="bg-layout" @change="handleSegmentChange">
         <template #label="{ payload }">
           <div class="w-[70px] flex justify-center">
             <SvgIcon :icon="payload.icon" class="h-28px text-icon-small" />
@@ -12,72 +12,71 @@
     </div>
     <Transition name="sider-inverted">
       <SettingItem v-if="showSiderInverted" :label="$t('theme.sider.inverted')">
-        <ASwitch v-model:checked="themeStore.sider.inverted" />
+        <ASwitch v-model:checked="theme.sider.inverted" />
       </SettingItem>
     </Transition>
     <SettingItem :label="$t('theme.grayscale')">
-      <ASwitch :checked="themeStore.grayscale" @update:checked="handleGrayscaleChange" />
+      <ASwitch :checked="theme.grayscale" @update:checked="handleGrayscaleChange" />
     </SettingItem>
   </div>
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+import {themeSchemaRecord} from "@/config/app";
+import SettingItem from "@/layout/base-layout/theme-drawer/components/setting-item.vue";
+import SvgIcon from "@/component/custom/svg-icon.vue";
+
 export default {
-    name: 'GlobalLogo',
+    name: 'DarkMode',
+    components: {SvgIcon, SettingItem},
     props: {
         showTitle: {
             type: Boolean
         }
     },
     data() {
-        return {}
-    },
-    computed: {},
-    methods: {}
-}
-
-import { themeSchemaRecord } from '@/constants/app';
-import SettingItem from '../components/setting-item.vue';
-
-defineOptions({
-    name: 'DarkMode'
-});
-
-const themeStore = useThemeStore();
-
-const icons: Record<UnionKey.ThemeScheme, string> = {
-    light: 'material-symbols:sunny',
-    dark: 'material-symbols:nightlight-rounded',
-    auto: 'material-symbols:hdr-auto'
-};
-
-function getSegmentOptions() {
-    const opts: SegmentedOption[] = Object.keys(themeSchemaRecord).map(item => {
-        const key = item as UnionKey.ThemeScheme;
         return {
-            value: item,
-            payload: {
-                icon: icons[key]
+            icons: {
+                light: 'material-symbols:sunny',
+                dark: 'material-symbols:nightlight-rounded',
+                auto: 'material-symbols:hdr-auto'
             }
-        };
-    });
+        }
+    },
+    computed: {
+        ...mapGetters(['theme']),
+        options(){
+            return this.getSegmentOptions();
+        },
+        showSiderInverted(){
+            return !this.theme.darkMode && this.theme.layout.mode.includes('vertical')
+        },
+    },
+    methods: {
+        getSegmentOptions() {
+            const opts = Object.keys(themeSchemaRecord).map(item => {
+                const key = item;
+                return {
+                    value: item,
+                    payload: {
+                        icon: this.icons[key]
+                    }
+                };
+            });
+            return opts;
+        },
 
-    return opts;
+        handleSegmentChange(value) {
+            this.$store.dispatch('theme/setThemeScheme', value);
+        },
+
+        handleGrayscaleChange(value) {
+            this.$store.dispatch('theme/setThemeScheme', value);
+        }
+    }
 }
 
-const options = computed(() => getSegmentOptions());
-
-function handleSegmentChange(value: string | number) {
-    themeStore.setThemeScheme(value as UnionKey.ThemeScheme);
-}
-
-const showSiderInverted = computed(() => !themeStore.darkMode && themeStore.layout.mode.includes('vertical'));
-
-type CheckedType = boolean | string | number;
-
-function handleGrayscaleChange(value: CheckedType) {
-    themeStore.setGrayscale(value as boolean);
-}
 </script>
 
 <style scoped>

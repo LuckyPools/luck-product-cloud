@@ -20,6 +20,12 @@ export default {
         RESET(state) {
             const initSettings = initThemeSettings();
             state = initSettings;
+        },
+        SET_THEME_SCHEME(state,value) {
+            state.themeScheme = value;
+        },
+        SET_GRAYSCALE(state,value) {
+            state.grayscale = value;
         }
     },
     actions: {
@@ -29,5 +35,26 @@ export default {
         reset({ commit }){
             commit('RESET');
         },
+        setThemeScheme({ commit },value) {
+            commit('SET_THEME_SCHEME',value);
+        },
+        setGrayscale({ commit },value) {
+            commit('SET_GRAYSCALE',value);
+        },
+        updateThemeColors({ commit, state },key, color) {
+            let colorValue = color;
+
+            if (settings.value.recommendColor) {
+                // get a color palette by provided color and color name, and use the suitable color
+
+                colorValue = getPaletteColorByNumber(color, 500, true);
+            }
+
+            if (key === 'primary') {
+                settings.value.themeColor = colorValue;
+            } else {
+                settings.value.otherColor[key] = colorValue;
+            }
+        }
     }
 };
