@@ -1,18 +1,16 @@
 <template>
   <div id="app">
       <ConfigProvider>
-          <BaseLayout class="bg-layout" ></BaseLayout>
+          <router-view class="bg-layout" />
       </ConfigProvider>
   </div>
 </template>
 
 <script>
 import { ConfigProvider } from 'ant-design-vue';
-import BaseLayout from "@/layout/base-layout/index.vue";
-
 export default {
   name: 'App',
-  components:{BaseLayout, ConfigProvider }
+  components:{ ConfigProvider }
 }
 </script>
 
