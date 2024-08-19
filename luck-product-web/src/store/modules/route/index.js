@@ -1,4 +1,3 @@
-import {getFixedTabIds} from "@/store/modules/tab";
 
 /**
  * 路由状态管理

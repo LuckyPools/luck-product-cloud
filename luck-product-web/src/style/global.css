@@ -15,3 +15,18 @@ html {
 html.grayscale {
   filter: grayscale(100%);
 }
+
+.bg-container {
+  --un-bg-opacity: 1;
+  background-color: rgb(var(--container-bg-color) / var(--un-bg-opacity)) /* rgb(var(--container-bg-color)) */;
+}
+
+.shadow-header {
+  --un-shadow: var(--header-box-shadow);
+  box-shadow: var(--un-ring-offset-shadow), var(--un-ring-shadow), var(--un-shadow);
+}
+
+.shadow-sider {
+  --un-shadow: var(--sider-box-shadow);
+  box-shadow: var(--un-ring-offset-shadow), var(--un-ring-shadow), var(--un-shadow);
+}

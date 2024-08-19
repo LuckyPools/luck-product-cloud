@@ -1,5 +1,7 @@
 import {customRoutes} from "@/router/routes";
+import {getGlobalMenusByAuthRoutes} from "@/store/modules/user/utils";
 
+const menus = getGlobalMenusByAuthRoutes(customRoutes);
 
 /**
  * 登录状态管理
@@ -14,7 +16,7 @@ export default {
       name: ''
     },
     // 当前登录用户的菜单
-    menus: customRoutes,
+    menus: menus,
     // 当前登录用户的权限
     permissions: [],
     // 当前登录用户的角色

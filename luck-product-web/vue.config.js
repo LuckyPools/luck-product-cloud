@@ -2,7 +2,9 @@ const proxy = require('http-proxy-middleware');
 const unocss = require('@unocss/webpack').default;
 
 module.exports = {
+    runtimeCompiler: true,
     devServer: {
+        port: 9099,
         proxy: {
             '/api': {
                 target: 'http://localhost:9090',

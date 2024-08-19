@@ -55,7 +55,7 @@ import FullScreen from "@/component/common/full-screen.vue";
 import ContextMenu from "@/layout/base-layout/global-tab/context-menu.vue";
 import SvgIcon from "@/component/custom/svg-icon.vue";
 import ReloadButton from "@/component/common/reload-button.vue";
-import {getFixedTabIds} from "@/store/modules/tab";
+import {getFixedTabIds} from "@/store/modules/tab/utils";
 
 const TAB_DATA_ID = 'data-tab-id';
 export default {

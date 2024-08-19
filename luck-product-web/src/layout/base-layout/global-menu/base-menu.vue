@@ -1,17 +1,22 @@
 <template>
   <SimpleScrollbar class="menu-wrapper" :class="{ 'select-menu': !darkTheme }">
-    <AMenu
+      <AMenu
       :mode="mode"
       :theme="menuTheme"
-      :items="menus"
       :selected-keys="selectedKeys"
-      :open-keys="openKeys"
       :inline-collapsed="inlineCollapsed"
       :inline-indent="18"
       class="size-full transition-300 border-0!"
       :class="{ 'bg-container!': !darkTheme, 'horizontal-menu': isHorizontal }"
-      @click="handleClickMenu"
-    />
+      @click="handleClickMenu">
+        <template v-for="item in menus">
+            <a-menu-item v-if="!item.children" :key="item.key">
+                <a-icon type="pie-chart" />
+                <span>{{ item.title }}</span>
+            </a-menu-item>
+            <sub-menu v-else :key="item.key" :menu-info="item" />
+        </template>
+    </AMenu>
   </SimpleScrollbar>
 </template>
 <script>
@@ -19,9 +24,39 @@ import SimpleScrollbar from "@/layout/page-tab/simple-scrollbar/index.vue";
 import {mapGetters} from "vuex";
 import {transformColorWithOpacity} from "@/layout/page-tab/shared";
 
+import { Menu } from 'ant-design-vue';
+const SubMenu = {
+    template: `
+      <a-sub-menu :key="menuInfo.key" v-bind="$props" v-on="$listeners">
+        <span slot="title">
+          <a-icon type="mail" /><span>{{ menuInfo.title }}</span>
+        </span>
+        <template v-for="item in menuInfo.children">
+          <a-menu-item v-if="!item.children" :key="item.key">
+            <a-icon type="pie-chart" />
+            <span>{{ item.title }}</span>
+          </a-menu-item>
+          <sub-menu v-else :key="item.key" :menu-info="item" />
+        </template>
+      </a-sub-menu>
+    `,
+    name: 'SubMenu',
+    // must add isSubMenu: true 此项必须被定义
+    isSubMenu: true,
+    props: {
+        // 解构a-sub-menu的属性，也就是文章开头提到的为什么使用函数式组件
+        ...Menu.SubMenu.props,
+        // Cannot overlap with properties within Menu.SubMenu.props
+        menuInfo: {
+            type: Object,
+            default: () => ({}),
+        },
+    },
+}
+
 export default {
   name: 'BaseMenu',
-  components: {SimpleScrollbar},
+  components: {SimpleScrollbar,SubMenu},
   props:{
     darkTheme:{
       type: Boolean
@@ -72,7 +107,10 @@ export default {
         return [];
       }
     },
-
+      /**
+       * todo 加上默认打开
+       * @returns {*|*[]}
+       */
     openKeys (){
       if (this.isHorizontal || this.inlineCollapsed) return [];
       const [selectedKey] = this.selectedKeys;

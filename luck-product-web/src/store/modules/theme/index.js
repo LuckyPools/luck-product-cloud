@@ -1,4 +1,4 @@
-import {addThemeVarsToHtml, createThemeToken, initThemeSettings} from "@/store/modules/theme/share";
+import {addThemeVarsToHtml, createThemeToken, initThemeSettings} from "@/store/modules/theme/utils";
 import {getPaletteColorByNumber} from "@/store/modules/theme/palette";
 
 
