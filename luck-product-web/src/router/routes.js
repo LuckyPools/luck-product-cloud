@@ -25,9 +25,9 @@ export const customRoutes = [
         },
         children: [
             {
-                name: 'login',
+                name: 'login_page',
                 path: '/login',
-                component: 'layout.base$view.login',
+                component: 'view.login',
                 meta: {
                     title: 'manage_menu',
                     i18nKey: 'route.manage_menu',
@@ -37,9 +37,9 @@ export const customRoutes = [
                 }
             },
             {
-                name: 'test',
+                name: 'test_page',
                 path: '/test',
-                component: 'layout.base$view.test',
+                component: 'view.test',
                 meta: {
                     title: 'manage_role',
                     i18nKey: 'route.manage_role',

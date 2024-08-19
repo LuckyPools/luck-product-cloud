@@ -1,9 +1,7 @@
 <template>
-  <div id="app">
-      <ConfigProvider>
-          <router-view class="bg-layout" />
-      </ConfigProvider>
-  </div>
+    <ConfigProvider>
+        <router-view class="bg-layout" />
+    </ConfigProvider>
 </template>
 
 <script>

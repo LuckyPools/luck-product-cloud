@@ -13,29 +13,14 @@
       <div class="a">
         <div class="b">{{$t('system.title')}}</div>
       </div>
-        <BaseLayout></BaseLayout>
     </a-form>
   </div>
 </template>
 
 <script>
   import { login } from "@/api/auth";
-  import GlobalLogo from "@/layout/base-layout/global-logo/index.vue";
-  import GlobalBreadcrumb from "@/layout/base-layout/global-breadcrumb/index.vue";
-  import GlobalContent from "@/layout/base-layout/global-content/index.vue";
-  import GlobalFooter from "@/layout/base-layout/global-footer/index.vue";
-  import ThemeButton from "@/layout/base-layout/global-header/components/theme-button.vue";
-  import UserAvatar from "@/layout/base-layout/global-header/components/user-avatar.vue";
-  import GlobalHeader from "@/layout/base-layout/global-header/index.vue";
-  import FirstLevelMenu from "@/layout/base-layout/global-menu/first-level-menu.vue";
-  import VerticalMixMenu from "@/layout/base-layout/global-menu/vertical-mix-menu.vue";
-  import HorizontalMixMenu from "@/layout/base-layout/global-menu/horizontal-mix-menu.vue";
-  import GlobalSider from "@/layout/base-layout/global-sider/index.vue";
-  import GlobalTab from "@/layout/base-layout/global-tab/index.vue";
-  import BaseLayout from "@/layout/base-layout/index.vue";
   export default {
     name: 'Login',
-      components: {BaseLayout},
     data() {
       return {
         // 加载状态
