@@ -1,23 +1,25 @@
 <template>
-  <ADivider>{{ $t('theme.themeSchema.title') }}</ADivider>
-  <div class="flex-col-stretch gap-16px">
-    <div class="i-flex-center">
-      <ASegmented :value="theme.themeScheme" :options="options" class="bg-layout" @change="handleSegmentChange">
-        <template #label="{ payload }">
-          <div class="w-[70px] flex justify-center">
-            <SvgIcon :icon="payload.icon" class="h-28px text-icon-small" />
+  <div>
+      <ADivider>{{ $t('theme.themeSchema.title') }}</ADivider>
+      <div class="flex-col-stretch gap-16px">
+          <div class="i-flex-center">
+              <ASegmented :value="theme.themeScheme" :options="options" class="bg-layout" @change="handleSegmentChange">
+                  <template #label="{ payload }">
+                      <div class="w-[70px] flex justify-center">
+                          <SvgIcon :icon="payload.icon" class="h-28px text-icon-small" />
+                      </div>
+                  </template>
+              </ASegmented>
           </div>
-        </template>
-      </ASegmented>
-    </div>
-    <Transition name="sider-inverted">
-      <SettingItem v-if="showSiderInverted" :label="$t('theme.sider.inverted')">
-        <ASwitch v-model:checked="theme.sider.inverted" />
-      </SettingItem>
-    </Transition>
-    <SettingItem :label="$t('theme.grayscale')">
-      <ASwitch :checked="theme.grayscale" @update:checked="handleGrayscaleChange" />
-    </SettingItem>
+          <Transition name="sider-inverted">
+              <SettingItem v-if="showSiderInverted" :label="$t('theme.sider.inverted')">
+                  <ASwitch v-model:checked="theme.sider.inverted" />
+              </SettingItem>
+          </Transition>
+          <SettingItem :label="$t('theme.grayscale')">
+              <ASwitch :checked="theme.grayscale" @update:checked="handleGrayscaleChange" />
+          </SettingItem>
+      </div>
   </div>
 </template>
 

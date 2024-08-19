@@ -54,7 +54,7 @@ export default {
     },
 
     siderCollapse (){
-      return this.theme.layout.mode === 'vertical' && appStore.siderCollapse
+      return this.theme.layout.mode === 'vertical' && this.app.siderCollapse
     },
 
     inlineCollapsed (){

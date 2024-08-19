@@ -13,7 +13,7 @@ export function getColorPalette(color, recommended) {
   if (recommended) {
     const colorPalette = getRecommendedColorPalette(getHex(color));
     colorPalette.palettes.forEach(palette => {
-      colorMap.set(palette.number, palette.hex);
+      colorMap.set[palette.number] = palette.hex;
     });
   } else {
     const colors = getAntDColorPalette(color);
@@ -21,7 +21,7 @@ export function getColorPalette(color, recommended) {
     const colorNumbers = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
 
     colorNumbers.forEach((number, index) => {
-      colorMap.set(number, colors[index]);
+      colorMap[number] = colors[index];
     });
   }
 
@@ -37,5 +37,5 @@ export function getColorPalette(color, recommended) {
  */
 export function getPaletteColorByNumber(color, number, recommended) {
   const colorMap = getColorPalette(color, recommended);
-  return colorMap.get(number);
+  return colorMap[number];
 }

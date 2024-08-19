@@ -40,7 +40,6 @@ export function getTabIdByRoute(route) {
 export function getTabByRoute(route) {
     const { name, path, fullPath = path, meta } = route;
     const { title, i18nKey, fixedIndexInTab } = meta;
-
     // Get icon and localIcon from getRouteIcons function
     const { icon, localIcon } = getRouteIcons(route);
 

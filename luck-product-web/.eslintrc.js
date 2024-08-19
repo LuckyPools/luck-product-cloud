@@ -33,6 +33,7 @@ module.exports = {
         'vue/script-indent': 0,
         'vue/require-prop-type-constructor': 0,
         'vue/no-use-v-if-with-v-for': 0,
+        "vue/no-v-model-argument": 0,
         'no-trailing-spaces': 0, // 一行结束后面不要有空格
         'no-multiple-empty-lines': 0, // [1, {"max": 2}],空行最多不能超过2行
         'no-extra-boolean-cast': 0, // 禁止不必要的bool转换

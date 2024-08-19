@@ -1,5 +1,6 @@
-import { getColorName, getDeltaE, getHsl, isValidColor, transformHslToHex } from '../shared';
+import { getDeltaE, getHsl, isValidColor, transformHslToHex } from './colord.js';
 import { colorPalettes } from '../../../config/palette.js';
+import {getColorName} from "@/store/modules/theme/name";
 
 /**
  * get recommended color palette by provided color
@@ -12,10 +13,10 @@ export function getRecommendedColorPalette(color) {
   const colorMap = {};
 
   colorPaletteFamily.palettes.forEach(palette => {
-    colorMap.set(palette.number, palette);
+    colorMap[palette.number] = palette;
   });
 
-  const mainColor = colorMap.get(500);
+  const mainColor = colorMap[500];
   const matchColor = colorPaletteFamily.palettes.find(palette => palette.hex === color);
 
   const colorPalette = {
@@ -37,7 +38,7 @@ export function getRecommendedColorPalette(color) {
 export function getRecommendedPaletteColorByNumber(color, number) {
   const colorPalette = getRecommendedColorPalette(color);
 
-  const { hex } = colorPalette.colorMap.get(number);
+  const { hex } = colorPalette.colorMap[number];
 
   return hex;
 }

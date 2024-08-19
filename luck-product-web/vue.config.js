@@ -1,4 +1,5 @@
 const proxy = require('http-proxy-middleware');
+const unocss = require('@unocss/webpack').default;
 
 module.exports = {
     devServer: {
@@ -10,5 +11,15 @@ module.exports = {
                 changeOrigin: true
             }
         }
+    },
+    configureWebpack: {
+        plugins: [unocss()],
+        optimization: {
+            realContentHash: true,
+        },
+    },
+    css: {
+        extract: true,
     }
 }
+

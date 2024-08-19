@@ -1,3 +1,6 @@
+import {customRoutes} from "@/router/routes";
+
+
 /**
  * 登录状态管理
  */
@@ -11,14 +14,7 @@ export default {
       name: ''
     },
     // 当前登录用户的菜单
-    menus: [
-      {icon: '',label: '测试',key: 'test',routeKey: 'to_test',
-        children : [
-          {icon: '',label: '子项1',key: 'item1',routeKey: 'to_item1'},
-          {icon: '',label: '子项2',key: 'item2',routeKey: 'to_item2'}]
-      },
-      {icon: '',label: '测试1',key: 'test1',routeKey: 'to_test1'}
-    ],
+    menus: customRoutes,
     // 当前登录用户的权限
     permissions: [],
     // 当前登录用户的角色

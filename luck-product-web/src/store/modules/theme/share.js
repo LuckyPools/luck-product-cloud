@@ -89,11 +89,11 @@ function createThemePaletteColors(colors, recommended = false) {
     colorKeys.forEach(key => {
         const colorMap = getColorPalette(colors[key], recommended);
 
-        colorPaletteVar[key] = colorMap.get(500);
-
-        colorMap.forEach((hex, number) => {
+        colorPaletteVar[key] = colorMap['500'];
+        for (const number in colorMap) {
+            const hex = colorMap[number];
             colorPaletteVar[`${key}-${number}`] = hex;
-        });
+        }
     });
 
     return colorPaletteVar;

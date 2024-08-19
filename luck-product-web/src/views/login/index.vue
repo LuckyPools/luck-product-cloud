@@ -13,18 +13,7 @@
       <div class="a">
         <div class="b">{{$t('system.title')}}</div>
       </div>
-        <global-logo></global-logo>
-        <global-breadcrumb></global-breadcrumb>
-        <global-content></global-content>
-        <global-footer></global-footer>
-        <theme-button></theme-button>
-        <user-avatar></user-avatar>
-        <global-header></global-header>
-        <first-level-menu></first-level-menu>
-        <vertical-mix-menu></vertical-mix-menu>
-        <horizontal-mix-menu></horizontal-mix-menu>
-        <global-sider></global-sider>
-        <global-tab></global-tab>
+        <BaseLayout></BaseLayout>
     </a-form>
   </div>
 </template>
@@ -43,15 +32,10 @@
   import HorizontalMixMenu from "@/layout/base-layout/global-menu/horizontal-mix-menu.vue";
   import GlobalSider from "@/layout/base-layout/global-sider/index.vue";
   import GlobalTab from "@/layout/base-layout/global-tab/index.vue";
+  import BaseLayout from "@/layout/base-layout/index.vue";
   export default {
     name: 'Login',
-      components: {
-        GlobalTab,
-        GlobalSider,
-        HorizontalMixMenu,
-        VerticalMixMenu,
-        FirstLevelMenu,
-        GlobalHeader, UserAvatar, ThemeButton, GlobalFooter, GlobalContent, GlobalBreadcrumb, GlobalLogo},
+      components: {BaseLayout},
     data() {
       return {
         // 加载状态

@@ -1,10 +1,33 @@
-import {initThemeSettings} from "@/store/modules/theme/share";
+import {addThemeVarsToHtml, createThemeToken, initThemeSettings} from "@/store/modules/theme/share";
 import {getPaletteColorByNumber} from "@/store/modules/theme/palette";
+
+
+// todo 监听themeColors
+function setupThemeVarsToHtml(themeColors) {
+    const { themeTokens, darkThemeTokens } = createThemeToken(themeColors);
+    addThemeVarsToHtml(themeTokens, darkThemeTokens);
+}
+
+function getThemeColors(state){
+    const {themeColor, otherColor, isInfoFollowPrimary} = state;
+    const colors = {
+        primary: themeColor,
+        ...otherColor,
+        info: isInfoFollowPrimary ? themeColor : otherColor.info
+    };
+    return colors;
+}
 
 /**
  * 主题状态管理
  */
-const settings = initThemeSettings()
+const settings = initThemeSettings();
+/**
+ * 设置style
+ */
+setupThemeVarsToHtml(getThemeColors(settings));
+
+
 
 export default {
     namespaced: true,
@@ -49,24 +72,19 @@ export default {
         setGrayscale({ commit },value) {
             commit('SET_GRAYSCALE',value);
         },
-        updateThemeColors({ commit, state },key, color) {
+        updateThemeColors({ commit, state, getters },key, color) {
             let colorValue = color;
             if (state.recommendColor) {
                 // get a color palette by provided color and color name, and use the suitable color
                 colorValue = getPaletteColorByNumber(color, 500, true);
             }
             commit('UPDATE_THEME_COLORS',key, colorValue);
+            setupThemeVarsToHtml(getters.themeColors);
         }
     },
     getters: {
         themeColors: state => {
-            const {themeColor, otherColor, isInfoFollowPrimary} = state;
-            const colors = {
-                primary: themeColor,
-                ...otherColor,
-                info: isInfoFollowPrimary ? themeColor : otherColor.info
-            };
-            return colors;
+            return getThemeColors(state);
         },
         darkMode: state => {
             if (state.themeScheme === 'auto') {

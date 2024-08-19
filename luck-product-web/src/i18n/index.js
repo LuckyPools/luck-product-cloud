@@ -19,4 +19,11 @@ export const i18n = new VueI18n({
 
 export default i18n;
 
-export const $t = i18n.t;
+/**
+ * 供其他js使用
+ * @param args
+ * @returns {string}
+ */
+export function $t(args) {
+    return i18n.tc.call(i18n, args);
+}
