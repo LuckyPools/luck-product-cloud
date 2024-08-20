@@ -2,7 +2,7 @@ import router from '@/router';
 import {
     extractTabsByAllRoutes,
     filterTabsById,
-    filterTabsByIds,
+    filterTabsByIds, getDefaultHomeTab,
     getFixedTabIds,
     getTabByRoute,
     isTabInTabs, updateTabByI18nKey, updateTabsByI18nKey
@@ -117,6 +117,12 @@ export default {
                 commit('SET_TABS',updateTabsByI18nKey(extractedTabs));
             }
             dispatch('addTab',currentRoute);
+        },
+
+        initHomeTab({ commit, rootState}) {
+            // todo 改为引用rootState.route.routeHome
+            const homeTab = getDefaultHomeTab(router, 'home');
+            commit('SET_HOME_TAB', homeTab);
         },
 
         isTabRetain({ state, commit }, tabId) {

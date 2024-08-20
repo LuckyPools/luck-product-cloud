@@ -1,5 +1,6 @@
 import { $t } from '@/i18n';
 import router from '@/router';
+import {getRoutePath} from "@/router/routes";
 
 /**
  * 主题状态管理
@@ -93,4 +94,31 @@ export function updateTabByI18nKey(tab) {
         ...tab,
         label: i18nKey ? $t(i18nKey) : label
     };
+}
+
+/**
+ * Get default home tab
+ *
+ * @param router
+ * @param homeRouteName routeHome in useRouteStore
+ */
+export function getDefaultHomeTab(router, homeRouteName) {
+    const homeRoutePath = getRoutePath(homeRouteName);
+    const i18nLabel = $t(`route.${homeRouteName}`);
+
+    let homeTab = {
+        id: getRoutePath(homeRouteName),
+        label: i18nLabel || homeRouteName,
+        routeKey: homeRouteName,
+        routePath: homeRoutePath,
+        fullPath: homeRoutePath
+    };
+
+    const routes = router.options.routes;
+    const homeRoute = routes.find(route => route.name === homeRouteName);
+    if (homeRoute) {
+        homeTab = getTabByRoute(homeRoute);
+    }
+
+    return homeTab;
 }

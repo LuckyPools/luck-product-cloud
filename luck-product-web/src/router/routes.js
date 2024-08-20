@@ -62,27 +62,16 @@ export const customRoutes = [
     }
 ];
 
-export const ROOT_ROUTE = {
-    name: 'root',
-    path: '/',
-    redirect: '/home',
-    meta: {
-        title: 'root',
-        constant: true
-    }
+/**
+ * map of route name and route path
+ */
+const routeMap = {
+    "root": "/",
+    "403": "/403",
+    "404": "/404",
+    "500": "/500",
+    "home": "/home"
 };
-
-const NOT_FOUND_ROUTE = {
-    name: 'not-found',
-    path: '/:pathMatch(.*)*',
-    component: 'layout.base$view.404',
-    meta: {
-        title: 'not-found',
-        constant: true
-    }
-};
-
-const builtinRoutes = [ROOT_ROUTE, NOT_FOUND_ROUTE];
 
 
 export function transformElegantRoutesToVueRoutes(
@@ -223,4 +212,9 @@ export function transformElegantRouteToVueRoute(
 
 export function createBuiltinVueRoutes() {
     return transformElegantRoutesToVueRoutes(customRoutes, layouts, views);
+}
+
+
+export function getRoutePath(name) {
+    return routeMap[name];
 }

@@ -5,6 +5,7 @@
 export default {
     namespaced: true,
     state: {
+        routeHome: '',
         breadcrumbs: [],
         cacheRoutes: [],
         allCacheRoutes: []

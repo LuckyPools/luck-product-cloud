@@ -159,6 +159,7 @@ export default {
       const { width , left } = useElementBounding(this.$refs.bsWrapper);
       this.bsWrapperWidth = width;
       this.bsWrapperLeft = left;
+      this.$store.dispatch('tab/initHomeTab');
       this.$store.dispatch('tab/initTabStore', this.$route);
     },
 
