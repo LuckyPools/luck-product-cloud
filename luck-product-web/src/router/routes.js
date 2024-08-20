@@ -16,10 +16,21 @@ export const customRoutes = [
     {
         name: 'home',
         path: '/home',
-        component: 'layout.base',
+        component: 'layout.base$view.home',
         meta: {
             title: 'home',
             i18nKey: 'route.home',
+            icon: 'mdi:monitor-dashboard',
+            order: 1
+        }
+    },
+    {
+        name: 'fire',
+        path: '/fire',
+        component: 'layout.base',
+        meta: {
+            title: 'fire',
+            i18nKey: 'route.document',
             icon: 'mdi:monitor-dashboard',
             order: 1
         },

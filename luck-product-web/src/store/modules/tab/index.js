@@ -5,7 +5,7 @@ import {
     filterTabsByIds,
     getFixedTabIds,
     getTabByRoute,
-    isTabInTabs, updateTabsByI18nKey
+    isTabInTabs, updateTabByI18nKey, updateTabsByI18nKey
 } from "@/store/modules/tab/utils";
 
 
@@ -19,6 +19,9 @@ export default {
     mutations: {
         SET_TABS(state, tabs) {
             state.tabs = tabs;
+        },
+        SET_HOME_TAB(state, tab) {
+            state.homeTab = tab;
         },
         SET_ACTIVE_TAB_ID(state, id) {
             state.activeTabId = id;
@@ -120,6 +123,13 @@ export default {
             if (tabId === state.homeTab?.id) return true;
             const fixedTabIds = getFixedTabIds(state.tabs);
             return fixedTabIds.includes(tabId);
+        },
+
+        updateTabsByLocale({ state, commit }) {
+            commit('SET_TABS', updateTabsByI18nKey(state.tabs));
+            if (state.homeTab) {
+                commit('SET_HOME_TAB', updateTabByI18nKey(state.homeTab))
+            }
         }
     }
 };

@@ -59,8 +59,6 @@ export default {
 
         CHANGE_LOCALE(state,value) {
             state.locale = value;
-            localStorage.setItem('locale',value);
-            setLocale(value);
         },
 
         SET_MIX_SIDER_FIXED(state, value) {
@@ -104,8 +102,14 @@ export default {
             commit('TOGGLE_SIDER_COLLAPSE');
         },
 
-        changeLocale({ commit },lang) {
+        changeLocale({ dispatch, commit, rootState },lang) {
             commit('CHANGE_LOCALE',lang);
+            localStorage.setItem('locale',lang);
+            setLocale(lang);
+            // todo updateDocumentTitleByLocale
+            dispatch('user/updateGlobalMenusByLocale', null, { root: true })
+            dispatch('tab/updateTabsByLocale', null, { root: true })
+            // todo setDayjsLocale(locale.value);
         },
 
         setMixSiderFixed({ commit }, value) {

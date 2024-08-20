@@ -3,7 +3,6 @@
       <AMenu
       :mode="mode"
       :theme="menuTheme"
-      :openKeys="openKeys"
       :selected-keys="selectedKeys"
       :inline-collapsed="inlineCollapsed"
       :inline-indent="18"

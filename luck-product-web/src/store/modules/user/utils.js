@@ -28,7 +28,7 @@ function getGlobalMenuByBaseRoute(route ) {
 
     const label = i18nKey ? $t(i18nKey) : title;
 
-    const menu = {
+    return {
         key: name,
         label,
         i18nKey,
@@ -38,6 +38,22 @@ function getGlobalMenuByBaseRoute(route ) {
         icon: icon,
         title: label
     };
+}
 
-    return menu;
+export function updateLocaleOfGlobalMenus(menus) {
+    const result = [];
+    menus.forEach(menu => {
+        const { i18nKey, label, children } = menu;
+        const newLabel = i18nKey ? $t(i18nKey) : label;
+        const newMenu  = {
+            ...menu,
+            label: newLabel,
+            title: newLabel
+        };
+        if (children?.length) {
+            newMenu.children = updateLocaleOfGlobalMenus(children);
+        }
+        result.push(newMenu);
+    });
+    return result;
 }

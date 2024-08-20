@@ -1,5 +1,5 @@
 import {customRoutes} from "@/router/routes";
-import {getGlobalMenusByAuthRoutes} from "@/store/modules/user/utils";
+import {getGlobalMenusByAuthRoutes, updateLocaleOfGlobalMenus} from "@/store/modules/user/utils";
 
 const menus = getGlobalMenusByAuthRoutes(customRoutes);
 
@@ -57,6 +57,11 @@ export default {
      */
     setMenus({ commit }, value) {
       commit('SET_MENUS', value);
+    },
+
+    updateGlobalMenusByLocale({ commit, state, dispatch}) {
+      const menus = updateLocaleOfGlobalMenus(state.menus);
+      dispatch('setMenus',menus);
     }
   }
 };
