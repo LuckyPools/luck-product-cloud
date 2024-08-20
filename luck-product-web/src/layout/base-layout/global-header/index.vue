@@ -8,7 +8,7 @@
     </div>
     <div class="h-full flex-y-center justify-end">
       <FullScreen v-if="!app.isMobile" :full="isFullscreen" @click.native="handleClick" />
-      <LangSwitch :lang="app.locale" :lang-options="app.localeOptions" @change-lang="changeLocale" />
+      <LangSwitch :lang="app.locale" :lang-options="app.localeOptions" @changeLang="changeLocale" />
       <ThemeSchemaSwitch
         :theme-schema="theme.themeScheme"
         :is-dark="theme.darkMode"
@@ -70,7 +70,6 @@ export default {
     },
     methods: {
         handleClick(){
-            debugger;
             toggle();
         },
         handleToggle(){

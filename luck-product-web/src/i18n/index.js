@@ -27,3 +27,7 @@ export default i18n;
 export function $t(args) {
     return i18n.tc.call(i18n, args);
 }
+
+export function setLocale(locale) {
+    i18n.locale = locale;
+}

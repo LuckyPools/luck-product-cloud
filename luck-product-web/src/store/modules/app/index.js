@@ -1,3 +1,5 @@
+import {setLocale} from "@/i18n";
+
 /**
  * 主题状态管理
  */
@@ -8,11 +10,11 @@ export default {
         localeOptions:[
             {
                 label: '中文',
-                key: 'zh-CN'
+                key: 'zh'
             },
             {
                 label: 'English',
-                key: 'en-US'
+                key: 'en'
             }
         ],
         isMobile: false,
@@ -58,6 +60,7 @@ export default {
         CHANGE_LOCALE(state,value) {
             state.locale = value;
             localStorage.setItem('locale',value);
+            setLocale(value);
         },
 
         SET_MIX_SIDER_FIXED(state, value) {

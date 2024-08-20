@@ -5,8 +5,8 @@
       <SvgIcon icon="heroicons:language" />
     </ButtonIcon>
     <template #overlay>
-      <AMenu :selected-keys="[lang]">
-        <AMenuItem v-for="option in langOptions" :key="option.key" @click="changeLang(option.key)">
+      <AMenu :selected-keys="[lang]" @click="changeLang">
+        <AMenuItem v-for="option in langOptions" :key="option.key">
           {{ option.label }}
         </AMenuItem>
       </AMenu>
@@ -49,8 +49,8 @@ export default {
     }
   },
   methods: {
-    changeLang(lang) {
-      this.$emit('changeLang', lang);
+    changeLang({key}) {
+      this.$emit('changeLang', key);
     }
   }
 }
