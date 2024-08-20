@@ -3,6 +3,7 @@
       <AMenu
       :mode="mode"
       :theme="menuTheme"
+      :openKeys="openKeys"
       :selected-keys="selectedKeys"
       :inline-collapsed="inlineCollapsed"
       :inline-indent="18"
@@ -74,6 +75,7 @@ export default {
   },
   data() {
     return {
+        routeInfo: null
     }
   },
   computed:{
@@ -97,15 +99,18 @@ export default {
     },
 
     selectedKeys (){
-      const route = this.$router.currentRoute;
-      const { hideInMenu, activeMenu } = route.meta;
-      const name = route.name;
-      const routeName = (hideInMenu ? activeMenu : name) || name;
-      if(routeName){
-        return [routeName];
-      }else{
+        const route = this.routeInfo;
+        if(route){
+            const { hideInMenu, activeMenu } = route.meta;
+            const name = route.name;
+            const routeName = (hideInMenu ? activeMenu : name) || name;
+            if(routeName){
+                return [routeName];
+            }else{
+                return [];
+            }
+        }
         return [];
-      }
     },
       /**
        * todo 加上默认打开
@@ -131,71 +136,81 @@ export default {
       return darkMode ? dark : light;
     }
   },
+  watch:{
+      $route: {
+          handler: function(val, oldVal){
+              this.routeInfo = val;
+          },
+          immediate: true,
+          deep: true
+      }
+  },
   methods: {
-    handleClickMenu(menuInfo) {
-      const key = menuInfo.key;
-      const query = this.getRouteQueryOfMetaByKey(key);
-      this.$router.push({name: key, query: query});
-    },
 
-    getRouteQueryOfMetaByKey(key) {
-      const meta = this.getRouteMetaByKey(key);
-      const query = {};
-      meta?.query?.forEach(item => {
-        query[item.key] = item.value;
-      });
-      return query;
-    },
+  handleClickMenu(menuInfo) {
+    const key = menuInfo.key;
+    const query = this.getRouteQueryOfMetaByKey(key);
+    this.$router.push({name: key, query: query});
+  },
 
-    getRouteMetaByKey(key) {
-      const allRoutes = this.$router.options.routes;
-      return allRoutes.find(route => route.name === key)?.meta || null;
-    },
+  getRouteQueryOfMetaByKey(key) {
+    const meta = this.getRouteMetaByKey(key);
+    const query = {};
+    meta?.query?.forEach(item => {
+      query[item.key] = item.value;
+    });
+    return query;
+  },
 
-    getSelectedMenuKeyPath(selectedKey) {
-      return this.getSelectedMenuKeyPathByKey(selectedKey);
-    },
+  getRouteMetaByKey(key) {
+    const allRoutes = this.$router.options.routes;
+    return allRoutes.find(route => route.name === key)?.meta || null;
+  },
 
-    getSelectedMenuKeyPathByKey(selectedKey){
-      const menus = this.user.menus;
-      const keyPath = [];
-      menus.some(menu => {
-        const path = this.findMenuPath(selectedKey, menu);
-        const find = Boolean(path?.length);
-        if (find) {
-          keyPath.push(...path);
-        }
-        return find;
-      });
-      return keyPath;
-    },
+  getSelectedMenuKeyPath(selectedKey) {
+    return this.getSelectedMenuKeyPathByKey(selectedKey);
+  },
 
-    findMenuPath(targetKey, menu){
-      const path = [];
+  getSelectedMenuKeyPathByKey(selectedKey){
+    const menus = this.user.menus;
+    const keyPath = [];
+    menus.some(menu => {
+      const path = this.findMenuPath(selectedKey, menu);
+      const find = Boolean(path?.length);
+      if (find) {
+        keyPath.push(...path);
+      }
+      return find;
+    });
+    return keyPath;
+  },
 
-      function dfs(item) {
-        path.push(item.key);
-        if (item.key === targetKey) {
-          return true;
-        }
-        if (item.children) {
-          for (const child of item.children) {
-            if (dfs(child)) {
-              return true;
-            }
+  findMenuPath(targetKey, menu){
+    const path = [];
+
+    function dfs(item) {
+      path.push(item.key);
+      if (item.key === targetKey) {
+        return true;
+      }
+      if (item.children) {
+        for (const child of item.children) {
+          if (dfs(child)) {
+            return true;
           }
         }
-        path.pop();
-        return false;
       }
-
-      if (dfs(menu)) {
-        return path;
-      }
-
-      return null;
+      path.pop();
+      return false;
     }
+
+    if (dfs(menu)) {
+      return path;
+    }
+
+    return null;
   }
+}
 }
 
 </script>

@@ -31,6 +31,11 @@ html.grayscale {
   box-shadow: var(--un-ring-offset-shadow), var(--un-ring-shadow), var(--un-shadow);
 }
 
+.shadow-tab {
+  --un-shadow: var(--tab-box-shadow);
+  box-shadow: var(--un-ring-offset-shadow), var(--un-ring-shadow), var(--un-shadow);
+}
+
 .size-full {
   width: 100%;
   height: 100%;

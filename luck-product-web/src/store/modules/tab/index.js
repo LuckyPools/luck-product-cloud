@@ -29,6 +29,7 @@ export default {
     },
     actions: {
         addTab({ state, commit },route, active) {
+            active = typeof active !== "undefined" ? active : true;
             const tab = getTabByRoute(route);
             const isHomeTab = tab.id === state.homeTab?.id;
             if (!isHomeTab && !isTabInTabs(tab.id, state.tabs)) {
