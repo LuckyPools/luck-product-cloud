@@ -41,7 +41,7 @@
       </BetterScroll>
     </div>
     <ReloadButton :loading="!app.reloadFlag" @click="refresh"/>
-    <FullScreen :full="app.fullContent" @click="toggleFullContent"/>
+    <FullScreen :full="app.fullContent" @click.native="toggleFullContent"/>
   </DarkModeContainer>
 </template>
 

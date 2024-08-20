@@ -7,7 +7,7 @@
       <GlobalBreadcrumb v-if="!app.isMobile" class="ml-12px" />
     </div>
     <div class="h-full flex-y-center justify-end">
-      <FullScreen v-if="!app.isMobile" :full="isFullscreen" @click="handleClick" />
+      <FullScreen v-if="!app.isMobile" :full="isFullscreen" @click.native="handleClick" />
       <LangSwitch :lang="app.locale" :lang-options="app.localeOptions" @change-lang="changeLocale" />
       <ThemeSchemaSwitch
         :theme-schema="theme.themeScheme"
@@ -70,6 +70,7 @@ export default {
     },
     methods: {
         handleClick(){
+            debugger;
             toggle();
         },
         handleToggle(){
