@@ -24,7 +24,7 @@
                 :active="item.id === tab.activeTabId"
                 :active-color="theme.themeColor"
                 :closable="!isTabRetain(item.id)"
-                @click="switchRouteByTab(item)"
+                @click.native="switchRouteByTab(item)"
                 @close="handleCloseTab(item)"
             >
               <template #prefix>
@@ -166,8 +166,8 @@ export default {
       this.$store.dispatch('app/toggleFullContent');
     },
 
-    switchRouteByTab() {
-      this.$store.dispatch('tab/switchRouteByTab');
+    switchRouteByTab(tab) {
+      this.$store.dispatch('tab/switchRouteByTab',tab);
     }
   }
 }

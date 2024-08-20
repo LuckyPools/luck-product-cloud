@@ -59,6 +59,7 @@ export default {
         },
 
         clearTabs({ state, commit, dispatch },excludes) {
+            excludes = excludes ? excludes : [];
             const remainTabIds = [...getFixedTabIds(state.tabs), ...excludes];
             const removedTabsIds = state.tabs.map(tab => tab.id).filter(id => !remainTabIds.includes(id));
             const isRemoveActiveTab = removedTabsIds.includes(state.activeTabId);

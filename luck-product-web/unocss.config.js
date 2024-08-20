@@ -39,7 +39,7 @@ export default defineConfig({
             'absolute-tr': 'absolute-rt',
             'absolute-bl': 'absolute-lb',
             'absolute-br': 'absolute-rb',
-            'absolute-center': 'absolute-lt flex-center size-full',
+            'absolute-center': 'absolute-lt flex-center h-full w-full',
             'fixed-lt': 'fixed left-0 top-0',
             'fixed-lb': 'fixed left-0 bottom-0',
             'fixed-rt': 'fixed right-0 top-0',
@@ -48,7 +48,7 @@ export default defineConfig({
             'fixed-tr': 'fixed-rt',
             'fixed-bl': 'fixed-lb',
             'fixed-br': 'fixed-rb',
-            'fixed-center': 'fixed-lt flex-center size-full'
+            'fixed-center': 'fixed-lt flex-center h-full w-full'
         },
         {
             'nowrap-hidden': 'overflow-hidden whitespace-nowrap',
