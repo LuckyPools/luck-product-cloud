@@ -19,9 +19,13 @@ NProgress.configure({
 })
 
 router.beforeEach((to, from, next) => {
-    // 进度条开始
-    NProgress.start()
-    next()
+    if (to.path.endsWith('/')) {
+        next({ path: to.path.slice(0, -1), replace: true })
+    } else {
+        // 进度条开始
+        NProgress.start()
+        next()
+    }
 })
 
 router.afterEach(() => {

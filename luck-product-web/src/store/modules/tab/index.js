@@ -2,7 +2,7 @@ import router from '@/router';
 import {
     extractTabsByAllRoutes,
     filterTabsById,
-    filterTabsByIds, getDefaultHomeTab,
+    filterTabsByIds, getAllTabs, getDefaultHomeTab,
     getFixedTabIds,
     getTabByRoute,
     isTabInTabs, updateTabByI18nKey, updateTabsByI18nKey
@@ -137,5 +137,10 @@ export default {
                 commit('SET_HOME_TAB', updateTabByI18nKey(state.homeTab))
             }
         }
+    },
+    getters: {
+        allTabs: state => {
+            return getAllTabs(state.tabs, state.homeTab);
+        },
     }
 };

@@ -122,3 +122,49 @@ export function getDefaultHomeTab(router, homeRouteName) {
 
     return homeTab;
 }
+
+
+/**
+ * Get all tabs
+ *
+ * @param tabs Tabs
+ * @param homeTab Home tab
+ */
+export function getAllTabs(tabs, homeTab) {
+    if (!homeTab) {
+        return [];
+    }
+    const filterHomeTabs = tabs.filter(tab => tab.id !== homeTab.id);
+
+    const fixedTabs = filterHomeTabs.filter(isFixedTab).sort((a, b) => a.fixedIndex - b.fixedIndex);
+
+    const remainTabs = filterHomeTabs.filter(tab => !isFixedTab(tab));
+
+    const allTabs = [homeTab, ...fixedTabs, ...remainTabs];
+
+    return updateTabsLabel(allTabs);
+}
+
+
+/**
+ * Update tabs label
+ *
+ * @param tabs
+ */
+function updateTabsLabel(tabs) {
+    const updated = tabs.map(tab => ({
+        ...tab,
+        label: tab.newLabel || tab.oldLabel || tab.label
+    }));
+
+    return updated;
+}
+
+/**
+ * Is fixed tab
+ *
+ * @param tab
+ */
+function isFixedTab(tab) {
+    return tab.fixedIndex !== undefined && tab.fixedIndex !== null;
+}

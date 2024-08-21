@@ -12,7 +12,7 @@
             :class="[theme.tab.mode === 'chrome' ? 'items-end' : 'items-center gap-12px']"
         >
           <ContextMenu
-              v-for="item in tab.tabs"
+              v-for="item in tabs"
               :key="item.id"
               :tab-id="item.id"
               :disabled-keys="getContextMenuDisabledKeys(item.id)"
@@ -81,6 +81,9 @@ export default {
   },
   computed: {
     ...mapGetters(['app', 'theme', 'tab', 'route']),
+    ...mapGetters('tab', {
+        tabs: 'allTabs',
+    }),
   },
   mounted() {
     this.init();

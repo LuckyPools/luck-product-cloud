@@ -1,3 +1,5 @@
+
+
 /**
  * vuex getter
  */
@@ -6,5 +8,5 @@ export default {
   user: (state) => state.user,
   theme: (state) => state.theme,
   route: (state) => state.route,
-  tab: (state) => state.tab
+  tab: (state) => state.tab,
 };

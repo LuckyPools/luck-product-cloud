@@ -21,7 +21,7 @@ export const customRoutes = [
             title: 'home',
             i18nKey: 'route.home',
             icon: 'mdi:monitor-dashboard',
-            order: 1
+            order: 0
         }
     },
     {
@@ -36,6 +36,17 @@ export const customRoutes = [
         },
         children: [
             {
+                name: 'test_page',
+                path: '/test',
+                component: 'view.test',
+                meta: {
+                    title: 'manage_role',
+                    i18nKey: 'route.manage_role',
+                    icon: 'carbon:user-role',
+                    order: 2
+                }
+            },
+            {
                 name: 'login_page',
                 path: '/login',
                 component: 'view.login',
@@ -45,17 +56,6 @@ export const customRoutes = [
                     icon: 'material-symbols:route',
                     order: 3,
                     keepAlive: true
-                }
-            },
-            {
-                name: 'test_page',
-                path: '/test',
-                component: 'view.test',
-                meta: {
-                    title: 'manage_role',
-                    i18nKey: 'route.manage_role',
-                    icon: 'carbon:user-role',
-                    order: 2
                 }
             }
         ]
