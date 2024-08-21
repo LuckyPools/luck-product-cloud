@@ -3,13 +3,13 @@
       <ADivider>{{ $t('theme.themeSchema.title') }}</ADivider>
       <div class="flex-col-stretch gap-16px">
           <div class="i-flex-center">
-              <ASegmented :value="theme.themeScheme" :options="options" class="bg-layout" @change="handleSegmentChange">
-                  <template #label="{ payload }">
-                      <div class="w-[70px] flex justify-center">
-                          <SvgIcon :icon="payload.icon" class="h-28px text-icon-small" />
-                      </div>
-                  </template>
-              </ASegmented>
+              <SegmentedSwitch v-model="theme.themeScheme" :options="options" class="bg-layout" @change="handleSegmentChange">
+                <template #label="{ payload }">
+                  <div class="w-[70px] flex justify-center">
+                    <SvgIcon :icon="payload.icon" class="h-28px text-icon-small" />
+                  </div>
+                </template>
+              </SegmentedSwitch>
           </div>
           <Transition name="sider-inverted">
               <SettingItem v-if="showSiderInverted" :label="$t('theme.sider.inverted')">
@@ -28,10 +28,12 @@ import {mapGetters} from "vuex";
 import {themeSchemaRecord} from "@/config/app";
 import SettingItem from "@/layout/base-layout/theme-drawer/components/setting-item.vue";
 import SvgIcon from "@/component/custom/svg-icon.vue";
+import SegmentedSwitch from "@/component/common/segmented-switch.vue";
 
 export default {
     name: 'DarkMode',
-    components: {SvgIcon, SettingItem},
+  // eslint-disable-next-line vue/no-unused-components
+    components: {SegmentedSwitch, SvgIcon, SettingItem},
     data() {
         return {
             icons: {

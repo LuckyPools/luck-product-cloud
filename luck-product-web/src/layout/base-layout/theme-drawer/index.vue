@@ -1,14 +1,20 @@
 <template>
   <ADrawer
-    :open="app.themeDrawerVisible"
-    :title="$t('theme.themeDrawerTitle')"
+    :visible="app.themeDrawerVisible"
     :closable="false"
     :body-style="{ padding: '0px' }"
+    :width="378"
     @close="handleClose"
   >
-    <template #extra>
-      <ButtonIcon icon="ant-design:close-outlined" class="h-28px" @click="handleClose" />
+    <template #title>
+      <div class="flex items-center">
+        <div class="flex-1">
+          <div class="text-16px font-bold">{{$t('theme.themeDrawerTitle')}}</div>
+        </div>
+        <ButtonIcon icon="ant-design:close-outlined" class="h-28px" @click.native="handleClose" />
+      </div>
     </template>
+
     <SimpleScrollbar>
       <div class="px-24px pb-24px pt-8px">
         <DarkMode />
@@ -17,8 +23,9 @@
         <PageFun />
       </div>
     </SimpleScrollbar>
+    <ConfigOperation />
     <template #footer>
-      <ConfigOperation />
+
     </template>
   </ADrawer>
 </template>

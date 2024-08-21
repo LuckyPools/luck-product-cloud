@@ -3,7 +3,7 @@
     icon="majesticons:color-swatch-line"
     :tooltip-content="$t('icon.themeConfig')"
     trigger-parent
-    @click="handleClick"
+    @click.native="handleClick"
   />
 </template>
 <script>

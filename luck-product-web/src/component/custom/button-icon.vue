@@ -1,12 +1,21 @@
 <template>
   <ATooltip :placement="tooltipPlacement" :get-popup-container="getPopupContainer" :title="tooltipContent">
-    <AButton type="text" v-bind="$attrs" :class="['h-36px','text-icon']">
+<!--    <AButton type="link" v-bind="$attrs" :class="['h-36px','text-icon']">-->
+<!--      <div class="flex-center gap-8px">-->
+<!--        <slot>-->
+<!--          <SvgIcon :icon="icon" />-->
+<!--        </slot>-->
+<!--  -->
+<!--      </div>-->
+<!--    </AButton>-->
+    <button class="luck-btn ant-btn border-none shadow-none h-8 text-4" type="text">
       <div class="flex-center gap-8px">
         <slot>
           <SvgIcon :icon="icon" />
         </slot>
+
       </div>
-    </AButton>
+    </button>
   </ATooltip>
 </template>
 <script>
@@ -46,4 +55,14 @@ export default {
     }
 }
 </script>
-<style scoped></style>
+<style lang="scss" scoped>
+.luck-btn {
+  &:hover {
+    border: none ;
+
+
+    color: rgba(0,0,0,0.88);
+    background-color: rgba(0,0,0,0.06);
+  }
+}
+</style>
