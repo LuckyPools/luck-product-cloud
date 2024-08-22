@@ -23,10 +23,10 @@
         <PageFun />
       </div>
     </SimpleScrollbar>
-    <ConfigOperation />
-    <template #footer>
 
-    </template>
+    <div class="use-footer">
+      <ConfigOperation />
+    </div>
   </ADrawer>
 </template>
 <script>
@@ -56,4 +56,26 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+/deep/  .ant-drawer-wrapper-body{
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  .ant-drawer-body{
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+    padding: 24px;
+  }
+}
+
+.use-footer{
+  z-index: 9999;
+  position: absolute;
+  bottom: 0;
+  flex-shrink: 0;
+  padding: 8px 16px;
+  border-top: 1px solid rgba(5, 5, 5, 0.06);
+}
+</style>
