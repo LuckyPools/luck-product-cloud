@@ -17,7 +17,7 @@
               </SettingItem>
           </Transition>
           <SettingItem :label="$t('theme.grayscale')">
-              <ASwitch v-model:checked="theme.grayscale" @update:checked="handleGrayscaleChange" />
+              <ASwitch v-model:checked="theme.grayscale" @change="handleGrayscaleChange" />
           </SettingItem>
       </div>
   </div>
@@ -70,9 +70,8 @@ export default {
             this.$store.dispatch('theme/setThemeScheme', value);
         },
 
-        handleGrayscaleChange(value) {
-            debugger;
-            this.$store.dispatch('theme/setThemeScheme', value);
+        handleGrayscaleChange(checked) {
+            this.$store.dispatch('theme/setGrayscale', checked);
         }
     }
 }
