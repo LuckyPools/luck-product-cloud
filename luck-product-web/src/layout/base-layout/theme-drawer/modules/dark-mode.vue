@@ -6,7 +6,7 @@
               <SegmentedSwitch v-model="theme.themeScheme" :options="options" class="bg-layout" @change="handleSegmentChange">
                 <template #label="{ payload }">
                   <div class="w-[70px] flex justify-center">
-                    <SvgIcon :icon="payload.icon" class="h-28px text-icon-small" />
+                    <SvgIcon :icon="payload.icon" class="h-28px text-icon-small flex items-center" />
                   </div>
                 </template>
               </SegmentedSwitch>
@@ -17,7 +17,7 @@
               </SettingItem>
           </Transition>
           <SettingItem :label="$t('theme.grayscale')">
-              <ASwitch :checked="theme.grayscale" @update:checked="handleGrayscaleChange" />
+              <ASwitch v-model:checked="theme.grayscale" @update:checked="handleGrayscaleChange" />
           </SettingItem>
       </div>
   </div>
@@ -71,6 +71,7 @@ export default {
         },
 
         handleGrayscaleChange(value) {
+            debugger;
             this.$store.dispatch('theme/setThemeScheme', value);
         }
     }

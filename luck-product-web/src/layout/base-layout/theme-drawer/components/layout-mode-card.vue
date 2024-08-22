@@ -32,7 +32,7 @@ export default {
     },
     data() {
         return {
-            LayoutConfig: {
+            layoutConfig: {
                 vertical: {
                     placement: 'bottom',
                     headerClass: '',

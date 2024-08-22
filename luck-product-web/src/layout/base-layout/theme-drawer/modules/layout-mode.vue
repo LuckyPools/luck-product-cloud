@@ -36,9 +36,11 @@
 
 <script>
 import {mapGetters} from "vuex";
+import LayoutModeCard from "@/layout/base-layout/theme-drawer/components/layout-mode-card.vue";
 
 export default {
     name: 'LayoutMode',
+    components: {LayoutModeCard},
     props: {},
     data() {
         return {}
