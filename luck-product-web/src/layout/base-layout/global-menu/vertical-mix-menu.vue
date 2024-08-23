@@ -44,8 +44,11 @@ export default {
   },
   computed: {
     ...mapGetters(['app','theme','user','route']),
+    ...mapGetters('theme', {
+        darkMode: 'darkMode',
+    }),
     siderInverted(){
-      return !this.theme.darkMode && this.theme.sider.inverted
+      return !this.darkMode && this.theme.sider.inverted
     },
 
     hasMenus(){

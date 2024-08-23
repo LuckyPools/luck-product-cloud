@@ -30,6 +30,9 @@ export default {
   },
   computed: {
     ...mapGetters(['theme','app','user']),
+    ...mapGetters('theme', {
+        darkMode: 'darkMode',
+    }),
     isVerticalMix(){
       return this.theme.layout.mode === 'vertical-mix';
     },
@@ -39,7 +42,7 @@ export default {
     },
 
     darkMenu(){
-      return !this.theme.darkMode && !this.isHorizontalMix && this.theme.sider.inverted
+      return !this.darkMode && !this.isHorizontalMix && this.theme.sider.inverted
     },
 
     showLogo(){

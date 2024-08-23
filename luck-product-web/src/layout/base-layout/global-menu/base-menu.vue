@@ -80,6 +80,9 @@ export default {
   computed:{
 
     ...mapGetters(['app','theme','user','route']),
+    ...mapGetters('theme', {
+        darkMode: 'darkMode',
+    }),
 
     menuTheme (){
       return (this.darkTheme ? 'dark' : 'light')
@@ -127,7 +130,7 @@ export default {
     },
 
     selectedBgColor (){
-      const darkMode = this.theme.darkmode;
+      const darkMode = this.darkmode;
       const themeColor = this.theme.themeColor;
       const light = transformColorWithOpacity(themeColor, 0.1, '#ffffff');
       const dark = transformColorWithOpacity(themeColor, 0.3, '#000000');

@@ -66,13 +66,14 @@ export default {
     flex: 1;
     min-width: 0;
     min-height: 0;
-    padding: 24px;
+    padding-bottom: 40px !important;
   }
 }
 
 .use-footer{
   z-index: 9999;
   position: absolute;
+  width: 100%;
   bottom: 0;
   flex-shrink: 0;
   padding: 8px 16px;

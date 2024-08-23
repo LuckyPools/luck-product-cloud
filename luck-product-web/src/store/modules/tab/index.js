@@ -59,7 +59,6 @@ export default {
                     update();
                 })
             }
-            commit('REMOVE_TAB',tabId);
         },
 
         clearTabs({ state, commit, dispatch },excludes) {

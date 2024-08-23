@@ -105,22 +105,36 @@ export function updateTabByI18nKey(tab) {
 export function getDefaultHomeTab(router, homeRouteName) {
     const homeRoutePath = getRoutePath(homeRouteName);
     const i18nLabel = $t(`route.${homeRouteName}`);
-
+    let matchTab = router.matcher.match(homeRoutePath);
+    console.log(matchTab);
     let homeTab = {
-        id: getRoutePath(homeRouteName),
+        id: homeRoutePath,
         label: i18nLabel || homeRouteName,
         routeKey: homeRouteName,
         routePath: homeRoutePath,
-        fullPath: homeRoutePath
+        fullPath: homeRoutePath,
+        i18nKey: matchTab?.meta?.i18nKey,
+        icon: matchTab?.meta?.icon
     };
-
-    const routes = router.options.routes;
-    const homeRoute = routes.find(route => route.name === homeRouteName);
-    if (homeRoute) {
-        homeTab = getTabByRoute(homeRoute);
-    }
-
     return homeTab;
+}
+
+function findRouteByName(routes, name) {
+    for (let route of routes) {
+        // 检查当前路由的名称是否匹配
+        if (route.name === name) {
+            return route; // 找到匹配的路由，返回它
+        }
+        // 如果当前路由有子路由且未找到匹配的路由，则递归查找
+        if (route.children && route.children.length > 0) {
+            const foundRoute = findRouteByName(route.children, name);
+            if (foundRoute) {
+                return foundRoute; // 如果在子路由中找到了匹配的路由，返回它
+            }
+        }
+    }
+    // 如果没有找到匹配的路由，返回null
+    return null;
 }
 
 

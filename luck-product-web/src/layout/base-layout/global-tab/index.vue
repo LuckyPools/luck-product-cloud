@@ -20,7 +20,7 @@
             <PageTab
                 :[TAB_DATA_ID]="item.id"
                 :mode="theme.tab.mode"
-                :dark-mode="theme.darkMode"
+                :dark-mode="darkMode"
                 :active="item.id === tab.activeTabId"
                 :active-color="theme.themeColor"
                 :closable="!isTabRetain(item.id)"
@@ -84,6 +84,9 @@ export default {
     ...mapGetters('tab', {
         tabs: 'allTabs',
     }),
+    ...mapGetters('theme', {
+        darkMode: 'darkMode',
+    })
   },
   mounted() {
     this.init();

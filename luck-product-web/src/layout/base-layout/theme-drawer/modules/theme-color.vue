@@ -22,14 +22,14 @@
                   </p>
               </template>
           </ATooltip>
-          <SettingItem v-for="(_, key) in theme.themeColors" :key="key" :label="$t(`theme.themeColor.${key}`)">
+          <SettingItem v-for="(_, key) in themeColors" :key="key" :label="$t(`theme.themeColor.${key}`)">
               <template v-if="key === 'info'" #suffix>
                   <ACheckbox v-model:checked="theme.isInfoFollowPrimary">
                       {{ $t('theme.themeColor.followPrimary') }}
                   </ACheckbox>
               </template>
               <ColorPicker
-                      :color="theme.themeColors[key]"
+                      :color="themeColors[key]"
                       :disabled="key === 'info' && theme.isInfoFollowPrimary"
                       @update:color="handleUpdateColor($event, key)"
               />
@@ -49,6 +49,9 @@ export default {
     },
     computed: {
         ...mapGetters(['theme','app']),
+        ...mapGetters('theme', {
+            themeColors: 'themeColors',
+        }),
     },
     methods: {
         handleUpdateColor(color, key) {

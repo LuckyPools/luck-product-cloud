@@ -11,7 +11,7 @@
       <LangSwitch :lang="app.locale" :lang-options="app.localeOptions" @changeLang="changeLocale" />
       <ThemeSchemaSwitch
         :theme-schema="theme.themeScheme"
-        :is-dark="theme.darkMode"
+        :is-dark="darkMode"
         @switch="toggleThemeScheme"
       />
       <ThemeButton />
@@ -60,6 +60,9 @@ export default {
     },
     computed: {
         ...mapGetters(['app','theme','user']),
+        ...mapGetters('theme', {
+            darkMode: 'darkMode',
+        }),
         headerMenus(){
             // todo 混合菜单
             if (this.theme.layout.mode === 'horizontal') {

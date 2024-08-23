@@ -45,11 +45,14 @@ export default {
     },
     computed: {
         ...mapGetters(['theme']),
+        ...mapGetters('theme', {
+            darkMode: 'darkMode',
+        }),
         options(){
             return this.getSegmentOptions();
         },
         showSiderInverted(){
-            return !this.theme.darkMode && this.theme.layout.mode.includes('vertical')
+            return !this.darkMode && this.theme.layout.mode.includes('vertical')
         },
     },
     methods: {

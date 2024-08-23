@@ -21,6 +21,11 @@ html.grayscale {
   background-color: rgb(var(--container-bg-color) / var(--un-bg-opacity)) /* rgb(var(--container-bg-color)) */;
 }
 
+.bg-container\! {
+  --un-bg-opacity: 1 !important;
+  background-color: rgb(var(--container-bg-color) / var(--un-bg-opacity)) /* rgb(var(--container-bg-color)) */ !important;
+}
+
 .shadow-header {
   --un-shadow: var(--header-box-shadow);
   box-shadow: var(--un-ring-offset-shadow), var(--un-ring-shadow), var(--un-shadow);
@@ -34,6 +39,11 @@ html.grayscale {
 .shadow-tab {
   --un-shadow: var(--tab-box-shadow);
   box-shadow: var(--un-ring-offset-shadow), var(--un-ring-shadow), var(--un-shadow);
+}
+
+.text-base_text {
+  --un-text-opacity: 1;
+  color: rgb(var(--base-text-color) / var(--un-text-opacity)) /* rgb(var(--base-text-color)) */;
 }
 
 .size-full {

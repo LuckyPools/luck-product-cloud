@@ -1,4 +1,10 @@
-import {addThemeVarsToHtml, createThemeToken, initThemeSettings} from "@/store/modules/theme/utils";
+import {
+    addThemeVarsToHtml,
+    createThemeToken,
+    initThemeSettings,
+    toggleCssDarkMode,
+    toggleGrayscaleMode
+} from "@/store/modules/theme/utils";
 import {getPaletteColorByNumber} from "@/store/modules/theme/palette";
 
 
@@ -66,11 +72,13 @@ export default {
         reset({ commit }){
             commit('RESET');
         },
-        setThemeScheme({ commit },value) {
+        setThemeScheme({ commit, getters },value) {
             commit('SET_THEME_SCHEME',value);
+            toggleCssDarkMode(getters.darkMode);
         },
         setGrayscale({ commit },value) {
             commit('SET_GRAYSCALE',value);
+            toggleGrayscaleMode(value);
         },
         updateThemeColors({ commit, state, getters },key, color) {
             let colorValue = color;
