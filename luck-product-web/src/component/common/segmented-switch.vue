@@ -33,7 +33,8 @@
               name="label"
               :label="getOptionLabel(option)"
               :payload="typeof option === 'object' ? option.payload : {}"
-          >{{ getOptionLabel(option) }}</slot
+          >{{ getOptionLabel(option) }}
+          </slot
           >
         </div>
       </div>
@@ -116,26 +117,30 @@ export default {
   background-color: #f5f5f5;
   border-radius: 6px;
   transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+
   .m-segmented-group {
     position: relative;
     display: flex;
     align-items: stretch;
     justify-items: flex-start;
     width: 100%;
+
     .m-segmented-item {
       position: relative;
       text-align: center;
       cursor: pointer;
-      transition:
-          color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1),
-          background-color 0.2s;
+      transition: color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1),
+      background-color 0.2s;
       border-radius: 4px;
+
       &:hover:not(.segmented-item-selected):not(.segmented-item-disabled) {
         color: rgba(0, 0, 0, 0.88);
+
         &::after {
           background-color: rgba(0, 0, 0, 0.06);
         }
       }
+
       &::after {
         position: absolute;
         width: 100%;
@@ -147,6 +152,7 @@ export default {
         pointer-events: none;
         content: '';
       }
+
       .segmented-item-input {
         position: absolute;
         inset-block-start: 0;
@@ -156,6 +162,7 @@ export default {
         opacity: 0;
         pointer-events: none;
       }
+
       .segmented-item-label {
         min-height: 28px;
         line-height: 28px;
@@ -165,24 +172,28 @@ export default {
         text-overflow: ellipsis;
       }
     }
+
     .segmented-item-selected {
       background-color: #ffffff;
-      box-shadow:
-          0 1px 2px 0 rgba(0, 0, 0, 0.03),
-          0 1px 6px -1px rgba(0, 0, 0, 0.02),
-          0 2px 4px 0 rgba(0, 0, 0, 0.02);
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03),
+      0 1px 6px -1px rgba(0, 0, 0, 0.02),
+      0 2px 4px 0 rgba(0, 0, 0, 0.02);
       color: rgba(0, 0, 0, 0.88);
     }
+
     .segmented-item-disabled {
       color: rgba(0, 0, 0, 0.25);
       cursor: not-allowed;
     }
   }
 }
+
 .segmented-small {
   border-radius: 4px;
+
   .m-segmented-group .m-segmented-item {
     border-radius: 2px;
+
     .segmented-item-label {
       min-height: 20px;
       line-height: 20px;
@@ -190,10 +201,13 @@ export default {
     }
   }
 }
+
 .segmented-large {
   border-radius: 8px;
+
   .m-segmented-group .m-segmented-item {
     border-radius: 6px;
+
     .segmented-item-label {
       min-height: 36px;
       line-height: 36px;
@@ -202,9 +216,11 @@ export default {
     }
   }
 }
+
 .segmented-block {
   display: flex;
   width: 100%;
+
   .m-segmented-group .m-segmented-item {
     flex: 1;
     min-width: 0;

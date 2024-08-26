@@ -1,14 +1,15 @@
 <template>
-    <ConfigProvider>
-        <router-view class="bg-layout" />
-    </ConfigProvider>
+  <ConfigProvider>
+    <router-view class="bg-layout"/>
+  </ConfigProvider>
 </template>
 
 <script>
-import { ConfigProvider } from 'ant-design-vue';
+import {ConfigProvider} from 'ant-design-vue';
+
 export default {
   name: 'App',
-  components:{ ConfigProvider }
+  components: {ConfigProvider}
 }
 </script>
 

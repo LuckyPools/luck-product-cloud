@@ -1,6 +1,8 @@
 <template>
-  <div class="app-container">
+  <div>
+    <div>
       1111
+    </div>
   </div>
 </template>
 <script>

@@ -1,8 +1,8 @@
 <template>
   <ButtonIcon :key="String(full)" :tooltip-content="full ? $t('icon.fullscreenExit') : $t('icon.fullscreen')">
     <!-- todo 图标 -->
-      <a-icon v-if="full" type="fullscreen-exit" />
-      <a-icon v-else type="fullscreen" />
+    <a-icon v-if="full" type="fullscreen-exit"/>
+    <a-icon v-else type="fullscreen"/>
   </ButtonIcon>
 </template>
 <script>

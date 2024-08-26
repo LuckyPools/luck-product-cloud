@@ -13,7 +13,7 @@
             '!text-white !bg-primary': menu.active && inverted}"
           @click="handleClickMixMenu(menu)"
       >
-        <component :is="menu.icon" :class="[app.siderCollapse ? 'text-icon-small' : 'text-icon-large']" />
+        <component :is="menu.icon" :class="[app.siderCollapse ? 'text-icon-small' : 'text-icon-large']"/>
         <p
             class="w-full ellipsis-text text-center text-12px transition-height-300"
             :class="[app.siderCollapse ? 'h-0 pt-0' : 'h-20px pt-4px']"
@@ -23,10 +23,10 @@
       </div>
     </SimpleScrollbar>
     <MenuToggler
-      arrow-icon
-      :collapsed="app.siderCollapse"
-      :class="{ 'text-white:88 !hover:text-white': inverted }"
-      @click="handleToggle"
+        arrow-icon
+        :collapsed="app.siderCollapse"
+        :class="{ 'text-white:88 !hover:text-white': inverted }"
+        @click="handleToggle"
     />
   </div>
 </template>
@@ -51,10 +51,10 @@ export default {
     return {}
   },
   computed: {
-    ...mapGetters(['app','theme','user','route']),
+    ...mapGetters(['app', 'theme', 'user', 'route']),
 
-    selectedBgColor(){
-      const { darkMode, themeColor } = this.theme;
+    selectedBgColor() {
+      const {darkMode, themeColor} = this.theme;
       const light = transformColorWithOpacity(themeColor, 0.1, '#ffffff');
       const dark = transformColorWithOpacity(themeColor, 0.3, '#000000');
       return darkMode ? dark : light;
@@ -66,7 +66,7 @@ export default {
       this.$emit('select', menu);
     },
 
-    handleToggle(){
+    handleToggle() {
       this.$store.dispatch('app/toggleSiderCollapse');
     },
   }

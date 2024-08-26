@@ -1,5 +1,5 @@
-import { getDeltaE, getHsl, isValidColor, transformHslToHex } from './colord.js';
-import { colorPalettes } from '../../../config/palette.js';
+import {getDeltaE, getHsl, isValidColor, transformHslToHex} from './colord.js';
+import {colorPalettes} from '../../../config/palette.js';
 import {getColorName} from "@/store/modules/theme/name";
 
 /**
@@ -8,25 +8,25 @@ import {getColorName} from "@/store/modules/theme/name";
  * @param color the provided color
  */
 export function getRecommendedColorPalette(color) {
-  const colorPaletteFamily = getRecommendedColorPaletteFamily(color);
+    const colorPaletteFamily = getRecommendedColorPaletteFamily(color);
 
-  const colorMap = {};
+    const colorMap = {};
 
-  colorPaletteFamily.palettes.forEach(palette => {
-    colorMap[palette.number] = palette;
-  });
+    colorPaletteFamily.palettes.forEach(palette => {
+        colorMap[palette.number] = palette;
+    });
 
-  const mainColor = colorMap[500];
-  const matchColor = colorPaletteFamily.palettes.find(palette => palette.hex === color);
+    const mainColor = colorMap[500];
+    const matchColor = colorPaletteFamily.palettes.find(palette => palette.hex === color);
 
-  const colorPalette = {
-    ...colorPaletteFamily,
-    colorMap,
-    main: mainColor,
-    match: matchColor
-  };
+    const colorPalette = {
+        ...colorPaletteFamily,
+        colorMap,
+        main: mainColor,
+        match: matchColor
+    };
 
-  return colorPalette;
+    return colorPalette;
 }
 
 /**
@@ -36,11 +36,11 @@ export function getRecommendedColorPalette(color) {
  * @param number the color palette number
  */
 export function getRecommendedPaletteColorByNumber(color, number) {
-  const colorPalette = getRecommendedColorPalette(color);
+    const colorPalette = getRecommendedColorPalette(color);
 
-  const { hex } = colorPalette.colorMap[number];
+    const {hex} = colorPalette.colorMap[number];
 
-  return hex;
+    return hex;
 }
 
 /**
@@ -49,54 +49,54 @@ export function getRecommendedPaletteColorByNumber(color, number) {
  * @param color the provided color
  */
 export function getRecommendedColorPaletteFamily(color) {
-  if (!isValidColor(color)) {
-    throw new Error('Invalid color, please check color value!');
-  }
+    if (!isValidColor(color)) {
+        throw new Error('Invalid color, please check color value!');
+    }
 
-  let colorName = getColorName(color);
+    let colorName = getColorName(color);
 
-  colorName = colorName.toLowerCase().replace(/\s/g, '-');
+    colorName = colorName.toLowerCase().replace(/\s/g, '-');
 
-  const { h: h1, s: s1 } = getHsl(color);
+    const {h: h1, s: s1} = getHsl(color);
 
-  const { nearestLightnessPalette, palettes } = getNearestColorPaletteFamily(color, colorPalettes);
+    const {nearestLightnessPalette, palettes} = getNearestColorPaletteFamily(color, colorPalettes);
 
-  const { number, hex } = nearestLightnessPalette;
+    const {number, hex} = nearestLightnessPalette;
 
-  const { h: h2, s: s2 } = getHsl(hex);
+    const {h: h2, s: s2} = getHsl(hex);
 
-  const deltaH = h1 - h2;
+    const deltaH = h1 - h2;
 
-  const sRatio = s1 / s2;
+    const sRatio = s1 / s2;
 
-  const colorPaletteFamily = {
-    name: colorName,
-    palettes: palettes.map(palette => {
-      let hexValue = color;
+    const colorPaletteFamily = {
+        name: colorName,
+        palettes: palettes.map(palette => {
+            let hexValue = color;
 
-      const isSame = number === palette.number;
+            const isSame = number === palette.number;
 
-      if (!isSame) {
-        const { h: h3, s: s3, l } = getHsl(palette.hex);
+            if (!isSame) {
+                const {h: h3, s: s3, l} = getHsl(palette.hex);
 
-        const newH = deltaH < 0 ? h3 + deltaH : h3 - deltaH;
-        const newS = s3 * sRatio;
+                const newH = deltaH < 0 ? h3 + deltaH : h3 - deltaH;
+                const newS = s3 * sRatio;
 
-        hexValue = transformHslToHex({
-          h: newH,
-          s: newS,
-          l
-        });
-      }
+                hexValue = transformHslToHex({
+                    h: newH,
+                    s: newS,
+                    l
+                });
+            }
 
-      return {
-        hex: hexValue,
-        number: palette.number
-      };
-    })
-  };
+            return {
+                hex: hexValue,
+                number: palette.number
+            };
+        })
+    };
 
-  return colorPaletteFamily;
+    return colorPaletteFamily;
 }
 
 /**
@@ -106,41 +106,41 @@ export function getRecommendedColorPaletteFamily(color) {
  * @param families color palette families
  */
 function getNearestColorPaletteFamily(color, families) {
-  const familyWithConfig = families.map(family => {
-    const palettes = family.palettes.map(palette => {
-      return {
-        ...palette,
-        delta: getDeltaE(color, palette.hex)
-      };
+    const familyWithConfig = families.map(family => {
+        const palettes = family.palettes.map(palette => {
+            return {
+                ...palette,
+                delta: getDeltaE(color, palette.hex)
+            };
+        });
+
+        const nearestPalette = palettes.reduce((prev, curr) => (prev.delta < curr.delta ? prev : curr));
+
+        return {
+            ...family,
+            palettes,
+            nearestPalette
+        };
     });
 
-    const nearestPalette = palettes.reduce((prev, curr) => (prev.delta < curr.delta ? prev : curr));
+    const nearestPaletteFamily = familyWithConfig.reduce((prev, curr) =>
+        prev.nearestPalette.delta < curr.nearestPalette.delta ? prev : curr
+    );
 
-    return {
-      ...family,
-      palettes,
-      nearestPalette
+    const {l} = getHsl(color);
+
+    const paletteFamily = {
+        ...nearestPaletteFamily,
+        nearestLightnessPalette: nearestPaletteFamily.palettes.reduce((prev, curr) => {
+            const {l: prevLightness} = getHsl(prev.hex);
+            const {l: currLightness} = getHsl(curr.hex);
+
+            const deltaPrev = Math.abs(prevLightness - l);
+            const deltaCurr = Math.abs(currLightness - l);
+
+            return deltaPrev < deltaCurr ? prev : curr;
+        })
     };
-  });
 
-  const nearestPaletteFamily = familyWithConfig.reduce((prev, curr) =>
-    prev.nearestPalette.delta < curr.nearestPalette.delta ? prev : curr
-  );
-
-  const { l } = getHsl(color);
-
-  const paletteFamily = {
-    ...nearestPaletteFamily,
-    nearestLightnessPalette: nearestPaletteFamily.palettes.reduce((prev, curr) => {
-      const { l: prevLightness } = getHsl(prev.hex);
-      const { l: currLightness } = getHsl(curr.hex);
-
-      const deltaPrev = Math.abs(prevLightness - l);
-      const deltaCurr = Math.abs(currLightness - l);
-
-      return deltaPrev < deltaCurr ? prev : curr;
-    })
-  };
-
-  return paletteFamily;
+    return paletteFamily;
 }

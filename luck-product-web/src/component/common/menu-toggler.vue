@@ -1,10 +1,10 @@
 <template>
   <ButtonIcon
-    :key="String(collapsed)"
-    :tooltip-content="collapsed ? $t('icon.expand') : $t('icon.collapse')"
-    tooltip-placement="bottomLeft"
+      :key="String(collapsed)"
+      :tooltip-content="collapsed ? $t('icon.expand') : $t('icon.collapse')"
+      tooltip-placement="bottomLeft"
   >
-    <SvgIcon :icon="icon" />
+    <SvgIcon :icon="icon"/>
   </ButtonIcon>
 </template>
 <script>
@@ -22,8 +22,8 @@ export default {
       type: Boolean
     },
   },
-  computed:{
-    icon(){
+  computed: {
+    icon() {
       const icons = {
         0: {
           0: 'line-md:menu-fold-left',

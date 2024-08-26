@@ -1,7 +1,7 @@
 <template>
   <div
-    class=":soy: relative inline-flex cursor-pointer items-center justify-center gap-16px whitespace-nowrap px-24px py-6px -mr-18px"
-    :class="[
+      class=":soy: relative inline-flex cursor-pointer items-center justify-center gap-16px whitespace-nowrap px-24px py-6px -mr-18px"
+      :class="[
       'chrome-tab',
       { 'chrome-tab_dark': darkMode },
       { 'chrome-tab_active': active },
@@ -9,7 +9,7 @@
     ]"
   >
     <div class=":soy: pointer-events-none absolute left-0 top-0 h-full w-full -z-1" :class="'chrome-tab__bg'">
-      <ChromeTabBg />
+      <ChromeTabBg/>
     </div>
     <slot name="prefix"></slot>
     <slot></slot>
@@ -20,6 +20,7 @@
 <script>
 import ChromeTabBg from "@/layout/page-tab/chrome-tab-bg/index.vue";
 import {PageTabProps} from '../props.js'
+
 export default {
   name: 'ChromeTab',
   components: {ChromeTabBg},
@@ -27,8 +28,7 @@ export default {
     ...PageTabProps
   },
   data() {
-    return {
-    }
+    return {}
   }
 }
 </script>

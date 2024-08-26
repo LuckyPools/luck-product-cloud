@@ -1,8 +1,7 @@
-
 <template>
   <a-dropdown placement="bottomCenter">
     <ButtonIcon :tooltip-content="tooltipContent" tooltip-placement="left">
-      <SvgIcon icon="heroicons:language" />
+      <SvgIcon icon="heroicons:language"/>
     </ButtonIcon>
     <template #overlay>
       <AMenu :selected-keys="[lang]" @click="changeLang">
@@ -42,8 +41,8 @@ export default {
   data() {
     return {}
   },
-  computed:{
-    tooltipContent(){
+  computed: {
+    tooltipContent() {
       if (!this.showTooltip) return '';
       return this.$t('icon.lang');
     }

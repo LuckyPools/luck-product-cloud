@@ -82,10 +82,10 @@ export default {
   computed: {
     ...mapGetters(['app', 'theme', 'tab', 'route']),
     ...mapGetters('tab', {
-        tabs: 'allTabs',
+      tabs: 'allTabs',
     }),
     ...mapGetters('theme', {
-        darkMode: 'darkMode',
+      darkMode: 'darkMode',
     })
   },
   mounted() {
@@ -162,7 +162,7 @@ export default {
     },
 
     init() {
-      const { width , left } = useElementBounding(this.$refs.bsWrapper);
+      const {width, left} = useElementBounding(this.$refs.bsWrapper);
       this.bsWrapperWidth = width;
       this.bsWrapperLeft = left;
       this.$store.dispatch('tab/initHomeTab');
@@ -174,7 +174,7 @@ export default {
     },
 
     switchRouteByTab(tab) {
-      this.$store.dispatch('tab/switchRouteByTab',tab);
+      this.$store.dispatch('tab/switchRouteByTab', tab);
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <ButtonIcon :tooltip-content="$t('icon.reload')">
     <!-- todo 图标 -->
-      <a-icon type="reload" :class="{ 'animate-spin animate-duration-750': loading }"  />
+    <a-icon type="reload" :class="{ 'animate-spin animate-duration-750': loading }"/>
   </ButtonIcon>
 </template>
 

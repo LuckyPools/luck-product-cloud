@@ -1,4 +1,5 @@
-import { colord } from 'colord';
+import {colord} from 'colord';
+
 export const ACTIVE_COLOR = '#1890ff';
 
 export function addColorAlpha(color, alpha) {
@@ -8,9 +9,9 @@ export function addColorAlpha(color, alpha) {
 
 export function transformColorWithOpacity(color, alpha, bgColor) {
     const originColor = addColorAlpha(color, alpha);
-    const { r: oR, g: oG, b: oB } = colord(originColor).toRgb();
+    const {r: oR, g: oG, b: oB} = colord(originColor).toRgb();
 
-    const { r: bgR, g: bgG, b: bgB } = colord(bgColor).toRgb();
+    const {r: bgR, g: bgG, b: bgB} = colord(bgColor).toRgb();
 
     function calRgb(or, bg, al) {
         return bg + (or - bg) * al;
@@ -26,7 +27,7 @@ export function transformColorWithOpacity(color, alpha, bgColor) {
 }
 
 export function createCssVars(props) {
-    const cssVars= {
+    const cssVars = {
         '--soy-primary-color': props.primaryColor,
         '--soy-primary-color1': props.primaryColor1,
         '--soy-primary-color2': props.primaryColor2,

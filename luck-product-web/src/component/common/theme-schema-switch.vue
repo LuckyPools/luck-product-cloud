@@ -1,9 +1,9 @@
 <template>
   <ButtonIcon
-    :icon="icon"
-    :tooltip-content="tooltipContent"
-    :tooltip-placement="tooltipPlacement"
-    @click.native="handleSwitch"
+      :icon="icon"
+      :tooltip-content="tooltipContent"
+      :tooltip-placement="tooltipPlacement"
+      @click.native="handleSwitch"
   />
 </template>
 <script>
@@ -38,10 +38,10 @@ export default {
     return {}
   },
   computed: {
-    icon(){
+    icon() {
       return icons[this.themeSchema]
     },
-    tooltipContent(){
+    tooltipContent() {
       if (!this.showTooltip) return '';
       return this.$t('icon.themeSchema');
     }

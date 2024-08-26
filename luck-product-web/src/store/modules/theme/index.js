@@ -10,11 +10,11 @@ import {getPaletteColorByNumber} from "@/store/modules/theme/palette";
 
 // todo 监听themeColors
 function setupThemeVarsToHtml(themeColors) {
-    const { themeTokens, darkThemeTokens } = createThemeToken(themeColors);
+    const {themeTokens, darkThemeTokens} = createThemeToken(themeColors);
     addThemeVarsToHtml(themeTokens, darkThemeTokens);
 }
 
-function getThemeColors(state){
+function getThemeColors(state) {
     const {themeColor, otherColor, isInfoFollowPrimary} = state;
     const colors = {
         primary: themeColor,
@@ -34,7 +34,6 @@ const settings = initThemeSettings();
 setupThemeVarsToHtml(getThemeColors(settings));
 
 
-
 export default {
     namespaced: true,
     state: {
@@ -51,13 +50,14 @@ export default {
             const initSettings = initThemeSettings();
             state = initSettings;
         },
-        SET_THEME_SCHEME(state,value) {
+        SET_THEME_SCHEME(state, value) {
             state.themeScheme = value;
         },
-        SET_GRAYSCALE(state,value) {
+        SET_GRAYSCALE(state, value) {
             state.grayscale = value;
         },
-        UPDATE_THEME_COLORS(state,key,colorValue){
+        UPDATE_THEME_COLORS(state, colorData) {
+            const {key, colorValue} = colorData;
             if (key === 'primary') {
                 state.themeColor = colorValue;
             } else {
@@ -66,28 +66,29 @@ export default {
         }
     },
     actions: {
-        toggleThemeScheme({ commit, getters }){
+        toggleThemeScheme({commit, getters}) {
             commit('TOGGLE_THEME_SCHEME');
             toggleCssDarkMode(getters.darkMode);
         },
-        reset({ commit }){
+        reset({commit}) {
             commit('RESET');
         },
-        setThemeScheme({ commit, getters },value) {
-            commit('SET_THEME_SCHEME',value);
+        setThemeScheme({commit, getters}, value) {
+            commit('SET_THEME_SCHEME', value);
             toggleCssDarkMode(getters.darkMode);
         },
-        setGrayscale({ commit },value) {
-            commit('SET_GRAYSCALE',value);
+        setGrayscale({commit}, value) {
+            commit('SET_GRAYSCALE', value);
             toggleGrayscaleMode(value);
         },
-        updateThemeColors({ commit, state, getters },key, color) {
+        updateThemeColors({commit, state, getters}, colorData) {
+            const {key, color} = colorData;
             let colorValue = color;
             if (state.recommendColor) {
                 // get a color palette by provided color and color name, and use the suitable color
                 colorValue = getPaletteColorByNumber(color, 500, true);
             }
-            commit('UPDATE_THEME_COLORS',key, colorValue);
+            commit('UPDATE_THEME_COLORS', {key, colorValue});
             setupThemeVarsToHtml(getters.themeColors);
         }
     },

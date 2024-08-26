@@ -5,18 +5,16 @@
 </template>
 <script>
 export default {
-    name: 'DarkModeContainer',
-    props:{
-        inverted:{
-            type: Boolean
-        }
-    },
-    data() {
-        return {
-        }
-    },
-    methods: {
+  name: 'DarkModeContainer',
+  props: {
+    inverted: {
+      type: Boolean
     }
+  },
+  data() {
+    return {}
+  },
+  methods: {}
 }
 </script>
 <style scoped></style>

@@ -34,7 +34,7 @@ export const PageTabProps = {
         type: Boolean
     },
     /** The color of the active tab */
-    activeColor:{
+    activeColor: {
         type: String
     },
     /**
@@ -42,7 +42,7 @@ export const PageTabProps = {
      *
      * Show the close icon when true
      */
-    closable:{
+    closable: {
         type: Boolean
     }
 

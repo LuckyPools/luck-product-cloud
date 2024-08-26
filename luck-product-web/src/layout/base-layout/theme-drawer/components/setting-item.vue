@@ -9,17 +9,17 @@
 </template>
 <script>
 export default {
-    name: 'SettingItem',
-    props: {
-        label: {
-            type: String
-        }
-    },
-    data() {
-        return {}
-    },
-    computed: {},
-    methods: {}
+  name: 'SettingItem',
+  props: {
+    label: {
+      type: String
+    }
+  },
+  data() {
+    return {}
+  },
+  computed: {},
+  methods: {}
 }
 </script>
 

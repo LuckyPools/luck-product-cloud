@@ -1,4 +1,3 @@
-
 const en = {
     system: {
         title: 'LuckAdmin',

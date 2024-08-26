@@ -4,12 +4,12 @@
     <template #overlay>
       <AMenu v-on:click="dropdownAction">
         <AMenuItem
-          v-for="option in options"
-          :key="option.key"
-          :disabled="option.disabled"
+            v-for="option in options"
+            :key="option.key"
+            :disabled="option.disabled"
         >
           <div class="flex-y-center gap-12px">
-            <SvgIcon :icon="option.icon" class="text-icon" />
+            <SvgIcon :icon="option.icon" class="text-icon"/>
             <span>{{ option.label }}</span>
           </div>
         </AMenuItem>
@@ -54,7 +54,7 @@ export default {
     return {}
   },
   computed: {
-    options(){
+    options() {
       const opts = [
         {
           key: 'closeCurrent',
@@ -95,17 +95,17 @@ export default {
     }
   },
   methods: {
-    dropdownAction({key}){
-      if(key === 'closeCurrent'){
-          this.$store.dispatch('tab/removeTab', this.tabId);
-      } else if(key === 'closeOther'){
-          this.$store.dispatch('tab/clearTabs', [this.tabId]);
-      } else if(key === 'closeLeft'){
-          this.$store.dispatch('tab/clearLeftTabs', this.tabId);
-      } else if(key === 'closeRight'){
-          this.$store.dispatch('tab/clearRightTabs', this.tabId);
-      } else if(key === 'closeAll'){
-          this.$store.dispatch('tab/clearTabs');
+    dropdownAction({key}) {
+      if (key === 'closeCurrent') {
+        this.$store.dispatch('tab/removeTab', this.tabId);
+      } else if (key === 'closeOther') {
+        this.$store.dispatch('tab/clearTabs', [this.tabId]);
+      } else if (key === 'closeLeft') {
+        this.$store.dispatch('tab/clearLeftTabs', this.tabId);
+      } else if (key === 'closeRight') {
+        this.$store.dispatch('tab/clearRightTabs', this.tabId);
+      } else if (key === 'closeAll') {
+        this.$store.dispatch('tab/clearTabs');
       }
     }
   }

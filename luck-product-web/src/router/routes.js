@@ -100,7 +100,7 @@ export function transformElegantRouteToVueRoute(
     function getLayoutName(component) {
         const layout = component.replace(LAYOUT_PREFIX, '');
 
-        if(!layouts[layout]) {
+        if (!layouts[layout]) {
             throw new Error(`Layout component "${layout}" not found`);
         }
 
@@ -114,7 +114,7 @@ export function transformElegantRouteToVueRoute(
     function getViewName(component) {
         const view = component.replace(VIEW_PREFIX, '');
 
-        if(!views[view]) {
+        if (!views[view]) {
             throw new Error(`View component "${view}" not found`);
         }
 
@@ -145,14 +145,14 @@ export function transformElegantRouteToVueRoute(
         route.props = true;
     }
 
-    const { name, path, component, children, ...rest } = route;
+    const {name, path, component, children, ...rest} = route;
 
-    const vueRoute = { name, path, ...rest } ;
+    const vueRoute = {name, path, ...rest};
 
     try {
         if (component) {
             if (isSingleLevelRoute(route)) {
-                const { layout, view } = getSingleLevelRouteComponent(component);
+                const {layout, view} = getSingleLevelRouteComponent(component);
 
                 const singleLevelRoute = {
                     path,
@@ -199,7 +199,7 @@ export function transformElegantRouteToVueRoute(
     if (children?.length) {
         const childRoutes = children.flatMap(child => transformElegantRouteToVueRoute(child, layouts, views));
 
-        if(isFirstLevelRoute(route)) {
+        if (isFirstLevelRoute(route)) {
             vueRoute.children = childRoutes;
         } else {
             vueRoutes.push(...childRoutes);

@@ -1,8 +1,8 @@
-import { overrideThemeSettings, themeSettings } from "@/theme/settings";
-import { getColorPalette } from "@/store/modules/theme/palette";
-import { getRgbOfColor } from './colord';
-import { themeVars } from "@/theme/vars";
-import { toggleHtmlClass } from "@/utils/common";
+import {overrideThemeSettings, themeSettings} from "@/theme/settings";
+import {getColorPalette} from "@/store/modules/theme/palette";
+import {getRgbOfColor} from './colord';
+import {themeVars} from "@/theme/vars";
+import {toggleHtmlClass} from "@/utils/common";
 
 
 const DARK_CLASS = 'dark';
@@ -30,7 +30,6 @@ export function initThemeSettings() {
 
     return settings;
 }
-
 
 
 /**
@@ -85,7 +84,6 @@ export function createThemeToken(colors, recommended = false) {
 function createThemePaletteColors(colors, recommended = false) {
     const colorKeys = Object.keys(colors);
     const colorPaletteVar = {};
-    debugger;
     colorKeys.forEach(key => {
         const colorMap = getColorPalette(colors[key], recommended);
 
@@ -122,7 +120,7 @@ function getCssVarByTokens(tokens) {
 
             if (key === 'colors') {
                 cssVarsKey = removeRgbPrefix(cssVarsKey);
-                const { r, g, b } = getRgbOfColor(cssValue);
+                const {r, g, b} = getRgbOfColor(cssValue);
                 cssValue = `${r} ${g} ${b}`;
             }
 
@@ -173,7 +171,7 @@ export function addThemeVarsToHtml(tokens, darkTokens) {
  * @param darkMode Is dark mode
  */
 export function toggleCssDarkMode(darkMode = false) {
-    const { add, remove } = toggleHtmlClass(DARK_CLASS);
+    const {add, remove} = toggleHtmlClass(DARK_CLASS);
 
     if (darkMode) {
         add();
@@ -190,7 +188,7 @@ export function toggleCssDarkMode(darkMode = false) {
 export function toggleGrayscaleMode(grayscaleMode = false) {
     const GRAYSCALE_CLASS = 'grayscale';
 
-    const { add, remove } = toggleHtmlClass(GRAYSCALE_CLASS);
+    const {add, remove} = toggleHtmlClass(GRAYSCALE_CLASS);
 
     if (grayscaleMode) {
         add();

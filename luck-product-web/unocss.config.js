@@ -2,7 +2,7 @@
 import {
     defineConfig,
     presetAttributify,
-    presetUno,
+    presetUno, transformerDirectives,
     transformerVariantGroup,
 } from "unocss";
 import presetIcons from "@unocss/preset-icons";
@@ -14,7 +14,7 @@ export default defineConfig({
             /* options */
         }),
     ],
-    transformers: [transformerVariantGroup()],
+    transformers: [transformerDirectives(), transformerVariantGroup()],
     shortcuts: [
         {
             'flex-center': 'flex justify-center items-center',

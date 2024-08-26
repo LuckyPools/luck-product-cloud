@@ -1,21 +1,21 @@
 <template>
   <SimpleScrollbar class="menu-wrapper" :class="{ 'select-menu': !darkTheme }">
-      <AMenu
-      :mode="mode"
-      :theme="menuTheme"
-      :selected-keys="selectedKeys"
-      :inline-collapsed="inlineCollapsed"
-      :inline-indent="18"
-      class="size-full transition-300 border-0!"
-      :class="{ 'bg-container!': !darkTheme, 'horizontal-menu': isHorizontal }"
-      @click="handleClickMenu">
-        <template v-for="item in menus">
-            <a-menu-item v-if="!item.children" :key="item.key">
-                <a-icon type="pie-chart" />
-                <span>{{ item.title }}</span>
-            </a-menu-item>
-            <sub-menu v-else :key="item.key" :menu-info="item" />
-        </template>
+    <AMenu
+        :mode="mode"
+        :theme="menuTheme"
+        :selected-keys="selectedKeys"
+        :inline-collapsed="inlineCollapsed"
+        :inline-indent="18"
+        class="size-full transition-300 border-0!"
+        :class="{ 'bg-container!': !darkTheme, 'horizontal-menu': isHorizontal }"
+        @click="handleClickMenu">
+      <template v-for="item in menus">
+        <a-menu-item v-if="!item.children" :key="item.key">
+          <a-icon type="pie-chart"/>
+          <span>{{ item.title }}</span>
+        </a-menu-item>
+        <sub-menu v-else :key="item.key" :menu-info="item"/>
+      </template>
     </AMenu>
   </SimpleScrollbar>
 </template>
@@ -24,9 +24,10 @@ import SimpleScrollbar from "@/layout/page-tab/simple-scrollbar/index.vue";
 import {mapGetters} from "vuex";
 import {transformColorWithOpacity} from "@/layout/page-tab/shared";
 
-import { Menu } from 'ant-design-vue';
+import {Menu} from 'ant-design-vue';
+
 const SubMenu = {
-    template: `
+  template: `
       <a-sub-menu :key="menuInfo.key" v-bind="$props" v-on="$listeners">
         <span slot="title">
           <a-icon type="mail" /><span>{{ menuInfo.title }}</span>
@@ -40,32 +41,32 @@ const SubMenu = {
         </template>
       </a-sub-menu>
     `,
-    name: 'SubMenu',
-    // must add isSubMenu: true 此项必须被定义
-    isSubMenu: true,
-    props: {
-        // 解构a-sub-menu的属性，也就是文章开头提到的为什么使用函数式组件
-        ...Menu.SubMenu.props,
-        // Cannot overlap with properties within Menu.SubMenu.props
-        menuInfo: {
-            type: Object,
-            default: () => ({}),
-        },
+  name: 'SubMenu',
+  // must add isSubMenu: true 此项必须被定义
+  isSubMenu: true,
+  props: {
+    // 解构a-sub-menu的属性，也就是文章开头提到的为什么使用函数式组件
+    ...Menu.SubMenu.props,
+    // Cannot overlap with properties within Menu.SubMenu.props
+    menuInfo: {
+      type: Object,
+      default: () => ({}),
     },
+  },
 }
 
 export default {
   name: 'BaseMenu',
-  components: {SimpleScrollbar,SubMenu},
-  props:{
-    darkTheme:{
+  components: {SimpleScrollbar, SubMenu},
+  props: {
+    darkTheme: {
       type: Boolean
     },
-    mode:{
+    mode: {
       type: String,
       default: 'inline'
     },
-    menus:{
+    menus: {
       /**
        * to see App.Global.Menu
        */
@@ -74,62 +75,62 @@ export default {
   },
   data() {
     return {
-        routeInfo: null
+      routeInfo: null
     }
   },
-  computed:{
+  computed: {
 
-    ...mapGetters(['app','theme','user','route']),
+    ...mapGetters(['app', 'theme', 'user', 'route']),
     ...mapGetters('theme', {
-        darkMode: 'darkMode',
+      darkMode: 'darkMode',
     }),
 
-    menuTheme (){
+    menuTheme() {
       return (this.darkTheme ? 'dark' : 'light')
     },
 
-    isHorizontal (){
+    isHorizontal() {
       return this.mode === 'horizontal'
     },
 
-    siderCollapse (){
+    siderCollapse() {
       return this.theme.layout.mode === 'vertical' && this.app.siderCollapse
     },
 
-    inlineCollapsed (){
+    inlineCollapsed() {
       return (this.mode === 'inline' ? this.siderCollapse : undefined)
     },
 
-    selectedKeys (){
-        const route = this.routeInfo;
-        if(route){
-            const { hideInMenu, activeMenu } = route.meta;
-            const name = route.name;
-            const routeName = (hideInMenu ? activeMenu : name) || name;
-            if(routeName){
-                return [routeName];
-            }else{
-                return [];
-            }
+    selectedKeys() {
+      const route = this.routeInfo;
+      if (route) {
+        const {hideInMenu, activeMenu} = route.meta;
+        const name = route.name;
+        const routeName = (hideInMenu ? activeMenu : name) || name;
+        if (routeName) {
+          return [routeName];
+        } else {
+          return [];
         }
-        return [];
+      }
+      return [];
     },
-      /**
-       * todo 加上默认打开
-       * @returns {*|*[]}
-       */
-    openKeys (){
+    /**
+     * todo 加上默认打开
+     * @returns {*|*[]}
+     */
+    openKeys() {
       if (this.isHorizontal || this.inlineCollapsed) return [];
       const [selectedKey] = this.selectedKeys;
       if (!selectedKey) return [];
       return this.getSelectedMenuKeyPath(selectedKey);
     },
 
-    headerHeight (){
+    headerHeight() {
       return `${this.theme.header.height}px`
     },
 
-    selectedBgColor (){
+    selectedBgColor() {
       const darkMode = this.darkmode;
       const themeColor = this.theme.themeColor;
       const light = transformColorWithOpacity(themeColor, 0.1, '#ffffff');
@@ -138,81 +139,81 @@ export default {
       return darkMode ? dark : light;
     }
   },
-  watch:{
-      $route: {
-          handler: function(val, oldVal){
-              this.routeInfo = val;
-          },
-          immediate: true,
-          deep: true
-      }
+  watch: {
+    $route: {
+      handler: function (val, oldVal) {
+        this.routeInfo = val;
+      },
+      immediate: true,
+      deep: true
+    }
   },
   methods: {
 
-  handleClickMenu(menuInfo) {
-    const key = menuInfo.key;
-    const query = this.getRouteQueryOfMetaByKey(key);
-    this.$router.push({name: key, query: query});
-  },
+    handleClickMenu(menuInfo) {
+      const key = menuInfo.key;
+      const query = this.getRouteQueryOfMetaByKey(key);
+      this.$router.push({name: key, query: query});
+    },
 
-  getRouteQueryOfMetaByKey(key) {
-    const meta = this.getRouteMetaByKey(key);
-    const query = {};
-    meta?.query?.forEach(item => {
-      query[item.key] = item.value;
-    });
-    return query;
-  },
+    getRouteQueryOfMetaByKey(key) {
+      const meta = this.getRouteMetaByKey(key);
+      const query = {};
+      meta?.query?.forEach(item => {
+        query[item.key] = item.value;
+      });
+      return query;
+    },
 
-  getRouteMetaByKey(key) {
-    const allRoutes = this.$router.options.routes;
-    return allRoutes.find(route => route.name === key)?.meta || null;
-  },
+    getRouteMetaByKey(key) {
+      const allRoutes = this.$router.options.routes;
+      return allRoutes.find(route => route.name === key)?.meta || null;
+    },
 
-  getSelectedMenuKeyPath(selectedKey) {
-    return this.getSelectedMenuKeyPathByKey(selectedKey);
-  },
+    getSelectedMenuKeyPath(selectedKey) {
+      return this.getSelectedMenuKeyPathByKey(selectedKey);
+    },
 
-  getSelectedMenuKeyPathByKey(selectedKey){
-    const menus = this.user.menus;
-    const keyPath = [];
-    menus.some(menu => {
-      const path = this.findMenuPath(selectedKey, menu);
-      const find = Boolean(path?.length);
-      if (find) {
-        keyPath.push(...path);
-      }
-      return find;
-    });
-    return keyPath;
-  },
+    getSelectedMenuKeyPathByKey(selectedKey) {
+      const menus = this.user.menus;
+      const keyPath = [];
+      menus.some(menu => {
+        const path = this.findMenuPath(selectedKey, menu);
+        const find = Boolean(path?.length);
+        if (find) {
+          keyPath.push(...path);
+        }
+        return find;
+      });
+      return keyPath;
+    },
 
-  findMenuPath(targetKey, menu){
-    const path = [];
+    findMenuPath(targetKey, menu) {
+      const path = [];
 
-    function dfs(item) {
-      path.push(item.key);
-      if (item.key === targetKey) {
-        return true;
-      }
-      if (item.children) {
-        for (const child of item.children) {
-          if (dfs(child)) {
-            return true;
+      function dfs(item) {
+        path.push(item.key);
+        if (item.key === targetKey) {
+          return true;
+        }
+        if (item.children) {
+          for (const child of item.children) {
+            if (dfs(child)) {
+              return true;
+            }
           }
         }
+        path.pop();
+        return false;
       }
-      path.pop();
-      return false;
-    }
 
-    if (dfs(menu)) {
-      return path;
-    }
+      if (dfs(menu)) {
+        return path;
+      }
 
-    return null;
+      return null;
+    }
   }
-}
 }
 
 </script>

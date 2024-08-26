@@ -1,10 +1,10 @@
 <template>
   <component
-    :is="activeTabComponent.component"
-    :class="activeTabComponent.class"
-    :style="cssVars"
-    v-bind="bindProps"
-    @mouseup="handleMouseup"
+      :is="activeTabComponent.component"
+      :class="activeTabComponent.class"
+      :style="cssVars"
+      v-bind="bindProps"
+      @mouseup="handleMouseup"
   >
     <template #prefix>
       <slot name="prefix"></slot>
@@ -12,7 +12,7 @@
     <slot></slot>
     <template #suffix>
       <slot name="suffix">
-        <SvgClose v-if="closable" :class="'svg-close'" @click="handleClose" />
+        <SvgClose v-if="closable" :class="'svg-close'" @click="handleClose"/>
       </slot>
     </template>
   </component>
@@ -21,8 +21,8 @@
 import ChromeTab from '@/layout/page-tab/chrome-tab/index.vue';
 import ButtonTab from '@/layout/page-tab/button-tab/index.vue';
 import SvgClose from "@/layout/page-tab/svg-close/index.vue";
-import { ACTIVE_COLOR, createTabCssVars } from './shared';
-import { PageTabProps } from './props';
+import {ACTIVE_COLOR, createTabCssVars} from './shared';
+import {PageTabProps} from './props';
 
 
 const props = {
@@ -47,15 +47,14 @@ const props = {
 
 export default {
   name: 'PageTab',
-  components: {SvgClose,ChromeTab,ButtonTab},
+  components: {SvgClose, ChromeTab, ButtonTab},
   props: props,
   data() {
-    return {
-    }
+    return {}
   },
   computed: {
     activeTabComponent() {
-      const { mode, chromeClass, buttonClass } = this;
+      const {mode, chromeClass, buttonClass} = this;
       const tabComponentMap = {
         chrome: {
           component: 'ChromeTab',
@@ -69,15 +68,15 @@ export default {
       return tabComponentMap[mode];
     },
 
-    cssVars(){
+    cssVars() {
       return createTabCssVars(this.activeColor);
     },
 
-    bindProps(){
-        const res = Object.entries(this.$props).filter(
-            ([key]) => !['chromeClass', 'buttonClass'].includes(key)
-        );
-        return Object.fromEntries(res);
+    bindProps() {
+      const res = Object.entries(this.$props).filter(
+          ([key]) => !['chromeClass', 'buttonClass'].includes(key)
+      );
+      return Object.fromEntries(res);
     }
   },
   methods: {

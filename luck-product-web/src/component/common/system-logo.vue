@@ -1,9 +1,9 @@
 <template>
-    <a-icon type="ant-design" />
+  <a-icon type="ant-design"/>
 </template>
 <script>
 export default {
-    name: 'SystemLogo'
+  name: 'SystemLogo'
 }
 </script>
 <style scoped></style>

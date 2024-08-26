@@ -4,23 +4,23 @@
       <slot></slot>
     </FirstLevelMenu>
     <div
-      class="relative h-full transition-width-300"
-      :style="{ width: app.mixSiderFixed && hasMenus ? theme.sider.mixChildMenuWidth + 'px' : '0px' }"
+        class="relative h-full transition-width-300"
+        :style="{ width: app.mixSiderFixed && hasMenus ? theme.sider.mixChildMenuWidth + 'px' : '0px' }"
     >
       <DarkModeContainer
-        class="absolute-lt h-full flex-col-stretch nowrap-hidden shadow-sm transition-all-300"
-        :inverted="siderInverted"
-        :style="{ width: showDrawer ? theme.sider.mixChildMenuWidth + 'px' : '0px' }"
+          class="absolute-lt h-full flex-col-stretch nowrap-hidden shadow-sm transition-all-300"
+          :inverted="siderInverted"
+          :style="{ width: showDrawer ? theme.sider.mixChildMenuWidth + 'px' : '0px' }"
       >
         <header class="flex-y-center justify-between px-12px" :style="{ height: theme.header.height + 'px' }">
           <h2 class="text-16px text-primary font-bold">{{ $t('system.title') }}</h2>
           <PinToggler
-            :pin="app.mixSiderFixed"
-            :class="{ 'text-white:88 !hover:text-white': siderInverted }"
-            @click="toggleMixSiderFixed"
+              :pin="app.mixSiderFixed"
+              :class="{ 'text-white:88 !hover:text-white': siderInverted }"
+              @click="toggleMixSiderFixed"
           />
         </header>
-        <BaseMenu :dark-theme="siderInverted" :menus="user.menus" />
+        <BaseMenu :dark-theme="siderInverted" :menus="user.menus"/>
       </DarkModeContainer>
     </div>
   </div>
@@ -43,19 +43,19 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['app','theme','user','route']),
+    ...mapGetters(['app', 'theme', 'user', 'route']),
     ...mapGetters('theme', {
-        darkMode: 'darkMode',
+      darkMode: 'darkMode',
     }),
-    siderInverted(){
+    siderInverted() {
       return !this.darkMode && this.theme.sider.inverted
     },
 
-    hasMenus(){
+    hasMenus() {
       return this.user.menus.length > 0
     },
 
-    showDrawer(){
+    showDrawer() {
       return this.hasMenus && (this.drawerVisible || this.app.mixSiderFixed)
     }
   },
@@ -81,7 +81,7 @@ export default {
       this.setDrawerVisible(false);
     },
 
-    toggleMixSiderFixed(){
+    toggleMixSiderFixed() {
       this.$store.dispatch('app/toggleMixSiderFixed');
     }
   }

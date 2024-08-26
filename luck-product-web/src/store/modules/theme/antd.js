@@ -1,4 +1,4 @@
-import { getHex, getHsv, isValidColor, mixColor } from './colord';
+import {getHex, getHsv, isValidColor, mixColor} from './colord';
 
 /** Hue step */
 const hueStep = 2;
@@ -23,40 +23,40 @@ const darkColorCount = 4;
  * @returns Hex color
  */
 export function getAntDPaletteColorByIndex(color, index) {
-  if (!isValidColor(color)) {
-    throw new Error('invalid input color value');
-  }
+    if (!isValidColor(color)) {
+        throw new Error('invalid input color value');
+    }
 
-  if (index === 6) {
-    return getHex(color);
-  }
+    if (index === 6) {
+        return getHex(color);
+    }
 
-  const isLight = index < 6;
-  const hsv = getHsv(color);
-  const i = isLight ? lightColorCount + 1 - index : index - lightColorCount - 1;
+    const isLight = index < 6;
+    const hsv = getHsv(color);
+    const i = isLight ? lightColorCount + 1 - index : index - lightColorCount - 1;
 
-  const newHsv = {
-    h: getHue(hsv, i, isLight),
-    s: getSaturation(hsv, i, isLight),
-    v: getValue(hsv, i, isLight)
-  };
+    const newHsv = {
+        h: getHue(hsv, i, isLight),
+        s: getSaturation(hsv, i, isLight),
+        v: getValue(hsv, i, isLight)
+    };
 
-  return getHex(newHsv);
+    return getHex(newHsv);
 }
 
 /** Map of dark color index and opacity */
 const darkColorMap = [
-  { index: 7, opacity: 0.15 },
-  { index: 6, opacity: 0.25 },
-  { index: 5, opacity: 0.3 },
-  { index: 5, opacity: 0.45 },
-  { index: 5, opacity: 0.65 },
-  { index: 5, opacity: 0.85 },
-  { index: 5, opacity: 0.9 },
-  { index: 4, opacity: 0.93 },
-  { index: 3, opacity: 0.95 },
-  { index: 2, opacity: 0.97 },
-  { index: 1, opacity: 0.98 }
+    {index: 7, opacity: 0.15},
+    {index: 6, opacity: 0.25},
+    {index: 5, opacity: 0.3},
+    {index: 5, opacity: 0.45},
+    {index: 5, opacity: 0.65},
+    {index: 5, opacity: 0.85},
+    {index: 5, opacity: 0.9},
+    {index: 4, opacity: 0.93},
+    {index: 3, opacity: 0.95},
+    {index: 2, opacity: 0.97},
+    {index: 1, opacity: 0.98}
 ];
 
 /**
@@ -67,22 +67,21 @@ const darkColorMap = [
  * @param darkThemeMixColor - Dark theme mix color (default: #141414)
  */
 export function getAntDColorPalette(color, darkTheme, darkThemeMixColor) {
-  darkThemeMixColor = darkThemeMixColor ? darkThemeMixColor : '#141414'
-  const indexes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+    darkThemeMixColor = darkThemeMixColor ? darkThemeMixColor : '#141414'
+    const indexes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+    const patterns = indexes.map(index => getAntDPaletteColorByIndex(color, index));
 
-  const patterns = indexes.map(index => getAntDPaletteColorByIndex(color, index));
+    if (darkTheme) {
+        const darkPatterns = darkColorMap.map(({index, opacity}) => {
+            const darkColor = mixColor(darkThemeMixColor, patterns[index], opacity);
 
-  if (darkTheme) {
-    const darkPatterns = darkColorMap.map(({ index, opacity }) => {
-      const darkColor = mixColor(darkThemeMixColor, patterns[index], opacity);
+            return darkColor;
+        });
 
-      return darkColor;
-    });
+        return darkPatterns.map(item => getHex(item));
+    }
 
-    return darkPatterns.map(item => getHex(item));
-  }
-
-  return patterns;
+    return patterns;
 }
 
 /**
@@ -93,25 +92,25 @@ export function getAntDColorPalette(color, darkTheme, darkThemeMixColor) {
  * @param isLight - Is light color
  */
 function getHue(hsv, i, isLight) {
-  let hue;
+    let hue;
 
-  const hsvH = Math.round(hsv.h);
+    const hsvH = Math.round(hsv.h);
 
-  if (hsvH >= 60 && hsvH <= 240) {
-    hue = isLight ? hsvH - hueStep * i : hsvH + hueStep * i;
-  } else {
-    hue = isLight ? hsvH + hueStep * i : hsvH - hueStep * i;
-  }
+    if (hsvH >= 60 && hsvH <= 240) {
+        hue = isLight ? hsvH - hueStep * i : hsvH + hueStep * i;
+    } else {
+        hue = isLight ? hsvH + hueStep * i : hsvH - hueStep * i;
+    }
 
-  if (hue < 0) {
-    hue += 360;
-  }
+    if (hue < 0) {
+        hue += 360;
+    }
 
-  if (hue >= 360) {
-    hue -= 360;
-  }
+    if (hue >= 360) {
+        hue -= 360;
+    }
 
-  return hue;
+    return hue;
 }
 
 /**
@@ -122,33 +121,33 @@ function getHue(hsv, i, isLight) {
  * @param isLight - Is light color
  */
 function getSaturation(hsv, i, isLight) {
-  if (hsv.h === 0 && hsv.s === 0) {
-    return hsv.s;
-  }
+    if (hsv.h === 0 && hsv.s === 0) {
+        return hsv.s;
+    }
 
-  let saturation;
+    let saturation;
 
-  if (isLight) {
-    saturation = hsv.s - saturationStep * i;
-  } else if (i === darkColorCount) {
-    saturation = hsv.s + saturationStep;
-  } else {
-    saturation = hsv.s + saturationStep2 * i;
-  }
+    if (isLight) {
+        saturation = hsv.s - saturationStep * i;
+    } else if (i === darkColorCount) {
+        saturation = hsv.s + saturationStep;
+    } else {
+        saturation = hsv.s + saturationStep2 * i;
+    }
 
-  if (saturation > 100) {
-    saturation = 100;
-  }
+    if (saturation > 100) {
+        saturation = 100;
+    }
 
-  if (isLight && i === lightColorCount && saturation > 10) {
-    saturation = 10;
-  }
+    if (isLight && i === lightColorCount && saturation > 10) {
+        saturation = 10;
+    }
 
-  if (saturation < 6) {
-    saturation = 6;
-  }
+    if (saturation < 6) {
+        saturation = 6;
+    }
 
-  return saturation;
+    return saturation;
 }
 
 /**
@@ -159,17 +158,17 @@ function getSaturation(hsv, i, isLight) {
  * @param isLight - Is light color
  */
 function getValue(hsv, i, isLight) {
-  let value;
+    let value;
 
-  if (isLight) {
-    value = hsv.v + brightnessStep1 * i;
-  } else {
-    value = hsv.v - brightnessStep2 * i;
-  }
+    if (isLight) {
+        value = hsv.v + brightnessStep1 * i;
+    } else {
+        value = hsv.v - brightnessStep2 * i;
+    }
 
-  if (value > 100) {
-    value = 100;
-  }
+    if (value > 100) {
+        value = 100;
+    }
 
-  return value;
+    return value;
 }

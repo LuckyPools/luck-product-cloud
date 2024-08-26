@@ -1,6 +1,6 @@
 <template>
   <ButtonIcon :tooltip-content="pin ? $t('icon.unpin') : $t('icon.pin')" tooltip-placement="bottomLeft" trigger-parent>
-    <SvgIcon :icon="icon" />
+    <SvgIcon :icon="icon"/>
   </ButtonIcon>
 </template>
 <script>
@@ -19,7 +19,7 @@ export default {
     return {}
   },
   computed: {
-    icon(){
+    icon() {
       return this.pin ? 'mdi-pin-off' : 'mdi-pin'
     }
   },

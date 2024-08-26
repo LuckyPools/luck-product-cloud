@@ -1,7 +1,3 @@
-
-
-
-
 export const AdminLayoutHeaderConfig = {
     /**
      * Whether header is visible
@@ -58,7 +54,7 @@ export const AdminLayoutTabConfig = {
 }
 
 /** Sider config */
-export const AdminLayoutSiderConfig  ={
+export const AdminLayoutSiderConfig = {
     /**
      * Whether sider is visible
      *
@@ -109,7 +105,7 @@ export const AdminLayoutSiderConfig  ={
     },
 }
 
-export const AdminLayoutContentConfig ={
+export const AdminLayoutContentConfig = {
     /**
      * Content class
      *

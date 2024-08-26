@@ -1,4 +1,4 @@
-import { $t } from '@/i18n';
+import {$t} from '@/i18n';
 import router from '@/router';
 import {getRoutePath} from "@/router/routes";
 
@@ -27,7 +27,7 @@ export function isTabInTabs(tabId, tabs) {
 }
 
 export function getTabIdByRoute(route) {
-    const { path, query = {}, meta } = route;
+    const {path, query = {}, meta} = route;
     let id = path;
     if (meta.multiTab) {
         const queryKeys = Object.keys(query).sort();
@@ -39,14 +39,14 @@ export function getTabIdByRoute(route) {
 }
 
 export function getTabByRoute(route) {
-    const { name, path, fullPath = path, meta } = route;
-    const { title, i18nKey, fixedIndexInTab } = meta;
+    const {name, path, fullPath = path, meta} = route;
+    const {title, i18nKey, fixedIndexInTab} = meta;
     // Get icon and localIcon from getRouteIcons function
-    const { icon, localIcon } = getRouteIcons(route);
+    const {icon, localIcon} = getRouteIcons(route);
 
     const label = i18nKey ? $t(i18nKey) : title;
 
-    const tab= {
+    const tab = {
         id: getTabIdByRoute(route),
         label,
         routeKey: name,
@@ -74,7 +74,7 @@ export function getRouteIcons(route) {
         icon = currentRoute?.meta?.icon || icon;
         localIcon = currentRoute?.meta?.localIcon;
     }
-    return { icon, localIcon };
+    return {icon, localIcon};
 }
 
 export function extractTabsByAllRoutes(router, tabs) {
@@ -89,7 +89,7 @@ export function updateTabsByI18nKey(tabs) {
 
 
 export function updateTabByI18nKey(tab) {
-    const { i18nKey, label } = tab;
+    const {i18nKey, label} = tab;
     return {
         ...tab,
         label: i18nKey ? $t(i18nKey) : label

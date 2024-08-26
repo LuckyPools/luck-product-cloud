@@ -1,4 +1,3 @@
-
 export const themeLayoutModeRecord = {
     vertical: 'theme.layoutMode.vertical',
     'vertical-mix': 'theme.layoutMode.vertical-mix',
@@ -27,7 +26,7 @@ export const themeScrollModeRecord = {
 
 export const themeScrollModeOptions = transformRecordToOption(themeScrollModeRecord);
 
-export const themeTabModeRecord= {
+export const themeTabModeRecord = {
     chrome: 'theme.tab.mode.chrome',
     button: 'theme.tab.mode.button'
 };

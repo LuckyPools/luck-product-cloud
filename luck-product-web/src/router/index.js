@@ -6,7 +6,7 @@ import {createBuiltinVueRoutes} from './routes';
 
 Vue.use(Router);
 
-const router =  new Router({
+const router = new Router({
     routes: createBuiltinVueRoutes()
 })
 
@@ -21,7 +21,7 @@ NProgress.configure({
 
 router.beforeEach((to, from, next) => {
     if (to.path.endsWith('/')) {
-        next({ path: to.path.slice(0, -1), replace: true })
+        next({path: to.path.slice(0, -1), replace: true})
     } else {
         // 进度条开始
         NProgress.start()

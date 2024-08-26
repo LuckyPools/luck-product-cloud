@@ -22,9 +22,9 @@ export function getGlobalMenusByAuthRoutes(routes) {
     return menus;
 }
 
-export function getGlobalMenuByBaseRoute(route ) {
-    const { name, path } = route;
-    const { title, i18nKey, icon = import.meta.env.VITE_MENU_ICON, localIcon } = route.meta ?? {};
+export function getGlobalMenuByBaseRoute(route) {
+    const {name, path} = route;
+    const {title, i18nKey, icon = import.meta.env.VITE_MENU_ICON, localIcon} = route.meta ?? {};
 
     const label = i18nKey ? $t(i18nKey) : title;
 
@@ -43,9 +43,9 @@ export function getGlobalMenuByBaseRoute(route ) {
 export function updateLocaleOfGlobalMenus(menus) {
     const result = [];
     menus.forEach(menu => {
-        const { i18nKey, label, children } = menu;
+        const {i18nKey, label, children} = menu;
         const newLabel = i18nKey ? $t(i18nKey) : label;
-        const newMenu  = {
+        const newMenu = {
             ...menu,
             label: newLabel,
             title: newLabel

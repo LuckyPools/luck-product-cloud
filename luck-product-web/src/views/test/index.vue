@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-      2222
+    2222
   </div>
 </template>
 <script>

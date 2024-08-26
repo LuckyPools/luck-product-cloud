@@ -1,17 +1,17 @@
 <template>
   <ATooltip :placement="tooltipPlacement" :get-popup-container="getPopupContainer" :title="tooltipContent">
-<!--    <AButton type="link" v-bind="$attrs" :class="['h-36px','text-icon']">-->
-<!--      <div class="flex-center gap-8px">-->
-<!--        <slot>-->
-<!--          <SvgIcon :icon="icon" />-->
-<!--        </slot>-->
-<!--  -->
-<!--      </div>-->
-<!--    </AButton>-->
+    <!--    <AButton type="link" v-bind="$attrs" :class="['h-36px','text-icon']">-->
+    <!--      <div class="flex-center gap-8px">-->
+    <!--        <slot>-->
+    <!--          <SvgIcon :icon="icon" />-->
+    <!--        </slot>-->
+    <!--  -->
+    <!--      </div>-->
+    <!--    </AButton>-->
     <button class="luck-btn ant-btn border-none shadow-none h-8 text-4 text-base_text" type="text">
       <div class="flex-center gap-8px">
         <slot>
-          <SvgIcon :icon="icon" />
+          <SvgIcon :icon="icon"/>
         </slot>
       </div>
     </button>
@@ -22,36 +22,35 @@
 import SvgIcon from "@/component/custom/svg-icon.vue";
 
 export default {
-    name: 'ButtonIcon',
-    components: {SvgIcon},
-    inheritAttrs: false,
-    props:{
-        icon:{
-            type: String,
-            default: ''
-        },
-        tooltipContent:{
-            type: String,
-            default: ''
-        },
-        tooltipPlacement:{
-            type: String,
-            default: 'bottom'
-        },
-        triggerParent:{
-            type: Boolean,
-            default: false
-        },
+  name: 'ButtonIcon',
+  components: {SvgIcon},
+  inheritAttrs: false,
+  props: {
+    icon: {
+      type: String,
+      default: ''
     },
-    data() {
-        return {
-        }
+    tooltipContent: {
+      type: String,
+      default: ''
     },
-    methods: {
-        getPopupContainer(triggerNode) {
-            return this.triggerParent ? triggerNode.parentElement : document.body;
-        }
+    tooltipPlacement: {
+      type: String,
+      default: 'bottom'
+    },
+    triggerParent: {
+      type: Boolean,
+      default: false
+    },
+  },
+  data() {
+    return {}
+  },
+  methods: {
+    getPopupContainer(triggerNode) {
+      return this.triggerParent ? triggerNode.parentElement : document.body;
     }
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -59,9 +58,9 @@ export default {
   background-color: transparent;
 
   &:hover {
-    border: none ;
+    border: none;
 
-    background-color: rgba(0,0,0,0.06);
+    background-color: rgba(0, 0, 0, 0.06);
   }
 }
 </style>

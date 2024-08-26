@@ -1,31 +1,31 @@
 <template>
   <ADrawer
-    :visible="app.themeDrawerVisible"
-    :closable="false"
-    :body-style="{ padding: '0px' }"
-    :width="378"
-    @close="handleClose"
+      :visible="app.themeDrawerVisible"
+      :closable="false"
+      :body-style="{ padding: '0px' }"
+      :width="378"
+      @close="handleClose"
   >
     <template #title>
       <div class="flex items-center">
         <div class="flex-1">
-          <div class="text-16px font-bold">{{$t('theme.themeDrawerTitle')}}</div>
+          <div class="text-16px font-bold">{{ $t('theme.themeDrawerTitle') }}</div>
         </div>
-        <ButtonIcon icon="ant-design:close-outlined" class="h-28px" @click.native="handleClose" />
+        <ButtonIcon icon="ant-design:close-outlined" class="h-28px" @click.native="handleClose"/>
       </div>
     </template>
 
     <SimpleScrollbar>
       <div class="px-24px pb-24px pt-8px">
-        <DarkMode />
-        <LayoutMode />
-        <ThemeColor />
-        <PageFun />
+        <DarkMode/>
+        <LayoutMode/>
+        <ThemeColor/>
+        <PageFun/>
       </div>
     </SimpleScrollbar>
 
     <div class="use-footer">
-      <ConfigOperation />
+      <ConfigOperation/>
     </div>
   </ADrawer>
 </template>
@@ -40,29 +40,29 @@ import ConfigOperation from "@/layout/base-layout/theme-drawer/modules/config-op
 import {mapGetters} from "vuex";
 
 export default {
-    name: 'ThemeDrawer',
-    components: {ConfigOperation, PageFun, ThemeColor, LayoutMode, DarkMode, SimpleScrollbar, ButtonIcon},
-    data() {
-        return {}
-    },
-    computed: {
-        ...mapGetters(['app']),
-    },
-    methods: {
-        handleClose(){
-            this.$store.dispatch('app/closeThemeDrawer');
-        }
+  name: 'ThemeDrawer',
+  components: {ConfigOperation, PageFun, ThemeColor, LayoutMode, DarkMode, SimpleScrollbar, ButtonIcon},
+  data() {
+    return {}
+  },
+  computed: {
+    ...mapGetters(['app']),
+  },
+  methods: {
+    handleClose() {
+      this.$store.dispatch('app/closeThemeDrawer');
     }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-/deep/  .ant-drawer-wrapper-body{
+/deep/ .ant-drawer-wrapper-body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
 
-  .ant-drawer-body{
+  .ant-drawer-body {
     flex: 1;
     min-width: 0;
     min-height: 0;
@@ -70,7 +70,7 @@ export default {
   }
 }
 
-.use-footer{
+.use-footer {
   z-index: 9999;
   position: absolute;
   width: 100%;

@@ -11,43 +11,44 @@
         <a-button v-on:click="login">登录</a-button>
       </a-form-item>
       <div class="a">
-        <div class="b">{{$t('system.title')}}</div>
+        <div class="b">{{ $t('system.title') }}</div>
       </div>
     </a-form>
   </div>
 </template>
 
 <script>
-  import { login } from "@/api/auth";
-  export default {
-    name: 'Login',
-    data() {
-      return {
-        // 加载状态
-        loading: false,
-        // 表单数据
-        form: {
-          username: '',
-          password: ''
-        }
-      };
-    },
-    methods:{
-      login(){
-        this.$store.dispatch(
-            'user/setInfo',{name: '张三'});
-        console.log(this.$store.state.user.info);
-        login(this.form).then(res=>{
-          console.log(res);
-        })
+import {login} from "@/api/auth";
+
+export default {
+  name: 'Login',
+  data() {
+    return {
+      // 加载状态
+      loading: false,
+      // 表单数据
+      form: {
+        username: '',
+        password: ''
       }
+    };
+  },
+  methods: {
+    login() {
+      this.$store.dispatch(
+          'user/setInfo', {name: '张三'});
+      console.log(this.$store.state.user.info);
+      login(this.form).then(res => {
+        console.log(res);
+      })
     }
   }
+}
 </script>
 <style lang="scss">
-  .a{
-    .b{
-      color: red;
-    }
+.a {
+  .b {
+    color: red;
   }
+}
 </style>
