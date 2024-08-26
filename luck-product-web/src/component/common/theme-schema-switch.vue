@@ -3,7 +3,7 @@
     :icon="icon"
     :tooltip-content="tooltipContent"
     :tooltip-placement="tooltipPlacement"
-    @click="handleSwitch"
+    @click.native="handleSwitch"
   />
 </template>
 <script>

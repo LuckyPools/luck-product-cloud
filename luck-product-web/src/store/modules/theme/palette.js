@@ -9,6 +9,7 @@ import { getAntDColorPalette } from './antd';
  * @param recommended whether to get recommended color palette (the provided color may not be the main color)
  */
 export function getColorPalette(color, recommended) {
+  debugger;
   const colorMap = {};
   if (recommended) {
     const colorPalette = getRecommendedColorPalette(getHex(color));

@@ -66,8 +66,9 @@ export default {
         }
     },
     actions: {
-        toggleThemeScheme({ commit }){
+        toggleThemeScheme({ commit, getters }){
             commit('TOGGLE_THEME_SCHEME');
+            toggleCssDarkMode(getters.darkMode);
         },
         reset({ commit }){
             commit('RESET');

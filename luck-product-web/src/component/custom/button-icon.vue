@@ -8,12 +8,11 @@
 <!--  -->
 <!--      </div>-->
 <!--    </AButton>-->
-    <button class="luck-btn ant-btn border-none shadow-none h-8 text-4" type="text">
+    <button class="luck-btn ant-btn border-none shadow-none h-8 text-4 text-base_text" type="text">
       <div class="flex-center gap-8px">
         <slot>
           <SvgIcon :icon="icon" />
         </slot>
-
       </div>
     </button>
   </ATooltip>
@@ -57,11 +56,11 @@ export default {
 </script>
 <style lang="scss" scoped>
 .luck-btn {
+  background-color: transparent;
+
   &:hover {
     border: none ;
 
-
-    color: rgba(0,0,0,0.88);
     background-color: rgba(0,0,0,0.06);
   }
 }

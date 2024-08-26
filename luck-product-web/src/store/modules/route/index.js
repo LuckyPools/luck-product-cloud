@@ -1,3 +1,30 @@
+import { getGlobalMenuByBaseRoute } from '../user/utils'
+
+
+export function getBreadcrumbsByRoute(route, menus) {
+    const key = route.name;
+    const activeKey = route.meta?.activeMenu;
+
+    const menuKey = activeKey || key;
+
+    for (const menu of menus) {
+        if (menu.key === menuKey) {
+            const breadcrumb = menuKey !== activeKey ? menu : getGlobalMenuByBaseRoute(route);
+            return [breadcrumb];
+        }
+
+        if (menu.children?.length) {
+            const result = getBreadcrumbsByRoute(route, menu.children);
+            if (result.length > 0) {
+                return [menu, ...result];
+            }
+        }
+    }
+
+    return [];
+}
+
+
 
 /**
  * 路由状态管理
@@ -5,17 +32,24 @@
 export default {
     namespaced: true,
     state: {
+        curRoute: null,
         routeHome: '',
-        breadcrumbs: [],
         cacheRoutes: [],
         allCacheRoutes: []
     },
     mutations: {
         ADD_CACHE_ROUTES(state, routeKey) {
             state.cacheRoutes.push(routeKey);
+        },
+        SET_CUR_ROUTE(state,value){
+            state.curRoute = value;
         }
     },
     actions: {
+        setCurRoute({ state, commit },value) {
+            commit('SET_CUR_ROUTE',value)
+        },
+
         reCacheRoutesByKey({ state, commit, dispatch }, routeKey) {
             if(!state.allCacheRoutes.includes(routeKey)){
                 return;
@@ -40,6 +74,11 @@ export default {
 
         isCachedRoute({ state, commit },routeKey) {
             return state.allCacheRoutes.includes(routeKey);
+        }
+    },
+    getters:{
+        breadcrumbs: (state, getters, rootState) => {
+            return getBreadcrumbsByRoute(state.curRoute, rootState.user.menus);
         }
     }
 };

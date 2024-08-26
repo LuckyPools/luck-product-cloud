@@ -1,8 +1,13 @@
 <template>
     <ABreadcrumb v-if="theme.header.breadcrumb.visible" v-bind="$props" v-on="$listeners">
-        <ABreadcrumbItem v-for="item in route.breadcrumbs" :key="item.key">
+        <ABreadcrumbItem v-for="item in breadcrumbs" :key="item.key">
             <div class="i-flex-y-center align-middle">
-                <component :is="item.icon" v-if="theme.header.breadcrumb.showIcon" class="mr-4px text-icon"/>
+                <SvgIcon
+                    :local-icon="item.localIcon"
+                    :icon="item.icon"
+                    v-if="theme.header.breadcrumb.showIcon"
+                    class="mr-4px text-icon"
+                />
                 {{ item.label }}
             </div>
             <template v-if="item.children?.length" #overlay>
@@ -10,8 +15,12 @@
                     <AMenuItem v-for="option in item.children" :key="option.key"
                                @click="handleClickMenu(option.routeKey)">
                         <div class="i-flex-y-center align-middle">
-                            <component :is="option.icon" v-if="theme.header.breadcrumb.showIcon"
-                                       class="mr-4px text-icon"/>
+                            <SvgIcon
+                                :local-icon="option.localIcon"
+                                :icon="option.icon"
+                                v-if="theme.header.breadcrumb.showIcon"
+                                class="mr-4px text-icon"
+                            />
                             {{ option.label }}
                         </div>
                     </AMenuItem>
@@ -22,8 +31,10 @@
 </template>
 <script>
 import {mapGetters} from "vuex";
+import SvgIcon from "@/component/custom/svg-icon.vue";
 export default {
     name: 'GlobalBreadcrumb',
+    components: {SvgIcon},
     inheritAttrs: false,
     data() {
         return {
@@ -31,6 +42,9 @@ export default {
     },
     computed: {
         ...mapGetters(['route', 'theme']),
+        ...mapGetters('route', {
+            breadcrumbs: 'breadcrumbs',
+        }),
     },
     methods: {
         handleClickMenu(key) {

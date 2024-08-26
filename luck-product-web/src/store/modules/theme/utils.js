@@ -85,7 +85,7 @@ export function createThemeToken(colors, recommended = false) {
 function createThemePaletteColors(colors, recommended = false) {
     const colorKeys = Object.keys(colors);
     const colorPaletteVar = {};
-
+    debugger;
     colorKeys.forEach(key => {
         const colorMap = getColorPalette(colors[key], recommended);
 

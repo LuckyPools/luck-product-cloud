@@ -22,7 +22,7 @@ export function getGlobalMenusByAuthRoutes(routes) {
     return menus;
 }
 
-function getGlobalMenuByBaseRoute(route ) {
+export function getGlobalMenuByBaseRoute(route ) {
     const { name, path } = route;
     const { title, i18nKey, icon = import.meta.env.VITE_MENU_ICON, localIcon } = route.meta ?? {};
 

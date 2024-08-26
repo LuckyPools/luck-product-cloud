@@ -106,7 +106,6 @@ export function getDefaultHomeTab(router, homeRouteName) {
     const homeRoutePath = getRoutePath(homeRouteName);
     const i18nLabel = $t(`route.${homeRouteName}`);
     let matchTab = router.matcher.match(homeRoutePath);
-    console.log(matchTab);
     let homeTab = {
         id: homeRoutePath,
         label: i18nLabel || homeRouteName,
