@@ -10,8 +10,6 @@ const router = new Router({
     routes: createBuiltinVueRoutes()
 })
 
-console.log(router)
-
 // router/index.ts
 
 NProgress.configure({

@@ -13,7 +13,7 @@
             '!text-white !bg-primary': menu.active && inverted}"
           @click="handleClickMixMenu(menu)"
       >
-        <component :is="menu.icon" :class="[app.siderCollapse ? 'text-icon-small' : 'text-icon-large']"/>
+        <SvgIcon :icon="menu.icon" :class="[app.siderCollapse ? 'text-icon-small' : 'text-icon-large']"/>
         <p
             class="w-full ellipsis-text text-center text-12px transition-height-300"
             :class="[app.siderCollapse ? 'h-0 pt-0' : 'h-20px pt-4px']"
@@ -35,10 +35,11 @@ import {mapGetters} from "vuex";
 import MenuToggler from "@/component/common/menu-toggler.vue";
 import SimpleScrollbar from "@/layout/page-tab/simple-scrollbar/index.vue";
 import {transformColorWithOpacity} from "@/layout/page-tab/share";
+import SvgIcon from "@/component/custom/svg-icon.vue";
 
 export default {
   name: 'FirstLevelMenu',
-  components: {SimpleScrollbar, MenuToggler},
+  components: {SvgIcon, SimpleScrollbar, MenuToggler},
   props: {
     inverted: {
       type: Boolean
