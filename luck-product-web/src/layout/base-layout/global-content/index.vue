@@ -18,7 +18,7 @@
 </template>
 <script>
 import {mapGetters} from "vuex";
-import {LAYOUT_SCROLL_EL_ID} from "@/layout/admin-layout/shared";
+import {LAYOUT_SCROLL_EL_ID} from "@/layout/admin-layout/share";
 
 export default {
   name: 'GlobalContent',

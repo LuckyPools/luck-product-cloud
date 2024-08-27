@@ -1,7 +1,7 @@
 <template>
   <div>
     <ADivider>{{ $t('theme.layoutMode.title') }}</ADivider>
-    <LayoutModeCard v-model:mode="theme.layout.mode" :disabled="app.isMobile">
+    <LayoutModeCard :mode="theme.layout.mode" :disabled="app.isMobile" @update:mode="updateMode">
       <template #vertical>
         <div class="layout-sider h-full w-18px"></div>
         <div class="vertical-wrapper">
@@ -48,28 +48,45 @@ export default {
   computed: {
     ...mapGetters(['theme', 'app']),
   },
-  methods: {}
+  methods: {
+      updateMode(value){
+          this.$store.dispatch('theme/setLayoutMode',value);
+      }
+  }
 }
 </script>
 
 <style scoped>
 .layout-header {
-  --uno: h-16px bg-primary rd-4px;
+    height: 16px;
+    border-radius: 4px;
+    --un-bg-opacity: 1;
+    background-color: rgb(var(--primary-color) / var(--un-bg-opacity));
 }
 
 .layout-sider {
-  --uno: bg-primary-300 rd-4px;
+    border-radius: 4px;
+    --un-bg-opacity: 1;
+    background-color: rgb(var(--primary-300-color) / var(--un-bg-opacity));
 }
 
 .layout-main {
-  --uno: flex-1 bg-primary-200 rd-4px;
+    flex: 1 1 0%;
+    border-radius: 4px;
+    --un-bg-opacity: 1;
+    background-color: rgb(var(--primary-200-color) / var(--un-bg-opacity));
 }
 
 .vertical-wrapper {
-  --uno: flex-1 flex-col gap-6px;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0%;
+    gap: 6px;
 }
 
 .horizontal-wrapper {
-  --uno: flex-1 flex gap-6px;
+    display: flex;
+    flex: 1 1 0%;
+    gap: 6px;
 }
 </style>

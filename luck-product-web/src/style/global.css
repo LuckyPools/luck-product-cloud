@@ -1,6 +1,7 @@
 @import './reset.css';
 @import './nprogress.css';
 @import './transition.css';
+@import './component.css';
 
 html,
 body,
@@ -24,6 +25,16 @@ html.grayscale {
 .bg-container\! {
     --un-bg-opacity: 1 !important;
     background-color: rgb(var(--container-bg-color) / var(--un-bg-opacity)) /* rgb(var(--container-bg-color)) */ !important;
+}
+
+.bg-layout {
+    --un-bg-opacity: 1;
+    background-color: rgb(var(--layout-bg-color) / var(--un-bg-opacity));
+}
+
+.bg-drawer{
+    --un-bg-opacity: 1;
+    background-color: rgb(var(--drawer-bg-color) / var(--un-bg-opacity));
 }
 
 .shadow-header {

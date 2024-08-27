@@ -8,7 +8,7 @@
     <!--  -->
     <!--      </div>-->
     <!--    </AButton>-->
-    <button class="luck-btn ant-btn border-none shadow-none h-8 text-4 text-base_text" type="text">
+    <button class="use-btn ant-btn border-none shadow-none h-8 text-4 text-base_text" type="text">
       <div class="flex-center gap-8px">
         <slot>
           <SvgIcon :icon="icon"/>
@@ -54,7 +54,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.luck-btn {
+.use-btn {
   background-color: transparent;
 
   &:hover {

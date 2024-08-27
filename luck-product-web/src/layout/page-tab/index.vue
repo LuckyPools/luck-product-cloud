@@ -21,7 +21,7 @@
 import ChromeTab from '@/layout/page-tab/chrome-tab/index.vue';
 import ButtonTab from '@/layout/page-tab/button-tab/index.vue';
 import SvgClose from "@/layout/page-tab/svg-close/index.vue";
-import {ACTIVE_COLOR, createTabCssVars} from './shared';
+import {ACTIVE_COLOR, createTabCssVars} from './share';
 import {PageTabProps} from './props';
 
 

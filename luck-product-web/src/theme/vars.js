@@ -23,6 +23,7 @@ export const themeVars = {
         ...colorPaletteVars,
         nprogress: 'rgb(var(--nprogress-color))',
         container: 'rgb(var(--container-bg-color))',
+        drawer: 'rgb(var(--drawer-bg-color))',
         layout: 'rgb(var(--layout-bg-color))',
         inverted: 'rgb(var(--inverted-bg-color))',
         base_text: 'rgb(var(--base-text-color))'

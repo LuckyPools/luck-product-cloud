@@ -1,6 +1,6 @@
 <template>
   <AdminLayout
-      v-model:sider-collapse="app.siderCollapse"
+      :sider-collapse="app.siderCollapse"
       :mode="layoutMode"
       :scroll-el-id="LAYOUT_SCROLL_EL_ID"
       :scroll-mode="theme.layout.scrollMode"
@@ -36,7 +36,7 @@
   </AdminLayout>
 </template>
 <script>
-import {LAYOUT_SCROLL_EL_ID} from '../admin-layout/shared.js';
+import {LAYOUT_SCROLL_EL_ID} from '../admin-layout/share.js';
 import {mapGetters} from "vuex";
 import AdminLayout from "@/layout/admin-layout/index.vue";
 import GlobalHeader from "@/layout/base-layout/global-header/index.vue";
@@ -82,7 +82,7 @@ export default {
     layoutMode() {
       const vertical = 'vertical';
       const horizontal = 'horizontal';
-      return this.theme.layout.mode.includes(vertical) ? vertical : horizontal;
+      return this.theme.layout.mode === vertical ? vertical : horizontal;
     },
 
     headerProps() {

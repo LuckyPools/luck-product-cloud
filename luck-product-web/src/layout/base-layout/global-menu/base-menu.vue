@@ -6,13 +6,15 @@
         :selected-keys="selectedKeys"
         :inline-collapsed="inlineCollapsed"
         :inline-indent="18"
-        class="size-full transition-300 border-0!"
+        class="size-full transition-300 border-0! text-base_text"
         :class="{ 'bg-container!': !darkTheme, 'horizontal-menu': isHorizontal }"
         @click="handleClickMenu">
       <template v-for="item in menus">
         <a-menu-item v-if="!item.children" :key="item.key">
-          <a-icon type="pie-chart"/>
-          <span>{{ item.title }}</span>
+          <div class="use-menu-title">
+              <a-icon type="pie-chart"/>
+              <span>{{ item.title }}</span>
+          </div>
         </a-menu-item>
         <sub-menu v-else :key="item.key" :menu-info="item"/>
       </template>
@@ -22,18 +24,18 @@
 <script>
 import SimpleScrollbar from "@/layout/page-tab/simple-scrollbar/index.vue";
 import {mapGetters} from "vuex";
-import {transformColorWithOpacity} from "@/layout/page-tab/shared";
+import {transformColorWithOpacity} from "@/layout/page-tab/share";
 
 import {Menu} from 'ant-design-vue';
 
 const SubMenu = {
   template: `
-      <a-sub-menu :key="menuInfo.key" v-bind="$props" v-on="$listeners">
+      <a-sub-menu class="use-menu" :key="menuInfo.key" v-bind="$props" v-on="$listeners">
         <span slot="title">
           <a-icon type="mail" /><span>{{ menuInfo.title }}</span>
         </span>
         <template v-for="item in menuInfo.children">
-          <a-menu-item v-if="!item.children" :key="item.key">
+          <a-menu-item v-if="!item.children" :key="item.key" class="text-base_text" >
             <a-icon type="pie-chart" />
             <span>{{ item.title }}</span>
           </a-menu-item>
@@ -131,7 +133,7 @@ export default {
     },
 
     selectedBgColor() {
-      const darkMode = this.darkmode;
+      const darkMode = this.darkMode;
       const themeColor = this.theme.themeColor;
       const light = transformColorWithOpacity(themeColor, 0.1, '#ffffff');
       const dark = transformColorWithOpacity(themeColor, 0.3, '#000000');
@@ -234,6 +236,7 @@ export default {
   :deep(.ant-menu-inline-collapsed) {
     > .ant-menu-item {
       padding-inline: calc(50% - 14px);
+      padding: 0 14px !important;
     }
 
     .ant-menu-item-icon {
@@ -242,6 +245,12 @@ export default {
 
     .ant-menu-submenu-title {
       padding-inline: calc(50% - 18px);
+      padding: 0 14px !important;
+      text-align: center;
+    }
+
+    .use-menu-title{
+      text-align: center;
     }
   }
 
@@ -256,6 +265,12 @@ export default {
       align-items: center;
     }
   }
+
+  :deep(.ant-menu-submenu) {
+    .ant-menu {
+      background-color: transparent;
+    }
+   }
 }
 
 .select-menu {

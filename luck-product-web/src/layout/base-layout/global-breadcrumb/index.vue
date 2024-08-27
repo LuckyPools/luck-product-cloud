@@ -1,7 +1,7 @@
 <template>
   <ABreadcrumb v-if="theme.header.breadcrumb.visible" v-bind="$props" v-on="$listeners">
-    <ABreadcrumbItem v-for="item in breadcrumbs" :key="item.key">
-      <div class="i-flex-y-center align-middle">
+    <ABreadcrumbItem v-for="item in breadcrumbs" :key="item.key" >
+      <div class="i-flex-y-center align-middle text-base_text">
         <SvgIcon
             :local-icon="item.localIcon"
             :icon="item.icon"
@@ -53,3 +53,8 @@ export default {
   }
 }
 </script>
+<style>
+.ant-breadcrumb > span:last-child {
+    color: transparent;
+}
+</style>

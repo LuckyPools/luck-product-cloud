@@ -46,6 +46,7 @@ export function createThemeToken(colors, recommended = false) {
             ...paletteColors,
             nprogress: paletteColors.primary,
             container: 'rgb(255, 255, 255)',
+            drawer: 'rgb(255, 255, 255)',
             layout: 'rgb(247, 250, 252)',
             inverted: 'rgb(0, 20, 40)',
             base_text: 'rgb(31, 31, 31)'
@@ -61,6 +62,7 @@ export function createThemeToken(colors, recommended = false) {
         colors: {
             ...themeTokens.colors,
             container: 'rgb(28, 28, 28)',
+            drawer: 'rgb(28, 28, 28)',
             layout: 'rgb(18, 18, 18)',
             base_text: 'rgb(224, 224, 224)'
         },

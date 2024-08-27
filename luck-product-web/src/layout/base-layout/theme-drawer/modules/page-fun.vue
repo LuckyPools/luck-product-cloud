@@ -104,7 +104,7 @@ export default {
       return this.theme.layout.mode;
     },
     isMixLayoutMode() {
-      return this.layoutMode.includes('mix')
+      return this.layoutMode.indexOf('mix') > -1
     },
     isWrapperScrollMode() {
       return this.theme.layout.scrollMode === 'wrapper'

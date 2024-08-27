@@ -34,7 +34,7 @@
 import {mapGetters} from "vuex";
 import MenuToggler from "@/component/common/menu-toggler.vue";
 import SimpleScrollbar from "@/layout/page-tab/simple-scrollbar/index.vue";
-import {transformColorWithOpacity} from "@/layout/page-tab/shared";
+import {transformColorWithOpacity} from "@/layout/page-tab/share";
 
 export default {
   name: 'FirstLevelMenu',

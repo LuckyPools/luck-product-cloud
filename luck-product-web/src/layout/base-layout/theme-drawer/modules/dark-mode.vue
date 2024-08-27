@@ -52,7 +52,7 @@ export default {
       return this.getSegmentOptions();
     },
     showSiderInverted() {
-      return !this.darkMode && this.theme.layout.mode.includes('vertical')
+      return !this.darkMode && this.theme.layout.mode === 'vertical'
     },
   },
   methods: {

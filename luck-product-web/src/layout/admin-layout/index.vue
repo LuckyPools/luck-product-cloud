@@ -122,7 +122,7 @@
 
 <script>
 import {AdminLayoutProps} from './props.js';
-import {LAYOUT_MAX_Z_INDEX, LAYOUT_SCROLL_EL_ID, createLayoutCssVars} from './shared';
+import {LAYOUT_MAX_Z_INDEX, LAYOUT_SCROLL_EL_ID, createLayoutCssVars} from './share';
 
 export default {
   name: 'AdminLayout',

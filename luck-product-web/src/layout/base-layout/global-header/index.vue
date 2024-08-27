@@ -3,7 +3,7 @@
     <GlobalLogo v-if="showLogo" class="h-full" :style="{ width: theme.sider.width + 'px' }"/>
     <BaseMenu v-if="showMenu" mode="horizontal" :menus="headerMenus" class="px-12px"/>
     <div v-else class="h-full flex-y-center flex-1-hidden">
-      <MenuToggler v-if="showMenuToggler" :collapsed="app.siderCollapse" @click="handleToggle"/>
+      <MenuToggler v-if="showMenuToggler" :collapsed="app.siderCollapse" @click.native="handleToggle"/>
       <GlobalBreadcrumb v-if="!app.isMobile" class="ml-12px"/>
     </div>
     <div class="h-full flex-y-center justify-end">

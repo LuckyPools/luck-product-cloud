@@ -53,6 +53,9 @@ export default {
         SET_THEME_SCHEME(state, value) {
             state.themeScheme = value;
         },
+        SET_LAYOUT_MODE(state, value){
+            state.layout.mode = value;
+        },
         SET_GRAYSCALE(state, value) {
             state.grayscale = value;
         },
@@ -76,6 +79,9 @@ export default {
         setThemeScheme({commit, getters}, value) {
             commit('SET_THEME_SCHEME', value);
             toggleCssDarkMode(getters.darkMode);
+        },
+        setLayoutMode({commit}, value) {
+            commit('SET_LAYOUT_MODE', value);
         },
         setGrayscale({commit}, value) {
             commit('SET_GRAYSCALE', value);
