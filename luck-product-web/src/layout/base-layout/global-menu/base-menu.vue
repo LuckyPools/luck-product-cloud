@@ -1,41 +1,42 @@
 <template>
-  <SimpleScrollbar class="menu-wrapper" :class="{ 'select-menu': !darkTheme }">
-    <AMenu
-        :mode="mode"
-        :theme="menuTheme"
-        :selected-keys="selectedKeys"
-        :inline-collapsed="inlineCollapsed"
-        :inline-indent="18"
-        class="size-full transition-300 border-0! text-base_text"
-        :class="{ 'bg-container!': !darkTheme, 'horizontal-menu': isHorizontal }"
-        @click="handleClickMenu">
-      <template v-for="item in menus">
-        <a-menu-item v-if="!item.children" :key="item.key">
-          <div class="use-menu-title">
+  <div>
+    <SimpleScrollbar class="menu-wrapper" :class="{ 'select-menu': !darkTheme }">
+      <AMenu
+          :mode="mode"
+          :theme="menuTheme"
+          :inline-collapsed="inlineCollapsed"
+          :selected-keys="selectedKeys"
+          :inline-indent="18"
+          class="size-full transition-300 border-0! text-base_text"
+          :class="{ 'bg-container!': !darkTheme, 'horizontal-menu': isHorizontal }"
+          @click="handleClickMenu">
+        <template v-for="item in menus">
+          <a-menu-item v-if="!item.children" :key="item.key">
+            <div class="use-menu-title">
               <a-icon type="pie-chart"/>
               <span>{{ item.title }}</span>
-          </div>
-        </a-menu-item>
-        <sub-menu v-else :key="item.key" :menu-info="item"/>
-      </template>
-    </AMenu>
-  </SimpleScrollbar>
+            </div>
+          </a-menu-item>
+          <sub-menu v-else :key="item.key" :menu-info="item"/>
+        </template>
+      </AMenu>
+    </SimpleScrollbar>
+  </div>
 </template>
 <script>
 import SimpleScrollbar from "@/layout/page-tab/simple-scrollbar/index.vue";
 import {mapGetters} from "vuex";
 import {transformColorWithOpacity} from "@/layout/page-tab/share";
 
-import {Menu} from 'ant-design-vue';
-
+import { Menu } from 'ant-design-vue';
 const SubMenu = {
   template: `
-      <a-sub-menu class="use-menu" :key="menuInfo.key" v-bind="$props" v-on="$listeners">
+      <a-sub-menu :key="menuInfo.key" v-bind="$props" v-on="$listeners">
         <span slot="title">
           <a-icon type="mail" /><span>{{ menuInfo.title }}</span>
         </span>
         <template v-for="item in menuInfo.children">
-          <a-menu-item v-if="!item.children" :key="item.key" class="text-base_text" >
+          <a-menu-item v-if="!item.children" :key="item.key">
             <a-icon type="pie-chart" />
             <span>{{ item.title }}</span>
           </a-menu-item>
@@ -44,10 +45,9 @@ const SubMenu = {
       </a-sub-menu>
     `,
   name: 'SubMenu',
-  // must add isSubMenu: true 此项必须被定义
+  // must add isSubMenu: true
   isSubMenu: true,
   props: {
-    // 解构a-sub-menu的属性，也就是文章开头提到的为什么使用函数式组件
     ...Menu.SubMenu.props,
     // Cannot overlap with properties within Menu.SubMenu.props
     menuInfo: {
@@ -55,11 +55,10 @@ const SubMenu = {
       default: () => ({}),
     },
   },
-}
-
+};
 export default {
   name: 'BaseMenu',
-  components: {SimpleScrollbar, SubMenu},
+  components: {SubMenu, SimpleScrollbar},
   props: {
     darkTheme: {
       type: Boolean
