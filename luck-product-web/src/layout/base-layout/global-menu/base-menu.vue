@@ -31,12 +31,12 @@ import {transformColorWithOpacity} from "@/layout/page-tab/share";
 import { Menu } from 'ant-design-vue';
 const SubMenu = {
   template: `
-      <a-sub-menu :key="menuInfo.key" v-bind="$props" v-on="$listeners">
+      <a-sub-menu :key="menuInfo.key" v-bind="$props" v-on="$listeners" class="use-menu">
         <span slot="title">
           <a-icon type="mail" /><span>{{ menuInfo.title }}</span>
         </span>
         <template v-for="item in menuInfo.children">
-          <a-menu-item v-if="!item.children" :key="item.key">
+          <a-menu-item v-if="!item.children" :key="item.key" class="text-base_text">
             <a-icon type="pie-chart" />
             <span>{{ item.title }}</span>
           </a-menu-item>

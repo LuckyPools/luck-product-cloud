@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ADivider>{{ $t('theme.layoutMode.title') }}</ADivider>
+    <ADivider class="text-base_text">{{ $t('theme.layoutMode.title') }}</ADivider>
     <LayoutModeCard :mode="theme.layout.mode" :disabled="app.isMobile" @update:mode="updateMode">
       <template #vertical>
         <div class="layout-sider h-full w-18px"></div>

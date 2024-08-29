@@ -9,7 +9,7 @@
     <template #title>
       <div class="flex items-center">
         <div class="flex-1">
-          <div class="text-16px font-bold">{{ $t('theme.themeDrawerTitle') }}</div>
+          <div class="text-16px font-bold text-base_text">{{ $t('theme.themeDrawerTitle') }}</div>
         </div>
         <ButtonIcon icon="ant-design:close-outlined" class="h-28px" @click.native="handleClose"/>
       </div>

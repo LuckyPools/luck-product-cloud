@@ -26,6 +26,7 @@ export const themeVars = {
         drawer: 'rgb(var(--drawer-bg-color))',
         layout: 'rgb(var(--layout-bg-color))',
         inverted: 'rgb(var(--inverted-bg-color))',
+        bg_color: 'rgb(var(--bg-color-color))',
         base_text: 'rgb(var(--base-text-color))'
     },
     boxShadow: {

@@ -4,8 +4,9 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import getters from './getters';
-import user from './modules/user';
 import app from './modules/app';
+import user from './modules/user';
+import context from './modules/context';
 import route from './modules/route';
 import theme from './modules/theme';
 import tab from './modules/tab';
@@ -19,6 +20,7 @@ export default new Vuex.Store({
     modules: {
         app,
         user,
+        context,
         theme,
         route,
         tab

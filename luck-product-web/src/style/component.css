@@ -1,3 +1,13 @@
 .use-menu {
     background-color: transparent;
 }
+
+.ant-drawer-content{
+    --un-bg-opacity: 1;
+    background-color: rgb(var(--drawer-bg-color) / var(--un-bg-opacity));
+}
+
+.ant-drawer-header{
+    --un-bg-opacity: 1;
+    background-color: rgb(var(--drawer-bg-color) / var(--un-bg-opacity));
+}

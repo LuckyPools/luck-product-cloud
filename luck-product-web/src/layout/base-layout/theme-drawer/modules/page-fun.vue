@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ADivider>{{ $t('theme.pageFunTitle') }}</ADivider>
+    <ADivider class="text-base_text">{{ $t('theme.pageFunTitle') }}</ADivider>
     <TransitionGroup tag="div" name="setting-list" class="flex-col-stretch gap-12px">
       <SettingItem key="1" :label="$t('theme.scrollMode.title')">
         <ASelect v-model:value="theme.layout.scrollMode" class="w-120px">

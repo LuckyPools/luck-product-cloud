@@ -4,7 +4,9 @@
       :class="{
       'segmented-small': size === 'small',
       'segmented-large': size === 'large',
-      'segmented-block': block
+      'segmented-block': block,
+      'bg-layout': darkMode,
+      'm-segmented-dark': darkMode
     }"
   >
     <div class="m-segmented-group">
@@ -43,6 +45,9 @@
 </template>
 <script>
 
+import darkMode from "@/layout/base-layout/theme-drawer/modules/dark-mode.vue";
+import {mapGetters} from "vuex";
+
 export default {
   name: 'SegmentedSwitch',
   props: {
@@ -77,7 +82,11 @@ export default {
   data() {
     return {}
   },
-  computed: {},
+  computed: {
+    ...mapGetters('theme', {
+      darkMode: 'darkMode',
+    }),
+  },
   methods: {
     onSelected(value) {
       if (value !== this.value) {
@@ -184,6 +193,18 @@ export default {
     .segmented-item-disabled {
       color: rgba(0, 0, 0, 0.25);
       cursor: not-allowed;
+    }
+  }
+}
+
+.m-segmented-dark{
+  color: rgba(255, 255, 255, 0.65);
+
+  .m-segmented-group {
+
+    .segmented-item-selected {
+      background-color: #1f1f1f;
+      color: rgba(255, 255, 255, 0.85);
     }
   }
 }

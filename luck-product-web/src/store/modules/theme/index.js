@@ -16,12 +16,11 @@ function setupThemeVarsToHtml(themeColors) {
 
 function getThemeColors(state) {
     const {themeColor, otherColor, isInfoFollowPrimary} = state;
-    const colors = {
+    return {
         primary: themeColor,
         ...otherColor,
         info: isInfoFollowPrimary ? themeColor : otherColor.info
     };
-    return colors;
 }
 
 /**

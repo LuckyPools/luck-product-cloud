@@ -66,7 +66,7 @@ export default {
     },
 
     handleSelectMixMenu(menu) {
-      // todo 分析逻辑
+      this.$store.dispatch('context/setActiveFirstLevelMenuKey',menu.key);
       // this.setActiveFirstLevelMenuKey(menu.key);
       if (menu.children?.length) {
         this.setDrawerVisible(true);
@@ -76,9 +76,10 @@ export default {
     },
 
     handleResetActiveMenu() {
-      // todo 分析逻辑
-      // getActiveFirstLevelMenuKey();
-      this.setDrawerVisible(false);
+      let that = this;
+      this.$store.dispatch('context/getActiveFirstLevelMenuKey').then(() => {
+        that.setDrawerVisible(false);
+      })
     },
 
     toggleMixSiderFixed() {

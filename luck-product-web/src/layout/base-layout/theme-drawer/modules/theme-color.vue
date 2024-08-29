@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ADivider>{{ $t('theme.themeColor.title') }}</ADivider>
+    <ADivider class="text-base_text">{{ $t('theme.themeColor.title') }}</ADivider>
     <div class="flex-col-stretch gap-12px">
       <ATooltip placement="topLeft">
         <SettingItem key="recommend-color" :label="$t('theme.recommendColor')">

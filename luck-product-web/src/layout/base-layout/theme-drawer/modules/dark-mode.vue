@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ADivider>{{ $t('theme.themeSchema.title') }}</ADivider>
+    <ADivider class="text-base_text">{{ $t('theme.themeSchema.title') }}</ADivider>
     <div class="flex-col-stretch gap-16px">
       <div class="i-flex-center">
         <SegmentedSwitch v-model="theme.themeScheme" :options="options" class="bg-layout" @change="handleSegmentChange">

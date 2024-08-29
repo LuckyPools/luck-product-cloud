@@ -45,7 +45,7 @@ export default {
     handleReset() {
       this.$store.dispatch('theme/reset').then(() => {
         setTimeout(() => {
-          window.$message?.success(this.$t('theme.configOperation.resetSuccessMsg'));
+          this.$message?.success(this.$t('theme.configOperation.resetSuccessMsg'),1000);
         }, 50);
       });
 

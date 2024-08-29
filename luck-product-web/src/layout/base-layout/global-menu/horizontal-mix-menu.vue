@@ -20,9 +20,7 @@ export default {
   methods: {
 
     handleSelectMixMenu(menu) {
-      // todo 分析逻辑
-      // setActiveFirstLevelMenuKey(menu.key);
-
+      this.$store.dispatch('context/setActiveFirstLevelMenuKey',menu.key);
       if (!menu.children?.length) {
         // todo 切换路由 routerPushByKey(key)
         this.$router.push({name: menu.routeKey, query: {}})
