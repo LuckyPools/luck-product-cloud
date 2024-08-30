@@ -31,6 +31,7 @@
 <script>
 import {mapGetters} from "vuex";
 import SvgIcon from "@/component/custom/svg-icon.vue";
+import {routerPushByKey} from "@/router";
 
 export default {
   name: 'GlobalBreadcrumb',
@@ -47,8 +48,7 @@ export default {
   },
   methods: {
     handleClickMenu(menuInfo) {
-      // todo 切换路由 routerPushByKey(key)
-      this.$router.push({name: menuInfo.key, query: {}})
+        routerPushByKey(menuInfo.key);
     }
   }
 }

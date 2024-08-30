@@ -1,4 +1,5 @@
-import {setLocale} from "@/i18n";
+import {$t, setLocale} from "@/i18n";
+import {useTitle} from "@vueuse/core";
 
 /**
  * 主题状态管理
@@ -104,10 +105,16 @@ export default {
             commit('CHANGE_LOCALE', lang);
             localStorage.setItem('locale', lang);
             setLocale(lang);
-            // todo updateDocumentTitleByLocale
+            dispatch('updateDocumentTitleByLocale')
             dispatch('user/updateGlobalMenusByLocale', null, {root: true})
             dispatch('tab/updateTabsByLocale', null, {root: true})
             // todo setDayjsLocale(locale.value);
+        },
+
+        updateDocumentTitleByLocale({dispatch, commit, rootState},) {
+            const { i18nKey, title } = rootState.route.curRoute.meta;
+            const documentTitle = i18nKey ? $t(i18nKey) : title;
+            useTitle(documentTitle);
         },
 
         setMixSiderFixed({commit}, value) {

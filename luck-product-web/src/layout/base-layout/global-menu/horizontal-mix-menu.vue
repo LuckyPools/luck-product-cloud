@@ -6,6 +6,7 @@
 
 <script>
 import FirstLevelMenu from "@/layout/base-layout/global-menu/first-level-menu.vue";
+import {routerPushByKey} from "@/router";
 
 export default {
   name: 'HorizontalMixMenu',
@@ -22,8 +23,7 @@ export default {
     handleSelectMixMenu(menu) {
       this.$store.dispatch('context/setActiveFirstLevelMenuKey',menu.key);
       if (!menu.children?.length) {
-        // todo 切换路由 routerPushByKey(key)
-        this.$router.push({name: menu.routeKey, query: {}})
+          routerPushByKey(menu.routeKey);
       }
     }
   }

@@ -29,6 +29,7 @@ import {Modal} from 'ant-design-vue';
 import {mapGetters} from "vuex";
 import SvgIcon from "@/component/custom/svg-icon.vue";
 import ButtonIcon from "@/component/custom/button-icon.vue";
+import {routerPushByKey} from "@/router";
 
 export default {
   name: 'UserAvatar',
@@ -53,8 +54,7 @@ export default {
       });
     },
     handleClick() {
-      // todo 切换路由 routerPushByKey(key)
-      this.$router.push({name: 'user-center', query: {}})
+        routerPushByKey('user-center');
     }
   }
 }

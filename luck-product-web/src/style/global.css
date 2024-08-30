@@ -19,7 +19,7 @@ html.grayscale {
 
 .bg-color{
     --un-bg-opacity: 1;
-    background-color: rgb(var(--bg-color-color) / var(--un-bg-opacity)) !important;
+    background-color: rgb(var(--bg-color-color) / var(--un-bg-opacity));
 }
 
 .bg-container {
@@ -29,12 +29,12 @@ html.grayscale {
 
 .bg-container\! {
     --un-bg-opacity: 1 !important;
-    background-color: rgb(var(--container-bg-color) / var(--un-bg-opacity)) !important;
+    background-color: rgb(var(--container-bg-color) / var(--un-bg-opacity));
 }
 
 .bg-layout {
     --un-bg-opacity: 1;
-    background-color: rgb(var(--layout-bg-color) / var(--un-bg-opacity)) !important;
+    background-color: rgb(var(--layout-bg-color) / var(--un-bg-opacity));
 }
 
 .shadow-header {
@@ -54,7 +54,7 @@ html.grayscale {
 
 .text-base_text {
     --un-text-opacity: 1;
-    color: rgb(var(--base-text-color) / var(--un-text-opacity)) !important;
+    color: rgb(var(--base-text-color) / var(--un-text-opacity));
 }
 
 .size-full {

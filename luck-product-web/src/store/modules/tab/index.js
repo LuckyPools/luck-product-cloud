@@ -123,8 +123,7 @@ export default {
         },
 
         initHomeTab({commit, rootState}) {
-            // todo 改为引用rootState.route.routeHome
-            const homeTab = getDefaultHomeTab(router, 'home');
+            const homeTab = getDefaultHomeTab(router, rootState.route.routeHome);
             commit('SET_HOME_TAB', homeTab);
         },
 

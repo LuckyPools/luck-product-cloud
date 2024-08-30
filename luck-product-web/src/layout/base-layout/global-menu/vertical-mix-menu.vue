@@ -1,6 +1,6 @@
 <template>
   <div class="h-full flex" @mouseleave="handleResetActiveMenu">
-    <FirstLevelMenu :active-menu-key="activeFirstLevelMenuKey" :inverted="siderInverted" @select="handleSelectMixMenu">
+    <FirstLevelMenu :active-menu-key="context.activeFirstLevelMenuKey" :inverted="siderInverted" @select="handleSelectMixMenu">
       <slot></slot>
     </FirstLevelMenu>
     <div
@@ -38,12 +38,11 @@ export default {
   data() {
     return {
       drawerVisible: false,
-      // todo 分析
       activeFirstLevelMenuKey: 'to_test'
     }
   },
   computed: {
-    ...mapGetters(['app', 'theme', 'user', 'route']),
+    ...mapGetters(['app', 'theme', 'user', 'route','context']),
     ...mapGetters('theme', {
       darkMode: 'darkMode',
     }),

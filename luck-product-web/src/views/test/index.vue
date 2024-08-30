@@ -3,8 +3,6 @@
     <a-menu
         :default-selected-keys="['1']"
         :default-open-keys="['2']"
-        mode="horizontal"
-        theme="dark"
     >
       <template v-for="item in list">
         <a-menu-item v-if="!item.children" :key="item.key">

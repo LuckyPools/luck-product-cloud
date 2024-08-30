@@ -64,10 +64,15 @@ export default {
     ...mapGetters('theme', {
       darkMode: 'darkMode',
     }),
+    ...mapGetters('context', {
+        menus: 'menus',
+    }),
     headerMenus() {
-      // todo 混合菜单
       if (this.theme.layout.mode === 'horizontal') {
         return this.user.menus;
+      }
+      if (this.theme.layout.mode === 'horizontal-mix') {
+          return this.menus;
       }
       return [];
     }

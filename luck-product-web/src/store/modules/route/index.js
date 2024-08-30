@@ -32,7 +32,7 @@ export default {
     namespaced: true,
     state: {
         curRoute: null,
-        routeHome: '',
+        routeHome: 'home',
         cacheRoutes: [],
         allCacheRoutes: []
     },

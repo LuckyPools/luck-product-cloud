@@ -1,18 +1,12 @@
 import {
-    addThemeVarsToHtml,
-    createThemeToken,
     initThemeSettings,
     toggleCssDarkMode,
-    toggleGrayscaleMode
+    toggleGrayscaleMode,
+    setupThemeVarsToHtml
 } from "@/store/modules/theme/utils";
 import {getPaletteColorByNumber} from "@/store/modules/theme/palette";
+import { usePreferredColorScheme } from '@vueuse/core';
 
-
-// todo 监听themeColors
-function setupThemeVarsToHtml(themeColors) {
-    const {themeTokens, darkThemeTokens} = createThemeToken(themeColors);
-    addThemeVarsToHtml(themeTokens, darkThemeTokens);
-}
 
 function getThemeColors(state) {
     const {themeColor, otherColor, isInfoFollowPrimary} = state;
@@ -23,20 +17,21 @@ function getThemeColors(state) {
     };
 }
 
-/**
- * 主题状态管理
- */
-const settings = initThemeSettings();
-/**
- * 设置style
- */
-setupThemeVarsToHtml(getThemeColors(settings));
+
+function initSetting (){
+    const settings = initThemeSettings();
+    setupThemeVarsToHtml(getThemeColors(settings));
+    return settings;
+}
+
+const settings = initSetting();
 
 
 export default {
     namespaced: true,
     state: {
-        ...settings
+        ...settings,
+        osTheme: usePreferredColorScheme()
     },
     mutations: {
         TOGGLE_THEME_SCHEME(state) {
@@ -95,6 +90,9 @@ export default {
             }
             commit('UPDATE_THEME_COLORS', {key, colorValue});
             setupThemeVarsToHtml(getters.themeColors);
+        },
+        cacheThemeSettings({state}){
+            localStorage.setItem('themeSettings', JSON.stringify(state));
         }
     },
     getters: {
@@ -103,8 +101,7 @@ export default {
         },
         darkMode: state => {
             if (state.themeScheme === 'auto') {
-                // todo 研究逻辑
-                // return state.osTheme === 'dark';
+                return state.osTheme === 'dark';
             }
             return state.themeScheme === 'dark';
         },

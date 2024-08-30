@@ -18,9 +18,11 @@ export function initThemeSettings() {
 
     // if it is production mode, the theme settings will be cached in localStorage
     // if want to update theme settings when publish new version, please update `overrideThemeSettings` in `src/theme/settings.ts`
-
-    const settings = localStorage.getItem('themeSettings') || themeSettings;
-
+    let localSettings = localStorage.getItem('themeSettings');
+    let settings = themeSettings;
+    if (localSettings){
+        settings = JSON.parse(localSettings);
+    }
     const isOverride = localStorage.getItem('overrideThemeFlag') === BUILD_TIME;
 
     if (!isOverride) {
@@ -168,6 +170,12 @@ export function addThemeVarsToHtml(tokens, darkTokens) {
 
     document.head.appendChild(style);
 }
+
+export function setupThemeVarsToHtml(themeColors) {
+    const {themeTokens, darkThemeTokens} = createThemeToken(themeColors);
+    addThemeVarsToHtml(themeTokens, darkThemeTokens);
+}
+
 
 /**
  * Toggle css dark mode

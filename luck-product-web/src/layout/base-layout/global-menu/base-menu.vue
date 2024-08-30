@@ -6,6 +6,7 @@
           :theme="menuTheme"
           :inline-collapsed="inlineCollapsed"
           :selected-keys="selectedKeys"
+          :default-open-keys="openKeys"
           :inline-indent="18"
           class="size-full transition-300 border-0! text-base_text"
           :class="{ 'bg-container!': !darkTheme, 'horizontal-menu': isHorizontal }"
@@ -31,12 +32,12 @@ import {transformColorWithOpacity} from "@/layout/page-tab/share";
 import { Menu } from 'ant-design-vue';
 const SubMenu = {
   template: `
-      <a-sub-menu :key="menuInfo.key" v-bind="$props" v-on="$listeners" class="use-menu">
+      <a-sub-menu :key="menuInfo.key" v-bind="$props" v-on="$listeners" class="use-menu text-base_text">
         <span slot="title">
           <a-icon type="mail" /><span>{{ menuInfo.title }}</span>
         </span>
         <template v-for="item in menuInfo.children">
-          <a-menu-item v-if="!item.children" :key="item.key" class="text-base_text">
+          <a-menu-item v-if="!item.children" :key="item.key">
             <a-icon type="pie-chart" />
             <span>{{ item.title }}</span>
           </a-menu-item>
@@ -116,10 +117,7 @@ export default {
       }
       return [];
     },
-    /**
-     * todo 加上默认打开
-     * @returns {*|*[]}
-     */
+
     openKeys() {
       if (this.isHorizontal || this.inlineCollapsed) return [];
       const [selectedKey] = this.selectedKeys;
@@ -224,6 +222,7 @@ export default {
     .ant-menu-item {
       width: calc(100% - 16px);
       margin-inline: 8px;
+      border-radius: 8px;
     }
   }
 
@@ -276,6 +275,10 @@ export default {
   :deep(.ant-menu-inline) {
     .ant-menu-item-selected {
       background-color: v-bind(selectedBgColor);
+    }
+
+    .ant-menu-item-selected::after {
+      opacity: 0;
     }
   }
 }

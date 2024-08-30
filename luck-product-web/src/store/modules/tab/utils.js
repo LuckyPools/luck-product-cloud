@@ -63,8 +63,7 @@ export function getTabByRoute(route) {
 
 export function getRouteIcons(route) {
     // Set default value for icon at the beginning
-    // todo VITE_MENU_ICON默认图标
-    let icon = route?.meta?.icon || '';
+    let icon = route?.meta?.icon || 'menu';
     let localIcon = route?.meta?.localIcon;
     // Route.matched only appears when there are multiple matches,so check if route.matched exists
     if (route.matched) {

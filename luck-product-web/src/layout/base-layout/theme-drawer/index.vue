@@ -37,6 +37,7 @@ import LayoutMode from "@/layout/base-layout/theme-drawer/modules/layout-mode.vu
 import ThemeColor from "@/layout/base-layout/theme-drawer/modules/theme-color.vue";
 import PageFun from "@/layout/base-layout/theme-drawer/modules/page-fun.vue";
 import ConfigOperation from "@/layout/base-layout/theme-drawer/modules/config-operation.vue";
+import { useEventListener } from '@vueuse/core';
 import {mapGetters} from "vuex";
 
 export default {
@@ -47,6 +48,13 @@ export default {
   },
   computed: {
     ...mapGetters(['app']),
+  },
+  mounted(){
+      let that = this;
+      // cache theme settings when page is closed or refreshed
+      useEventListener(window, 'beforeunload', () => {
+          that.$store.dispatch('theme/cacheThemeSettings');
+      });
   },
   methods: {
     handleClose() {
