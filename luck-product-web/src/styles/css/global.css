@@ -38,6 +38,11 @@ html.grayscale {
     background-color: rgb(var(--layout-bg-color) / var(--un-bg-opacity)) !important;
 }
 
+.bg-drawer{
+    --un-bg-opacity: 1;
+    background-color: rgb(var(--drawer-bg-color) / var(--un-bg-opacity));
+}
+
 .shadow-header {
     --un-shadow: var(--header-box-shadow);
     box-shadow: var(--un-ring-offset-shadow), var(--un-ring-shadow), var(--un-shadow);

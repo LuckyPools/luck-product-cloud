@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-between">
+  <div class="flex justify-between bg-drawer">
     <AButton danger @click="handleReset">{{ $t('theme.configOperation.resetConfig') }}</AButton>
     <div ref="domRef">
       <AButton type="primary">{{ $t('theme.configOperation.copyConfig') }}</AButton>
@@ -13,9 +13,7 @@ import {mapGetters} from "vuex";
 export default {
   name: 'ConfigOperation',
   data() {
-    return {
-      domRef: null
-    }
+    return {}
   },
   computed: {
     ...mapGetters(['theme']),
@@ -25,14 +23,16 @@ export default {
   },
   methods: {
     initClipboard() {
-      if (!this.domRef) return;
+      let that = this;
+      const domRef = this.$refs.domRef;
+      if (!domRef) return;
 
-      const clipboard = new Clipboard(this.domRef, {
+      const clipboard = new Clipboard(domRef, {
         text: () => this.getClipboardText()
       });
 
       clipboard.on('success', () => {
-        window.$message?.success(this.$t('theme.configOperation.copySuccessMsg'));
+          that.$message?.success(that.$t('theme.configOperation.copySuccessMsg'));
       });
     },
 
@@ -43,9 +43,10 @@ export default {
     },
 
     handleReset() {
+      let that = this;
       this.$store.dispatch('theme/reset').then(() => {
         setTimeout(() => {
-          this.$message?.success(this.$t('theme.configOperation.resetSuccessMsg'));
+            that.$message?.success(that.$t('theme.configOperation.resetSuccessMsg'));
         }, 50);
       });
 
