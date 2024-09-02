@@ -1,4 +1,4 @@
-import BaseLayout from "@/layout/base-layout/index.vue";
+import BaseLayout from "@/layouts/base-layout/index.vue";
 
 
 export const layouts = {

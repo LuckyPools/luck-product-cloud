@@ -2,10 +2,10 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import store from './store';
-import i18n from './i18n';
+import i18n from './locales';
 import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
-import './style/global.css';
+import '@/styles/css/index.css';
 import 'uno.css';
 
 Vue.use(Antd);

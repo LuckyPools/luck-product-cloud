@@ -1,4 +1,4 @@
-import {$t} from "@/i18n";
+import {$t} from "@/locales";
 
 /**
  * Get global menus by auth routes

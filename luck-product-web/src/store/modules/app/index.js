@@ -1,4 +1,4 @@
-import {$t, setLocale} from "@/i18n";
+import {$t, setLocale} from "@/locales";
 import {useTitle} from "@vueuse/core";
 
 /**

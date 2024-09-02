@@ -1,4 +1,4 @@
-import {overrideThemeSettings, themeSettings} from "@/theme/settings";
+import {overrideThemeSettings, themeSettings} from "@/theme";
 import {getColorPalette} from "@/store/modules/theme/palette";
 import {getRgbOfColor} from './colord';
 import {themeVars} from "@/theme/vars";

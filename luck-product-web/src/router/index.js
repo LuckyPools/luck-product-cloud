@@ -4,7 +4,7 @@ import NProgress from 'nprogress';
 import store from '../store'
 import {createBuiltinVueRoutes} from './routes';
 import {useTitle} from "@vueuse/core";
-import {$t} from "@/i18n";
+import {$t} from "@/locales";
 
 Vue.use(Router);
 

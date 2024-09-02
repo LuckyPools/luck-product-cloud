@@ -1,0 +1,63 @@
+<template>
+  <AButton v-if="!user.isLogin" @click="loginOrRegister">{{ $t('page.login.common.loginOrRegister') }}</AButton>
+  <ADropdown v-else placement="bottomRight" :trigger="['click']">
+    <ButtonIcon>
+      <SvgIcon icon="ph:user-circle" class="text-icon-large"/>
+      <span class="text-16px font-medium">{{ user.info.username }}</span>
+    </ButtonIcon>
+    <template #overlay>
+      <AMenu>
+        <AMenuItem @click="handleClick">
+          <div class="flex-center gap-8px">
+            <SvgIcon icon="ph:user-circle" class="text-icon"/>
+            {{ $t('common.userCenter') }}
+          </div>
+        </AMenuItem>
+        <AMenuDivider/>
+        <AMenuItem @click="logout">
+          <div class="flex-center gap-8px">
+            <SvgIcon icon="ph:sign-out" class="text-icon"/>
+            {{ $t('common.logout') }}
+          </div>
+        </AMenuItem>
+      </AMenu>
+    </template>
+  </ADropdown>
+</template>
+<script>
+import {Modal} from 'ant-design-vue';
+import {mapGetters} from "vuex";
+import SvgIcon from "@/components/custom/svg-icon/index.vue";
+import ButtonIcon from "@/components/custom/button-icon/index.vue";
+import {routerPushByKey} from "@/router";
+
+export default {
+  name: 'UserAvatar',
+  components: {ButtonIcon, SvgIcon},
+  data() {
+    return {}
+  },
+  computed: {
+    ...mapGetters(['user'])
+  },
+  methods: {
+    loginOrRegister() {
+    },
+    logout() {
+      Modal.confirm({
+        title: this.$t('common.tip'),
+        content: this.$t('common.logoutConfirm'),
+        okText: this.$t('common.confirm'),
+        cancelText: this.$t('common.cancel'),
+        onOk: () => {
+        }
+      });
+    },
+    handleClick() {
+        routerPushByKey('user-center');
+    }
+  }
+}
+
+</script>
+<style scoped></style>

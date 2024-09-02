@@ -1,5 +1,4 @@
-import {$t} from '@/i18n';
-import router from '@/router';
+import {$t} from '@/locales';
 import {getRoutePath} from "@/router/routes";
 
 /**

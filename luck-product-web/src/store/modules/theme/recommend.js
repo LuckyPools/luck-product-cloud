@@ -1,5 +1,5 @@
 import {getDeltaE, getHsl, isValidColor, transformHslToHex} from './colord.js';
-import {colorPalettes} from '../../../config/palette.js';
+import {colorPalettes} from '../../../theme/color/palette.js';
 import {getColorName} from "@/store/modules/theme/name";
 
 /**

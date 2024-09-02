@@ -1,4 +1,4 @@
-import {colorNames} from '../../../config/name.js';
+import {colorNames} from '../../../theme/color/name.js';
 import {getHex, getHsl, getRgb} from './colord';
 
 /**
