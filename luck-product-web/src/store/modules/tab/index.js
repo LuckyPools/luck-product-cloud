@@ -123,7 +123,7 @@ export default {
         },
 
         initHomeTab({commit, rootState}) {
-            const homeTab = getDefaultHomeTab(router, rootState.route.routeHome);
+            const homeTab = getDefaultHomeTab(router, rootState.route.homeRouteKey);
             commit('SET_HOME_TAB', homeTab);
         },
 

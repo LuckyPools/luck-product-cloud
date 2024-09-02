@@ -32,7 +32,7 @@ export default {
     namespaced: true,
     state: {
         curRoute: null,
-        routeHome: 'home',
+        homeRouteKey: 'home',
         cacheRoutes: [],
         allCacheRoutes: []
     },
@@ -42,11 +42,18 @@ export default {
         },
         SET_CUR_ROUTE(state, value) {
             state.curRoute = value;
+        },
+        SET_HOME_ROUTE_KEY(state, value){
+            state.homeRouteKey = value;
         }
     },
     actions: {
         setCurRoute({state, commit}, value) {
             commit('SET_CUR_ROUTE', value)
+        },
+
+        setHomeRouteKey({commit}, value) {
+            commit('SET_HOME_ROUTE_KEY', value)
         },
 
         reCacheRoutesByKey({state, commit, dispatch}, routeKey) {

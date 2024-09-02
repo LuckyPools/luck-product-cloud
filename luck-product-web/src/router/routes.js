@@ -1,13 +1,16 @@
 import BaseLayout from "@/layouts/base-layout/index.vue";
+import BlankLayout from "@/layouts/blank-layout/index.vue";
 
 
 export const layouts = {
     base: BaseLayout,
+    blank: BlankLayout
 };
 
 export const views = {
     login: () => import("@/views/login/index.vue"),
     test: () => import("@/views/test/index.vue"),
+    user: () => import("@/views/system/user/index.vue"),
     404: () => import("@/views/test/index.vue"),
     home: () => import("@/views/home/index.vue")
 }
@@ -22,6 +25,18 @@ export const customRoutes = [
             i18nKey: 'route.home',
             icon: 'mdi:monitor-dashboard',
             order: 0
+        }
+    },
+    {
+        name: 'login',
+        path: '/login',
+        component: 'layout.blank$view.login',
+        props: true,
+        meta: {
+            title: 'login',
+            i18nKey: 'route.login',
+            constant: true,
+            hideInMenu: true
         }
     },
     {
@@ -47,9 +62,9 @@ export const customRoutes = [
                 }
             },
             {
-                name: 'login_page',
-                path: '/login',
-                component: 'view.login',
+                name: 'user_page',
+                path: '/user',
+                component: 'view.user',
                 meta: {
                     title: 'manage_menu',
                     i18nKey: 'route.manage_menu',
@@ -72,6 +87,8 @@ const routeMap = {
     "500": "/500",
     "home": "/home"
 };
+
+export const whiteList = ['/login'];
 
 
 export function transformElegantRoutesToVueRoutes(

@@ -98,7 +98,7 @@ export function updateTabByI18nKey(tab) {
  * Get default home tab
  *
  * @param router
- * @param homeRouteName routeHome in useRouteStore
+ * @param homeRouteName homeRouteKey in useRouteStore
  */
 export function getDefaultHomeTab(router, homeRouteName) {
     const homeRoutePath = getRoutePath(homeRouteName);

@@ -1,10 +1,10 @@
 <template>
   <div>
     <a-form :form="form">
-      <a-form-item label='姓名：'>
+      <a-form-item label='登录'>
         <a-input v-model="form.username" placeholder="请输入客户名称"/>
       </a-form-item>
-      <a-form-item label='密码：'>
+      <a-form-item label='成功'>
         <a-input v-model="form.password" placeholder="请输入客户名称"/>
       </a-form-item>
       <a-form-item>
@@ -19,7 +19,6 @@
 
 <script>
 import {login} from "@/api/auth";
-import {routerPushByKey} from "@/router";
 
 export default {
   name: 'Login',
@@ -36,10 +35,11 @@ export default {
   },
   methods: {
     login() {
+      this.$store.dispatch(
+          'user/setInfo', {name: '张三'});
+      console.log(this.$store.state.user.info);
       login(this.form).then(res => {
-        routerPushByKey('home');
-      }).catch(() => {
-        this.$message.error("登录失败")
+        console.log(res);
       })
     }
   }

@@ -1,3 +1,8 @@
+
+
+// token 存储的名称
+export const TOKEN_KEY = 'access_token';
+
 export const themeLayoutModeRecord = {
     vertical: 'theme.layoutMode.vertical',
     'vertical-mix': 'theme.layoutMode.vertical-mix',
