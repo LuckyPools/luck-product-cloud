@@ -1,7 +1,9 @@
 package com.luck.cloud.core.service.impl;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.StrUtil;
 import com.luck.cloud.base.param.SearchParam;
+import com.luck.cloud.common.enums.AuthCodeEnum;
 import com.luck.cloud.core.entity.LoginUser;
 import com.luck.cloud.core.entity.User;
 import com.luck.cloud.core.service.ILoginUserService;
@@ -35,12 +37,13 @@ public class LoginUserServiceImpl implements ILoginUserService {
     private IUserService userService;
 
     @Override
-    public UserDetails loadUserByUsername(String s) {
+    public UserDetails loadUserByUsername(String username) {
+        Assert.isNull(username,"用户名为空");
         SearchParam searchParam = SearchParam.getSearchParam();
-        searchParam.put("loginName",s);
+        searchParam.put("loginName",username);
         User user = userService.queryOne(searchParam);
         if(user == null){
-            throw new UsernameNotFoundException("用户不存在");
+            throw new UsernameNotFoundException(AuthCodeEnum.ACCOUNT_NOT_EXIST.getMessage());
         }
         LoginUser loginUser = new LoginUser();
         BeanUtils.copyProperties(user,loginUser);

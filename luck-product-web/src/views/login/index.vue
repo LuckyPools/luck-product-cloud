@@ -48,7 +48,7 @@ export default {
 <style lang="scss">
 .a {
   .b {
-    color: red;
+    color: black;
   }
 }
 </style>
