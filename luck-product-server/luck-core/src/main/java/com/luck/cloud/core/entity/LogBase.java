@@ -1,11 +1,8 @@
 package com.luck.cloud.core.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.sql.Timestamp;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.luck.cloud.base.entity.DataEntity;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 /**
@@ -17,7 +14,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("sys_log_request")
-public class LogRequest extends DataEntity<LogRequest>{
+public class LogBase extends DataEntity<LogBase>{
 
     /**
      * 用户ID

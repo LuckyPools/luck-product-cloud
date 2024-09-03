@@ -2,7 +2,7 @@ package com.luck.cloud.gateway.config;
 
 import cn.hutool.core.map.MapUtil;
 import com.luck.cloud.common.utils.JwtUtils;
-import com.luck.cloud.core.entity.LoginUser;
+import com.luck.cloud.core.dto.LoginUser;
 import com.luck.cloud.redis.utils.RedisCacheUtils;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;

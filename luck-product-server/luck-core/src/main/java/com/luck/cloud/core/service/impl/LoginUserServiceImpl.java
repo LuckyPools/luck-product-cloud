@@ -1,10 +1,8 @@
 package com.luck.cloud.core.service.impl;
 
-import cn.hutool.core.lang.Assert;
-import cn.hutool.core.util.StrUtil;
 import com.luck.cloud.base.param.SearchParam;
 import com.luck.cloud.common.enums.AuthCodeEnum;
-import com.luck.cloud.core.entity.LoginUser;
+import com.luck.cloud.core.dto.LoginUser;
 import com.luck.cloud.core.entity.User;
 import com.luck.cloud.core.service.ILoginUserService;
 import com.luck.cloud.core.service.IUserService;
@@ -16,10 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -38,9 +33,8 @@ public class LoginUserServiceImpl implements ILoginUserService {
 
     @Override
     public UserDetails loadUserByUsername(String username) {
-        Assert.isNull(username,"用户名为空");
         SearchParam searchParam = SearchParam.getSearchParam();
-        searchParam.put("loginName",username);
+        searchParam.put("username",username);
         User user = userService.queryOne(searchParam);
         if(user == null){
             throw new UsernameNotFoundException(AuthCodeEnum.ACCOUNT_NOT_EXIST.getMessage());

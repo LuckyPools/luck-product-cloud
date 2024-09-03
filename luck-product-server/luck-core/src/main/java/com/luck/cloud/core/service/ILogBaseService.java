@@ -1,6 +1,6 @@
 package com.luck.cloud.core.service;
 
-import com.luck.cloud.core.entity.LogRequest;
+import com.luck.cloud.core.entity.LogBase;
 import com.luck.cloud.base.service.IBaseService;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author luck
  * @since 2024-08-01
  */
-public interface ILogRequestService extends IBaseService<LogRequest> {
+public interface ILogBaseService extends IBaseService<LogBase> {
 
     /**
      * 写日志

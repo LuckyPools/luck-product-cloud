@@ -1,7 +1,6 @@
 package com.luck.cloud.core.vo;
 
-import java.sql.Timestamp;
-import com.luck.cloud.core.entity.LogRequest;
+import com.luck.cloud.core.entity.LogBase;
 import io.github.linpeilie.annotations.AutoMapper;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -14,8 +13,8 @@ import lombok.Data;
  */
 @Data
 @ApiModel("系统请求日志")
-@AutoMapper(target = LogRequest.class)
-public class LogRequestVO{
+@AutoMapper(target = LogBase.class)
+public class LogBaseVO {
 
      @ApiModelProperty(value = "数据ID")
      private String id;

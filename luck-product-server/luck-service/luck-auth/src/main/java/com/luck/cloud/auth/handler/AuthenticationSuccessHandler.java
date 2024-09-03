@@ -3,7 +3,7 @@ package com.luck.cloud.auth.handler;
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.luck.cloud.common.utils.JwtUtils;
-import com.luck.cloud.core.entity.LoginUser;
+import com.luck.cloud.core.dto.LoginUser;
 import com.luck.cloud.redis.utils.RedisCacheUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;

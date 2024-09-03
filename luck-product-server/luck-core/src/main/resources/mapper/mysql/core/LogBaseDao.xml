@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.luck.cloud.core.dao.LogRequestDao">
-    <select id="queryList" resultType="com.luck.cloud.core.entity.LogRequest">
+<mapper namespace="com.luck.cloud.core.dao.LogBaseDao">
+    <select id="queryList" resultType="com.luck.cloud.core.entity.LogBase">
         select t.* from sys_log_request t
         <where>
             t.is_delete = 0

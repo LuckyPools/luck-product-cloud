@@ -1,5 +1,6 @@
-package com.luck.cloud.core.entity;
+package com.luck.cloud.core.dto;
 
+import com.luck.cloud.core.entity.User;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

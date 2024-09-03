@@ -4,7 +4,7 @@ package com.luck.cloud.core.utils;
 import cn.hutool.core.map.MapUtil;
 import com.luck.cloud.common.utils.JwtUtils;
 import com.luck.cloud.common.utils.StringUtils;
-import com.luck.cloud.core.entity.LoginUser;
+import com.luck.cloud.core.dto.LoginUser;
 import com.luck.cloud.core.entity.Role;
 import com.luck.cloud.redis.utils.RedisCacheUtils;
 import io.jsonwebtoken.Claims;

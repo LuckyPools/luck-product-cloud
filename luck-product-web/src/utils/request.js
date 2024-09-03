@@ -54,4 +54,9 @@ async function get(url, config = {}) {
     return request.get(url, config);
 }
 
-export default request
+export default {
+    default: request,
+    ...request,
+    post,
+    get
+};

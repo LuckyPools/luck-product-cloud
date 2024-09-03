@@ -1,7 +1,7 @@
 package com.luck.cloud.gateway.filter;
 
 
-import com.luck.cloud.core.service.ILogRequestService;
+import com.luck.cloud.core.service.ILogBaseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -21,12 +21,12 @@ import reactor.core.publisher.Mono;
 public class GatewayLogFilter implements GlobalFilter, Ordered {
 
     @Autowired
-    private ILogRequestService logRequestService;
+    private ILogBaseService logBaseService;
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         exchange.getRequest().getQueryParams();
-        logRequestService.writeLog(exchange.getRequest());
+        logBaseService.writeLog(exchange.getRequest());
         return chain.filter(exchange);
     }
 

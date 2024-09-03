@@ -14,8 +14,8 @@
             <if test="id != null and id != ''">
                 and t.id = #{id}
             </if>
-            <if test="loginName != null and loginName != ''">
-                and t.login_name = #{loginName}
+            <if test="username != null and username != ''">
+                and t.username = #{username}
             </if>
         </where>
     </select>
