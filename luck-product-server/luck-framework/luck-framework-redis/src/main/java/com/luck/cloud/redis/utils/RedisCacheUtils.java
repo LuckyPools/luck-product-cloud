@@ -27,7 +27,7 @@ public class RedisCacheUtils {
          * 缓存命名空间：项目编码:环境编码:大版本号
          */
         private static String getCachePrefix() {
-            return "redis" + ":";
+            return "luckSoft" + ":";
         }
     }
 

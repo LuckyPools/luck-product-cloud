@@ -20,6 +20,7 @@
 <script>
 import {login} from "@/api/auth";
 import {routerPushByKey} from "@/router";
+import {setToken} from "@/utils/auth";
 
 export default {
   name: 'Login',
@@ -37,6 +38,7 @@ export default {
   methods: {
     login() {
       login(this.form).then(res => {
+        setToken(res.data);
         routerPushByKey('home');
       }).catch(() => {
         this.$message.error("登录失败")
