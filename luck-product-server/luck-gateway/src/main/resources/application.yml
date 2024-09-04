@@ -75,5 +75,5 @@ security:
   ignore:
     urls:
       - "/auth/login"
-      - "/logout"
+      - "/auth/logout"
       - "/admin/instance"

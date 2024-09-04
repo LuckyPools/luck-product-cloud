@@ -57,7 +57,12 @@ public class UserUtils {
     }
 
     public static void removeUserCache(){
-
+        String token = getUserToken();
+        if(StringUtils.isNoneBlank(token)) {
+            Claims claims = JwtUtils.getClaims("token");
+            String userId = MapUtil.getStr(claims, "userId");
+            RedisCacheUtils.remove("user:" + userId);
+        }
     }
 
     private static String getUserToken(){

@@ -1,5 +1,6 @@
 package com.luck.cloud.auth.controller;
 
+import com.luck.cloud.core.utils.UserUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,6 +16,13 @@ public class LoginController {
 
     @PostMapping
     public String login() {
-        return "success";
+        return "login success";
+    }
+
+
+    @PostMapping("/logiut")
+    public String logout() {
+        UserUtils.removeUserCache();
+        return "logout success";
     }
 }

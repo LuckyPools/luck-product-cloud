@@ -37,7 +37,7 @@ public class SecurityContextRepository implements ServerSecurityContextRepositor
 
 
     /**
-     * todo 具体功能
+     * 获取token
      * @param exchange
      * @return
      */
