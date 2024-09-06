@@ -22,6 +22,11 @@ module.exports = {
     },
     css: {
         extract: true,
+        loaderOptions: {
+            scss: {
+                additionalData: `@import "~@/styles/scss/variables.scss";`,
+            },
+        },
     }
 }
 

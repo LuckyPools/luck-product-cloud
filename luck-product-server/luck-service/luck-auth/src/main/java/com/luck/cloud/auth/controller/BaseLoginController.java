@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2024-07-17
  */
 @RestController
-public class LoginController {
+public class BaseLoginController {
 
 
     @PostMapping

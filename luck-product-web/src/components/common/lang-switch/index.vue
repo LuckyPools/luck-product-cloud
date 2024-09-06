@@ -1,7 +1,7 @@
 <template>
   <a-dropdown placement="bottomCenter">
     <ButtonIcon :tooltip-content="tooltipContent" tooltip-placement="left">
-      <SvgIcon icon="heroicons:language"/>
+      <SvgIcon unicon="heroicons:language"/>
     </ButtonIcon>
     <template #overlay>
       <AMenu :selected-keys="[lang]" @click="changeLang">

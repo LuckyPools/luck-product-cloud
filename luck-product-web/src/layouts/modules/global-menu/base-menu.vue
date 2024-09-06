@@ -13,8 +13,8 @@
           @click="handleClickMenu">
         <template v-for="item in menus">
           <a-menu-item v-if="!item.children" :key="item.key">
-            <div class="use-menu-title">
-              <a-icon type="pie-chart"/>
+            <div :class="{'collapsed-menu-item' : inlineCollapsed}">
+              <SvgIcon :icon="item.icon"></SvgIcon>
               <span>{{ item.title }}</span>
             </div>
           </a-menu-item>
@@ -30,14 +30,16 @@ import {mapGetters} from "vuex";
 import {transformColorWithOpacity} from "@/layouts/modules/page-tab/share";
 
 import { Menu } from 'ant-design-vue';
+import SvgIcon from "@/components/custom/svg-icon/index.vue";
 const SubMenu = {
   template: `
-      <a-sub-menu :key="menuInfo.key" v-bind="$props" v-on="$listeners" class="use-menu">
+      <a-sub-menu :key="menuInfo.key" v-bind="$props" v-on="$listeners" class="use-sub-menu">
         <span slot="title">
-          <a-icon type="mail" /><span>{{ menuInfo.title }}</span>
+          <SvgIcon :icon="menuInfo.icon"></SvgIcon>
+          <span>{{ menuInfo.title }}</span>
         </span>
         <template v-for="item in menuInfo.children">
-          <a-menu-item v-if="!item.children" :key="item.key" class="text-base_text!">
+          <a-menu-item v-if="!item.children" :key="item.key">
             <a-icon type="pie-chart" />
             <span>{{ item.title }}</span>
           </a-menu-item>
@@ -59,7 +61,7 @@ const SubMenu = {
 };
 export default {
   name: 'BaseMenu',
-  components: {SubMenu, SimpleScrollbar},
+  components: {SvgIcon, SubMenu, SimpleScrollbar},
   props: {
     darkTheme: {
       type: Boolean
@@ -136,6 +138,9 @@ export default {
       const dark = transformColorWithOpacity(themeColor, 0.3, '#000000');
 
       return darkMode ? dark : light;
+    },
+    selectTextColor(){
+        return this.theme.themeColor;
     }
   },
   watch: {
@@ -217,6 +222,7 @@ export default {
 
 </script>
 <style lang="scss" scoped>
+
 .menu-wrapper {
   :deep(.ant-menu-inline) {
     .ant-menu-item {
@@ -224,11 +230,29 @@ export default {
       margin-inline: 8px;
       border-radius: 8px;
     }
+
+    .ant-menu-item:hover {
+      color: red;
+    }
   }
 
   :deep(.ant-menu-submenu-title) {
     width: calc(100% - 16px);
     margin-inline: 8px;
+  }
+
+  :deep(.ant-menu-submenu-title):hover {
+    color: red;
+    background-color: rgba(0, 0, 0, 0.06);
+    border-radius: 8px;
+
+    .ant-menu-submenu-arrow::before {
+      background: red;
+    }
+
+    .ant-menu-submenu-arrow::after {
+      background: red;
+    }
   }
 
   :deep(.ant-menu-inline-collapsed) {
@@ -247,9 +271,6 @@ export default {
       text-align: center;
     }
 
-    .use-menu-title{
-      text-align: center;
-    }
   }
 
   :deep(.ant-menu-horizontal) {
@@ -269,21 +290,36 @@ export default {
       background-color: transparent;
     }
    }
+
 }
+
 
 .select-menu {
   :deep(.ant-menu-inline) {
     .ant-menu-item-selected {
       background-color: v-bind(selectedBgColor);
+      color: v-bind(selectTextColor) !important;
     }
 
     .ant-menu-item-selected::after {
       opacity: 0;
     }
   }
+
+  :deep(.ant-menu-submenu-selected){
+    color: v-bind(selectTextColor);
+  }
+
+  :deep(.ant-menu-item-active) {
+    background-color: rgba(0, 0, 0, 0.06);
+  }
 }
 
 .horizontal-menu {
   line-height: v-bind(headerHeight);
+}
+
+.collapsed-menu-item{
+  text-align: center;
 }
 </style>

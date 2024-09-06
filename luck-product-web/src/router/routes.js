@@ -23,7 +23,7 @@ export const customRoutes = [
         meta: {
             title: 'home',
             i18nKey: 'route.home',
-            icon: 'mdi:monitor-dashboard',
+            icon: 'carbon:user-role',
             order: 0
         }
     },
@@ -46,7 +46,7 @@ export const customRoutes = [
         meta: {
             title: 'fire',
             i18nKey: 'route.document',
-            icon: 'mdi:monitor-dashboard',
+            icon: 'mail',
             order: 1
         },
         children: [

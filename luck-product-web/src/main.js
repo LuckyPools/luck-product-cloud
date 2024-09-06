@@ -6,6 +6,7 @@ import i18n from './locales';
 import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
 import '@/styles/css/index.css';
+import '@/styles/scss/index.scss';
 import 'uno.css';
 
 Vue.use(Antd);

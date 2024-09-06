@@ -1,16 +1,16 @@
 <template>
   <ButtonIcon :key="String(full)" :tooltip-content="full ? $t('icon.fullscreenExit') : $t('icon.fullscreen')">
-    <!-- todo 图标 -->
-    <a-icon v-if="full" type="fullscreen-exit"/>
-    <a-icon v-else type="fullscreen"/>
+      <SvgIcon v-if="full" icon="fullscreen-exit"></SvgIcon>
+      <SvgIcon v-else icon="fullscreen"></SvgIcon>
   </ButtonIcon>
 </template>
 <script>
 import ButtonIcon from "@/components/custom/button-icon/index.vue";
+import SvgIcon from "@/components/custom/svg-icon/index.vue";
 
 export default {
   name: 'FullScreen',
-  components: {ButtonIcon},
+  components: {SvgIcon, ButtonIcon},
   props: {
     full: {
       type: Boolean

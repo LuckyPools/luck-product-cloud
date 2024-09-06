@@ -27,35 +27,36 @@ router.beforeEach((to, from, next) => {
     }
     // 进度条开始
     NProgress.start()
-    // 判断是否登录
-    if (getToken()) {
-        // 还未注册动态路由则先获取
-        if (!store.state.user.menus) {
-            store
-                .dispatch('user/fetchUserInfo')
-                .then(({ menus, homePath }) => {
-                    if (menus) {
-                        store.dispatch('route/setHomeRouteKey', homePath);
-                        // todo 添加动态路由
-                        router.addRoutes([]);
-                        next({ ...to});
-                    }
-                })
-                .catch((e) => {
-                    console.error(e);
-                    next();
-                });
-        } else {
-            next();
-        }
-    } else if (whiteList.includes(to.path)) {
-        next();
-    } else {
-        next({
-            path: '/login',
-            query: to.path === '/' ? {} : { from: to.path }
-        });
-    }
+    next();
+    // // 判断是否登录
+    // if (getToken()) {
+    //     // 还未注册动态路由则先获取
+    //     if (!store.state.user.menus) {
+    //         store
+    //             .dispatch('user/fetchUserInfo')
+    //             .then(({ menus, homePath }) => {
+    //                 if (menus) {
+    //                     store.dispatch('route/setHomeRouteKey', homePath);
+    //                     // todo 添加动态路由
+    //                     router.addRoutes([]);
+    //                     next({ ...to});
+    //                 }
+    //             })
+    //             .catch((e) => {
+    //                 console.error(e);
+    //                 next();
+    //             });
+    //     } else {
+    //         next();
+    //     }
+    // } else if (whiteList.includes(to.path)) {
+    //     next();
+    // } else {
+    //     next({
+    //         path: '/login',
+    //         query: to.path === '/' ? {} : { from: to.path }
+    //     });
+    // }
 })
 
 router.afterEach((to, from, next) => {

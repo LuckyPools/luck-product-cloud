@@ -51,8 +51,8 @@ export function createThemeToken(colors, recommended = false) {
             drawer: 'rgb(255, 255, 255)',
             layout: 'rgb(247, 250, 252)',
             inverted: 'rgb(0, 20, 40)',
-            bg_color: 'rgb(255, 255, 255)',
-            base_text: 'rgb(31, 31, 31)'
+            base: 'rgb(255, 255, 255)',
+            text: 'rgb(31, 31, 31)'
         },
         boxShadow: {
             header: '0 1px 2px rgb(0, 21, 41, 0.08)',
@@ -67,8 +67,8 @@ export function createThemeToken(colors, recommended = false) {
             container: 'rgb(28, 28, 28)',
             drawer: 'rgb(28, 28, 28)',
             layout: 'rgb(18, 18, 18)',
-            bg_color: 'rgb(255, 255, 255)',
-            base_text: 'rgb(224, 224, 224)'
+            base: 'rgb(255, 255, 255)',
+            text: 'rgb(224, 224, 224)'
         },
         boxShadow: {
             ...themeTokens.boxShadow

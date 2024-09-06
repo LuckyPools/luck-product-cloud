@@ -13,9 +13,9 @@ html.grayscale {
     filter: grayscale(100%);
 }
 
-.bg-color{
+.base-color{
     --un-bg-opacity: 1;
-    background-color: rgb(var(--bg-color-color) / var(--un-bg-opacity));
+    background-color: rgb(var(--base-color) / var(--un-bg-opacity));
 }
 
 .bg-container {
@@ -60,12 +60,12 @@ html.grayscale {
 
 .text-base_text {
     --un-text-opacity: 1;
-    color: rgb(var(--base-text-color) / var(--un-text-opacity));
+    color: rgb(var(--text-color) / var(--un-text-opacity));
 }
 
 .text-base_text\! {
     --un-text-opacity: 1;
-    color: rgb(var(--base-text-color) / var(--un-text-opacity)) !important;
+    color: rgb(var(--text-color) / var(--un-text-opacity)) !important;
 }
 
 .size-full {
