@@ -1,6 +1,8 @@
 
 
 // token 存储的名称
+import {transformRecordToOption} from "@/utils/common";
+
 export const TOKEN_KEY = 'access_token';
 
 export const themeLayoutModeRecord = {
@@ -17,12 +19,7 @@ export const themeSchemaRecord = {
     auto: 'theme.themeSchema.auto'
 };
 
-export function transformRecordToOption(record) {
-    return Object.entries(record).map(([value, label]) => ({
-        value,
-        label
-    }));
-}
+
 
 export const themeScrollModeRecord = {
     wrapper: 'theme.scrollMode.wrapper',

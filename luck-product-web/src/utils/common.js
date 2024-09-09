@@ -1,3 +1,5 @@
+import {$t} from "@/locales";
+
 /**
  * Toggle html class
  *
@@ -224,4 +226,25 @@ export function isExternalLink(url) {
             url.startsWith('https://') ||
             url.startsWith('//'))
     );
+}
+
+
+/**
+ * Translate options
+ *
+ * @param options
+ */
+export function translateOptions(options) {
+    return options.map(option => ({
+        ...option,
+        label: $t(option.label)
+    }));
+}
+
+
+export function transformRecordToOption(record) {
+    return Object.entries(record).map(([value, label]) => ({
+        value,
+        label
+    }));
 }

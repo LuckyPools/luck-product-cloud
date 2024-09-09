@@ -73,7 +73,3 @@ html.grayscale {
     height: 100%;
 }
 
-:root{
-    --un-text-opacity: 1;
-    --text-color-rgb: rgb(var(--text-color) / var(--un-text-opacity));
-}

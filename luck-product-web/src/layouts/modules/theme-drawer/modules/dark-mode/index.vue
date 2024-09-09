@@ -26,9 +26,9 @@
 <script>
 import {mapGetters} from "vuex";
 import {themeSchemaRecord} from "@/config/app";
-import SettingItem from "@/layouts/modules/theme-drawer/components/setting-item.vue";
+import SettingItem from "@/layouts/modules/theme-drawer/components/setting-item/index.vue";
 import SvgIcon from "@/components/custom/svg-icon/index.vue";
-import SegmentedSwitch from "@/components/common/segmented-switch/index.vue";
+import SegmentedSwitch from "@/layouts/modules/theme-drawer/components/segmented-switch/index.vue";
 
 export default {
   name: 'DarkMode',

@@ -85,7 +85,7 @@
 <script>
 import {mapGetters} from "vuex";
 import {themePageAnimationModeOptions, themeScrollModeOptions, themeTabModeOptions} from '@/config/app';
-import SettingItem from "@/layouts/modules/theme-drawer/components/setting-item.vue";
+import SettingItem from "@/layouts/modules/theme-drawer/components/setting-item/index.vue";
 
 export default {
   name: 'PageFun',

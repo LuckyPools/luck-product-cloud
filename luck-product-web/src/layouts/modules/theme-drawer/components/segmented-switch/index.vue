@@ -45,7 +45,7 @@
 </template>
 <script>
 
-import darkMode from "@/layouts/modules/theme-drawer/modules/dark-mode.vue";
+import darkMode from "@/layouts/modules/theme-drawer/modules/dark-mode/index.vue";
 import {mapGetters} from "vuex";
 
 export default {

@@ -39,7 +39,7 @@
 </template>
 <script>
 import {mapGetters} from "vuex";
-import SettingItem from "@/layouts/modules/theme-drawer/components/setting-item.vue";
+import SettingItem from "@/layouts/modules/theme-drawer/components/setting-item/index.vue";
 import ColorPicker from "@/components/common/color-picker/index.vue";
 
 export default {

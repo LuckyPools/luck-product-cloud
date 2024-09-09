@@ -55,13 +55,13 @@
             <div class="w-full flex-y-center justify-end gap-12px">
               <AButton @click="reset">
                 <template #icon>
-                  <icon-ic-round-refresh class="align-sub text-icon" />
+                  <SvgIcon icon="icon-ic-round-refresh" class="align-sub text-icon" ></SvgIcon>
                 </template>
                 <span class="ml-8px">{{ $t('common.reset') }}</span>
               </AButton>
               <AButton type="primary" ghost @click="search">
                 <template #icon>
-                  <icon-ic-round-search class="align-sub text-icon" />
+                  <SvgIcon icon="icon-ic-round-search" class="align-sub text-icon" ></SvgIcon>
                 </template>
                 <span class="ml-8px">{{ $t('common.search') }}</span>
               </AButton>
@@ -73,20 +73,25 @@
   </ACard>
 </template>
 <script>
+import { enableStatusOptions, userGenderOptions } from '@/constants/business';
+import {translateOptions} from "@/utils/common";
+import {useFormRules} from "@/utils/form";
+import SvgIcon from "@/components/custom/svg-icon/index.vue";
 
 export default {
     name: 'UserSearch',
-    props: {
-    },
+    components: {SvgIcon},
+    props: {},
     data() {
         return {
-            model: ''
+            model: '',
+            enableStatusOptions: enableStatusOptions,
+            userGenderOptions: userGenderOptions
         }
     },
     computed: {
         rules(){
             const { patternRules } = useFormRules(); // inside computed to make locale reactive
-
             return {
                 userEmail: patternRules.email,
                 userPhone: patternRules.phone
@@ -100,14 +105,16 @@ export default {
         },
 
         search() {
-            this.this.$refs.formRef.validate();
+            this.$refs.formRef.validate();
             this.$emit('search');
+        },
+
+        translateOptions(options){
+          return translateOptions(options);
         }
     }
 }
 
-// import { enableStatusOptions, userGenderOptions } from '@/constants/business';
-// import { translateOptions } from '@/utils/common';
 
 </script>
 <style scoped></style>

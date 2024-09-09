@@ -32,11 +32,11 @@
 <script>
 import ButtonIcon from "@/components/custom/button-icon/index.vue";
 import SimpleScrollbar from "@/layouts/modules/page-tab/simple-scrollbar/index.vue";
-import DarkMode from "@/layouts/modules/theme-drawer/modules/dark-mode.vue";
-import LayoutMode from "@/layouts/modules/theme-drawer/modules/layout-mode.vue";
-import ThemeColor from "@/layouts/modules/theme-drawer/modules/theme-color.vue";
-import PageFun from "@/layouts/modules/theme-drawer/modules/page-fun.vue";
-import ConfigOperation from "@/layouts/modules/theme-drawer/modules/config-operation.vue";
+import DarkMode from "@/layouts/modules/theme-drawer/modules/dark-mode/index.vue";
+import LayoutMode from "@/layouts/modules/theme-drawer/modules/layout-mode/index.vue";
+import ThemeColor from "@/layouts/modules/theme-drawer/modules/theme-color/index.vue";
+import PageFun from "@/layouts/modules/theme-drawer/modules/page-fun/index.vue";
+import ConfigOperation from "@/layouts/modules/theme-drawer/modules/config-operation/index.vue";
 import { useEventListener } from '@vueuse/core';
 import {mapGetters} from "vuex";
 
