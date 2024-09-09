@@ -4,6 +4,7 @@
       :class="activeTabComponent.class"
       :style="cssVars"
       v-bind="bindProps"
+      class="use-tab"
       @mouseup="handleMouseup"
   >
     <template #prefix>
@@ -93,7 +94,13 @@ export default {
 }
 
 </script>
-
+<style lang="scss" scoped>
+:deep(.use-icon){
+    svg{
+        display: block;
+    }
+ }
+</style>
 <style scoped>
 @import 'module.css';
 </style>

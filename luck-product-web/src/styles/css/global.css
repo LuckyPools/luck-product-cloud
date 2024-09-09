@@ -60,12 +60,12 @@ html.grayscale {
 
 .text-base_text {
     --un-text-opacity: 1;
-    color: rgb(var(--text-color) / var(--un-text-opacity));
+    color: var(--text-color-rgb);
 }
 
 .text-base_text\! {
     --un-text-opacity: 1;
-    color: rgb(var(--text-color) / var(--un-text-opacity)) !important;
+    color: var(--text-color-rgb) !important;
 }
 
 .size-full {
@@ -73,3 +73,7 @@ html.grayscale {
     height: 100%;
 }
 
+:root{
+    --un-text-opacity: 1;
+    --text-color-rgb: rgb(var(--text-color) / var(--un-text-opacity));
+}

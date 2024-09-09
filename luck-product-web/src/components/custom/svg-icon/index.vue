@@ -1,5 +1,5 @@
 <template>
-  <div class="inline-block">
+  <div class="use-icon">
     <template v-if="renderLocalIcon">
       <svg aria-hidden="true" width="1em" height="1em" v-bind="bindAttrs">
         <use :xlink:href="symbolId" fill="currentColor"/>
@@ -53,4 +53,11 @@ export default {
   methods: {}
 }
 </script>
-<style scoped></style>
+<style scoped>
+.use-icon{
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: middle;
+
+}
+</style>

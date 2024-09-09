@@ -39,8 +39,8 @@ const SubMenu = {
           <span>{{ menuInfo.title }}</span>
         </span>
         <template v-for="item in menuInfo.children">
-          <a-menu-item v-if="!item.children" :key="item.key">
-            <a-icon type="pie-chart" />
+          <a-menu-item v-if="!item.children" :key="item.key" class="text-base_text!">
+            <SvgIcon :icon="item.icon"></SvgIcon>
             <span>{{ item.title }}</span>
           </a-menu-item>
           <sub-menu v-else :key="item.key" :menu-info="item" />
@@ -58,6 +58,7 @@ const SubMenu = {
       default: () => ({}),
     },
   },
+  components: {SvgIcon}
 };
 export default {
   name: 'BaseMenu',
@@ -222,7 +223,6 @@ export default {
 
 </script>
 <style lang="scss" scoped>
-
 .menu-wrapper {
   :deep(.ant-menu-inline) {
     .ant-menu-item {
@@ -232,27 +232,27 @@ export default {
     }
 
     .ant-menu-item:hover {
-      color: red;
+      color: var(--text-color-rgb);
     }
   }
 
   :deep(.ant-menu-submenu-title) {
     width: calc(100% - 16px);
     margin-inline: 8px;
-  }
-
-  :deep(.ant-menu-submenu-title):hover {
-    color: red;
-    background-color: rgba(0, 0, 0, 0.06);
-    border-radius: 8px;
 
     .ant-menu-submenu-arrow::before {
-      background: red;
+      background: var(--text-color-rgb);
     }
 
     .ant-menu-submenu-arrow::after {
-      background: red;
+      background: var(--text-color-rgb);
     }
+  }
+
+  :deep(.ant-menu-submenu-title):hover {
+    color: var(--text-color-rgb);
+    background-color: rgba(0, 0, 0, 0.06);
+    border-radius: 8px;
   }
 
   :deep(.ant-menu-inline-collapsed) {
@@ -308,6 +308,14 @@ export default {
 
   :deep(.ant-menu-submenu-selected){
     color: v-bind(selectTextColor);
+
+    .ant-menu-submenu-arrow::before {
+      background: v-bind(selectTextColor);
+    }
+
+    .ant-menu-submenu-arrow::after {
+      background: v-bind(selectTextColor);
+    }
   }
 
   :deep(.ant-menu-item-active) {

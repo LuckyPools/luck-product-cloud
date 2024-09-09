@@ -202,6 +202,13 @@ export default {
 
   .m-segmented-group {
 
+    .m-segmented-item {
+
+      &:hover:not(.segmented-item-selected):not(.segmented-item-disabled) {
+        color: rgba(255, 255, 255, 0.85);
+      }
+    }
+
     .segmented-item-selected {
       background-color: #1f1f1f;
       color: rgba(255, 255, 255, 0.85);

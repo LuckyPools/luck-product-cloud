@@ -65,7 +65,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-/deep/ .ant-drawer-wrapper-body {
+:deep(.ant-drawer-wrapper-body) {
   display: flex;
   flex-direction: column;
   overflow: hidden;

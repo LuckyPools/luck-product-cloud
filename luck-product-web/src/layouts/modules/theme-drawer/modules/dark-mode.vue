@@ -6,7 +6,7 @@
         <SegmentedSwitch v-model="theme.themeScheme" :options="options" class="bg-layout!" @change="handleSegmentChange">
           <template #label="{ payload }">
             <div class="w-[70px] flex justify-center">
-              <SvgIcon :icon="payload.icon" class="h-28px text-icon-small flex items-center"/>
+              <SvgIcon :icon="payload.icon" class="h-28px text-icon-small flex! items-center"/>
             </div>
           </template>
         </SegmentedSwitch>
