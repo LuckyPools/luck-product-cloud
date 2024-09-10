@@ -11,9 +11,9 @@
       </span>
         </div>
         <AproTable
-                :row-selection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }"
-                :columns="columns"
-                :data-source="data"
+            :row-selection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }"
+            :columns="columns"
+            :data-source="data"
         >
             <template v-slot:action>
                 <a href="javascript:;">Delete</a>
@@ -22,8 +22,7 @@
     </div>
 </template>
 <script>
-import AproTable from "@/views/system/user/table.vue";
-import {ref} from "vue";
+import AproTable from "@/components/common/a-pro-table/index.vue";
 
 const columns = [
     {
@@ -53,41 +52,6 @@ for (let i = 0; i < 46; i++) {
         age: 32,
         address: `London, Park Lane no. ${i}`,
     });
-}
-
-function useLoading(initValue = false) {
-    const { bool: loading, setTrue: startLoading, setFalse: endLoading } = useBoolean(initValue);
-
-    return {
-        loading,
-        startLoading,
-        endLoading
-    };
-}
-
-function useBoolean(initValue = false) {
-    const bool = ref(initValue);
-
-    function setBool(value) {
-        bool.value = value;
-    }
-    function setTrue() {
-        setBool(true);
-    }
-    function setFalse() {
-        setBool(false);
-    }
-    function toggle() {
-        setBool(!bool.value);
-    }
-
-    return {
-        bool,
-        setBool,
-        setTrue,
-        setFalse,
-        toggle
-    };
 }
 
 export default {

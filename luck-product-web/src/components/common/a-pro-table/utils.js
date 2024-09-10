@@ -90,6 +90,7 @@ export function getOrderItems(sorter) {
  * @param data 需要遍历的数据
  * @param callback 回调
  * @param childrenField children字段名
+ * @param parent
  */
 export function eachTreeData(
     data,

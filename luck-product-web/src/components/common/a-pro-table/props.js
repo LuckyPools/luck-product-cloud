@@ -96,11 +96,28 @@ export const customProps= {
     // 是否需要分页
     needPage: {
         type: Boolean,
-        default: true
+        default: false
     },
-
+    // 分页组件每页显示条目个数
+    pageSize: {
+        type: Number,
+        default: 10,
+        validator(value) {
+            return value > 0;
+        }
+    },
+    // 分页组件默认页码
+    currentPage: {
+        type: Number,
+        default: 1,
+        validator(value) {
+            return value > 0;
+        }
+    },
     // 默认的排序列的 prop 和顺序
     defaultSort: Object,
+    // 服务端数据源默认请求参数
+    where: Object,
     // 服务端数据源自定义请求参数名称
     request: Object,
     // 服务端数据源自定义响应参数名称
