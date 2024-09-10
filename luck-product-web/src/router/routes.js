@@ -11,6 +11,7 @@ export const views = {
     login: () => import("@/views/login/index.vue"),
     test: () => import("@/views/test/index.vue"),
     user: () => import("@/views/system/user/index.vue"),
+    role: () => import("@/views/system/role/index.vue"),
     404: () => import("@/views/test/index.vue"),
     home: () => import("@/views/home/index.vue")
 }
@@ -37,6 +38,17 @@ export const customRoutes = [
             i18nKey: 'route.login',
             constant: true,
             hideInMenu: true
+        }
+    },
+    {
+        name: 'role',
+        path: '/role',
+        component: 'layout.base$view.role',
+        meta: {
+            title: 'role',
+            i18nKey: 'route.role',
+            icon: 'mdi:monitor-dashboard',
+            order: 0
         }
     },
     {

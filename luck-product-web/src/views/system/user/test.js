@@ -1,9 +1,6 @@
 import {computed, effectScope, onScopeDispose, reactive, ref, shallowRef, watch} from 'vue';
-import {cloneDeep} from 'lodash-es';
 import {toValue, useElementSize} from '@vueuse/core';
-import {$t} from '@/locales';
 import store from '@/store'
-import {TableRowSelection} from "ant-design-vue/lib/table/interface";
 
 export function useTable(config) {
   const scope = effectScope();

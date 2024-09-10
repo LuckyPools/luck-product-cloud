@@ -1,18 +1,23 @@
 import {cloneDeep} from "lodash-es";
-import {computed} from "vue";
-import {TableRowSelection} from "ant-design-vue/lib/table/interface";
-import {$t} from "@/locales";
-import {toValue} from "@vueuse/core/index";
 
 export const mixins = {
     data() {
         return {
+            tableOptions: {
+
+            },
             operateType: 'add',
             drawerVisible: false,
             editingData: {},
             data: [],
             checkedRowKeys: {}
         };
+    },
+    props: {
+        loading: {
+            type: Boolean
+        },
+
     },
     computed: {
         rowSelection(){
@@ -32,6 +37,15 @@ export const mixins = {
 
     },
     methods: {
+        useTable(config){
+            const { apiFn, apiParams, immediate } = config;
+
+        },
+
+        useHookTable(){
+
+        },
+
         handleAdd() {
             this.operateType = 'add';
             this.openDrawer();
@@ -57,7 +71,7 @@ export const mixins = {
         },
 
         onBatchDeleted() {
-            this.$message?.success($t('common.deleteSuccess'));
+            this.$message?.success(this.$t('common.deleteSuccess'));
             this.checkedRowKeys = [];
             this.getData();
         },
@@ -67,7 +81,7 @@ export const mixins = {
         },
 
         onDeleted() {
-            this.$message?.success($t('common.deleteSuccess'));
+            this.$message?.success(this.$t('common.deleteSuccess'));
             this.getData();
         }
     },
