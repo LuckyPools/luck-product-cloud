@@ -29,6 +29,9 @@
           :columns="columns"
           :dataSource="tableData"
           :loading="tableLoading"
+          @expand="handleExpand"
+          @change="handlePageChange"
+          @expandedRowsChange="handleExpandedRowsChange"
       >
           <template  v-for="column in columns"  :slot="column.scopedSlots?column.scopedSlots.customRender:''" slot-scope="text,record" >
               <slot :name="column.scopedSlots?column.scopedSlots.customRender:''" v-bind:scope="record" ></slot>
@@ -43,9 +46,9 @@ import {eachTreeData, getFieldValue, getOrderItems, reloadData} from "@/componen
 
 export default {
     name: 'AproTable',
+    emits: ['expand', 'change', 'expandedRowsChange'],
     data() {
         return {
-          testData,
           // 当前显示数据
           tableData: [],
           // 数据请求状态
@@ -264,7 +267,6 @@ export default {
           };
       },
 
-
       /**
        * 树形懒加载时给数据增加可展开的字段标识
        * @param data
@@ -363,6 +365,18 @@ export default {
               }
           });
           return filters;
+      },
+
+      handlePageChange(pagination, filters, sorter, { currentDataSource }){
+        this.$emit('change', pagination, filters, sorter, { currentDataSource })
+      },
+
+      handleExpand(expanded, record){
+        this.$emit('expand', expanded, record);
+      },
+
+      handleExpandedRowsChange(expandedRowKeys){
+        this.$emit('expandedRowsChange', expandedRowKeys);
       },
 
       startLoading(){

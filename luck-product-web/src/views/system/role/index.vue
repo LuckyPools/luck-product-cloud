@@ -14,6 +14,7 @@
             :row-selection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }"
             :columns="columns"
             :data-source="data"
+            @change="handleChange"
         >
             <template v-slot:action>
                 <a href="javascript:;">Delete</a>
@@ -85,6 +86,9 @@ export default {
             console.log('selectedRowKeys changed: ', selectedRowKeys);
             this.selectedRowKeys = selectedRowKeys;
         },
+        handleChange(pagination, filters, sorter, { currentDataSource }){
+            console.log('测试分页事件' + pagination)
+        }
     }
 };
 </script>
