@@ -29,6 +29,7 @@
           :columns="columns"
           :dataSource="tableData"
           :loading="tableLoading"
+          :pagination="tablePagination"
           @expand="handleExpand"
           @change="handlePageChange"
           @expandedRowsChange="handleExpandedRowsChange"
@@ -43,6 +44,7 @@
 <script>
 import props from "@/components/common/a-pro-table/props";
 import {eachTreeData, getFieldValue, getOrderItems, reloadData} from "@/components/common/a-pro-table/utils";
+import {defaultResponseConfig} from "@/config/request";
 
 export default {
     name: 'AproTable',
@@ -53,21 +55,26 @@ export default {
           tableData: [],
           // 数据请求状态
           tableLoading: this.loading,
-          // 当前在第几页
-          tablePage: this.currentPage,
-          // 每页显示数量
-          tableLimit: this.pageSize,
           // 当前排序参数
           tableSorter: null,
           // 当前筛选参数
           tableFilters: null,
-          // 数据总数量
-          tableTotal: 0,
           // 当前搜索参数
           tableWhere: {},
           // 请求错误后的提示信息
           errorText: '',
-        };
+          // 分页配置
+          tablePagination: {
+            // 当前在第几页
+            current: 1,
+            // 每页显示数量
+            pageSize: 10,
+            // 数据总数量
+            total: 0,
+            // 切换页
+            onChange: this.onPageCurrentChange
+          }
+        }
     },
     props: {
       ...props
@@ -83,6 +90,12 @@ export default {
     },
     methods: {
 
+      onPageCurrentChange(page,pageSize) {
+        this.tablePagination.current = page;
+        this.tablePagination.pageSize = pageSize;
+        this.reload();
+      },
+
       reload() {
           const defaultSorter = this.getDefaultSorter();
           const defaultFilters = this.getDefaultFilters();
@@ -91,13 +104,13 @@ export default {
               const { page, data, total } = reloadData(
                   this.dataSource,
                   this.tableSorter ?? defaultSorter,
-                  this.tablePage,
-                  this.tableLimit,
+                  this.tablePagination.current,
+                  this.tablePagination.pageSize,
                   this.needPage
               );
-              this.tablePage = page;
+              this.tablePagination.current = page;
               this.tableData = data;
-              this.tableTotal = total;
+              this.tablePagination.total = total;
               this.tableLoading = false;
               const result = { data, total, response: this.dataSource };
               this.onRenderDone(result, page, total);
@@ -109,8 +122,8 @@ export default {
                   this.tableLoading = true;
                   // 排序参数
                   const reqParams = {
-                      page: this.tablePage,
-                      limit: this.tableLimit,
+                      page: this.tablePagination.current,
+                      limit: this.tablePagination.pageSize,
                       where: {...this.tableWhere},
                       // 排序请求参数
                       order: this.getRequestOrders(defaultSorter),
@@ -125,7 +138,7 @@ export default {
                   Promise.resolve(req)
                       .then((result) => {
                           if (typeof result !== 'undefined') {
-                              const { data, count } = this.getResponseResult(result);
+                              const { data, count } = this.getResponseResult(result.data);
                               this.dataSourceCallback(data, count, result);
                           }
                       })
@@ -151,26 +164,26 @@ export default {
                   this.needPage &&
                   !data.length &&
                   total &&
-                  this.tablePage &&
-                  this.tableLimit
+                  this.tablePagination.current &&
+                  this.tablePagination.pageSize
               ) {
-                  const maxPage = Math.ceil(total / this.tableLimit);
-                  if (maxPage && this.tablePage > maxPage) {
-                      this.tablePage = maxPage;
+                  const maxPage = Math.ceil(total / this.tablePagination.pageSize);
+                  if (maxPage && this.tablePagination.current > maxPage) {
+                      this.tablePagination.current = maxPage;
                       this.reload();
                       return;
                   }
               }
               // 获取返回的数据
               this.tableData = data;
-              this.tableTotal = total || data.length;
+              this.tablePagination.total = total || data.length;
               this.tableLoading = false;
               const result = {
                   data: this.tableData,
-                  total: this.tableTotal,
+                  total: this.tablePagination.total,
                   response
               };
-              this.onRenderDone(result, this.tablePage, this.tableTotal, parent);
+              this.onRenderDone(result, this.tablePagination.current, this.tablePagination.total);
           } else if (typeof data === 'string') {
               this.tableLoading = false;
               this.errorText = data;
@@ -186,13 +199,13 @@ export default {
        * @param result
        * @param page
        * @param total
-       * @param parent
        */
-      onRenderDone(result, page, total, parent) {
-          this.$emit('done', result, page, total, parent);
+      onRenderDone(result, page, total) {
+          this.$emit('done', result, page, total);
       },
 
-      async getData(page, limit, where, order, filterValue, sorter, filters) {
+      async getData(reqParams) {
+        const {page, limit, where,order, filterValue, sorter, filters} = reqParams;
           if (this.api.query) {
               if (typeof this.api.query === 'string') {
                   return this.api.query;
@@ -221,6 +234,7 @@ export default {
                           }
                       });
                   }
+                  searchData.searchParam['a'] = '1';
                   const res = await this.api.query(searchData);
                   if (res.records) {
                       return {
@@ -251,6 +265,7 @@ export default {
               };
           }
           const { dataName, countName, statusCode, statusName, msgName } = {
+              ...defaultResponseConfig,
               ...this.response
           };
           if (!dataName) {

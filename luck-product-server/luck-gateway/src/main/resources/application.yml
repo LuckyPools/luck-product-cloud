@@ -77,3 +77,4 @@ security:
       - "/auth/login"
       - "/auth/logout"
       - "/admin/instance"
+

@@ -11,9 +11,9 @@
       </span>
         </div>
         <AproTable
+            :api="api"
             :row-selection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }"
             :columns="columns"
-            :data-source="data"
             @change="handleChange"
         >
             <template v-slot:action>
@@ -24,6 +24,7 @@
 </template>
 <script>
 import AproTable from "@/components/common/a-pro-table/index.vue";
+import {pageUsers} from "@/api/system/user";
 
 const columns = [
     {
@@ -31,12 +32,12 @@ const columns = [
         dataIndex: 'name',
     },
     {
-        title: 'Age',
-        dataIndex: 'age',
+        title: 'Username',
+        dataIndex: 'username',
     },
     {
-        title: 'Address',
-        dataIndex: 'address',
+        title: 'id',
+        dataIndex: 'id',
     },
     {
         title: 'Action',
@@ -63,6 +64,9 @@ export default {
             columns,
             selectedRowKeys: [], // Check here to configure the default column
             loading: false,
+            api: {
+              query: pageUsers
+            },
         };
     },
     computed: {

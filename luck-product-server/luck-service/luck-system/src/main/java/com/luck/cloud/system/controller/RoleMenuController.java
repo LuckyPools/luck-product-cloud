@@ -22,8 +22,8 @@ import java.util.List;
  * @author luck
  * @since 2024-07-30
  */
-@RestController("coreRoleMenuController")
-@RequestMapping("/core/roleMenu")
+@RestController("sysRoleMenuController")
+@RequestMapping("/roleMenu")
 public class RoleMenuController extends BaseController {
 
     @Autowired

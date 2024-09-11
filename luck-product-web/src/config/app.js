@@ -19,8 +19,6 @@ export const themeSchemaRecord = {
     auto: 'theme.themeSchema.auto'
 };
 
-
-
 export const themeScrollModeRecord = {
     wrapper: 'theme.scrollMode.wrapper',
     content: 'theme.scrollMode.content'

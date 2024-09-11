@@ -8,6 +8,15 @@ export async function getUserInfo() {
 }
 
 
+/**
+ * 分页查询用户
+ * @param params 查询条件
+ */
+export async function pageUsers(params) {
+    return await request.post('/sys/user/page', params);
+}
+
+
 export async function fetchGetUserList() {
     return {
         "data": {

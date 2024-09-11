@@ -22,8 +22,8 @@ import java.util.List;
  * @author luck
  * @since 2024-08-01
  */
-@RestController("coreLogBaseController")
-@RequestMapping("/core/logBase")
+@RestController("sysLogBaseController")
+@RequestMapping("/logBase")
 public class LogBaseController extends BaseController {
 
     @Autowired

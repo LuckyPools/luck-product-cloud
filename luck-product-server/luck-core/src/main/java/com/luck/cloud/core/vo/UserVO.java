@@ -23,6 +23,8 @@ public class UserVO implements Serializable {
 
     private String name;
 
+    private String username;
+
     private String loginName;
 
     private String password;

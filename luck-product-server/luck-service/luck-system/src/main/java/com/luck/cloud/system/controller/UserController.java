@@ -33,7 +33,7 @@ public class UserController extends BaseController {
      * @return
      */
     @PostMapping("/page")
-    public PageVO<UserVO> page(PageVO<User> pageVO) {
+    public PageVO<UserVO> page(@RequestBody PageVO<User> pageVO) {
         userService.queryPage(pageVO);
         return ConvertUtils.convertPage(pageVO, UserVO.class);
     }
