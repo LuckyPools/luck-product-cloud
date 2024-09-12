@@ -31,10 +31,11 @@
 <script>
 
 import SvgIcon from "@/components/custom/svg-icon/index.vue";
+import TableColumnSetting from "@/views/system/user/modules/table-column-setting.vue";
 
 export default {
   name: 'TableHeaderOperation',
-  components: {SvgIcon},
+  components: {TableColumnSetting, SvgIcon},
   props: {
     disabledDelete: {
       type: Boolean

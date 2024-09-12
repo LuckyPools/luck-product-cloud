@@ -27,7 +27,10 @@ export const tableProps = {
     customHeaderRow: Function,
     useFixedHeader: Boolean,
     bordered: Boolean,
-    showHeader: Boolean,
+    showHeader: {
+        type: Boolean,
+        default: true
+    },
     footer: Function,
     title: Function,
     scroll: Object,
