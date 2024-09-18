@@ -1,6 +1,6 @@
 <template>
     <div class="min-h-500px flex-col-stretch gap-16px overflow-hidden lt-sm:overflow-auto">
-      <RoleSearch v-model:model="searchParams" @reset="resetSearchParams" @search="getDataByPage" />
+      <RoleSearch :formModel.sync="searchParams" @reset="resetSearchParams" @search="search" />
       <ACard
           :title="$t('page.manage.user.title')"
           :bordered="false"
@@ -8,9 +8,11 @@
           class="flex-col-stretch sm:flex-1-hidden card-wrapper"
       >
         <AproTable
+          ref="table"
           :api="api"
           :row-selection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }"
           :columns="columns"
+          :where="searchParams"
           @change="handleChange"
         >
           <template v-slot:action>
@@ -96,8 +98,8 @@ export default {
         resetSearchParams(){
 
         },
-        getDataByPage(){
-
+        search(){
+          this.$refs.table.reload();
         }
     }
 };

@@ -12,8 +12,8 @@
     >
       <ARow :gutter="[16, 16]" class="ant-search-form-row" wrap>
         <ACol :span="24" :md="12" :lg="6">
-          <AFormItem :label="$t('page.manage.user.userName')" name="userName" class="m-0">
-            <AInput v-model:value="model.userName" :placeholder="$t('page.manage.user.form.userName')" />
+          <AFormItem :label="$t('page.manage.user.userName')" name="username" class="m-0">
+            <AInput v-model:value="model.username" :placeholder="$t('page.manage.user.form.userName')" />
           </AFormItem>
         </ACol>
         <ACol :span="24" :md="12" :lg="6">
@@ -51,7 +51,7 @@
             />
           </AFormItem>
         </ACol>
-        <div class="flex-1">
+        <div class="flex-1 use-btn">
           <AFormItem>
             <div class="w-full flex-y-center justify-end gap-12px">
               <AButton @click="reset">
@@ -77,12 +77,33 @@ import SvgIcon from "@/components/custom/svg-icon/index.vue";
 export default {
   name: 'UserSearch',
   components: {SvgIcon},
-  props: {},
+  props: {
+    formModel: {
+      type: Object,
+      default: () => ({})
+    }
+  },
   data() {
     return {
-      model: '',
+      model: {
+        username: '',
+        userGender: '',
+        nickName: '',
+        userPhone: '',
+        userEmail: '',
+        status: ''
+      },
       enableStatusOptions: enableStatusOptions,
       userGenderOptions: userGenderOptions
+    }
+  },
+  watch: {
+    model: {
+      handler: function (val) {
+        this.$emit('update:formModel', val);
+      },
+      immediate: true,
+      deep: true
     }
   },
   computed: {
@@ -101,7 +122,6 @@ export default {
     },
 
     search() {
-      this.$refs.formRef.validate();
       this.$emit('search');
     },
 
@@ -122,6 +142,14 @@ export default {
   .ant-search-form-row{
     display: flex;
     flex-flow: row wrap;
+  }
+
+  .ant-form-item {
+    margin-bottom: 4px;
+  }
+
+  .use-btn{
+    margin-top: 12px;
   }
 }
 </style>

@@ -1,6 +1,7 @@
 <template>
   <div>
       <a-table
+          ref="tableWrapperRef"
           :tableLayout="tableLayout"
           :bordered="bordered"
           :childrenColumnName="childrenColumnName"
@@ -19,7 +20,6 @@
           :rowClassName="rowClassName"
           :rowKey="rowKey"
           :rowSelection="rowSelection"
-          :scroll="scroll"
           :showHeader="showHeader"
           :title="title"
           :customHeaderRow="customHeaderRow"
@@ -30,6 +30,7 @@
           :dataSource="tableData"
           :loading="tableLoading"
           :pagination="tablePagination"
+          :scroll="tableScroll"
           @expand="handleExpand"
           @change="handlePageChange"
           @expandedRowsChange="handleExpandedRowsChange"
@@ -45,6 +46,7 @@
 import props from "@/components/common/a-pro-table/props";
 import {eachTreeData, getFieldValue, getOrderItems, reloadData} from "@/components/common/a-pro-table/utils";
 import {defaultResponseConfig} from "@/config/request";
+import {useElementSize} from "@vueuse/core";
 
 export default {
     name: 'AproTable',
@@ -59,8 +61,6 @@ export default {
           tableSorter: null,
           // 当前筛选参数
           tableFilters: null,
-          // 当前搜索参数
-          tableWhere: {},
           // 请求错误后的提示信息
           errorText: '',
           // 分页配置
@@ -71,6 +71,8 @@ export default {
             pageSize: 10,
             // 数据总数量
             total: 0,
+            // 分页大小
+            pageSizeOptions: ['10', '20', '30', '40', '50'],
             // 切换页
             onChange: this.onPageCurrentChange
           }
@@ -80,7 +82,14 @@ export default {
       ...props
     },
     computed: {
-
+      tableScroll(){
+        if(this.scroll){
+          return this.scroll;
+        }
+        return {
+          y: 180
+        };
+      },
     },
     created() {
 
@@ -124,7 +133,7 @@ export default {
                   const reqParams = {
                       page: this.tablePagination.current,
                       limit: this.tablePagination.pageSize,
-                      where: {...this.tableWhere},
+                      where: {...this.where},
                       // 排序请求参数
                       order: this.getRequestOrders(defaultSorter),
                       // 筛选请求参数
