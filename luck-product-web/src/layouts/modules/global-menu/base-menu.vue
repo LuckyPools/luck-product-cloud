@@ -14,7 +14,7 @@
         <template v-for="item in menus">
           <a-menu-item v-if="!item.children" :key="item.key">
             <div :class="{'collapsed-menu-item' : inlineCollapsed}">
-              <SvgIcon :icon="item.icon"></SvgIcon>
+              <SvgIcon :icon="item.icon" class="anticon"></SvgIcon>
               <span>{{ item.title }}</span>
             </div>
           </a-menu-item>
@@ -35,7 +35,7 @@ const SubMenu = {
   template: `
       <a-sub-menu :key="menuInfo.key" v-bind="$props" v-on="$listeners" class="use-sub-menu">
         <span slot="title">
-          <SvgIcon :icon="menuInfo.icon"></SvgIcon>
+          <SvgIcon :icon="menuInfo.icon" class="anticon"></SvgIcon>
           <span>{{ menuInfo.title }}</span>
         </span>
         <template v-for="item in menuInfo.children">
@@ -141,7 +141,7 @@ export default {
       return darkMode ? dark : light;
     },
     selectTextColor(){
-        return this.theme.themeColor;
+      return this.theme.themeColor;
     }
   },
   watch: {
@@ -267,7 +267,7 @@ export default {
 
     .ant-menu-submenu-title {
       padding-inline: calc(50% - 18px);
-      padding: 0 14px !important;
+      padding: 0 16px !important;
       text-align: center;
     }
 
@@ -289,7 +289,7 @@ export default {
     .ant-menu {
       background-color: transparent;
     }
-   }
+  }
 
 }
 

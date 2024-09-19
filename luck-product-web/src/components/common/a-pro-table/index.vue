@@ -46,7 +46,6 @@
 import props from "@/components/common/a-pro-table/props";
 import {eachTreeData, getFieldValue, getOrderItems, reloadData} from "@/components/common/a-pro-table/utils";
 import {defaultResponseConfig} from "@/config/request";
-import {useElementSize} from "@vueuse/core";
 
 export default {
     name: 'AproTable',

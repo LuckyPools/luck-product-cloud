@@ -1,5 +1,17 @@
 <template>
     <div class="min-h-500px flex-col-stretch gap-16px overflow-hidden lt-sm:overflow-auto">
+      <a-button @click="() => setModal1Visible(true)">表单</a-button>
+      <AproModal
+          title="20px to Top"
+          :dialog-style="{ top: '20px' }"
+          :visible="modal1Visible"
+          @ok="() => setModal1Visible(false)"
+          @cancel="() => setModal1Visible(false)"
+      >
+        <p>some contents...</p>
+        <p>some contents...</p>
+        <p>some contents...</p>
+      </AproModal>
       <RoleSearch :formModel.sync="searchParams" @reset="resetSearchParams" @search="search" />
       <ACard
           :title="$t('page.manage.user.title')"
@@ -24,6 +36,7 @@
 </template>
 <script>
 import AproTable from "@/components/common/a-pro-table/index.vue";
+import AproModal from "@/components/common/a-pro-modal/index.vue";
 import RoleSearch from "@/views/system/role/modules/role-search.vue";
 import {pageUsers} from "@/api/system/user";
 
@@ -58,11 +71,12 @@ for (let i = 0; i < 46; i++) {
 }
 
 export default {
-    components: {AproTable,RoleSearch},
+    components: {AproTable,RoleSearch,AproModal},
     data() {
         return {
             data,
             columns,
+            modal1Visible: false,
             searchParams: {},
             selectedRowKeys: [], // Check here to configure the default column
             loading: false,
@@ -98,9 +112,15 @@ export default {
         resetSearchParams(){
 
         },
+        openModal(){
+            this.$message.info("打开表单")
+        },
         search(){
           this.$refs.table.reload();
-        }
+        },
+        setModal1Visible(modal1Visible) {
+          this.modal1Visible = modal1Visible;
+        },
     }
 };
 </script>

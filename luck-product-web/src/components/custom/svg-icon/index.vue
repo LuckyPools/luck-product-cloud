@@ -1,5 +1,5 @@
 <template>
-  <div class="use-icon">
+  <i class="use-icon">
     <template v-if="renderLocalIcon">
       <svg aria-hidden="true" width="1em" height="1em" v-bind="bindAttrs">
         <use :xlink:href="symbolId" fill="currentColor"/>
@@ -8,7 +8,7 @@
     <template v-else>
       <Icon v-if="icon" :icon="icon" v-bind="bindAttrs"/>
     </template>
-  </div>
+  </i>
 </template>
 <script>
 import {Icon} from '@iconify/vue2';
