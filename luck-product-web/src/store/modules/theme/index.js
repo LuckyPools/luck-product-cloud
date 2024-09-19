@@ -6,6 +6,7 @@ import {
 } from "@/store/modules/theme/utils";
 import {getPaletteColorByNumber} from "@/store/modules/theme/palette";
 import { usePreferredColorScheme } from '@vueuse/core';
+import {themeSettings} from "@/theme";
 
 
 function getThemeColors(state) {
@@ -41,8 +42,9 @@ export default {
             state.themeScheme = themeSchemes[nextIndex];
         },
         RESET(state) {
-            const initSettings = initThemeSettings();
-            state = initSettings;
+            Object.keys(themeSettings).forEach(key => {
+                state[key] = themeSettings[key];
+            });
         },
         SET_THEME_SCHEME(state, value) {
             state.themeScheme = value;
