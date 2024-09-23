@@ -58,7 +58,17 @@ export const modalProps = {
 }
 
 export const customProps= {
+    /**
+     * 使用尾部插槽
+     */
     footSlot: {
+        type: Boolean,
+        default: false
+    },
+    /**
+     * 是否全屏
+     */
+    fullHeight:{
         type: Boolean,
         default: false
     }

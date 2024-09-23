@@ -8,6 +8,9 @@
           @ok="() => setModal1Visible(false)"
           @cancel="() => setModal1Visible(false)"
       >
+<!--        <template #title>-->
+<!--            <h1>here is title</h1>-->
+<!--        </template>-->
         <p>some contents...</p>
         <p>some contents...</p>
         <p>some contents...</p>
