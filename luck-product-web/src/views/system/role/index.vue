@@ -11,9 +11,9 @@
 <!--        <template #title>-->
 <!--            <h1>here is title</h1>-->
 <!--        </template>-->
-        <p>some contents...</p>
-        <p>some contents...</p>
-        <p>some contents...</p>
+        <div v-for="(item, index) in generateRange(20)" :key="index">
+          {{ index }}
+        </div>
       </AproModal>
       <RoleSearch :formModel.sync="searchParams" @reset="resetSearchParams" @search="search" />
       <ACard
@@ -124,6 +124,9 @@ export default {
         setModal1Visible(modal1Visible) {
           this.modal1Visible = modal1Visible;
         },
+        generateRange(n) {
+          return Array.from({ length: n }, (_, i) => i);
+        }
     }
 };
 </script>

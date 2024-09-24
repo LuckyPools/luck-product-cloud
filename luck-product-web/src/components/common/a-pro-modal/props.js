@@ -17,7 +17,10 @@ export const modalProps = {
     /** 垂直居中 */
     centered: Boolean,
     /** 宽度*/
-    width: [String,Number],
+    width: {
+        type: [String,Number],
+        default: '520px'
+    },
     /** 底部内容*/
     footer: String,
     /** 确认按钮文字*/

@@ -142,7 +142,7 @@ export default {
     },
     selectTextColor(){
       return this.theme.themeColor;
-    }
+    },
   },
   watch: {
     $route: {
@@ -292,7 +292,6 @@ export default {
   }
 
 }
-
 
 .select-menu {
   :deep(.ant-menu-inline) {
