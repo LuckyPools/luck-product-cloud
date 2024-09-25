@@ -7,7 +7,10 @@ export const modalProps = {
     /** 标题*/
     title: [String,Function],
     /** 是否显示右上角的关闭按钮*/
-    closable: Boolean,
+    closable: {
+        type: Boolean,
+        default: true
+    },
     closeIcon: String,
     /** 点击确定回调*/
     // onOk: (e: React.MouseEvent<any>) => void,

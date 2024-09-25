@@ -1,11 +1,10 @@
 <template>
   <div>
     <a-modal
-        :visible="visible"
+        ref="modal"
         :confirmLoading="confirmLoading"
         :closable="closable"
         :closeIcon="closeIcon"
-        :afterClose="afterClose"
         :centered="centered"
         :footer="footer"
         :okText="okText"
@@ -29,19 +28,24 @@
         :wrapProps="wrapProps"
         :focusTriggerAfterClose="focusTriggerAfterClose"
         :dialogStyle="formDialogStyle"
+        :visible="formVisible"
         :width="formWidth"
+        :afterClose="handleAfterClose"
         @ok="handleOk"
         @cancel="handleCancel"
         :class="[{'full-height': formFullHeight}]"
     >
       <template #title>
-        <slot name="title">
           <div class="flex justify-between items-center">
-            <span>{{title}}</span>
-            <SvgIcon v-if="!formFullHeight" v-on:click.native="toggleFullHeight" icon="bi:arrows-angle-expand" class="text-icon-large cursor-pointer"/>
-            <SvgIcon v-else v-on:click.native="toggleFullHeight" icon="bi:arrows-angle-contract" class="text-icon-large cursor-pointer"/>
+            <slot name="title">
+              <span>{{title}}</span>
+            </slot>
+            <SvgIcon v-if="!formFullHeight" v-on:click.native="toggleFullHeight" icon="mdi:arrow-expand" class="mr-10! cursor-pointer"/>
+            <SvgIcon v-else v-on:click.native="toggleFullHeight" icon="mdi:arrow-collapse" class="mr-10! cursor-pointer"/>
           </div>
-        </slot>
+      </template>
+      <template #closeIcon>
+        <SvgIcon icon="mdi:close" class="cursor-pointer text-icon-large align-super! text-black"/>
       </template>
       <template v-if="footSlot" #footer>
         <slot name="footer"></slot>
@@ -62,7 +66,23 @@ export default {
   },
   data() {
     return {
+      /**
+       * 是否可见
+       */
+      formVisible: false,
+      /**
+       * 全屏
+       */
       formFullHeight: false
+    }
+  },
+  watch: {
+    visible(val) {
+      if(val){
+        this.handleOpen();
+      }else{
+        this.handleCancel();
+      }
     }
   },
   computed: {
@@ -77,31 +97,62 @@ export default {
       }
     },
     formWidth(){
-      console.log(props.width.default)
-      if(this.formFullHeight && this.width === props.width.default){
+      if(this.formFullHeight
+          && this.width === props.width.default){
         return '780px'
       }
       return this.width
     },
   },
-  created() {
-    this.initStyle()
-  },
   methods: {
+    /**
+     * 初始化样式
+     */
     initStyle(){
       this.formFullHeight = this.fullHeight
     },
 
+    /**
+     * 确认按钮
+     * @param e
+     */
     handleOk(e) {
       this.$emit('ok', e);
+      this.formVisible = false;
     },
 
+    /**
+     * 关闭弹窗
+     * @param e
+     */
     handleCancel(e) {
       this.$emit('cancel', e);
+      this.formVisible = false;
     },
 
+    /**
+     * 打开弹窗
+     */
+    handleOpen(){
+      this.initStyle();
+      this.formVisible = true;
+    },
+
+    /**
+     * 切换全屏
+     */
     toggleFullHeight(){
       this.formFullHeight = !this.formFullHeight;
+    },
+
+    /**
+     * 关闭弹窗后
+     */
+    handleAfterClose(){
+      this.initStyle();
+      if(this.afterClose){
+        this.afterClose();
+      }
     }
   },
 };

@@ -2,15 +2,14 @@
     <div class="min-h-500px flex-col-stretch gap-16px overflow-hidden lt-sm:overflow-auto">
       <a-button @click="() => setModal1Visible(true)">表单</a-button>
       <AproModal
-          title="20px to Top"
+          ref="modal"
+          :afterClose="handleAfterClose"
+          :full-height="true"
           :dialog-style="{ top: '20px' }"
-          :visible="modal1Visible"
-          @ok="() => setModal1Visible(false)"
-          @cancel="() => setModal1Visible(false)"
       >
-<!--        <template #title>-->
-<!--            <h1>here is title</h1>-->
-<!--        </template>-->
+        <template #title>
+            <h1>here is title</h1>
+        </template>
         <div v-for="(item, index) in generateRange(20)" :key="index">
           {{ index }}
         </div>
@@ -122,10 +121,17 @@ export default {
           this.$refs.table.reload();
         },
         setModal1Visible(modal1Visible) {
-          this.modal1Visible = modal1Visible;
+          if(modal1Visible){
+            this.$refs.modal.handleOpen();
+          }else{
+            this.$refs.modal.handleCancel();
+          }
         },
         generateRange(n) {
           return Array.from({ length: n }, (_, i) => i);
+        },
+        handleAfterClose(){
+            this.$message.info("关闭成功")
         }
     }
 };
