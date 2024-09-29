@@ -40,8 +40,8 @@
             <slot name="title">
               <span>{{title}}</span>
             </slot>
-            <SvgIcon v-if="!formFullHeight" v-on:click.native="toggleFullHeight" icon="mdi:arrow-expand" class="mr-10! cursor-pointer"/>
-            <SvgIcon v-else v-on:click.native="toggleFullHeight" icon="mdi:arrow-collapse" class="mr-10! cursor-pointer"/>
+            <SvgIcon v-if="!formFullHeight" v-on:click.native="toggleFullHeight" icon="mdi:fullscreen" class="mr-10! cursor-pointer"/>
+            <SvgIcon v-else v-on:click.native="toggleFullHeight" icon="mdi:fullscreen-exit" class="mr-10! cursor-pointer"/>
           </div>
       </template>
       <template #closeIcon>

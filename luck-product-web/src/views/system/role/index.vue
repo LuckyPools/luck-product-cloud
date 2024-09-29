@@ -14,7 +14,7 @@
           {{ index }}
         </div>
       </AproModal>
-      <RoleSearch :formModel.sync="searchParams" @reset="resetSearchParams" @search="search" />
+      <RoleSearch v-if="false" :formModel.sync="searchParams" @reset="resetSearchParams" @search="search" />
       <ACard
           :title="$t('page.manage.user.title')"
           :bordered="false"
@@ -131,7 +131,7 @@ export default {
           return Array.from({ length: n }, (_, i) => i);
         },
         handleAfterClose(){
-            this.$message.info("关闭成功")
+            //this.$message.info("关闭成功")
         }
     }
 };

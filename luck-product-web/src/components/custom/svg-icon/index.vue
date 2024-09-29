@@ -56,7 +56,6 @@ export default {
 <style scoped>
 .use-icon{
     display: inline-block;
-    margin-right: 10px;
     vertical-align: middle;
 
 }
