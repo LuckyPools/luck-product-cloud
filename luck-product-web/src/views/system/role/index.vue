@@ -29,9 +29,7 @@
           :where="searchParams"
           @change="handleChange"
         >
-          <template v-slot:action>
-            <a href="javascript:;">Delete</a>
-          </template>
+
         </AproTable>
       </ACard>
     </div>
