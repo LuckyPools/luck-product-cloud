@@ -82,6 +82,13 @@ const {
       minWidth: 100
     },
     {
+        key: 'id',
+        dataIndex: 'id',
+        title: $t('page.manage.user.userName'),
+        align: 'center',
+        minWidth: 100
+    },
+    {
       key: 'userGender',
       title: $t('page.manage.user.userGender'),
       align: 'center',

@@ -44,20 +44,59 @@ const columns = [
     {
         title: 'Name',
         dataIndex: 'name',
+        width: 200
     },
     {
         title: 'Username',
         dataIndex: 'username',
+        width: 200
     },
     {
         title: 'id',
         dataIndex: 'id',
+        width: 200
     },
     {
-        title: 'Action',
-        key: 'action',
-        scopedSlots: { customRender: 'action' },
+        title: 'id2',
+        dataIndex: 'id',
+        width: 200
     },
+    {
+        title: 'id3',
+        dataIndex: 'id',
+    },
+    {
+        title: 'id4',
+        dataIndex: 'id',
+    },
+    {
+        title: 'id5',
+        dataIndex: 'id',
+    },
+    {
+        title: 'id6',
+        dataIndex: 'id',
+    },
+    {
+        title: 'id7',
+        dataIndex: 'id',
+    },
+    {
+        title: 'id8',
+        dataIndex: 'id',
+    },
+    {
+        title: 'id9',
+        dataIndex: 'id',
+    },
+    {
+        title: 'id10',
+        dataIndex: 'id',
+    },
+    {
+        title: 'id11',
+        dataIndex: 'id',
+    }
 ];
 
 const data = [];

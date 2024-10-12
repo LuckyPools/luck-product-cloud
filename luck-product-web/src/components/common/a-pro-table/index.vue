@@ -23,40 +23,40 @@
         :showHeader="showHeader"
         :title="title"
         :customHeaderRow="customHeaderRow"
-        :customRow="customRow"
         :getPopupContainer="getPopupContainer"
         :transformCellText="transformCellText"
-        :columns="columns"
+        :columns="tableColumns"
         :dataSource="tableData"
         :loading="tableLoading"
         :pagination="tablePagination"
         :scroll="tableScroll"
+        :customRow="tableCustomRow"
         @expand="handleExpand"
         @change="handlePageChange"
         @expandedRowsChange="handleExpandedRowsChange"
     >
-      <template v-for="column in columns" :slot="column.scopedSlots?column.scopedSlots.customRender:''"
+      <template v-for="column in tableColumns" :slot="column.scopedSlots?column.scopedSlots.customRender:''"
                 slot-scope="text,record">
         <slot :name="column.scopedSlots?column.scopedSlots.customRender:''" v-bind:scope="record"></slot>
       </template>
-      <template v-slot:action>
-        <div class="table-row-buttons">
+      <template v-slot:action="text,record,index">
+        <div v-if="index === hoverIndex" class="table-row-buttons">
           <div class="begin" style="display: inline-block"></div>
           <div class="buttons-contain">
-            <button type="button" class="el-button el-button--text" key="0" title="纠正信息">
+            <button type="button" class="use-button--text" key="0" title="纠正信息">
               <span>
                 <a-icon type="drag" />
                 <div class="btn-name">纠正信息</div>
               </span>
             </button>
-            <button type="button" class="el-button el-button--text" key="1" title="查看入职办理">
+            <button type="button" class="use-button--text" key="1" title="查看入职办理">
               <span>
                 <a-icon type="delete" />
                 <div class="btn-name">查看入职办理</div>
               </span>
             </button>
           </div>
-          <div class="fold-contain">
+          <div class="fold-contain" style="display: none">
             <button type="button" class="el-button fold el-button--text">
               <span><svg aria-hidden="true" class="icon fs12"><use
                 xlink:href="#s-right-put"></use></svg></span></button>
@@ -71,6 +71,7 @@
 import props from "@/components/common/a-pro-table/props";
 import {eachTreeData, getFieldValue, getOrderItems, reloadData} from "@/components/common/a-pro-table/utils";
 import {defaultResponseConfig} from "@/config/request";
+import {deepClone} from "@/utils/common";
 
 export default {
   name: 'AproTable',
@@ -87,6 +88,8 @@ export default {
       tableFilters: null,
       // 请求错误后的提示信息
       errorText: '',
+      // 悬浮列
+      hoverIndex: '',
       // 分页配置
       tablePagination: {
         // 当前在第几页
@@ -106,6 +109,10 @@ export default {
     ...props
   },
   computed: {
+    /**
+     *  滚动配置
+     * @returns {Object|{y: number}}
+     */
     tableScroll() {
       if (this.scroll) {
         return this.scroll;
@@ -114,6 +121,19 @@ export default {
         y: 280
       };
     },
+
+    tableColumns(){
+        var columns = this.$utils.deepClone(this.columns);
+        if(columns){
+          columns.push({
+              title: 'Action',
+              key: 'action',
+              colSpan: 0,
+              scopedSlots: { customRender: 'action' },
+          })
+        }
+        return columns;
+    }
   },
   created() {
 
@@ -123,12 +143,69 @@ export default {
   },
   methods: {
 
+    /**
+     * 分页变化
+     * @param page
+     * @param pageSize
+     */
     onPageCurrentChange(page, pageSize) {
       this.tablePagination.current = page;
       this.tablePagination.pageSize = pageSize;
       this.reload();
     },
 
+    /**
+     *  行操作事件
+      * @param record
+     *  @param index
+     *  @returns
+     */
+    tableCustomRow(record, index){
+        return {
+            props: {
+                ...(this.customRow?.props ?? {})
+            },
+            on: { // 事件
+                click: (event) => {},
+                dblclick: (event) => {},
+                contextmenu: (event) => {},
+                mouseenter: (event) => {
+                    this.handleMouseEnterRow(record,index);
+                    if(this.customRow?.on?.mouseenter){
+                        this.customRow.on.mouseenter(event);
+                    }
+                },
+                mouseleave: (event) => {
+                    this.handleMouseLeaveRow(record,index);
+                    if(this.customRow?.on?.mouseleave){
+                        this.customRow.on.mouseleave(event);
+                    }
+                }
+            },
+        }
+    },
+
+    /**
+     *  鼠标离开表格行
+      * @param record
+     *  @param index
+     */
+    handleMouseEnterRow(record, index){
+        this.hoverIndex = index;
+    },
+
+    /**
+     *  鼠标悬浮表格行
+      * @param record
+     *  @param index
+     */
+    handleMouseLeaveRow(record, index){
+        this.hoverIndex = '';
+    },
+
+    /**
+     *  刷新表格数据
+     */
     reload() {
       const defaultSorter = this.getDefaultSorter();
       const defaultFilters = this.getDefaultFilters();
@@ -453,13 +530,13 @@ export default {
   margin-left: 80px;
   font-size: 0;
   border: 0 solid #6e8bde;
-  background-color: #dbf1ec;
   white-space: nowrap;
   width: auto;
   transition: width 2s linear;
   -moz-transition: width 2s linear;
   -webkit-transition: width 2s linear;
   -o-transition: width 2s linear;
+  background-color: #dbf1ec;
 }
 
 .table-row-buttons .begin {
@@ -468,7 +545,6 @@ export default {
   top: 0;
   height: 100%;
   width: 80px;
-  background: linear-gradient(0deg, rgba(219, 241, 236, 0), rgba(219, 241, 236, .85));
   background: -webkit-linear-gradient(0deg, rgba(219, 241, 236, 0), rgba(219, 241, 236, .85));
 }
 
@@ -478,13 +554,14 @@ export default {
   height: 100%;
 }
 
-.table-row-buttons .el-button--text {
+.table-row-buttons .use-button--text {
   padding: 0 8px;
   border-width: 0;
   margin-right: 10px;
   margin-top: 0;
   height: 100%;
   font-size: 12px;
+  background: none;
 }
 
 .table-row-buttons .btn-name {

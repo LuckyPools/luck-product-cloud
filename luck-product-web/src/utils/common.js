@@ -248,3 +248,39 @@ export function transformRecordToOption(record) {
         label
     }));
 }
+
+
+/**
+ * 深度克隆对象
+ * @param obj 源对象
+ * @return 克隆后的对象
+ */
+export function deepClone(obj) {
+    let result;
+    if (Array.isArray(obj)) {
+        result = [];
+    } else if (typeof obj === 'object' && obj !== null) {
+        result = {};
+    } else {
+        return obj;
+    }
+    Object.keys(obj).forEach((key) => {
+        if (typeof obj[key] === 'object' && obj[key] !== null) {
+            result[key] = deepClone(obj[key]);
+        } else {
+            result[key] = obj[key];
+        }
+    });
+    return result;
+}
+
+export default {
+    toggleHtmlClass,
+    toTreeData,
+    formatMenus,
+    formatTreeData,
+    isExternalLink,
+    translateOptions,
+    transformRecordToOption,
+    deepClone
+}
