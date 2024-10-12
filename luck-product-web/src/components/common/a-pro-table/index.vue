@@ -40,7 +40,7 @@
         <slot :name="column.scopedSlots?column.scopedSlots.customRender:''" v-bind:scope="record"></slot>
       </template>
       <template v-slot:action="text,record,index">
-        <div v-if="index === hoverIndex" class="table-row-buttons">
+        <div v-if="index" class="table-row-buttons">
           <div class="begin" style="display: inline-block"></div>
           <div class="buttons-contain">
             <button type="button" class="use-button--text" key="0" title="纠正信息">
@@ -56,10 +56,12 @@
               </span>
             </button>
           </div>
-          <div class="fold-contain" style="display: none">
-            <button type="button" class="el-button fold el-button--text">
-              <span><svg aria-hidden="true" class="icon fs12"><use
-                xlink:href="#s-right-put"></use></svg></span></button>
+          <div class="fold-contain">
+            <button type="button" class="fold use-button--text">
+                <span>
+                    <a-icon type="left" />
+                </span>
+            </button>
           </div>
         </div>
       </template>
@@ -90,6 +92,8 @@ export default {
       errorText: '',
       // 悬浮列
       hoverIndex: '',
+      //
+      rowExpand: false,
       // 分页配置
       tablePagination: {
         // 当前在第几页
@@ -201,6 +205,7 @@ export default {
      */
     handleMouseLeaveRow(record, index){
         this.hoverIndex = '';
+        this.rowExpand = false;
     },
 
     /**
