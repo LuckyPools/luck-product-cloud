@@ -206,7 +206,6 @@ export default {
      *  @param index
      */
     handleMouseLeaveRow(record, index){
-        this.rowExpand = true;
         this.hoverIndex = '';
     },
 
