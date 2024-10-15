@@ -87,7 +87,7 @@ export default {
 
     ...mapGetters(['app', 'theme', 'user', 'route']),
     ...mapGetters('theme', {
-      darkMode: 'darkMode',
+      selectedBgColor: 'selectedBgColor',
     }),
 
     menuTheme() {
@@ -132,14 +132,6 @@ export default {
       return `${this.theme.header.height}px`
     },
 
-    selectedBgColor() {
-      const darkMode = this.darkMode;
-      const themeColor = this.theme.themeColor;
-      const light = transformColorWithOpacity(themeColor, 0.1, '#ffffff');
-      const dark = transformColorWithOpacity(themeColor, 0.3, '#000000');
-
-      return darkMode ? dark : light;
-    },
     selectTextColor(){
       return this.theme.themeColor;
     },

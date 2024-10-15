@@ -29,7 +29,20 @@
           :where="searchParams"
           @change="handleChange"
         >
-
+          <template v-slot:action>
+            <button class="use-button--text" key="0" title="纠正信息">
+              <span>
+                <a-icon type="drag" />
+                <div class="btn-name">纠正信息</div>
+              </span>
+            </button>
+            <button class="use-button--text" key="1" title="查看入职办理">
+              <span>
+                <a-icon type="delete" />
+                <div class="btn-name">查看入职办理</div>
+              </span>
+            </button>
+          </template>
         </AproTable>
       </ACard>
     </div>
@@ -44,7 +57,7 @@ const columns = [
     {
         title: 'Name',
         dataIndex: 'name',
-        width: 200
+        width: 500
     },
     {
         title: 'Username',
@@ -52,50 +65,19 @@ const columns = [
         width: 200
     },
     {
+      title: 'loginName',
+      dataIndex: 'loginName',
+      width: 200
+    },
+    {
+      title: 'isDelete',
+      dataIndex: 'isDelete',
+      width: 100
+    },
+    {
         title: 'id',
         dataIndex: 'id',
         width: 200
-    },
-    {
-        title: 'id2',
-        dataIndex: 'id',
-        width: 200
-    },
-    {
-        title: 'id3',
-        dataIndex: 'id',
-    },
-    {
-        title: 'id4',
-        dataIndex: 'id',
-    },
-    {
-        title: 'id5',
-        dataIndex: 'id',
-    },
-    {
-        title: 'id6',
-        dataIndex: 'id',
-    },
-    {
-        title: 'id7',
-        dataIndex: 'id',
-    },
-    {
-        title: 'id8',
-        dataIndex: 'id',
-    },
-    {
-        title: 'id9',
-        dataIndex: 'id',
-    },
-    {
-        title: 'id10',
-        dataIndex: 'id',
-    },
-    {
-        title: 'id11',
-        dataIndex: 'id',
     }
 ];
 

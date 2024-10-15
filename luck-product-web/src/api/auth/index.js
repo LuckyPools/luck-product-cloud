@@ -6,3 +6,4 @@ export function login(data) {
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
     })
 }
+

@@ -40,27 +40,17 @@
         <slot :name="column.scopedSlots?column.scopedSlots.customRender:''" v-bind:scope="record"></slot>
       </template>
       <template v-slot:action="text,record,index">
-        <div v-if="index" class="table-row-buttons">
-          <div class="begin" style="display: inline-block"></div>
-          <div class="buttons-contain">
-            <button type="button" class="use-button--text" key="0" title="纠正信息">
-              <span>
-                <a-icon type="drag" />
-                <div class="btn-name">纠正信息</div>
-              </span>
-            </button>
-            <button type="button" class="use-button--text" key="1" title="查看入职办理">
-              <span>
-                <a-icon type="delete" />
-                <div class="btn-name">查看入职办理</div>
-              </span>
-            </button>
+        <div v-if="hoverIndex === index" class="table-row-buttons">
+          <div class="begin"></div>
+          <div v-if="rowExpand" class="buttons-contain">
+            <slot name="action"></slot>
           </div>
           <div class="fold-contain">
-            <button type="button" class="fold use-button--text">
-                <span>
-                    <a-icon type="left" />
-                </span>
+            <button class="use-button--text">
+              <span>
+                <a-icon v-if="rowExpand" type="left" v-on:click="toogleRowExpand" />
+                <a-icon v-else type="right" v-on:click="toogleRowExpand"  />
+              </span>
             </button>
           </div>
         </div>
@@ -73,7 +63,7 @@
 import props from "@/components/common/a-pro-table/props";
 import {eachTreeData, getFieldValue, getOrderItems, reloadData} from "@/components/common/a-pro-table/utils";
 import {defaultResponseConfig} from "@/config/request";
-import {deepClone} from "@/utils/common";
+import {mapGetters} from "vuex";
 
 export default {
   name: 'AproTable',
@@ -92,8 +82,8 @@ export default {
       errorText: '',
       // 悬浮列
       hoverIndex: '',
-      //
-      rowExpand: false,
+      // 悬浮行展开
+      rowExpand: true,
       // 分页配置
       tablePagination: {
         // 当前在第几页
@@ -113,6 +103,11 @@ export default {
     ...props
   },
   computed: {
+
+    ...mapGetters('theme', {
+      selectedBgColor: 'selectedBgColor',
+    }),
+
     /**
      *  滚动配置
      * @returns {Object|{y: number}}
@@ -190,6 +185,13 @@ export default {
     },
 
     /**
+     * 切换行展开状态
+     */
+    toogleRowExpand(){
+      this.rowExpand = !this.rowExpand;
+    },
+
+    /**
      *  鼠标离开表格行
       * @param record
      *  @param index
@@ -204,8 +206,8 @@ export default {
      *  @param index
      */
     handleMouseLeaveRow(record, index){
+        this.rowExpand = true;
         this.hoverIndex = '';
-        this.rowExpand = false;
     },
 
     /**
@@ -541,56 +543,64 @@ export default {
   -moz-transition: width 2s linear;
   -webkit-transition: width 2s linear;
   -o-transition: width 2s linear;
-  background-color: #dbf1ec;
-}
+  background-color: v-bind(selectedBgColor);
 
-.table-row-buttons .begin {
-  position: absolute;
-  left: -80px;
-  top: 0;
-  height: 100%;
-  width: 80px;
-  background: -webkit-linear-gradient(0deg, rgba(219, 241, 236, 0), rgba(219, 241, 236, .85));
-}
+  .begin {
+    display: inline-block;
+    position: absolute;
+    left: -80px;
+    top: 0;
+    height: 100%;
+    width: 80px;
+    background: -webkit-linear-gradient(0deg, rgba(219, 241, 236, 0), v-bind(selectedBgColor));
+  }
 
-.table-row-buttons .buttons-contain {
-  position: relative;
-  display: inline-block;
-  height: 100%;
-}
+  .buttons-contain {
+    position: relative;
+    display: inline-block;
+    height: 100%;
+  }
 
-.table-row-buttons .use-button--text {
-  padding: 0 8px;
-  border-width: 0;
-  margin-right: 10px;
-  margin-top: 0;
-  height: 100%;
-  font-size: 12px;
-  background: none;
-}
+  .use-button--text {
+    padding: 0 8px;
+    border-width: 0;
+    margin-top: 0;
+    height: 100%;
+    font-size: 12px;
+    background: none;
 
-.table-row-buttons .btn-name {
-  max-width: 105px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  -o-text-overflow: ellipsis;
-  overflow: hidden;
-}
+    .btn-name {
+      max-width: 105px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      -o-text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
 
-.table-row-buttons .fold-contain {
-  position: absolute;
-  display: inline-block;
-  right: 0;
-  top: 0;
-  padding: 0;
-  margin: 0;
-  height: 100%;
-  width: 30px;
-  cursor: pointer;
+  .fold-contain {
+    position: absolute;
+    display: inline-block;
+    right: 0;
+    top: 0;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 30px;
+    cursor: pointer;
+
+    button{
+      background-color: #f2f5f8;
+    }
+  }
 }
 
 .ant-table-row  td:last-child{
   position: relative;
+}
+
+.ant-table-tbody > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td {
+  background-color: v-bind(selectedBgColor);
 }
 
 </style>
