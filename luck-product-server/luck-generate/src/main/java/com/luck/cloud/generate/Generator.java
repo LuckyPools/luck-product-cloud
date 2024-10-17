@@ -50,7 +50,7 @@ public class Generator {
     /**
      * 需要生成的表(注意数据库类型是否区分大小写)
      */
-    private static String[] include = {"sys_user_role"};
+    private static String[] include = {"sys_dict_type","sys_dict_item"};
 
     /**
      * 需要去除的表名字前缀
@@ -84,7 +84,7 @@ public class Generator {
                     builder.parent(parentPackage)
                             .moduleName(modulesName)
                             .mapper("dao")
-                            //xml文件输出路径
+                            // xml文件输出路径
                             .pathInfo(Collections.singletonMap(OutputFile.xml, projectPath + mapperPath + modulesName.replaceAll("\\.", "/")));
                 })
                 .templateConfig(builder -> {
@@ -123,7 +123,7 @@ public class Generator {
                             .enableRestStyle();
                 })
                 .injectionConfig(builder -> {
-                    //自定义xml模板
+                    // 自定义xml模板
                     builder.customFile(CustomMap.create().build("Dao.xml", "template/mapper.xml.btl").build("VO.java", "template/vo.java.btl"))
                             .build();
                 })
@@ -135,10 +135,10 @@ public class Generator {
                         customFile.forEach((key, value) -> {
                             String parentPath;
                             if(key.startsWith("Dao")){
-                                //自定义xml文件输出
+                                // 自定义xml文件输出
                                 parentPath = this.getPathInfo(OutputFile.xml);
                             }else{
-                                //自定义vo文件输出
+                                // 自定义vo文件输出
                                 parentPath = projectPath + path + File.separator + (parentPackage + File.separator + modulesName + File.separator + "vo").replaceAll("\\.", "/");
                             }
                             String fileName = String.format(parentPath + File.separator + entityName + "%s", key);

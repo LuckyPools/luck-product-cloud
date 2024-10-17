@@ -48,14 +48,25 @@ public class UserUtils {
         return null;
     }
 
+    /**
+     * 获取用户角色
+     * @return
+     */
     public static List<Role> getUserRoles(){
         return null;
     }
 
+    /**
+     * 获取用户目录权限
+     * @return
+     */
     public static List<Role> getUserMenus(){
         return null;
     }
 
+    /**
+     * 移除用户缓存
+     */
     public static void removeUserCache(){
         String token = getUserToken();
         if(StringUtils.isNoneBlank(token)) {
@@ -65,6 +76,10 @@ public class UserUtils {
         }
     }
 
+    /**
+     * 获取用户token
+     * @return
+     */
     private static String getUserToken(){
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         return request.getHeader("Authorization");
