@@ -56,6 +56,12 @@ public class DictItem extends DataEntity<DictItem>{
     private String parentIds;
 
     /**
+     * 字典项名称路径
+     */
+    @TableField
+    private String allNames;
+
+    /**
      * 分类标识
      */
     @TableField
