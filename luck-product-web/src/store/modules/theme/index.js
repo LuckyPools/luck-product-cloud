@@ -7,6 +7,8 @@ import {
 import {getPaletteColorByNumber} from "@/store/modules/theme/palette";
 import { usePreferredColorScheme } from '@vueuse/core';
 import {themeSettings} from "@/theme";
+import darkMode from "@/layouts/modules/theme-drawer/modules/dark-mode/index.vue";
+import {transformColorWithOpacity} from "@/layouts/modules/page-tab/share";
 
 
 function getThemeColors(state) {
@@ -106,6 +108,12 @@ export default {
                 return state.osTheme === 'dark';
             }
             return state.themeScheme === 'dark';
+        },
+        selectedBgColor: (state, getters) => {
+            const themeColor = state.themeColor;
+            const light = transformColorWithOpacity(themeColor, 0.1, '#ffffff');
+            const dark = transformColorWithOpacity(themeColor, 0.3, '#000000');
+            return getters.darkMode ? dark : light;
         },
         grayscaleMode: state => {
             return state.grayscale
