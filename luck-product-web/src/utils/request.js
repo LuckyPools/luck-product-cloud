@@ -21,7 +21,7 @@ request.interceptors.request.use(config => {
 // 添加响应拦截器
 request.interceptors.response.use(response => {
     let {code, msg} = response.data
-    if (code !== 20000) {
+    if (code !== 200) {
         console.log(msg)
     }
     return response

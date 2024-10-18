@@ -1,4 +1,4 @@
-package com.luck.cloud.core.controller;
+package com.luck.cloud.system.controller;
 
 import com.luck.cloud.base.vo.ResultVO;
 import com.luck.cloud.base.vo.PageVO;
@@ -24,7 +24,7 @@ import java.util.List;
  * @since 2024-10-17
  */
 @RestController("coreDictTypeController")
-@RequestMapping("/core/dictType")
+@RequestMapping("/dictType")
 public class DictTypeController extends BaseController {
 
     @Autowired

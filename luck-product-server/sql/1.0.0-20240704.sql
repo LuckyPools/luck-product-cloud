@@ -132,6 +132,7 @@ CREATE TABLE `sys_dict_item` (
      `parent_id` varchar(255)  DEFAULT NULL COMMENT '父级ID',
      `parent_ids` varchar(2000)  DEFAULT NULL COMMENT '所有父级ID路径',
      `all_names` varchar(2000)  DEFAULT NULL COMMENT '字典项名称路径',
+     `grade` int DEFAULT NULL COMMENT '层级',
      `filter` varchar(255) DEFAULT NULL COMMENT '分类标识',
      `sort` int DEFAULT NULL COMMENT '排序',
      PRIMARY KEY (`id`) USING BTREE

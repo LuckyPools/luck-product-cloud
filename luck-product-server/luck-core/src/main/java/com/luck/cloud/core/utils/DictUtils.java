@@ -87,6 +87,31 @@ public class DictUtils {
         return dictList;
     }
 
+    /**
+     * 获取指定节点的子节点
+     *
+     * @param dictCode 字典类型编码
+     * @param parentId 父节点ID
+     * @param filter   分类过滤标识
+     */
+    public static List<DictItem> getItemList(String dictCode, String parentId, String filter, String grades) {
+        List<DictItem> dictItems = DictUtils.getItemList(dictCode, filter);
+        // 父节点id过滤
+        if (StringUtils.isNotEmpty(parentId)) {
+            dictItems = dictItems.stream()
+                    .filter(dictItem -> parentId.equals(dictItem.getParentId()))
+                    .collect(Collectors.toList());
+        }
+        // 层级过滤
+        if (StringUtils.isNotEmpty(grades)) {
+            List<String> gradesList = Lists.newArrayList(grades.split(","));
+            dictItems = dictItems.stream()
+                    .filter(dictItem -> gradesList.contains(String.valueOf(dictItem.getGrade())))
+                    .collect(Collectors.toList());
+        }
+        return dictItems;
+    }
+
 
     /**
      * 根据字典类型编码和字典项编码获取字典项值

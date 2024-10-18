@@ -28,8 +28,8 @@
 <script>
 import {mapGetters} from "vuex";
 import FirstLevelMenu from "@/layouts/modules/global-menu/first-level-menu.vue";
-import DarkModeContainer from "@/components/common/dark-mode-container/index.vue";
-import PinToggler from "@/components/common/pin-toggler/index.vue";
+import DarkModeContainer from "@/components/custom/dark-mode-container/index.vue";
+import PinToggler from "@/components/custom/pin-toggler/index.vue";
 import BaseMenu from "@/layouts/modules/global-menu/base-menu.vue";
 
 export default {

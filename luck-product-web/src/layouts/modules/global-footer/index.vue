@@ -8,7 +8,7 @@
 </template>
 <script>
 
-import DarkModeContainer from "@/components/common/dark-mode-container/index.vue";
+import DarkModeContainer from "@/components/custom/dark-mode-container/index.vue";
 
 export default {
   name: 'GlobalFooter',

@@ -35,10 +35,13 @@
         @change="handlePageChange"
         @expandedRowsChange="handleExpandedRowsChange"
     >
+      <!-- 字段插槽 -->
       <template v-for="column in tableColumns" :slot="column.scopedSlots?column.scopedSlots.customRender:''"
                 slot-scope="text,record">
         <slot :name="column.scopedSlots?column.scopedSlots.customRender:''" v-bind:scope="record"></slot>
       </template>
+
+      <!-- 按钮插槽 -->
       <template v-slot:action="text,record,index">
         <div v-if="hoverIndex === index" class="table-row-buttons">
           <div class="begin"></div>
@@ -60,8 +63,8 @@
 </template>
 
 <script>
-import props from "@/components/common/a-pro-table/props";
-import {eachTreeData, getFieldValue, getOrderItems, reloadData} from "@/components/common/a-pro-table/utils";
+import props from "@/components/extend/a-pro-table/props";
+import {eachTreeData, getFieldValue, getOrderItems, reloadData} from "@/components/extend/a-pro-table/utils";
 import {defaultResponseConfig} from "@/config/request";
 import {mapGetters} from "vuex";
 

@@ -65,6 +65,12 @@ public class DictItem extends DataEntity<DictItem>{
      * 分类标识
      */
     @TableField
+    private String grade;
+
+    /**
+     * 分类标识
+     */
+    @TableField
     private String filter;
 
     /**

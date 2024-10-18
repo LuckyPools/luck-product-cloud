@@ -48,8 +48,8 @@
     </div>
 </template>
 <script>
-import AproTable from "@/components/common/a-pro-table/index.vue";
-import AproModal from "@/components/common/a-pro-modal/index.vue";
+import AproTable from "@/components/extend/a-pro-table/index.vue";
+import AproModal from "@/components/extend/a-pro-modal/index.vue";
 import RoleSearch from "@/views/system/role/modules/role-search.vue";
 import {pageUsers} from "@/api/system/user";
 

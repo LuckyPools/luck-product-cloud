@@ -15,7 +15,7 @@
 <script>
 import {mapGetters} from "vuex";
 import GlobalLogo from "@/layouts/modules/global-logo/index.vue";
-import DarkModeContainer from "@/components/common/dark-mode-container/index.vue";
+import DarkModeContainer from "@/components/custom/dark-mode-container/index.vue";
 import VerticalMixMenu from "@/layouts/modules/global-menu/vertical-mix-menu.vue";
 import HorizontalMixMenu from "@/layouts/modules/global-menu/horizontal-mix-menu.vue";
 import BaseMenu from "@/layouts/modules/global-menu/base-menu.vue";

@@ -7,7 +7,7 @@
   </router-link>
 </template>
 <script>
-import SystemLogo from "@/components/common/system-logo/index.vue";
+import SystemLogo from "@/components/custom/system-logo/index.vue";
 
 export default {
   name: 'GlobalLogo',

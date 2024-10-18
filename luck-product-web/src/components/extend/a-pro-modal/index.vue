@@ -35,6 +35,7 @@
         @cancel="handleCancel"
         :class="[{'full-height': formFullHeight}]"
     >
+      <!-- 标题插槽 -->
       <template #title>
           <div class="flex justify-between items-center">
             <slot name="title">
@@ -44,9 +45,12 @@
             <SvgIcon v-else v-on:click.native="toggleFullHeight" icon="mdi:fullscreen-exit" class="mr-10! cursor-pointer"/>
           </div>
       </template>
+
       <template #closeIcon>
         <SvgIcon icon="mdi:close" class="cursor-pointer text-icon-large align-super! text-black"/>
       </template>
+
+      <!-- 底部插槽 -->
       <template v-if="footSlot" #footer>
         <slot name="footer"></slot>
       </template>
@@ -56,7 +60,7 @@
 </template>
 
 <script>
-import props from "@/components/common/a-pro-modal/props";
+import props from "@/components/extend/a-pro-modal/props";
 import SvgIcon from "@/components/custom/svg-icon/index.vue";
 export default {
   name: 'AproModal',

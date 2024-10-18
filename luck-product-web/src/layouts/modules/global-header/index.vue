@@ -22,15 +22,15 @@
 <script>
 import {useFullscreen} from '@vueuse/core';
 import {mapGetters} from "vuex";
-import DarkModeContainer from "@/components/common/dark-mode-container/index.vue";
+import DarkModeContainer from "@/components/custom/dark-mode-container/index.vue";
 import ThemeButton from "@/layouts/modules/global-header/components/theme-button.vue";
 import UserAvatar from "@/layouts/modules/global-header/components/user-avatar.vue";
 import GlobalLogo from "@/layouts/modules/global-logo/index.vue";
 import GlobalBreadcrumb from "@/layouts/modules/global-breadcrumb/index.vue";
-import MenuToggler from "@/components/common/menu-toggler/index.vue";
-import FullScreen from "@/components/common/full-screen/index.vue";
-import LangSwitch from "@/components/common/lang-switch/index.vue";
-import ThemeSchemaSwitch from "@/components/common/theme-schema-switch/index.vue";
+import MenuToggler from "@/components/custom/menu-toggler/index.vue";
+import FullScreen from "@/components/custom/full-screen/index.vue";
+import LangSwitch from "@/components/custom/lang-switch/index.vue";
+import ThemeSchemaSwitch from "@/components/custom/theme-schema-switch/index.vue";
 import BaseMenu from "@/layouts/modules/global-menu/base-menu.vue";
 
 const {isFullscreen, toggle} = useFullscreen();

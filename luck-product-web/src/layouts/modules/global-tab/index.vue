@@ -48,13 +48,13 @@
 <script>
 import {useElementBounding} from '@vueuse/core';
 import {mapGetters} from "vuex";
-import DarkModeContainer from "@/components/common/dark-mode-container/index.vue";
+import DarkModeContainer from "@/components/custom/dark-mode-container/index.vue";
 import BetterScroll from "@/components/custom/better-scroll/index.vue";
 import PageTab from "@/layouts/modules/page-tab/index.vue";
-import FullScreen from "@/components/common/full-screen/index.vue";
+import FullScreen from "@/components/custom/full-screen/index.vue";
 import ContextMenu from "@/layouts/modules/global-tab/context-menu.vue";
 import SvgIcon from "@/components/custom/svg-icon/index.vue";
-import ReloadButton from "@/components/common/reload-button/index.vue";
+import ReloadButton from "@/components/custom/reload-button/index.vue";
 import {getFixedTabIds} from "@/store/modules/tab/utils";
 
 const TAB_DATA_ID = 'data-tab-id';

@@ -32,7 +32,7 @@
 </template>
 <script>
 import {mapGetters} from "vuex";
-import MenuToggler from "@/components/common/menu-toggler/index.vue";
+import MenuToggler from "@/components/custom/menu-toggler/index.vue";
 import SimpleScrollbar from "@/layouts/modules/page-tab/simple-scrollbar/index.vue";
 import {transformColorWithOpacity} from "@/layouts/modules/page-tab/share";
 import SvgIcon from "@/components/custom/svg-icon/index.vue";

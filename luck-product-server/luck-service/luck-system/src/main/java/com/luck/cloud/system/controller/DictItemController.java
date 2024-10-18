@@ -1,11 +1,11 @@
-package com.luck.cloud.core.controller;
+package com.luck.cloud.system.controller;
 
 import com.luck.cloud.base.vo.ResultVO;
 import com.luck.cloud.base.vo.PageVO;
 import com.luck.cloud.core.entity.DictItem;
+import com.luck.cloud.core.utils.DictUtils;
 import com.luck.cloud.core.vo.DictItemVO;
 import com.luck.cloud.base.utils.ConvertUtils;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import com.luck.cloud.base.controller.BaseController;
@@ -24,7 +24,7 @@ import java.util.List;
  * @since 2024-10-17
  */
 @RestController("coreDictItemController")
-@RequestMapping("/core/dictItem")
+@RequestMapping("/dictItem")
 public class DictItemController extends BaseController {
 
     @Autowired
@@ -32,8 +32,14 @@ public class DictItemController extends BaseController {
 
     @ApiOperation("分页获取数据")
     @PostMapping("page")
-    public PageVO<DictItemVO> pageDictItem(@RequestBody PageVO<DictItem> PageVO) {
+    public ResultVO<DictItemVO> pageDictItem(@RequestBody PageVO<DictItem> PageVO) {
         return ConvertUtils.convertPage(dictItemService.queryPage(PageVO), DictItemVO.class);
+    }
+
+    @ApiOperation("获取字典项列表")
+    @PostMapping("getDictItems")
+    public ResultVO<List<DictItemVO>> getDictItems(String dictCode, String parentId, String filter, String grades) {
+        return ResultVO.success(ConvertUtils.convertList(DictUtils.getItemList(dictCode,parentId,filter,grades), DictItemVO.class));
     }
 
     @ApiOperation("根据id获取唯一数据")
