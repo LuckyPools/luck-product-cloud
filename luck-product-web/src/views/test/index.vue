@@ -1,6 +1,6 @@
 <template>
   <div style="width: 256px">
-    <AProSelect v-model="eyeColor" :options="colors" mode="multiple" size="default" label-key="label" value-key="name" width="120px" >
+    <AProSelect v-model="eyeColor" :options="colors" size="default" label-key="label" value-key="name" width="120px" >
     </AProSelect>
 
     <a-select v-model="mouseColor" :options="colors" mode="multiple" width="120px" >

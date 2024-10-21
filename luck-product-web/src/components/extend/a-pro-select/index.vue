@@ -131,16 +131,6 @@ export default {
         }
     },
     watch: {
-        value: {
-            handler(newVal, oldVal) {
-                if (newVal !== oldVal) {
-                    if (this.localOptions.length > 0) {
-                        this.setSelectValue();
-                    }
-                }
-            },
-            immediate: true
-        },
         selectValue: {
             handler(newVal, oldVal) {
                 if (newVal !== oldVal) {
