@@ -38,7 +38,7 @@ public class DictItemController extends BaseController {
 
     @ApiOperation("获取字典项列表")
     @PostMapping("getDictItems")
-    public ResultVO<List<DictItemVO>> getDictItems(String dictCode, String parentId, String filter, String grades) {
+    public ResultVO<List<DictItemVO>> getDictItems(@RequestParam("dictCode") String dictCode, String parentId, String filter, String grades) {
         return ResultVO.success(ConvertUtils.convertList(DictUtils.getItemList(dictCode,parentId,filter,grades), DictItemVO.class));
     }
 

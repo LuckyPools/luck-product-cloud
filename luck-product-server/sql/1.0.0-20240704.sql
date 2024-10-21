@@ -138,4 +138,7 @@ CREATE TABLE `sys_dict_item` (
      PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='系统管理-字典项';
 
+INSERT INTO `luck_product`.`sys_dict_type`(`id`, `create_by`, `create_date`, `update_by`, `update_date`, `remarks`, `is_delete`, `name`, `code`) VALUES ('1', '1', '2024-10-21 20:38:58', '1', '2024-10-21 20:39:03', NULL, 0, '系统-是否', 'D_SYS_YES_NO');
+INSERT INTO `luck_product`.`sys_dict_item`(`id`, `create_by`, `create_date`, `update_by`, `update_date`, `remarks`, `is_delete`, `name`, `code`, `dict_id`, `dict_code`, `parent_id`, `parent_ids`, `all_names`, `grade`, `filter`, `sort`) VALUES ('1', '1', '2024-10-21 20:39:45', '1', '2024-10-21 20:39:47', NULL, 0, '是', 'yes', '1', 'D_SYS_YES_NO', NULL, NULL, 'yes', 1, NULL, 10);
+INSERT INTO `luck_product`.`sys_dict_item`(`id`, `create_by`, `create_date`, `update_by`, `update_date`, `remarks`, `is_delete`, `name`, `code`, `dict_id`, `dict_code`, `parent_id`, `parent_ids`, `all_names`, `grade`, `filter`, `sort`) VALUES ('2', '1', '2024-10-21 20:40:32', '1', '2024-10-21 20:40:34', NULL, 0, '否', 'no', '1', 'D_SYS_YES_NO', NULL, NULL, 'no', 1, NULL, 20);
 

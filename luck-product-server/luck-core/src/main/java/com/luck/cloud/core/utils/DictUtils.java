@@ -1,5 +1,6 @@
 package com.luck.cloud.core.utils;
 
+import com.alibaba.fastjson.TypeReference;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.luck.cloud.base.param.SearchParam;
@@ -56,7 +57,7 @@ public class DictUtils {
      * @param dictCode 字典类型编码
      */
     public static List<DictItem> getItemList(String dictCode) {
-        Map<String, List<DictItem>> dictMap = RedisCacheUtils.get(CACHE_DICT_MAP);
+        Map<String, List<DictItem>> dictMap = RedisCacheUtils.get(CACHE_DICT_MAP,new TypeReference<Map<String, List<DictItem>>>() {});
         if (dictMap == null) {
             dictMap = DictUtils.refreshCache();
         }

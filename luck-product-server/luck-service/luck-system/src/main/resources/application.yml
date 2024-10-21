@@ -8,7 +8,21 @@ spring:
     username: ${datasource.username}
     password: ${datasource.password}
     url: ${datasource.url}
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: ${datasource.driver-class-name}
+
+  redis:
+    database: ${redis.database}
+    host: ${redis.host}
+    port: ${redis.port}
+    password: ${redis.password}
+    timeout: ${redis.timeout}
+    jedis:
+      pool:
+        max-idle: ${redis.jedis.pool.max-idle}
+        min-idle: ${redis.jedis.pool.min-idle}
+        max-active: ${redis.jedis.pool.max-active}
+        max-wait: ${redis.jedis.pool.max-wait}
+    expire: ${redis.expire}
 
 jdbc:
   type: mysql

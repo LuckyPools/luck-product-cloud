@@ -58,9 +58,9 @@
         @dropdownVisibleChange="handleDropdownVisibleChange"
     >
         <!-- 空数据插槽 -->
-<!--        <template v-slot:notFoundContent>-->
-<!--            <slot name="notFoundContent"></slot>-->
-<!--        </template>-->
+        <template v-slot:notFoundContent>
+            <slot name="notFoundContent"></slot>
+        </template>
         <a-select-option
             v-for="item in localOptions"
             :key="item[valueKey]"

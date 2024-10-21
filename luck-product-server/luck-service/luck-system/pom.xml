@@ -17,11 +17,6 @@
             <artifactId>luck-core</artifactId>
             <version>${revision}</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.luck.cloud</groupId>-->
-<!--            <artifactId>luck-framework-base</artifactId>-->
-<!--            <version>${revision}</version>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>

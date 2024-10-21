@@ -1,13 +1,14 @@
 package com.luck.cloud.redis.utils;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.TypeReference;
 import com.luck.cloud.common.utils.SpringBeanUtils;
 import com.luck.cloud.common.utils.StringUtils;
 import com.luck.cloud.redis.service.RedisService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * redis缓存操作工具类
@@ -38,8 +39,16 @@ public class RedisCacheUtils {
     public static <T> T get(String key, Class<T> clazz) {
         String str = get(key);
         if(StringUtils.isNotEmpty(str)){
-            String objStr = (String) JSON.parse(str);
-            return JSONObject.parseObject(objStr, clazz);
+            return JSONObject.parseObject(str, clazz);
+        }
+        return null;
+    }
+
+
+    public static <T> T get(String key, TypeReference<T> type) {
+        String str = get(key);
+        if(StringUtils.isNotEmpty(str)){
+            return JSONObject.parseObject(str, type);
         }
         return null;
     }

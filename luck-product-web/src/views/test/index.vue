@@ -3,8 +3,8 @@
     <AProSelect v-model="eyeColor" :options="colors" size="default" label-key="label" value-key="name" width="120px" >
     </AProSelect>
 
-    <a-select v-model="mouseColor" :options="colors" mode="multiple" width="120px" >
-    </a-select>
+    <AProSelect v-model="toYes" dict-code="D_SYS_YES_NO" size="default" label-key="name" value-key="code" width="120px" >
+    </AProSelect>
 
     <a-menu
         :default-selected-keys="['1']"
@@ -100,6 +100,7 @@ export default {
         }
       ],
       mouseColor: 'blue',
+      toYes: 'yes',
       eyeColor: 'red',
       colors: [
           {
