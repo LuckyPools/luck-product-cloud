@@ -156,21 +156,21 @@ export default {
                 }
             }
         },
-        filter: {
+        dictFilter: {
             handler() {
                 if (this.dictCode) {
                     this.loadOptions();
                 }
             }
         },
-        parentId: {
+        dictParentId: {
             handler() {
                 if (this.dictCode) {
                     this.loadOptions();
                 }
             }
         },
-        grades: {
+        dictGrade: {
             handler() {
                 if (this.dictCode) {
                     this.loadOptions();
@@ -241,8 +241,8 @@ export default {
          */
         async queryUrl() {
             let req = this.$api?.httpRequest;
-            if (req && this.method && this.api) {
-                let result = await req(this.method, this.api, this.params);
+            if (req && this.apiMethod && this.api) {
+                let result = await req(this.apiMethod, this.api, this.apiParams);
                 return result.data;
             } else {
                 return [];
@@ -257,9 +257,9 @@ export default {
             if (req) {
                 let params = {};
                 params.dictCode = this.dictCode;
-                params.filter = this.filter;
-                params.parentId = this.parentId;
-                params.grades = this.grades;
+                params.filter = this.dictFilter;
+                params.parentId = this.dictParentId;
+                params.grade = this.dictGrade;
                 let result = await req(params);
                 return result.data;
             } else {

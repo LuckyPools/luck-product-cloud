@@ -108,14 +108,14 @@ export const customProps = {
     /**
      * 当API为URL字符串时的请求方法类型
      */
-    method: {
+    apiMethod: {
         type: String,
         default: 'get'
     },
     /**
      * 当API为URL字符串时的请求参数
      */
-    params: {
+    apiParams: {
         type: Object,
         default: () => {
             return {};
@@ -124,21 +124,21 @@ export const customProps = {
     /**
      * 字典过滤，和字典编码一起生效
      */
-    filter: {
+    dictFilter: {
         type: String,
         default: ''
     },
     /**
      * 字典父级ID，和字典编码一起生效
      */
-    parentId: {
+    dictParentId: {
         type: String,
         default: ''
     },
     /**
      * 字典级别，和字典编码一起生效
      */
-    grades: {
+    dictGrade: {
         type: String,
         default: ''
     },

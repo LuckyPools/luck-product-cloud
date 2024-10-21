@@ -1,25 +1,25 @@
 <template>
-    <div>
+    <div class="el-bns">
         <span v-if="isView" class="a-view">{{ viewValue }}</span>
-        <div v-else :style="{ width: width }">
-            <a-radio-group
-                name="radioGroup"
-                v-model="selectValue"
+        <template v-else>
+            <a-checkbox-group
                 :defaultValue="defaultValue"
                 :disabled="disabled"
                 :name="name"
-                :size="size"
-                :buttonStyle="buttonStyle"
-                @change="handleChange">
-                <a-radio v-for="item in localOptions"
-                         :value="item[valueKey]"
-                         :disabled="isDisabledOption(item)"
-                         @blur="handleBlur"
-                         @focus="handleFocus">
+                v-model="selectValue"
+                @change="handleChange"
+            >
+                <a-checkbox
+                    v-for="item in localOptions"
+                    :disabled="isDisabledOption(item)"
+                    @change="(val) => handleChangeItem(val, item)"
+                    @blur="handleBlur"
+                    @focus="handleFocus"
+                >
                     {{ item[labelKey] }}
-                </a-radio>
-            </a-radio-group>
-        </div>
+                </a-checkbox>
+            </a-checkbox-group>
+        </template>
     </div>
 </template>
 
@@ -32,23 +32,26 @@ export default {
     props: {
         ...props
     },
-    emits: ['change','focus','blur'],
+    emits: ['change', 'select'],
     data() {
         return {
             // 选项
             localOptions: [],
-            // 选择项
-            selectValue: null
+            // 绑定数据
+            selectValue: []
         };
     },
     computed: {
         // 查看模式显示数据
         viewValue() {
-            let option = this.localOptions.find(
-                (item) => this.value == item[this.valueKey]
-            );
-            if (option) {
-                return option[this.labelKey];
+            let selectLabel = [];
+            this.localOptions.forEach((item) => {
+                if (this.selectValue.includes(item[this.valueKey])) {
+                    selectLabel.push(item[this.labelKey]);
+                }
+            });
+            if (selectLabel.length > 0) {
+                return selectLabel.join(',');
             } else {
                 return '';
             }
@@ -65,12 +68,14 @@ export default {
         },
         localOptions: {
             handler() {
+                // 监听checkbox选项的变化，当选项发生变化时，重新绑定已选中的值
                 this.setSelectValue();
             },
             deep: true
         },
         dictCode: {
             handler() {
+                // 当字典码发生变化时，重新渲染checkbox选项
                 if (this.dictCode) {
                     this.loadOptions();
                 }
@@ -78,6 +83,7 @@ export default {
         },
         dictFilter: {
             handler() {
+                // 当字典过滤条件发生变化时，重新渲染checkbox选项
                 if (this.dictCode) {
                     this.loadOptions();
                 }
@@ -85,6 +91,7 @@ export default {
         },
         dictParentId: {
             handler() {
+                // 当指定字典项父级id发生变化时，重新渲染checkbox选项
                 if (this.dictCode) {
                     this.loadOptions();
                 }
@@ -92,6 +99,7 @@ export default {
         },
         dictGrade: {
             handler() {
+                // 当指定字典项层级发生变化时，重新渲染checkbox选项
                 if (this.dictCode) {
                     this.loadOptions();
                 }
@@ -99,20 +107,23 @@ export default {
         },
         options: {
             handler() {
+                // 当指定本地字典项变化时，重新渲染checkbox选项
                 this.loadOptions();
             },
             deep: true
         },
         api: {
             handler() {
+                // 当指定取数的api变化时，重新渲染checkbox选项
                 if (this.api) {
                     this.loadOptions();
                 }
             },
             deep: true
         },
-        params: {
+        apiParams: {
             handler() {
+                // 当指定取数的api参数变化时，重新渲染checkbox选项
                 this.loadOptions();
             },
             deep: true
@@ -152,7 +163,7 @@ export default {
             } else if (this.dictCode != null && this.dictCode.trim() !== '') {
                 return this.queryDict();
             } else {
-                return this.$utils.deepClone(this.localOptions);
+                return this.$utils.deepClone(this.options);
             }
         },
 
@@ -161,11 +172,11 @@ export default {
          */
         async queryUrl() {
             let req = this.$api?.httpRequest;
-            if (req && this.apiMethod && this.api) {
+            if (req && this.method && this.api) {
                 const result = await req(this.apiMethod, this.api, this.apiParams);
                 return result.data;
             } else {
-                return {};
+                return [];
             }
         },
 
@@ -179,7 +190,7 @@ export default {
                 params.dictCode = this.dictCode;
                 params.filter = this.dictFilter;
                 params.parentId = this.dictParentId;
-                params.grade = this.dictGrade;
+                params.grades = this.dictGrade;
                 let result = await req(params);
                 return result.data;
             } else {
@@ -191,8 +202,17 @@ export default {
          * 设置本地绑定值
          */
         setSelectValue() {
-            if (!this.localOptions.some((item) => item[this.valueKey] == this.value)) {
-                this.selectValue = this.value;
+            if (this.value) {
+                let curValue = this.value ? this.value.split(',') : [];
+                let selectValue = [];
+                curValue.forEach((it) => {
+                    if (this.localOptions.some((item) => item[this.valueKey] === it)) {
+                        selectValue.push(it);
+                    }
+                });
+                this.selectValue = selectValue;
+            } else {
+                this.selectValue = [];
             }
         },
 
@@ -201,13 +221,10 @@ export default {
          * @param item 选项
          */
         isDisabledOption(item) {
-            if (this.disabled) {
-                return true;
-            }
             if (
                 item == null ||
                 this.disabledOptions == null ||
-                this.disabledOptions.length == 0
+                this.disabledOptions.length === 0
             ) {
                 return false;
             }
@@ -222,6 +239,16 @@ export default {
          */
         handleChange(e) {
             this.$emit('change', e);
+        },
+
+        /**
+         * group和box的change事件重复
+         * box项修改提交为select事件
+         * @param val 是否选中
+         * @param option 选中项
+         */
+        handleChangeItem(val, option) {
+            this.$emit('changeItem', val, option);
         },
 
         /**

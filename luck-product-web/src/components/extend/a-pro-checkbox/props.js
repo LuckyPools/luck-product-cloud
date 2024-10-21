@@ -1,56 +1,43 @@
 import commonProps from '../a-pro-common/props';
+
 /**
  * 继承属性
  */
 export const extendProps = {
     /**
-     * 默认选中的值
+     * 默认选中的选项
      */
     defaultValue: {
-        type: null, // 'any' type is represented by null in Vue prop type definition
-        default: null
+        type: Array,
+        default: () => []
     },
     /**
-     * 禁选所有子单选器
+     * 整组失效
      */
     disabled: {
         type: Boolean,
         default: false
     },
     /**
-     * RadioGroup 下所有 input[type="radio"] 的 name 属性
+     * CheckboxGroup 下所有 input[type="checkbox"] 的 name 属性
      */
     name: {
         type: String,
         default: null
     },
     /**
-     * 以配置形式设置子元素
+     * 指定可选项，可以通过 slot="label" slot-scope="option" 定制label
      */
     options: {
         type: [Array, String],
-        default: null
+        default: () => []
     },
     /**
-     * 大小，只对按钮样式生效
-     */
-    size: {
-        type: String,
-        default: 'default' // Assuming the default size is 'default'
-    },
-    /**
-     * 用于设置当前选中的值
+     * 指定选中的选项
      */
     value: {
-        type: null, // 'any' type is represented by null in Vue prop type definition
-        default: null
-    },
-    /**
-     * RadioButton 的风格样式，目前有描边和填色两种风格
-     */
-    buttonStyle: {
-        type: String,
-        default: 'outline'
+        type: Array,
+        default: () => []
     }
 };
 
@@ -81,41 +68,39 @@ export const customProps = {
         }
     },
     /**
-     * 字典过滤，和字典编码一起生效
+     * 字典编码，使用字典编码查询字典项作为选项数据
      */
-    dictFilter: {
+    dictCode: {
         type: String,
         default: ''
     },
     /**
-     * 字典父级ID，和字典编码一起生效
+     * 字典过滤，和字典编码一起生效
+     */
+    dictFilter: {
+        type: Array[Number],
+        default: () => []
+    },
+    /**
+     * 字典项父级ID，和字典编码一起生效
      */
     dictParentId: {
         type: String,
         default: ''
     },
     /**
-     * 字典级别，和字典编码一起生效
+     * 字典层级，和字典编码一起生效
      */
     dictGrade: {
-        type: String,
-        default: ''
+        type: Array[Number],
+        default: () => []
     },
     /**
      * 禁用选项，由禁用值组成的数组
      */
     disabledOptions: {
         type: Array,
-        default: () => {
-            return [];
-        }
-    },
-    /**
-     * 字典编码，使用字典编码查询字典项作为选项数据
-     */
-    dictCode: {
-        type: String,
-        default: ''
+        default: () => []
     },
     /**
      * 选项标签的键名
@@ -138,11 +123,19 @@ export const customProps = {
         type: String,
         default: '100%'
     }
-}
+};
+
+/**
+ * 覆盖属性
+ */
+export const overrideProps = {
+    value: String
+};
 
 export default {
     ...extendProps,
     ...customProps,
+    ...overrideProps,
     /**
      * 公共属性
      */
