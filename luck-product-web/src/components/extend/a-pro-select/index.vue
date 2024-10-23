@@ -68,8 +68,12 @@
             :value="item[valueKey]"
             :disabled="isDisabledOption(item)"
         >
-            <!-- 默认插槽 -->
-            <span style="float: left">{{ item[labelKey] }}</span>
+          <!-- 默认插槽 -->
+          <slot :item="item">
+            <template>
+              <span>{{ item[labelKey] }}</span>
+            </template>
+          </slot>
         </a-select-option>
     </a-select>
   </div>
@@ -80,7 +84,7 @@ import props from './props';
 import common from '../a-pro-common/mixin';
 
 export default {
-    name: 'AproSelect',
+    name: 'AProSelect',
     mixins: [common],
     props: {
         ...props
@@ -191,7 +195,7 @@ export default {
             },
             deep: true
         },
-        params: {
+        apiParams: {
             handler() {
                 this.loadOptions();
             },
@@ -275,14 +279,14 @@ export default {
                 let curValue = this.value ? this.value.split(',') : [];
                 let selectValue = [];
                 curValue.forEach((it) => {
-                    if (this.localOptions.some((item) => item[this.valueKey] == it)) {
+                    if (this.localOptions.some((item) => item[this.valueKey] === it)) {
                         selectValue.push(it);
                     }
                 });
                 this.selectValue = selectValue;
             } else {
-                if (this.localOptions.some((item) => item[this.valueKey] == this.value)) {
-                    this.selectValue = this.value ? this.value : '';
+                if (this.localOptions.some((item) => item[this.valueKey] === this.value)) {
+                    this.selectValue = this.value ? this.value : null;
                 } else {
                     this.selectValue = null;
                 }
@@ -297,7 +301,7 @@ export default {
             if (
                 item == null ||
                 this.disabledOptions == null ||
-                this.disabledOptions.length == 0
+                this.disabledOptions.length === 0
             ) {
                 return false;
             }

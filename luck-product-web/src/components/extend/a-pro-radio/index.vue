@@ -1,22 +1,28 @@
 <template>
     <div>
         <span v-if="isView" class="a-view">{{ viewValue }}</span>
-        <div v-else :style="{ width: width }">
+        <div v-else>
             <a-radio-group
                 name="radioGroup"
                 v-model="selectValue"
                 :defaultValue="defaultValue"
                 :disabled="disabled"
-                :name="name"
                 :size="size"
                 :buttonStyle="buttonStyle"
+                :style="{ width: width }"
                 @change="handleChange">
                 <a-radio v-for="item in localOptions"
+                         :key="item[valueKey]"
                          :value="item[valueKey]"
                          :disabled="isDisabledOption(item)"
                          @blur="handleBlur"
                          @focus="handleFocus">
-                    {{ item[labelKey] }}
+                    <!-- 默认插槽 -->
+                    <slot :item="item">
+                      <template>
+                        <span>{{ item[labelKey] }}</span>
+                      </template>
+                    </slot>
                 </a-radio>
             </a-radio-group>
         </div>
@@ -28,6 +34,7 @@ import props from './props';
 import common from '../a-pro-common/mixin';
 
 export default {
+    name: 'AProRadio',
     mixins: [common],
     props: {
         ...props
@@ -45,7 +52,7 @@ export default {
         // 查看模式显示数据
         viewValue() {
             let option = this.localOptions.find(
-                (item) => this.value == item[this.valueKey]
+                (item) => this.value === item[this.valueKey]
             );
             if (option) {
                 return option[this.labelKey];
@@ -111,7 +118,7 @@ export default {
             },
             deep: true
         },
-        params: {
+        apiParams: {
             handler() {
                 this.loadOptions();
             },
@@ -152,7 +159,7 @@ export default {
             } else if (this.dictCode != null && this.dictCode.trim() !== '') {
                 return this.queryDict();
             } else {
-                return this.$utils.deepClone(this.localOptions);
+                return this.$utils.deepClone(this.options);
             }
         },
 
@@ -191,8 +198,10 @@ export default {
          * 设置本地绑定值
          */
         setSelectValue() {
-            if (!this.localOptions.some((item) => item[this.valueKey] == this.value)) {
-                this.selectValue = this.value;
+            if (this.localOptions.some((item) => item[this.valueKey] === this.value)) {
+                this.selectValue = this.value ? this.value : null;
+            } else {
+              this.selectValue = null;
             }
         },
 
@@ -207,7 +216,7 @@ export default {
             if (
                 item == null ||
                 this.disabledOptions == null ||
-                this.disabledOptions.length == 0
+                this.disabledOptions.length === 0
             ) {
                 return false;
             }

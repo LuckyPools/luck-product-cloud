@@ -1,22 +1,29 @@
 <template>
-    <div class="el-bns">
+    <div class="a">
         <span v-if="isView" class="a-view">{{ viewValue }}</span>
         <template v-else>
             <a-checkbox-group
-                :defaultValue="defaultValue"
+                name="checkGroup"
                 :disabled="disabled"
-                :name="name"
+                :style="{ width: width }"
                 v-model="selectValue"
                 @change="handleChange"
             >
                 <a-checkbox
                     v-for="item in localOptions"
+                    :value="item[valueKey]"
+                    :key="item[valueKey]"
                     :disabled="isDisabledOption(item)"
                     @change="(val) => handleChangeItem(val, item)"
                     @blur="handleBlur"
                     @focus="handleFocus"
                 >
-                    {{ item[labelKey] }}
+                  <!-- 默认插槽 -->
+                  <slot :item="item">
+                    <template>
+                      <span>{{ item[labelKey] }}</span>
+                    </template>
+                  </slot>
                 </a-checkbox>
             </a-checkbox-group>
         </template>
@@ -28,6 +35,7 @@ import props from './props';
 import common from '../a-pro-common/mixin';
 
 export default {
+    name: 'AProCheckBox',
     mixins: [common],
     props: {
         ...props
@@ -61,7 +69,7 @@ export default {
         selectValue: {
             handler(newVal, oldVal) {
                 if (newVal !== oldVal) {
-                    this.$emit('input', this.selectValue);
+                    this.$emit('input', this.selectValue.join(','));
                 }
             },
             deep: true

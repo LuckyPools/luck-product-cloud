@@ -7,10 +7,10 @@ export const extendProps = {
     /**
      * 默认选中的选项
      */
-    defaultValue: {
-        type: Array,
-        default: () => []
-    },
+    // defaultValue: {
+    //     type: Array,
+    //     default: () => []
+    // },
     /**
      * 整组失效
      */
@@ -30,13 +30,6 @@ export const extendProps = {
      */
     options: {
         type: [Array, String],
-        default: () => []
-    },
-    /**
-     * 指定选中的选项
-     */
-    value: {
-        type: Array,
         default: () => []
     }
 };
@@ -129,7 +122,13 @@ export const customProps = {
  * 覆盖属性
  */
 export const overrideProps = {
-    value: String
+    /**
+     * 指定选中的选项
+     */
+    value: {
+        type: null,
+        default: null
+    }
 };
 
 export default {

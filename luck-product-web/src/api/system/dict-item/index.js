@@ -14,5 +14,7 @@ export async function pageDictItem(params) {
  * @param params 查询条件
  */
 export async function getDictItems(params) {
-    return await request.post('/sys/dictItem/getDictItems', params);
+    return await request.get('/sys/dictItem/getDictItems',{
+        params: { ...params }
+    });
 }

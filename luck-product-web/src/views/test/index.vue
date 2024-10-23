@@ -4,7 +4,31 @@
     </AProSelect>
 
     <AProSelect v-model="toYes" dict-code="D_SYS_YES_NO" size="default" label-key="name" value-key="code" width="120px" >
+      <template v-slot:default="{item}">
+        <span style="color: red">{{ item.name }}</span>
+      </template>
     </AProSelect>
+
+    <AProRadio v-model="eyeColor" :options="colors" label-key="label" value-key="name" width="120px" >
+    </AProRadio>
+
+    <AProRadio v-model="toYes" dict-code="D_SYS_YES_NO" label-key="name" value-key="code" width="120px" >
+      <template v-slot:default="{item}">
+        <span style="color: red">{{ item.name }}</span>
+      </template>
+    </AProRadio>
+
+    <AProCheck v-model="eyeColor" :options="colors" label-key="label" value-key="name" width="120px" >
+    </AProCheck>
+
+    <AProCheck v-model="toYes" dict-code="D_SYS_YES_NO" label-key="name" value-key="code" width="120px">
+      <template v-slot:default="{item}">
+        <span style="color: red">{{ item.name }}</span>
+      </template>
+    </AProCheck>
+
+    <AProSwitch v-model="toYes" dict-code="D_SYS_YES_NO" label-key="name" value-key="code" width="120px">
+    </AProSwitch>
 
     <a-menu
         :default-selected-keys="['1']"
@@ -23,6 +47,9 @@
 
 <script>
 import AProSelect from "@/components/extend/a-pro-select/index.vue";
+import AProRadio from "@/components/extend/a-pro-radio/index.vue";
+import AProCheck from "@/components/extend/a-pro-checkbox/index.vue";
+import AProSwitch from "@/components/extend/a-pro-switch/index.vue";
 import { Menu } from 'ant-design-vue';
 const SubMenu = {
   template: `
@@ -54,7 +81,10 @@ const SubMenu = {
 export default {
   components: {
     'sub-menu': SubMenu,
-      AProSelect
+      AProSelect,
+      AProRadio,
+      AProCheck,
+      AProSwitch
   },
   data() {
     return {
@@ -100,6 +130,8 @@ export default {
         }
       ],
       mouseColor: 'blue',
+      gender: '',
+      age: '',
       toYes: 'yes',
       eyeColor: 'red',
       colors: [
