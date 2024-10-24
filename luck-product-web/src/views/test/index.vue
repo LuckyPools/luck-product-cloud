@@ -30,6 +30,15 @@
     <AProSwitch v-model="toYes" dict-code="D_SYS_YES_NO" label-key="name" value-key="code" width="120px">
     </AProSwitch>
 
+    <AProSwitch v-model="toYes" dict-code="D_SYS_YES_NO" label-key="name" value-key="code" width="120px">
+      <a-icon slot="checkedChildren" type="check" />
+      <a-icon slot="unCheckedChildren" type="close" />
+    </AProSwitch>
+
+    <a-cascader v-model="cas" :options="options" placeholder="Please select" />
+
+    <AProCascader v-model="cas" :options="options" :fieldNames="fieldNames"></AProCascader>
+
     <a-menu
         :default-selected-keys="['1']"
         :default-open-keys="['2']"
@@ -50,6 +59,7 @@ import AProSelect from "@/components/extend/a-pro-select/index.vue";
 import AProRadio from "@/components/extend/a-pro-radio/index.vue";
 import AProCheck from "@/components/extend/a-pro-checkbox/index.vue";
 import AProSwitch from "@/components/extend/a-pro-switch/index.vue";
+import AProCascader from "@/components/extend/a-pro-cascader/index.vue";
 import { Menu } from 'ant-design-vue';
 const SubMenu = {
   template: `
@@ -84,7 +94,8 @@ export default {
       AProSelect,
       AProRadio,
       AProCheck,
-      AProSwitch
+      AProSwitch,
+      AProCascader
   },
   data() {
     return {
@@ -132,6 +143,7 @@ export default {
       mouseColor: 'blue',
       gender: '',
       age: '',
+      cas: '',
       toYes: 'yes',
       eyeColor: 'red',
       colors: [
@@ -150,8 +162,45 @@ export default {
               name: 'green',
               key: 'g'
           }
+      ],
+      fieldNames: {
+        label: 'label', value: 'value', children: 'children'
+      },
+      options: [
+        {
+          value: 'zhejiang',
+          label: 'Zhejiang',
+          children: [
+            {
+              value: 'hangzhou',
+              label: 'Hangzhou',
+              children: [
+                {
+                  value: 'xihu',
+                  label: 'West Lake',
+                },
+              ],
+            },
+          ],
+        },
+        {
+          value: 'jiangsu',
+          label: 'Jiangsu',
+          children: [
+            {
+              value: 'nanjing',
+              label: 'Nanjing',
+              children: [
+                {
+                  value: 'zhonghuamen',
+                  label: 'Zhong Hua Men',
+                },
+              ],
+            },
+          ],
+        }
       ]
-    };
+    }
   },
   methods: {
     toggleCollapsed() {

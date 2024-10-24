@@ -135,14 +135,17 @@ export default {
         }
     },
     watch: {
+        value: {
+            handler() {
+                this.setSelectValue();
+            }
+        },
         selectValue: {
-            handler(newVal, oldVal) {
-                if (newVal !== oldVal) {
-                    if (this.isMultiple) {
-                        this.$emit('input', this.selectValue.join(','));
-                    } else {
-                        this.$emit('input', this.selectValue);
-                    }
+            handler() {
+                if (this.isMultiple) {
+                  this.$emit('input', this.selectValue.join(','));
+                } else {
+                  this.$emit('input', this.selectValue);
                 }
             },
             deep: true

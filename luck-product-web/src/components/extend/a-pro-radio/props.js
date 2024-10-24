@@ -1,4 +1,5 @@
 import commonProps from '../a-pro-common/props';
+
 /**
  * 继承属性
  */

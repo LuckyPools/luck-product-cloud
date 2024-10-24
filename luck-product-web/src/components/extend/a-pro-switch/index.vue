@@ -5,13 +5,21 @@
       <a-switch
           v-model="selectValue"
           :auto-focus="autoFocus"
-          :checked-children="localCheckedChildren"
-          :un-checked-children="localUnCheckedChildren"
           :default-checked="defaultChecked"
           :disabled="disabled"
           :loading="loading"
           :size="size"
-      ></a-switch>
+          @change="handleChange"
+          @blur="handleBlur"
+          @focus="handleFocus"
+      >
+        <template v-slot:checkedChildren>
+          <slot name="checkedChildren">{{localCheckedChildren}}</slot>
+        </template>
+        <template v-slot:unCheckedChildren>
+          <slot name="unCheckedChildren">{{localUnCheckedChildren}}</slot>
+        </template>
+      </a-switch>
     </div>
   </div>
 </template>
@@ -26,7 +34,7 @@ export default {
     props: {
       ...props
     },
-    emits: ['input'],
+    emits: ['change','blur','focus'],
     data() {
       return {
         // 选项
@@ -45,9 +53,13 @@ export default {
         }
     },
     watch: {
+      value: {
+          handler() {
+             this.setSelectValue();
+          },
+      },
       selectValue: {
-          handler(newVal, oldVal) {
-            if (newVal !== oldVal) {
+          handler() {
               if(this.localOptions && this.localOptions.length > 1){
                 let selectValue;
                 if(this.selectValue){
@@ -57,46 +69,45 @@ export default {
                 }
                 this.$emit('input', selectValue);
               }
-            }
           },
           deep: true
       },
       localOptions: {
           handler() {
-            if(this.localOptions && this.localOptions.length > 1){
-                this.localUnCheckedChildren = this.localOptions[0][this.labelKey];
-                this.localCheckedChildren = this.localOptions[1][this.labelKey];
-            }
-            this.setSelectValue();
+              if(this.localOptions && this.localOptions.length > 1){
+                  this.localUnCheckedChildren = this.localOptions[0][this.labelKey];
+                  this.localCheckedChildren = this.localOptions[1][this.labelKey];
+              }
+              this.setSelectValue();
           },
           deep: true
       },
       dictCode: {
           handler() {
-            if (this.dictCode) {
-              this.loadOptions();
-            }
+              if (this.dictCode) {
+                this.loadOptions();
+              }
           }
       },
       dictFilter: {
           handler() {
-            if (this.dictCode) {
-              this.loadOptions();
-            }
+              if (this.dictCode) {
+                this.loadOptions();
+              }
           }
       },
       dictParentId: {
           handler() {
-            if (this.dictCode) {
-              this.loadOptions();
-            }
+              if (this.dictCode) {
+                this.loadOptions();
+              }
           }
       },
       dictGrade: {
           handler() {
-            if (this.dictCode) {
-              this.loadOptions();
-            }
+              if (this.dictCode) {
+                this.loadOptions();
+              }
           }
       },
       options: {
@@ -180,8 +191,29 @@ export default {
          * 设置本地绑定值
          */
         setSelectValue() {
-            this.selectValue = this.localOptions.some((item) => item[this.valueKey] === this.value);
+            this.selectValue = this.localOptions[1][this.valueKey] === this.value;
         },
+
+        /**
+         * 选中 option，或 input 的 value 变化时触发的回调
+         */
+        handleChange(e) {
+            this.$emit('change', e);
+        },
+
+        /**
+         * 获取焦点
+         */
+        handleFocus(){
+            this.$emit('focus');
+        },
+
+        /**
+         * 移除焦点
+         */
+        handleBlur(){
+            this.$emit('blur');
+        }
     }
 };
 </script>

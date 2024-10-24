@@ -40,7 +40,7 @@ export default {
     props: {
         ...props
     },
-    emits: ['change', 'select'],
+    emits: ['change','select','blur','focus'],
     data() {
         return {
             // 选项
@@ -66,11 +66,14 @@ export default {
         }
     },
     watch: {
+        value: {
+            handler() {
+              this.setSelectValue();
+            }
+        },
         selectValue: {
-            handler(newVal, oldVal) {
-                if (newVal !== oldVal) {
-                    this.$emit('input', this.selectValue.join(','));
-                }
+            handler() {
+                this.$emit('input', this.selectValue.join(','));
             },
             deep: true
         },
